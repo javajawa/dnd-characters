@@ -1,0 +1,162 @@
+# vim: nospell
+
+name: Light in the Morning
+
+info:
+  race: Tabaxi
+  size: Medium
+  age: "21"
+  speed: "30"
+  height: '6''2"'
+  cute: "Very Yes"
+  appearance: |-
+    Light-Yellow fur,
+    very little patterning
+    Yellow eyes
+
+stats:
+  str: "12(base)"
+  dex: "16(base) + 2(tabaxi racial bonus)"
+  con: "15(base)"
+  int: "8(base)"
+  wis: "14(base)"
+  cha: "11(base) + 1(tabaxi racial bonus)"
+
+levels: { monk: 1 }
+hit_dice: ["{monk}d8(monk hit dice)"]
+hit_points: "8(lvl1 monk hit dice) + {monk}*con(con modifier)"
+armour_class: "10(monk unarmoured) + dex(monk unarmoured) + wis(monk unarmoured)"
+
+saves:
+  str: Monk Class
+  dex: Monk Class
+
+skills:
+  perception: Cat's Talent (Tabaxi)
+  stealth: Cat's Talent (Tabaxi)
+  insight: Acolyte background
+  religion: Acolyte background
+  acrobatics: Base skill profiencies (monk)
+  athletics: Base skill profiencies (monk)
+
+weapons:
+  - name: Quarterstaff (1h)
+    proficient: true
+    enchantment: dex
+    damage:
+      bludgeoning: 1d6
+    notes: ""
+  - name: Quarterstaff (2h)
+    proficient: true
+    enchantment: dex
+    damage:
+      bludgeoning: 1d8
+    notes: ""
+  - name: Unarmed (claw)
+    proficient: true
+    enchantment: dex
+    damage:
+      slashing: 1d4
+    notes: ""
+  - name: Unarmed (other)
+    proficient: true
+    enchantment: dex
+    damage:
+      bludgeoning: 1d4
+    notes: ""
+  - name: Dart
+    proficient: true
+    enchantment: dex
+    damage:
+      piercing: 1d4
+    notes: 10 darts
+
+features:
+  - name: Darkvision
+    source: Tabaxi racial feature
+    description: >-
+      You have a cat's keen senses, especially in the dark.
+      You can see in dim light within 60 feet of you as if it were bright light,
+      and in darkness as if it were dim light.
+      You can't discern color in darkness, only shades of gray.
+  - name: Feline Agility
+    source: Tabaxi racial feature
+    description: >-
+      Your reflexes and agility allow you to move with a burst of speed.
+      When you move on your tum in combat, you can double your speed until the end of the turn.
+      Once you use this trait, you can't use it again until you move 0 feet on one of your turns.
+  - name: Cat's Claws
+    source: Tabaxi racial feature
+    description: >-
+      Because of your claws, you have a climbing speed of 20 feet.
+      In addition, your claws are natural weapons, which you can use to make unarmed strikes.
+      If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier,
+      instead of the bludgeoning damage normal for an unarmed strike.
+  - name: Shelter of the Faithful
+    source: Acolyte background feature
+    description: >-
+      As an acolyte, you command the respect of those who share your faith,
+      and you can perform the religious ceremonies of your deity.
+      You and your adventuring companions can expect to receive free healing
+      and care at a temple, shrine, or other established presence of your faith,
+      though you must provide any material components needed for spells.
+      Those who share your religion will support you (but only you) at a modest lifestyle.
+      You might also have ties to a specific temple dedicated to your chosen
+      deity or pantheon, and you have a residence there.
+      This could be the temple where you used to serve, if you remain on good
+      terms with it, or a temple where you have found a new home.
+      While near your temple, you can call upon the priests for assistance,
+      provided the assistance you ask for is not hazardous and you remain
+      in good standing with your temple.
+  - name: Unarmored Defense
+    source: Monk class feature
+    description: >-
+      Beginning at 1st level, while you are wearing no armor and not wielding a shield,
+      your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
+  - name: Martial Arts
+    source: Monk class feature
+    description: >-
+      At 1st level, your practice of martial arts gives you mastery of
+      combat styles that use unarmed strikes and monk weapons,
+      which are shortswords and any simple melee weapons that don't have
+      the two-handed or heavy property.
+      You gain the following benefits while you are unarmed or wielding
+      only monk weapons and you aren't wearing armor or wielding a shield:
+      You can use Dexterity instead of Strength for the attack and damage
+      rolls of your unarmed strikes and monk weapons.
+      You can roll a d4 in place of the normal damage of your unarmed strike
+      or monk weapon. This die changes as you gain monk levels, as shown
+      in the Martial Arts column of the Monk table. When you use the Attack
+      action with an unarmed strike or a monk weapon on your turn, you can
+      make one unarmed strike as a bonus action. For example, if you take the
+      Attack action and attack with a quarterstaff, you can also make an
+      unarmed strike as a bonus action, assuming you haven't already taken a
+      bonus action this turn.
+
+backstory:
+  "Traits - Sheltered": >-
+    I've spent so long in the temple that I have little practical
+    experience dealing with people in the outside world.
+  "Traits - Isolated": >-
+    I grew up in a church-as-a-family, with many who loved me,
+    but none who were particular close and nuturing.
+  "Ideals - Charity": >-
+    I always try to help those in need, no matter what the personal cost.
+  "Flaws - Piety": >-
+    My piety sometimes leads me to blindly trust those that profess faith in my god.
+  "Flaws - Pascifism": >-
+    I will not harm a being, unless it is causing harm to me or those around me.
+    Even then, I will try to disable rather than kill or destroy
+  "God - Eldath": >-
+    Eldath was a pacifist who avoided hostile action, even if threatened.
+    Although shy, quiet, and enigmatic, the Green Goddess was possessed of
+    unknown depths of character and unexpressed resolve that could not be broken.
+    Eldath protected rivers, streams, and druids' groves.
+  "Bonds - [todo]": >-
+    [i need to invent the monetary master and abbess]
+  "Backstory": |
+    Light was left as a orphan at a abbey of Eldath near the confluence of the Surbrin and Dessarin rivers (near Yartar). Named "Light Eldath"(?rework) for the element of the Goddess, they were later given a more traditional Tabaxi name of "Light in the Morning".
+    They were raised into the faith and ways of Eldath, as a helper and a pacifist but never touched by the god. Around the Abbey, they helped out with services, chores, and turned out to be a passable cook. They were raised as a vegetarian and a pacifist.
+    As they became of age, they helped escorted the travellers, including the supply merchants from Yartar to the abbey, and learnt the basis of how to defend themselves with staff and claw.
+    During one trip to Yartar, they were invited to join a group of monks in their Monestry, where they learnt how to actually truly use the weapons and the concept of Ki. On completing their training, on their first mission of intervention, they saw monks using their powers for offence for the first time, and turned away from the monestry and the leader.
+    Considering themselves estranged from both Church and Monestary, they headed west to, paying their way via chores and cooking, until they found themself in [GM will hook us up here]

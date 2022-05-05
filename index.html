@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Light in the Morning</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="char.js" async defer></script>
+  </head>
+  <body>
+    <main id="left"></main>
+    <main id="right"></main>
+    <svg style="position: fixed; z-index: -2">
+      <filter id="wavy2">
+        <feTurbulence
+          x="0"
+          y="0"
+          baseFrequency="0.02"
+          numOctaves="5"
+          seed="1"
+        ></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale="20" />
+      </filter>
+    </svg>
+  </body>
+</html>
