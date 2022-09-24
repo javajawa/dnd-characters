@@ -6,38 +6,72 @@ info:
   race: Tabaxi
   size: Medium
   age: "21"
-  speed: "30"
-  height: '6''2"'
-  cute: "Very Yes"
+  height: '6''2" / 187cm'
+  languages: |-
+    Common
+    Elvish
+    Druidic
+    Sylvan (written)
   appearance: |-
-    Light-Yellow fur,
-    very little patterning
+    Light-Yellow fur
+    No patterning
     Yellow eyes
+    Low ears
+
+levels: { monk: 3 }
 
 stats:
   str: "12(base)"
   dex: "16(base) + 2(tabaxi racial bonus)"
   con: "15(base)"
-  int: "8(base)"
+  int: "11(base) + 1(tabaxi racial bonus (relocated))"
   wis: "14(base)"
-  cha: "11(base) + 1(tabaxi racial bonus)"
+  cha: "7(base)"
 
-levels: { monk: 1 }
-hit_dice: ["{monk}d8(monk hit dice)"]
-hit_points: "8(lvl1 monk hit dice) + {monk}*con(con modifier)"
-armour_class: "10(monk unarmoured) + dex(monk unarmoured) + wis(monk unarmoured)"
+facts:
+  "hit points": "8(lvl1 monk hit dice) + 5(lvl2 monk hit die) + 5(lvl3 monk hit die) + {monk}*con(con modifier)"
+  "armour class": "10(monk unarmoured) + dex(monk unarmoured) + wis(monk unarmoured)"
+  "movement": 30(tabaxi) + 10(unarmored movement)
+  "climbing": 20(cat's claws)
+  "hit dice": "{monk}d8(monk hit dice)"
+  "ki points": "{monk}(one per monk lvl)"
+  "ki save": "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
+  "martial die": "d4(monk level 1-4)"
+  "perception": "10 + wis(passive perception) + prof(passive perception)"
 
 saves:
   str: Monk Class
   dex: Monk Class
 
-skills:
-  perception: Cat's Talent (Tabaxi)
-  stealth: Cat's Talent (Tabaxi)
-  insight: Acolyte background
-  religion: Acolyte background
-  acrobatics: Base skill profiencies (monk)
-  athletics: Base skill profiencies (monk)
+proficiencies:
+  skills:
+    perception: Cat's Talent (Tabaxi)
+    nature: Backstory, replaces stealth from Tabaxi
+    insight: Acolyte background
+    religion: Acolyte background
+    history: Base skill proficiencies (monk)
+    athletics: Base skill proficiencies (monk)
+    medicine: Way of Mercy (monk sub-class)
+  armour: {}
+  weapons:
+    Club: Monk
+    Dagger: Monk
+    Greatclub: Monk
+    Handaxe: Monk
+    Javelin: Monk
+    Light Hammer: Monk
+    Mace: Monk
+    Quarterstaff: Monk
+    Sickle: Monk
+    Spear: Monk
+    Light Crossbow: Monk
+    Dart: Monk
+    Shortbow: Monk
+    Sling: Monk
+    Short sword: Monk
+  tools:
+    Cooks Tools: Monk tool proficiency
+    Herbalists Tools: Way of Mercy (monk sub-class)
 
 weapons:
   - name: Quarterstaff (1h)
@@ -56,22 +90,73 @@ weapons:
     proficient: true
     enchantment: dex
     damage:
-      slashing: 1d4
+      slashing: "1{martial die}"
     notes: ""
   - name: Unarmed (other)
     proficient: true
     enchantment: dex
     damage:
-      bludgeoning: 1d4
+      bludgeoning: "1{martial die}"
     notes: ""
   - name: Dart
     proficient: true
     enchantment: dex
     damage:
       piercing: 1d4
-    notes: 10 darts
+    notes: 8 darts, range 20/60
 
 features:
+  - name: "Ki Power: Hands of Healing"
+    source: Way of Mercy, Monastic tradition
+    dice: "1{martial die} + wis"
+    description: >-
+      At 3rd level, your mystical touch can mend wounds.
+      As an action, you can spend 1 ki point to touch a creature and restore a
+      number of hit points equal to a roll of your Martial Arts die + your
+      Wisdom modifier.
+
+      When you use your Flurry of Blows, you can replace one of the
+      unarmed strikes with a use of this feature without spending a ki point for the healing.
+  - name: "Ki Power: Hands of Harm"
+    source: Way of Mercy, Monastic tradition
+    dice: "1{martial die} + wis"
+    description: >-
+      At 3rd level, you use your ki to inflict wounds.
+      When you hit a creature with an unarmed strike,
+      you can spend 1 ki point to deal extra necrotic damage equal
+      to one roll of your Martial Arts die + your Wisdom modifier.
+      You can use this feature only once per turn.
+  - name: Deflect Missiles
+    source: Monk lvl3
+    dice: 1d10 + dex + {monk}
+    description: >-
+      Starting at 3rd level, you can use your reaction to deflect or catch the
+      missile when you are hit by a ranged weapon attack.
+      When you do so, the damage you take from the attack is reduced by
+      1d10 + your Dexterity modifier + your monk level.
+
+      If you reduce the damage to 0, you can catch the missile if it is small
+      enough for you to hold in one hand and you have at least one hand free.
+      If you catch a missile in this way, you can spend 1 ki point to make a
+      ranged attack with a range of 20/60 using the weapon or piece of
+      ammunition you just caught, as part of the same reaction.
+      You make this attack with proficiency, regardless of your weapon
+      proficiencies, and the missile counts as a monk weapon for the attack.
+  - name: "Ki Power: Flurry of Blows"
+    source: Monk lvl2
+    description: >-
+      Immediately after you take the Attack action on your turn,
+      you can spend 1 ki point to make two unarmed strikes as a bonus action.
+  - name: "Ki Power: Patient Defense"
+    source: Monk lvl2
+    description: >-
+      You can spend 1 ki point to take the Dodge action as a
+      bonus action on your turn.
+  - name: "Ki Power: Step of the Wind"
+    source: Monk lvl2
+    description: >-
+      You can spend 1 ki point to take the Disengage or Dash action as a
+      bonus action on your turn, and your jump distance is doubled for the turn.
   - name: Darkvision
     source: Tabaxi racial feature
     description: >-
@@ -120,43 +205,440 @@ features:
       combat styles that use unarmed strikes and monk weapons,
       which are shortswords and any simple melee weapons that don't have
       the two-handed or heavy property.
+
+
       You gain the following benefits while you are unarmed or wielding
       only monk weapons and you aren't wearing armor or wielding a shield:
-      You can use Dexterity instead of Strength for the attack and damage
+
+       - You can use Dexterity instead of Strength for the attack and damage
       rolls of your unarmed strikes and monk weapons.
-      You can roll a d4 in place of the normal damage of your unarmed strike
-      or monk weapon. This die changes as you gain monk levels, as shown
-      in the Martial Arts column of the Monk table. When you use the Attack
-      action with an unarmed strike or a monk weapon on your turn, you can
-      make one unarmed strike as a bonus action. For example, if you take the
-      Attack action and attack with a quarterstaff, you can also make an
-      unarmed strike as a bonus action, assuming you haven't already taken a
-      bonus action this turn.
+
+       - You can roll you martial arts die in place of the normal damage of
+      your unarmed strike or monk weapon.
+
+       - When you use the Attack action with an unarmed strike or a monk weapon
+      on your turn, you can make one unarmed strike as a bonus action.
 
 backstory:
-  "Traits - Sheltered": >-
+  "Traits – Sheltered": >-
     I've spent so long in the temple that I have little practical
     experience dealing with people in the outside world.
-  "Traits - Isolated": >-
+  "Traits – Isolated": >-
     I grew up in a church-as-a-family, with many who loved me,
     but none who were particular close and nuturing.
-  "Ideals - Charity": >-
+  "Ideals – Charity": >-
     I always try to help those in need, no matter what the personal cost.
-  "Flaws - Piety": >-
+  "Flaws – Piety": >-
     My piety sometimes leads me to blindly trust those that profess faith in my god.
-  "Flaws - Pascifism": >-
+  "Flaws – Pascifism": >-
     I will not harm a being, unless it is causing harm to me or those around me.
     Even then, I will try to disable rather than kill or destroy
-  "God - Eldath": >-
-    Eldath was a pacifist who avoided hostile action, even if threatened.
-    Although shy, quiet, and enigmatic, the Green Goddess was possessed of
-    unknown depths of character and unexpressed resolve that could not be broken.
-    Eldath protected rivers, streams, and druids' groves.
-  "Bonds - [todo]": >-
+  "Dogma – Eldath": >-
+    The philosophy of Eldath is highly advanced. It teaches that peace can only
+    come from within and cannot be taught or imposed; it must be readied through
+    thought and meditation. The faithful of Eldath should seek stillness and
+    thereby find peace. They are to plant trees and green-leaved things and
+    tend such things when they need it, wherever they may be.
+
+    Eldathyn are instructed to nurture and aid and not to restrict or punish.
+    They may defend but not punish. Eldathyn may work violence only to defend,
+    and they may slay nothing of the forest except to prevent it from slaying
+    themselves or another under their protection.
+
+    All worshipers of Eldath are to aid fellow Eldathyn and clergy of Silvanus
+    and Mielikki whenever possible and give assistance, support, and shelter
+    to displaced forest dwellers and those who work to defend ponds marshes,
+    and streamside woods everywhere.
+    They must swear to take no thinking life save in direst need and to share
+    with all beings the beneficial things that grow in or come from running
+    water that all may know it and praise Eldath.
+
+  "Bonds – [todo]": >-
     [i need to invent the monetary master and abbess]
-  "Backstory": |
-    Light was left as a orphan at a abbey of Eldath near the confluence of the Surbrin and Dessarin rivers (near Yartar). Named "Light Eldath"(?rework) for the element of the Goddess, they were later given a more traditional Tabaxi name of "Light in the Morning".
-    They were raised into the faith and ways of Eldath, as a helper and a pacifist but never touched by the god. Around the Abbey, they helped out with services, chores, and turned out to be a passable cook. They were raised as a vegetarian and a pacifist.
-    As they became of age, they helped escorted the travellers, including the supply merchants from Yartar to the abbey, and learnt the basis of how to defend themselves with staff and claw.
-    During one trip to Yartar, they were invited to join a group of monks in their Monestry, where they learnt how to actually truly use the weapons and the concept of Ki. On completing their training, on their first mission of intervention, they saw monks using their powers for offence for the first time, and turned away from the monestry and the leader.
-    Considering themselves estranged from both Church and Monestary, they headed west to, paying their way via chores and cooking, until they found themself in [GM will hook us up here]
+
+  "Location – The Abbey": >-
+    Although called an Abbey, this cluster of low profile stone buildings sits
+    a short walk from a sacred grove and holy sit of Eldath.
+    To the South and East, the buildings overlook the confluence of the Triboar
+    tributary with the River Surbrin, flowing out of the Evermoors in the North.
+    To the North-West, about a kilometre away stands a large wildflower and
+    oak tree grove, centred around a still but clear pond and shrine stone.
+
+    https://tea-cats.co.uk/dnd/map.png (Abbey shown in yellow)
+
+    The importance of the site to both druids and clerics who serve the goddess
+    is highlighted by the presence of the permanent stone structures that make up the abbey.
+    The small group of buildings has enough room to support the needs of itinerant followers,
+    pilgrims, and other visitors, up to almost 40 people at the site
+    (less in winter when fires might need to be lit and use up space and air).
+
+    Access to the site is by boat crossing the river (no nearby bridges, making it a quiet spot for non-wildlife).
+
+    The construction is designed to minimise the impact on the environment;
+    each building is sunk slightly into the earth and has a triangular
+    tent-like shape that allows grass and flowers to grow over it.
+    Sections are cut out to form skylights/firepits and windows to allow light
+    and air to circulate.
+
+    https://i.pinimg.com/originals/32/86/65/32866581f9eaf3da666fa42f97df5a5e.png
+
+    The area includes a group of blockhouses, a couple of small houses for the
+    senior members of the church or distinguished guests, a large communal refectory,
+    a dedicated recovery ward for those who arrived seeking divine healing,
+    a small 'mendery' (with a variety of tools for working with wood, stone,
+    and leather), and a modest library chronicling the history of the area
+    around the rivers and moors, and both its and other area's flora and fauna.
+    The buildings are crafted to minimise the disruption to the natural stillness
+    of the land, a practice enhanced by the use of enchanted boundary stones
+    to prevent sound from leaving the site.
+
+    (Permanent population of a few clerics, a few druids, some novices/acolytes
+    of each, a scribe who maintains the library; an itinerant population of
+    nearby rangers (who help bring in food), wandering followers of Eldath and
+    related gods, and people seeking healing.)
+
+  "Location – The Monastery": >-
+    The Monastery where Light trained to be a monk was located outside of Triboar,
+    in the shadow of the Storm Mountains. The hardy group of men and elves act
+    as a de facto extra layer of defence for Triboar by "removing" goblins and
+    troll groups from the hills.
+
+    https://tea-cats.co.uk/dnd/map.png (Monastery shown in blue)
+
+    The buildings fell like they were hewn from the stone, a testament to the
+    strength stored here and the ability to channel power from within rather
+    than following the energy from the flow of nature.
+
+    https://twistedsifter.com/wp-content/uploads/2010/11/ellora-caves-india-mountain-temples-20.jpg?w=400
+
+    The stone halls didn't have any 'civilian' population, just the order of monks.
+    Training rooms with dummies and stone floors and such.
+
+  "Backstory – Childhood": >-
+    Aged (about) 3, Light was found by one of the boundary markers of the abbey.
+    Originally known as "Eldath's Light" for their fur matching the goddess's light,
+    they were later given a more traditional Tabaxi name of "Light in the Morning".
+
+    The adults of the site were content to raise this child there; some of the
+    older members were parents and grandparents who had raised children before.
+    Few knew more of Tabaxi than the name of the race, so there was little
+    connection to Tabaxi cultures and traditions, and instead, a range of
+    knowledge of the forest was instilled in the young one.
+
+    Being raised in a small religious community rather than a traditional village,
+    Light's upbringing was one of quiet contemplation, prayer, and very few
+    interactions with people their own age. Some children visited as pilgrims
+    or as part of parties to seek healing, but those didn't have time to form
+    long term friendships. Once they were old enough to make day trips,
+    they were taken to Yartar on trips to spend time away from the abbey.
+    Inbetweenwhiles, they spent a lot of time with the scribe and the works
+    in the library, and they grew up literate and aware of the world around them.
+
+    What formalised training they did receive included the primary initiation
+    into the ceremonies of Eldath and went through some of the basic novice
+    training for both the clerical and druidic aspects of faith,
+    but none of the magical power came to Light.
+
+  "Backstory – A Visitor": >-
+    A lot of Light's understanding of their people and origins comes from a visiting wizard,
+    who arrived to pursue some knowledge in the library and was able to shed some light on Light.
+    They took the name "Light in the Morning" and learnt of Tabaxi across the ocean in Maztica.
+
+  "Backstory – Teenage Years": >-
+    Once they were old enough to be able to help, Light was encouraged to help
+    make the abbey/camp a happy and safe place to live.
+    This included helping around the hospital and in the refectory,
+    along with the standard chores of cleaning and washing.
+
+    As they became older, they helped work the boats and escort travellers from
+    Yartar to the abbey, turning the familiar trip into something for a purpose
+    and not just pleasure. On these trips, they learnt the basics of defending
+    themselves with staff and claw.
+
+    As they matured, Light realised that they did not want to stay in the abbey forever;
+    without a path into direct service to the god, they would forever be a hanger-on.
+    They considered taking a craft apprenticeship in Yartar, but before they did,
+    they were approached by a Monk of a nearby order dedicated to protecting free people.
+
+  "Backstory – Apprentice to Monks": >-
+    Having been recruited in Yartar, Light bid farewell to the abbey and
+    relocated to the Monastery in the foothills of the Sword Mountains.
+    A place of training, meditation, and dedication to the cause,
+    the monastery was both familiar and so different a place for Light to live.
+    It was still and calm but did not have the same feeling of peace and
+    tranquillity as the old abbey.
+
+    At the Monestry, they learnt how to actually use the weapons and the concept
+    and potential of Ki. As part of their novice/initiate training,
+    they were sent on a raid against a goblin/kobold encampment,
+    in which the leader ordered the camp to be set ablaze during the attack.
+    Confronted with the death of non-combatants, Light left the part and
+    slipped into south Neverwinter Wood.
+
+  "Backstory – On The Run": >-
+    Fleeing from their own conscience and the presumed judgement and discipline of the monks,
+    Light heads into the Neverwinter Forest to get away from the raiding party.
+    They decide not to return to the abbey, seeing as that would be an obvious place to look for them.
+    In Conyberry, they meet Glint and Bram and are recruited to join the adventure.
+
+  "Session Log – Session 1": |-
+    Bram has a holy symbol that looks like a dragon claw -- Bahamut.
+    Learnt about the Cat Lord from new best friend Glint.
+    Kolbold with white scales on the shield?
+    Tiefling who stabs sleeping kobolds.
+    Oh no, a Dragon. I forgot to write down their name. It was Cryovain.
+    The dragon seems to want to eat everything.
+    Changling Tiefling pushed the kobold out of the cart!
+    There's a lot of plotting going on :/
+
+  "Session Log – Session 2": |
+    Innkeeper of Phandalin is human, Toblin Stonehill, from Triboar.
+    There's an ex-Sheriff 40mi east "Big Al" (Alfonse Kalazorn)
+
+    Townmaster Harbin Western, leading Phandalin
+      Wouldn't come out.
+      Had quests
+      Scared as all fuck.
+
+    Miner's Exchange
+      #ClassWar
+      Head is Haleath Thorntooth
+
+    Lionshield Coster
+      Fantasy Costo, where all your dreams come true
+      Run by Linene Graywind
+      Whelp. there's noone here who can fight, it seems
+
+    Barthen's Provisioners
+      Run by Elmar Barthen (might be a wizard, does shape shifting)
+      Assisted by Thistle (young half-elf) and Thandor (gnome)
+
+    That dragon scale inlaid shield we found? That's magical! Reduces cold damage
+    Our cleric doesn't like being encouraged to go to wizard school
+
+  "Session Log – Session 3": |
+    Smithy
+      Dwarven smith (Alger) and Human apprentice.
+      Made some magical moonblades (inverse scythes)
+      Alger seems to be willing to actually work towards defeating the dragon, but makes blades (ewwwww).
+
+    The local midwife — an acolyte of Chauntea named Adabra Gwynn — lives by herself in a stone windmill on the side of a hill a few miles south of Phandalin. With dragon sightings becoming more common, it’s not safe for her to be alone. Urge Adabra to return to Phandalin. Once she’s safe, visit Townmaster Harbin Wester to claim a reward of 25 gp.
+
+    At The Windmill
+      30% grade hill is a fun climb!
+      Ooo, that _hurt_. I got jumped by some very scary monster.
+      Landan is good healer
+      Bezlik casts spells!!
+      This Manticore is tough. But we got it
+
+      Hey, we found Adabra! She's an alchemy type person. Got dem good potions.
+      She does not want to leave. Why am I not surprised.
+      Well, we let her stay, and we got some letters (and some manticore spikes)
+
+      Popped into the miner's guild, and reported back to the Town Master [level up sound]
+
+      Found us a Glint who found an elder half-elf, sounds like they had a great time in the orchard.
+
+  "Session Log – Session 4": |
+    Sleepy times. Very important. Glint seems rather upset with just how Fine we were on our trip.
+
+    "All Druids Welcomes At Alderleaf Farm." -- seen on the side of the well by the shrine in town.
+
+    Bezlik hasn't quite worked out the ears on a Tabaxi. At least Glint can tell Light and Light!Bezlik apart.
+
+    We're going to the...[drum roll please] the Gnomes.
+    We have found them be following a stream (Light got to lead the pad-pad) and found their magical mushrooms.
+    And their waterfall. Their very very loud waterfall. WHICH WE CAN'T HEAR EACHOTHER OVER!!
+    Found a way in, and we eventually find the kitchen of the gnomes! Legendary bread and mushroom facilities.
+    Fibblestib and Dabbledob are the artificers. We should go visit them, but maybe not going via the Crazy Gnome who is testing their fully automatic onmi-directional crossbow machine. Are we going to BE FINE(tm) again?
+    During the battle, people disappeared and reappeared elsewhere, Glint grew wings and lights, Bezlik turned blue, and Sleep eventually took this thing down. Good old Sleep. We love sleep.
+    Landan raised the idea of building a bigger, more dragon killing version to the now captured gnome friend.
+
+    The teleported friends found some guards who are on the lookout for shapeshifters, very aggressively. Crossbow aggressive :3
+    We have some tense neigotiations as we shuffle through trying to prove that we are friends, not shapeshifters, as neither is true.
+    They do not belive Light. Even after I loafed!
+
+  "Session Log – Session 5": |
+    Bezlik declared as "I am Bezlikoye, Changling, and servant of Ma'eyt".
+    That scared the bigjebsus out of the gnomish guards who went running.
+    Light let the mad engineering gnome go free (and reclaim my rope) ready to work out how to get a Centaur across a narrow rope bridge.
+
+    The rope bridge does not like our mass. Glint is flying aorund, leaving the spinning blades round. Bezlik is climbing down into a river, Landan is not, Bram has gone the long way around, and Light is stuck in the middle splitting the party even more. Who knows where Glint is, who knows what Landan is going to do.
+    All Light knows is that they are wet, their head hurts from the noise of the waterfall, and so far this is possibly worse that the whole manticore incident.
+
+    [OOC] Glint found Fibblestib(m) and Dabbledob(f) have been found by a Glint.
+    Light make it up a slope, but there's nowhere to tie up the rope to help the others up.
+
+    The Benny Hill Theme plays. Glint does one full loop of the tunnels and makes some new friends in the time in the time it takes up to wade the river and climb into the dormatory.
+    Bram isn't good with steep slopes, damaged the manticore-nommed leg again :( But we have found the foreman/chief inventor gnomes.
+
+    Glint "I turned off the Spinning Death Blades"
+    Bram "The What?"
+    Glint "Don't even worry about it, I turned them off"
+
+    Gods, we made it in to a laboratory with useful people. This room is full of *things* and *stuff* which is exciting.
+    Hey, these people know the difference between shapeshifters and shapechangers. Light still doesn't, but hopefully they're learning.
+
+    Right, the kings are a couple who are...out of it. They're locked up in their room worrying about shapechangers. The fore-gnomes seem to think that one has gone insane and is holding the other.
+    Someone finally explains the difference (in character) between changelings and dopplegangers and shapechangers. Let's hope that Light was paying attention and not essentially hissing at everything.
+
+    There might also be a green dragon in the area (v.OOC).
+
+    Kings claim there is a problem, in that a carpet in the throne room ate a gnome (Nia). Fibble said that they probably just left -- people come and go all the time.
+    Throne room does not have a carpet -- but there is a faint outline of where one was.
+    And it looks like we have a mimic.
+
+    [OOC] Gnome poking things brigade: ACTIVATE!!
+    Bram kicking heavy doors: ACTIVATE!!
+    Glint jumping off the damn bridge into the river: ACTIVATE!!
+
+    Pog is also missing. (eyyyyy, aren't we all missing a Pog >.<). There's a keg gone from the wine cellar too, signs of struggle and their is a stray plate! Such chaos. Also, the mug Pog went to fill isn't there.
+    [OOC] Back over by the king's bedchambers, the talking is going...poorly. There's keyhole spying, spell transcribing, and all sorts of drama. Oh, and Dobby is guarding the door.
+
+  "Session Log – Session 6": |
+    [OOC] Landan has a fancy book.
+
+    Oh good, the quad firing crossbow machine has been remanned (regnomed) by...the left half of Pog. Who has been...melted by acid (probably from the nom nom, but maybe Dale has entered the scene). Light has no brain in this moment.
+
+    Bram feel down a cliff, Glint is panicing, and Bezlik we found the cooks looking very beat up and they reckon they trapped it up North...but it came from the wrong direction than one would expect given where Pog's body is. This is all going swimmingly (with far too much swimming).
+    Light is still very much having a headache and not thinking well, to the point that they still haven't realised that there is probably more than one mimic. Or that sending off Glint by themself is a terrible idea as she'll panic and cause more problems.
+    [OOC] Landan also seems to be doing a bit of a panic, and has jumped into the water.
+
+    Bezlik appears to have some idea what is going on, and has given Light a direction, so they've just forded the stream to make sure Bram is safe from a potential mimics -- and has potentially spotted something wrong with the mushrooms. Landan got Bram back up, and turned blue!
+
+    Light really needs to stop engaging and taking aggro -- even the shield assist from Bram isn't enough to stop Light going down in round 2. I'm sure the 5 points of acid damage is not a problem. Nor is the natural 1 on the first death save. Everything Is Fine. Hopefully Bezlik's tactical plan of "summon gnomes" will stop things going Fine for too much longer. And maybe someone will get Light up before permadeath.
+
+    Good news: a half-naked Landan turned More Blue and got 7 hit points back onto Light! Hurray!
+    More good new: Eldritch Blast, it turns out, is a wonderful support spell if by support spell you mean combat spell.
+    Triple good news: Ooo, we're getting mimic info: oh good, this one has already taken some damage (it is the one from the kitchen). Frankly, Bezlik carried this battle, with Landan keeping the fools alive. Glint did...nothing, poor thing, with a little sling.
+    Less good news: Bram went down again, and we are 100% out of healing spell capability
+
+    Short rest time, get dry. cook some mushrooms, heal up a bit. Now to drag a mimic around the place and talk to the Kings. Oh, and Landan got something put in his book. The King let his husband up, who wasn't only tied down but also glued to the chair. We have been given items 1, 3, and 18 from the vaults, and things are Going Well (not to be confused with Going Fine).
+
+    "1" is wand of pyrotechnics, "3" is a giant pendant amulet (unidentified), and "18" is some kind of 1ft rod (unidentified)?
+    Also, the tied up king give us a wizzard's [sic] hat.
+
+    [OOC] Bezlik tried to shift in front of the Kings, and things went sideways. The form shift didn't actually take place, and there was a scary booming voice...and Light saw none of this.
+
+    Things Light _may_ have learned from this expidition:
+     - Glint might be an bumbling idiot
+     - Rushing in is a good way to get ganked
+     - People and situations are complicated and evolve quicker than they are used to thinking
+
+    Things Light _has_ learnt from this expidition:
+     - Healing boops! (well technically returning and handing in the quest does that)
+
+  "Session Log – Session 7": |
+    Back to town, sold off the Wizzard Hat for 55gp
+
+    Party split up to run errands. Bezlik got us the rooms
+
+    Landan and I head to Barthen's Provisions, where a Bugbear and an ex-bodybuilder-looking human were having an argument with Elmar.
+    The inside doesn't feel right...something about redbands? Still seems happy to see Landan.
+    Seemed unaware of where his stock was when finding the herbalism kit, and really wanted us out.
+    [OOC] Shakedown! We have some "vigilanties" in town >.<
+
+    Glint and Bram off to meet Daran, the half-elf in Orchard
+    [OOC] ex-fighter, has a great sword behind the door
+    Mushroom wine is delivered, and partially consumed.
+
+    Light learns what a shakedown is! Light has found a way the day _can_ get worse.
+
+    Morning comes. Light finds the Orchard!
+    [OOC] Bezlik has had to go off (for ooc reasons).
+    [OOC] Bram has a shiny new oath and not a lot of sleep.
+    Glint has a shiny new book! It has weird semi-text in it.
+
+    Elmar, from the supplies store, has a dwarf supplier Gundren Rockseeker has not turned up, and he's worried. We might be all off on another advantage
+
+    We went up the path, found the dead horses...and got jumped by 4 goblins. Light did some fancy running to engage one pair, and took them out...including collapsing one's chest in on itself.
+    The rest got cleaned up very quick (combat lastest less than a round).
+
+    Bram got Light to snap out of the "oh no I hurt something" stance by pointing out the one who still is up. Glint speaks Goblin!
+    Captured Goblin tells us there are at least 15 goblins at the lair, led by a non-goblin who is uglier and hairier than Landan.
+    Black Spider hired King Grol wanted the Dwarf who was running the supply cart.
+    On being released, they attempted to sneak back pass us, and got firebolted.
+
+    Tracks heading to the North imply the cart was _carried_ off by the goblins (not dragged)
+
+    Searching the bodies gave us:
+     - Some saddlebags for more Bram pockets
+     - 2 gp
+
+    Back at the beginning of the right, Light spotted a book that was a Dwarven journal.
+    [OOC] seems to be about a recoverd magical dwarven forge
+
+    https://cdn.discordapp.com/attachments/969593357825376276/1010638513672310865/unknown.png
+
+    Manor in town is named for the Lord mentioned in the passage
+    [OOC] The runined house in the east of town is where the entrance probably is entrance?
+
+    We set off after the tracks, and we now have traps! There was one rope snare trap, and a giant covered hole (which was probably dug after the cart was carried across)
+    And we arrive at A LOCATION. As we get closer, we see a stream/brook flowing out of our destination.
+
+  "Session Log – Session 8": |
+    Time to investigate this here cave!
+    We find no traps, three sentries already stabbed to death.
+    Bezlik returns, with the ability to Summon Greater Crossbow.
+    The inside of the cave is stone. Goddarn stone
+
+    Inside the cave there are wolves! And stealthy enemies! And very painful spear.
+    And a mage who made Landan and Light very afraid.
+
+    The Kobold we let go in session 1 is called 'Frigidfang', appearantly,
+    and they appear to be attempting to kill us.
+    Wolves are free! We're going down! Everything in fine!
+    Lots of new powers showing up, like we all recently levelled up or something.
+
+    The Kobolds might be trying to run/fly away, or just repositioning on us.
+
+    Bezlik has a nemesis, become a balloon, and is honestly having a swell time.
+
+    These notes are very incomplete because brain. I did get chocolates IRL.
+
+  "Session Log – Session 9": |
+    Kobold encounter! The healer went down first, quickly traded for a kobold.
+    Three kobolda come out of the shadows, Landan is brought up, Light gets a
+    bruise and a stab and then magiced into a frag.
+    Light managed to go down twice in this combat! The second time for their
+    own silly reasons.
+
+    In the room we found:
+      - magical rope
+      - a grappling hook
+      - a note for capturing the merchant, signed by King Grol
+      - the cart stuff!
+      - including potions, money, and maybe some other things?
+      - no sign of the driver friend
+
+    Light heard a human-ish voice being harrassed by some Goblins (hey, there's still some of those around).
+    Before taking our rest (which we really, really needed), we manage to prevent the defence water from flooding away and potentially trapping us out.
+
+    A rest occurred. 3 hit dice wasn't enough for me to fully heal up, but the group overall is looking a lot better. We head back inside, and cross the bridge and find...the goblins! One might be called Klarg. They spot the light coming from our party, and...we somehow get into a hostage neigotation! Bram is summoned into the room to try and secure release of the captive.
+
+    Bram successfully neigotiated the release of the human, after the goblin found out they were now in charge. Turns out that power corrupts, or some such. The human we rescues it appearantly called Sildar Hallwinter, and doesn't seem to know much apart from their being a 'the castle' -- possibly 'Cragmore Castle'.
+
+    Our captured kobold has been...burnt to a crisp! Along with Rope-Chan the First!
+    The rope is dead...long live the rope!
+
+    We return to town!
+
+
+inventory:
+  - 9gp, 3sp, 5cp
+  - Backpack
+  - Common Clothes, Hooded
+  - Bedroll
+  - Waterskin
+  - Cook's Utensils|https://tea-cats.co.uk/dnd/cooks-tools.txt
+  - Herbalism Kit|https://tea-cats.co.uk/dnd/herbalism-kit.txt
+  - Tinderbox
+  - Torches (10)
+  - Rations (10)
+  - Hempen rope (50 feet)
+  - Amulet of Eldath
+  - Prayer book of Eldath
+  - Leather Band of Light|https://www.dndbeyond.com/magic-items/4983300-leather-band-of-light
+  - Herbs and Ingredients, 5gp worth
+  - Grappling hook
+  - Healing Potion|https://www.dndbeyond.com/magic-items/4708-potion-of-healing

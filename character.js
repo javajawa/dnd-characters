@@ -33,8 +33,9 @@ export const skills = {
 };
 
 export class Feature {
-  constructor(name, description, reason) {
+  constructor(name, dice, description, reason) {
     this.name = name;
+    this.dice = dice;
     this.description = description;
     this.reason = reason;
   }
@@ -55,7 +56,7 @@ export class Weapon {
       return this._mods;
     }
 
-    return new ComboVal(this._mods, new ProfVal("weapon profiency"));
+    return new ComboVal(this._mods, new ProfVal("weapon proficiency"));
   }
 
   get damage() {
@@ -68,33 +69,35 @@ export class Character {
     name,
     info,
     levels,
-    hp,
-    ac,
     stats,
+    facts,
     saves,
     skills,
+    proficiencies,
     features,
     weapons,
-    notes
+    notes,
+    inventory,
   ) {
     this.name = name;
     this.info = info;
     this.levels = levels;
-    this.hit_points = hp;
-    this.armour_class = ac;
     this.stats = stats;
+    this.facts = facts;
     this.saves = saves;
     this.skills = skills;
+    this.proficiencies = proficiencies;
     this.features = features;
     this.weapons = weapons;
     this.notes = notes;
+    this.inventory = inventory;
   }
 
   get level() {
     return Object.values(this.levels).reduce((a, b) => a + b, 0);
   }
 
-  get profiency() {
+  get proficiency() {
     const level = this.level;
 
     return new Val(1 + Math.ceil(level / 4), "from " + level + " total levels");
@@ -102,6 +105,10 @@ export class Character {
 
   stat(name) {
     return this.stats[name];
+  }
+
+  fact(name) {
+    return this.facts[name];
   }
 
   stat_mod(name) {

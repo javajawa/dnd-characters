@@ -43,7 +43,7 @@ export class MulVal extends Val {
 
 export class StatVal extends Val {
   constructor(stat, reason) {
-    super(0, reason || "from stat modifier for " + stat);
+    super(0, "+" + stat + (reason ? ", " + reason : ""));
     this._stat = stat;
   }
 
@@ -58,11 +58,11 @@ export class ProfVal extends Val {
   }
 
   get val() {
-    return window.character.profiency.val;
+    return window.character.proficiency.val;
   }
 
   get reason() {
-    return "profiency bouns: " + this._reason;
+    return "proficiency bouns, " + this._reason;
   }
 }
 

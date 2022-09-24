@@ -4,4 +4,4 @@ all: character.json
 	true
 
 %.json: %.yaml
-	./convert.py $<
+	python3 ./convert.py $<

@@ -22,6 +22,9 @@ const [
   tr,
   th,
   td,
+  hr,
+  img,
+  a,
 ] = [
   "h2",
   "section",
@@ -40,11 +43,19 @@ const [
   "tr",
   "th",
   "td",
+  "hr",
+  "img",
+  "a",
 ].map((x) => elemGenerator(x));
 
 function value(val) {
   if (!(val instanceof Val)) {
-    val = new Val(val, "[unknown reasons]");
+	let reason = "[unknown reasons]";
+	if ((typeof val === 'string') && val.includes("(")) {
+      [val, reason] = val.split("(");
+	  reason = reason.replace(")", "");
+	}
+    return [val, { "title": reason }];
   }
 
   if (!(val instanceof ComboVal)) {
@@ -76,35 +87,36 @@ export function render() {
   document.getElementById("left").appendChild(
     section(
       { id: "skills" },
-      dl(
-        Object.keys(skills)
-          .map((skill) => [skill, character.skill(skill)])
-          .map(([name, skill]) => [dt(name), dd(value(skill))])
+      details(
+      	{"open": true},
+        summary("Skills"),
+	    dl(
+		  Object.keys(skills)
+		    .map((skill) => [skill, character.skill(skill)])
+			.map(([name, skill]) => [
+				dt(name, {"class": skill in character.skills ? "proficient" : "", "title": skill.reason}),
+				dd(value(skill))
+			])
+	    ),
+	  ),
+      details(
+      	summary("Weapons"),
+      	dl(Object.entries(character.proficiencies.weapons).map(([a, b]) => dt(a, {"title": b}))),
       ),
-      character.features.map((feature) =>
-        details(
-          summary(feature.name, { title: feature.reason }),
-          p({ style: "font-style: italic" }, feature.reason),
-          p(feature.description)
-        )
-      )
+	  details(
+      	summary("Armour"),
+      	dl(Object.entries(character.proficiencies.armour).map(([a, b]) => dt(a, {"title": b}))),
+      ),
+      details(
+      	summary("Tools"),
+      	dl(Object.entries(character.proficiencies.tools).map(([a, b]) => dt(a, {"title": b}))),
+      ),
     )
   );
   document.getElementById("right").appendChild(
     section(
       { id: "statblock" },
-      div(
-        span("Profiency"),
-        abbr({ class: "stat leather" }, value(character.profiency))
-      ),
-      div(
-        span("Max HP"),
-        abbr({ class: "stat leather" }, value(character.hit_points))
-      ),
-      div(
-        span("Armour Class"),
-        abbr({ class: "stat leather" }, value(character.armour_class))
-      ),
+      p(
       Object.entries(stats)
         .map(([stat, name]) => [
           name,
@@ -123,8 +135,18 @@ export function render() {
             )
           )
         ),
+      ), p(
+      div(
+        span("Proficiency"),
+        abbr({ class: "stat leather" }, value(character.proficiency))
+      ),
+      Object.keys(character.facts)
+        .map(fact => div(
+          span(fact),
+          abbr({ class: "stat leather" }, value(character.fact(fact)))
+      )),
+      ),
       table(
-        thead(tr(th("Weapon"), th("Attack"), th("Damage Roll"), th("Notes"))),
         tbody(
           character.weapons.map((weapon) =>
             tr(
@@ -142,13 +164,28 @@ export function render() {
   document.getElementById("right").appendChild(
     section(
       { id: "notes" },
+      character.features.map((feature) =>
+        details(
+          summary(feature.name, { title: feature.reason }, feature.dice ? span(" (", value(feature.dice), ")") : null),
+          p({ style: "font-style: italic" }, feature.reason),
+          p(feature.description)
+        )
+      ),
+      hr(),
       character.notes.map((feature) =>
         details(
           summary(feature.name, { title: feature.reason }),
           p({ style: "font-style: italic" }, feature.reason),
-          p(feature.description)
+          p(feature.description.split(/(https:\/\/[^ \n]+)/).map(c => /^https:\/\//.test(c) ? img({"src": c}) : c))
         )
-      )
+      ),
+    )
+  );
+  document.getElementById("right").appendChild(
+    section(
+      { id: "inventory" },
+
+      character.inventory.map(item => item.split("|")).map(([name, link]) => a(name, {"href": link || "#", "target": "_blank", "style": "transform: rotate(" + (10*(Math.random()-0.5)) + "deg)"}))
     )
   );
 }

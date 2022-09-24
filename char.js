@@ -5,15 +5,23 @@ import { stats, skills, Character, Feature, Weapon } from "./character.js";
 import { render } from "./render.js";
 
 const regexp_comment = /(.+)\((.+)\)/;
-const regexp_var = /{([a-z]+)}/;
+const regexp_var = /{([a-z ]+)}/;
 const regexp_mul = /([0-9]+)\*(.*)/;
 const regexp_dice = /[0-9]+d[0-9]+/;
+const regexp_dice_size = /^d[0-9]+(\([^)]+\))?$/;
 
-function parseVal(string, levels) {
+function parseVal(string, levels, facts) {
   string = string.toString();
-  if (string.includes("+")) {
-    return new ComboVal(...string.split("+").map((x) => parseVal(x, levels)));
+
+  if (regexp_dice_size.test(string)) {
+      return string;
   }
+
+  if (string.includes("+")) {
+    return new ComboVal(...string.split("+").map((x) => parseVal(x, levels, facts)));
+  }
+
+  const replace = {...levels, ...facts};
 
   let comment = "";
 
@@ -30,13 +38,22 @@ function parseVal(string, levels) {
     return new StatVal(string, comment);
   }
 
-  while (regexp_var.test(string)) {
-    string = string.replace(regexp_var, (_, x) => levels[x]);
+  if (string == "prof") {
+    return new ProfVal(comment);
   }
+
+  while (regexp_var.test(string)) {
+    string = string.replace(regexp_var, (_, x) => {
+        comment += " " + x;
+        return replace[x];
+    });
+  }
+
+  comment = comment.trim();
 
   if (regexp_mul.test(string)) {
     let foo = regexp_mul.exec(string);
-    return new MulVal(foo[1], parseVal(foo[2], levels), comment);
+    return new MulVal(foo[1], parseVal(foo[2], levels, facts), comment);
   }
 
   if (regexp_dice.test(string)) {
@@ -60,22 +77,19 @@ fetch("character.json")
     const info = r.info;
 
     const levels = r.levels;
-    const hit_points = parseVal(r.hit_points, levels);
-    const hit_dice = new ComboVal(
-      ...r.hit_dice.map((x) => parseVal(x, levels))
-    );
-    const armour_class = parseVal(r.armour_class, levels);
 
-    const stats = r.stats.map((x) => parseVal(x, levels));
-    const saves = r.saves.map((x) => new ProfVal(x));
-    const skills = r.skills.map((x) => new ProfVal(x));
+    const stats  = r.stats.map((x) => parseVal(x, levels, {}));
+    const facts  = r.facts.map((x) => parseVal(x, levels, {}));
+    const saves  = r.saves.map((x) => new ProfVal(x));
+    const skills = r.proficiencies.skills.map((x) => new ProfVal(x));
+    const profs  = r.proficiencies;
 
     const features = r.features.map(
       (feature) =>
-        new Feature(feature.name, feature.description, feature.source)
+        new Feature(feature.name, feature.dice ? parseVal(feature.dice, levels, facts) : null, feature.description, feature.source)
     );
     const backstory = Object.entries(r.backstory).map(
-      ([key, value]) => new Feature(key, value, "")
+      ([key, value]) => new Feature(key, null, value, "")
     );
 
     const weapons = r.weapons.map(
@@ -86,25 +100,27 @@ fetch("character.json")
           weapon.proficient,
           parseVal(weapon.enchantment),
           Object.entries(weapon.damage).map(([type, damage]) =>
-            parseVal(damage + "(" + type + ")", levels)
+            parseVal(damage + "(" + type + ")", levels, facts)
           ),
           weapon.notes
         )
     );
 
+    const inventory = r.inventory;
+
     window.character = new Character(
       name,
       info,
       levels,
-      hit_points,
-      // hit_dice,
-      armour_class,
       stats,
+      facts,
       saves,
       skills,
+      profs,
       features,
       weapons,
-      backstory
+      backstory,
+      inventory
     );
 
     render();
