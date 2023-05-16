@@ -1,223 +1,488 @@
-# vim: nospell
-
 name: Light in the Morning
 
 info:
   race: Tabaxi
   size: Medium
-  age: "21"
+  age: "20"
   height: '6''2" / 187cm'
-  languages: |-
-    Common
-    Elvish
-    Druidic
-    Sylvan (written)
+  languages:
+    - Common
+    - Elvish
+    - Druidic
+    - Sylvan (written)
   appearance: |-
     Light-Yellow fur
     No patterning
     Yellow eyes
     Low ears
 
-levels: { monk: 3 }
-
 stats:
   str: "12(base)"
-  dex: "16(base) + 2(tabaxi racial bonus)"
+  dex: "16(base) + 2(tabaxi racial bonus) + 2(monk lvl 4 ASI)"
   con: "15(base)"
   int: "11(base) + 1(tabaxi racial bonus (relocated))"
-  wis: "14(base)"
+  wis: "14(base) + 1(shadow touched feat)"
   cha: "7(base)"
 
+feats:
+  - name: Tabaxi
+    link: http://dnd5e.wikidot.com/tabaxi
+    description: |-
+      Hailing from a strange and distant land, wandering tabaxi are catlike
+      humanoids driven by curiosity to collect interesting artifacts,
+      gather tales and stories, and lay eyes on all the world's wonders.
+      
+      Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long.
+      Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
+    proficiencies:
+      - type: skill
+        target: perception
+      - type: skill
+        target: nature
+
+    facts:
+      speed: 30 + {monk_bonus_speed}
+
+    abilities:
+      - kind: ability
+        name: Dark-Vision
+        description: >-
+          You have a cat's keen senses, especially in the dark.
+          You can see in dim light within 60 feet of you as if it were bright light,
+          and in darkness as if it were dim light.
+          You can't discern color in darkness, only shades of gray.
+      - kind: ability
+        name: Feline Agility
+        description: >-
+          Your reflexes and agility allow you to move with a burst of speed.
+          When you move on your tum in combat, you can double your speed until the end of the turn.
+          Once you use this trait, you can't use it again until you move 0 feet on one of your turns.
+      - kind: ability
+        name: Cat's Claws
+        description: >-
+          Because of your claws, you have a climbing speed of 20 feet.
+          In addition, your claws are natural weapons, which you can use to make unarmed strikes.
+          If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier,
+          instead of the bludgeoning damage normal for an unarmed strike.
+
+  - name: Acolyte
+    link: http://dnd5e.wikidot.com/background:acolyte
+    description: >-
+      You have spent your life in the service of a temple to a specific god or pantheon of gods.
+      You act as an intermediary between the realm of the holy and the mortal world,
+      performing sacred rites and offering sacrifices in order to conduct worshipers
+      into the presence of the divine.
+    proficiencies:
+      - type: skill
+        target: insight
+      - type: skill
+        target: religion
+    abilities:
+      - kind: ability
+        name: Shelter of the Faithful
+        description: >-
+          As an acolyte, you command the respect of those who share your faith,
+          and you can perform the religious ceremonies of your deity.
+          You and your adventuring companions can expect to receive free healing
+          and care at a temple, shrine, or other established presence of your faith,
+          though you must provide any material components needed for spells.
+          Those who share your religion will support you (but only you) at a modest lifestyle.
+
+          You might also have ties to a specific temple dedicated to your chosen deity or pantheon,
+          and you have a residence there. This could be the temple where you used to serve,
+          if you remain on good terms with it, or a temple where you have found a new home.
+          While near your temple, you can call upon the priests for assistance,
+          provided the assistance you ask for is not hazardous and you remain in
+          good standing with your temple.
+
+  - name: Unarmed Combat
+    link: http://dnd5e.wikidot.com/tabaxi
+    description: |-
+      Hailing from a strange and distant land, wandering tabaxi are catlike
+      humanoids driven by curiosity to collect interesting artifacts,
+      gather tales and stories, and lay eyes on all the world's wonders.
+
+      Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long.
+      Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
+    resources:
+      - name: Hands
+        pool: 2
+        regain:
+          amount: 2
+          on: round
+    abilities:
+      - kind: attack
+        name: "Unarmed: Grapple"
+        resources:
+          hands: 1
+          action: 1
+        proficiency: unarmed
+        reach: "5"
+        attack_bonuses: "dex|str"
+        save:
+          dc: 8 + str + prof
+          stat: dex
+        status:
+          - name: Grappled
+            length: Until Broken
+            description: |-
+              While grappled, the opponent can use an action to try escaping.
+              They make a Strength (Athletics) or Dexterity (Acrobatics) check,
+              against this attacks save.
+        description: |-
+          The target is Grappled, and the grapple’s escape DC equals 8 + your Strength modifier + your Proficiency Bonus.
+          This grapple is possible only if the target is no more than one Size larger than you and if you have a hand free to grab the target.
+
+          - A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.
+          - The condition ends if the grappler is incapacitated (see the condition).
+          - The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect,
+            such as when a creature is hurled away by the thunder-wave spell.
+
+      - kind: attack
+        name: "Unarmed: Knock Prone"
+        proficiency: unarmed
+        resources:
+          hands: 1
+          action: 1
+        reach: "5 + 10{eldritch_maul}"
+        attack_bonuses: "dex|str"
+        damage:
+          bludgeoning: 0
+        damage_bonuses: 0
+        status:
+          - name: Prone
+            length: Until they stand up
+            description: |-
+              - A prone creature’s only movement option is to crawl, unless it stands up and thereby ends the condition.
+              - The creature has disadvantage on attack rolls.
+              - An attack roll against the creature has advantage if the attacker is within 5 feet of the creature.
+                Otherwise, the attack roll has disadvantage.
+
+      - kind: attack
+        name: "Unarmed: Punch with Fist"
+        proficiency: unarmed
+        resources:
+          hands: 1
+          action: 1
+        reach: "5 + 10{eldritch_maul}"
+        attack_bonuses: "dex|str"
+        damage:
+          bludgeoning: "{martial_arts_dice} + {hybrid_rat_form}d4"
+          force: "{eldritch_maul}d6"
+        damage_bonuses: "dex|str + 1(fist wraps)"
+
+      - kind: attack
+        name: "Unarmed: Slash with Fist and Claws"
+        proficiency: unarmed
+        resources:
+          hands: 1
+          action: 1
+        reach: "5 + 10{eldritch_maul}"
+        attack_bonuses: "dex|str"
+        damage:
+          slashing: "{martial_arts_dice} + {hybrid_rat_form}d4"
+          force: "{eldritch_maul}d6"
+        damage_bonuses: "dex|str + 1(fist wraps)"
+
+      - kind: attack
+        name: "Unarmed: Kick with Foot"
+        proficiency: unarmed
+        resources:
+          action: 1
+        reach: "5 + 10{eldritch_maul}"
+        attack_bonuses: "dex|str"
+        damage:
+          bludgeoning: "{martial_arts_dice} + {hybrid_rat_form}d4"
+          force: "{eldritch_maul}d6"
+        damage_bonuses: "dex|str"
+
+      - kind: attack
+        name: "Unarmed: Slash with Foot Claws"
+        proficiency: unarmed
+        resources:
+          action: 1
+        reach: "5 + 10{eldritch_maul}"
+        attack_bonuses: "dex|str"
+        damage:
+          slashing: "{martial_arts_dice} + {hybrid_rat_form}d4"
+          force: "{eldritch_maul}d6"
+        damage_bonuses: "dex|str"
+
+
+levels:
+  - class: Monk
+    level: 1
+    link: http://dnd5e.wikidot.com/monk
+    description: >-
+      Monks are united in their ability to magically harness the energy that flows in their bodies.
+      Whether channeled as a striking display of combat prowess or a subtler focus of
+      defensive ability and speed, this energy infuses all that a monk does.
+    hit_die: d8
+    hit_points: 8
+    facts:
+      martial_arts_dice: "d4"
+    proficiencies:
+      - type: ability_save
+        target: str
+      - type: ability_save
+        target: dex
+      - type: skill
+        target: history
+      - type: skill
+        target: athletics
+      - type: equipment
+        target: cook's tools
+      - type: weapon
+        target: club
+      - type: weapon
+        target: dagger
+      - type: weapon
+        target: great club
+      - type: weapon
+        target: hand axe
+      - type: weapon
+        target: javelin
+      - type: weapon
+        target: light hammer
+      - type: weapon
+        target: mace
+      - type: weapon
+        target: quarterstaff
+      - type: weapon
+        target: sickle
+      - type: weapon
+        target: spear
+      - type: weapon
+        target: light crossbow
+      - type: weapon
+        target: dart
+      - type: weapon
+        target: short bow
+      - type: weapon
+        target: sling
+      - type: weapon
+        target: short sword
+      - type: weapon
+        target: unarmed
+    abilities:
+      - kind: ability
+        name: Unarmored Defense
+        description: >-
+          Beginning at 1st level, while you are wearing no armor and not wielding a shield,
+          your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
+      - kind: ability
+        name: Martial Arts
+        description: >-
+          At 1st level, your practice of martial arts gives you mastery of
+          combat styles that use unarmed strikes and monk weapons,
+          which are short-swords and any simple melee weapons that don't have
+          the two-handed or heavy property.
+    
+    
+          You gain the following benefits while you are unarmed or wielding
+          only monk weapons and you aren't wearing armor or wielding a shield:
+    
+           - You can use Dexterity instead of Strength for the attack and damage
+          rolls of your unarmed strikes and monk weapons.
+    
+           - You can roll you martial arts die in place of the normal damage of
+          your unarmed strike or monk weapon.
+    
+           - When you use the Attack action with an unarmed strike or a monk weapon
+          on your turn, you can make one unarmed strike as a bonus action.
+      - name: Dedicated Weapon
+        description: >-
+          Also at 2nd level, you train yourself to use a variety of weapons as monk weapons,
+          not just simple melee weapons and short-swords.
+          Whenever you finish a short or long rest, you can touch one weapon, focus your ki on it,
+          and then count that weapon as a monk weapon until you use this feature again.
+    
+          The chosen weapon must meet these criteria:
+          
+            - The weapon must be a simple or martial weapon.
+          
+            - You must be proficient with it.
+          
+            - It must lack the heavy and special properties.  
+
+  - class: Monk
+    level: 2
+    link: http://dnd5e.wikidot.com/monk
+    description: >-
+      Monks are united in their ability to magically harness the energy that flows in their bodies.
+      Whether channeled as a striking display of combat prowess or a subtler focus of
+      defensive ability and speed, this energy infuses all that a monk does.
+    hit_die: d8
+    hit_points: 5
+    resources:
+      - name: Ki
+        description: >-
+          Starting at 2nd level, your training allows you to harness the mystic energy of ki.
+          Your access to this energy is represented by a number of ki points.
+          Your monk level determines the number of points you have, as shown in the
+          Ki Points column of the Monk table.
+
+          You can spend these points to fuel various ki features.
+          You start knowing three such features: Flurry of Blows, Patient Defense,
+          and Step of the Wind.
+          You learn more ki features as you gain levels in this class.
+
+          When you spend a ki point, it is unavailable until you finish a short
+          or long rest, at the end of which you draw all of your expended ki back
+          into yourself.
+          You must spend at least 30 minutes of the rest meditating to regain your ki points.
+
+          Some of your ki features require your target to make a saving throw to
+          resist the feature's effects.
+        pool: "{monk}"
+        regain:
+          amount: "{monk}"
+          on: short rest
+    facts:
+      monk_bonus_speed: 10
+    abilities:
+      - kind: ability
+        name: "Ki Power: Flurry of Blows"
+        description: >-
+          Immediately after you take the Attack action on your turn,
+          you can spend 1 ki point to make two unarmed strikes as a bonus action.
+        resources:
+          ki: 1
+      - kind: ability
+        name: "Ki Power: Patient Defense"
+        description: >-
+          You can spend 1 ki point to take the Dodge action as a
+          bonus action on your turn.
+        resources:
+          ki: 1
+      - kind: ability
+        name: "Ki Power: Step of the Wind"
+        description: >-
+          You can spend 1 ki point to take the Disengage or Dash action as a
+          bonus action on your turn, and your jump distance is doubled for the turn.
+        resources:
+          ki: 1
+
+  - class: monk
+    level: 3
+    hit_die: d8
+    hit_points: 5
+    abilities:
+      - name: "Ki Power: Hands of Healing"
+        source: Way of Mercy, Monastic tradition
+        dice: "1{martial die} + wis"
+        description: >-
+          At 3rd level, your mystical touch can mend wounds.
+          As an action, you can spend 1 ki point to touch a creature and restore a
+          number of hit points equal to a roll of your Martial Arts die + your
+          Wisdom modifier.
+
+          When you use your Flurry of Blows, you can replace one of the
+          unarmed strikes with a use of this feature without spending a ki point for the healing.
+      - name: "Ki Power: Hands of Harm"
+        source: Way of Mercy, Monastic tradition
+        dice: "1{martial die} + wis"
+        description: >-
+          At 3rd level, you use your ki to inflict wounds.
+          When you hit a creature with an unarmed strike,
+          you can spend 1 ki point to deal extra necrotic damage equal
+          to one roll of your Martial Arts die + your Wisdom modifier.
+          You can use this feature only once per turn.
+      - name: Deflect Missiles
+        source: Monk lvl3
+        dice: 1d10 + dex + {monk}
+        description: >-
+          Starting at 3rd level, you can use your reaction to deflect or catch the
+          missile when you are hit by a ranged weapon attack.
+          When you do so, the damage you take from the attack is reduced by
+          1d10 + your Dexterity modifier + your monk level.
+
+          If you reduce the damage to 0, you can catch the missile if it is small
+          enough for you to hold in one hand and you have at least one hand free.
+          If you catch a missile in this way, you can spend 1 ki point to make a
+          ranged attack with a range of 20/60 using the weapon or piece of
+          ammunition you just caught, as part of the same reaction.
+          You make this attack with proficiency, regardless of your weapon
+          proficiencies, and the missile counts as a monk weapon for the attack.
+
+
 facts:
-  "hit points": "8(lvl1 monk hit dice) + 5(lvl2 monk hit die) + 5(lvl3 monk hit die) + {monk}*con(con modifier)"
+  "hit points": "8(lvl1 monk hit dice) + 5(lvl2 monk hit die) + 5(lvl3 monk hit die) + 5(lvl4 monk hit dice) + 5(lvl5 monk hit die) + {monk}*con(con modifier)"
   "armour class": "10(monk unarmoured) + dex(monk unarmoured) + wis(monk unarmoured)"
   "movement": 30(tabaxi) + 10(unarmored movement)
   "climbing": 20(cat's claws)
   "hit dice": "{monk}d8(monk hit dice)"
   "ki points": "{monk}(one per monk lvl)"
   "ki save": "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
-  "martial die": "d4(monk level 1-4)"
   "perception": "10 + wis(passive perception) + prof(passive perception)"
-
-saves:
-  str: Monk Class
-  dex: Monk Class
 
 proficiencies:
   skills:
-    perception: Cat's Talent (Tabaxi)
-    nature: Backstory, replaces stealth from Tabaxi
-    insight: Acolyte background
-    religion: Acolyte background
-    history: Base skill proficiencies (monk)
-    athletics: Base skill proficiencies (monk)
     medicine: Way of Mercy (monk sub-class)
-  armour: {}
-  weapons:
-    Club: Monk
-    Dagger: Monk
-    Greatclub: Monk
-    Handaxe: Monk
-    Javelin: Monk
-    Light Hammer: Monk
-    Mace: Monk
-    Quarterstaff: Monk
-    Sickle: Monk
-    Spear: Monk
-    Light Crossbow: Monk
-    Dart: Monk
-    Shortbow: Monk
-    Sling: Monk
-    Short sword: Monk
   tools:
-    Cooks Tools: Monk tool proficiency
     Herbalists Tools: Way of Mercy (monk sub-class)
 
 weapons:
   - name: Quarterstaff (1h)
     proficient: true
+    range: [0, 0]
     enchantment: dex
     damage:
       bludgeoning: 1d6
     notes: ""
   - name: Quarterstaff (2h)
     proficient: true
+    range: [0, 0]
     enchantment: dex
     damage:
       bludgeoning: 1d8
     notes: ""
-  - name: Unarmed (claw)
+  - name: Light Crossbow (2h)
     proficient: true
+    range: [80, 320]
     enchantment: dex
     damage:
-      slashing: "1{martial die}"
-    notes: ""
-  - name: Unarmed (other)
+      piercing: 1d8
+    notes: Loading, Two-handed
+  - name: Chakram
     proficient: true
     enchantment: dex
+    range: [ "20+5*dex(dex modifier)+5*str(str modifier)", 100 ]
     damage:
-      bludgeoning: "1{martial die}"
-    notes: ""
-  - name: Dart
-    proficient: true
-    enchantment: dex
-    damage:
-      piercing: 1d4
-    notes: 8 darts, range 20/60
+      slashing: 1d6
+    notes: "DC10 dex save on miss"
+
 
 features:
-  - name: "Ki Power: Hands of Healing"
-    source: Way of Mercy, Monastic tradition
-    dice: "1{martial die} + wis"
-    description: >-
-      At 3rd level, your mystical touch can mend wounds.
-      As an action, you can spend 1 ki point to touch a creature and restore a
-      number of hit points equal to a roll of your Martial Arts die + your
-      Wisdom modifier.
+  - name: Druidcraft (action, cantrip, 30ft)
+    source: Elder Leaf Mask
+    description: |-
+      Whispering to the spirits of nature, you create one of the following effects within range:
 
-      When you use your Flurry of Blows, you can replace one of the
-      unarmed strikes with a use of this feature without spending a ki point for the healing.
-  - name: "Ki Power: Hands of Harm"
-    source: Way of Mercy, Monastic tradition
-    dice: "1{martial die} + wis"
-    description: >-
-      At 3rd level, you use your ki to inflict wounds.
-      When you hit a creature with an unarmed strike,
-      you can spend 1 ki point to deal extra necrotic damage equal
-      to one roll of your Martial Arts die + your Wisdom modifier.
-      You can use this feature only once per turn.
-  - name: Deflect Missiles
-    source: Monk lvl3
-    dice: 1d10 + dex + {monk}
-    description: >-
-      Starting at 3rd level, you can use your reaction to deflect or catch the
-      missile when you are hit by a ranged weapon attack.
-      When you do so, the damage you take from the attack is reduced by
-      1d10 + your Dexterity modifier + your monk level.
+       - You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.
+       - You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.
+       - You create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.
+       - You instantly light or snuff out a candle, a torch, or a small campfire.
+  - name: Ensaring Strike (1 ki point, bonus action, self)
+    source: Elder Leaf Mask
+    description: |-
+      Concentration, up to 1 minute
 
-      If you reduce the damage to 0, you can catch the missile if it is small
-      enough for you to hold in one hand and you have at least one hand free.
-      If you catch a missile in this way, you can spend 1 ki point to make a
-      ranged attack with a range of 20/60 using the weapon or piece of
-      ammunition you just caught, as part of the same reaction.
-      You make this attack with proficiency, regardless of your weapon
-      proficiencies, and the missile counts as a monk weapon for the attack.
-  - name: "Ki Power: Flurry of Blows"
-    source: Monk lvl2
-    description: >-
-      Immediately after you take the Attack action on your turn,
-      you can spend 1 ki point to make two unarmed strikes as a bonus action.
-  - name: "Ki Power: Patient Defense"
-    source: Monk lvl2
-    description: >-
-      You can spend 1 ki point to take the Dodge action as a
-      bonus action on your turn.
-  - name: "Ki Power: Step of the Wind"
-    source: Monk lvl2
-    description: >-
-      You can spend 1 ki point to take the Disengage or Dash action as a
-      bonus action on your turn, and your jump distance is doubled for the turn.
-  - name: Darkvision
-    source: Tabaxi racial feature
-    description: >-
-      You have a cat's keen senses, especially in the dark.
-      You can see in dim light within 60 feet of you as if it were bright light,
-      and in darkness as if it were dim light.
-      You can't discern color in darkness, only shades of gray.
-  - name: Feline Agility
-    source: Tabaxi racial feature
-    description: >-
-      Your reflexes and agility allow you to move with a burst of speed.
-      When you move on your tum in combat, you can double your speed until the end of the turn.
-      Once you use this trait, you can't use it again until you move 0 feet on one of your turns.
-  - name: Cat's Claws
-    source: Tabaxi racial feature
-    description: >-
-      Because of your claws, you have a climbing speed of 20 feet.
-      In addition, your claws are natural weapons, which you can use to make unarmed strikes.
-      If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier,
-      instead of the bludgeoning damage normal for an unarmed strike.
-  - name: Shelter of the Faithful
-    source: Acolyte background feature
-    description: >-
-      As an acolyte, you command the respect of those who share your faith,
-      and you can perform the religious ceremonies of your deity.
-      You and your adventuring companions can expect to receive free healing
-      and care at a temple, shrine, or other established presence of your faith,
-      though you must provide any material components needed for spells.
-      Those who share your religion will support you (but only you) at a modest lifestyle.
-      You might also have ties to a specific temple dedicated to your chosen
-      deity or pantheon, and you have a residence there.
-      This could be the temple where you used to serve, if you remain on good
-      terms with it, or a temple where you have found a new home.
-      While near your temple, you can call upon the priests for assistance,
-      provided the assistance you ask for is not hazardous and you remain
-      in good standing with your temple.
-  - name: Unarmored Defense
-    source: Monk class feature
-    description: >-
-      Beginning at 1st level, while you are wearing no armor and not wielding a shield,
-      your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
-  - name: Martial Arts
-    source: Monk class feature
-    description: >-
-      At 1st level, your practice of martial arts gives you mastery of
-      combat styles that use unarmed strikes and monk weapons,
-      which are shortswords and any simple melee weapons that don't have
-      the two-handed or heavy property.
+      The next time you hit a creature with a weapon attack before this spell ends, a writhing mass of thorny vines appears at the point of impact, and the target must succeed on a Strength saving throw or be restrained by the magical vines until the spell ends. A Large or larger creature has advantage on this saving throw. If the target succeeds on the save, the vines shrivel away.
 
+      While restrained by this spell, the target takes 1d6 piercing damage at the start of each of its turns. A creature restrained by the vines or one that can touch the creature can use its action to make a Strength check against your spell save DC. On a success, the target is freed.
+  - name: Spike Growth (2 ki points, action, 150ft)
+    source: Elder Leaf Mask
+    description: |-
+      The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.
 
-      You gain the following benefits while you are unarmed or wielding
-      only monk weapons and you aren't wearing armor or wielding a shield:
+      The transformation of the ground is camouflaged to look natural. Any creature that can't see the area at the time the spell is cast must make a Wisdom (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.
+  - name: Wand of Magic Missile Darts
+    source: Wand of Magic Missile Darts
+    description: |-
+      This wand has 3 charges. While holding it, you can use an action to cast the magic missile dart spell from it. When you expend 1 of its charges you instead cast the magic missile spell from it.
+      The wand regains 1d4 - 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
 
-       - You can use Dexterity instead of Strength for the attack and damage
-      rolls of your unarmed strikes and monk weapons.
-
-       - You can roll you martial arts die in place of the normal damage of
-      your unarmed strike or monk weapon.
-
-       - When you use the Attack action with an unarmed strike or a monk weapon
-      on your turn, you can make one unarmed strike as a bonus action.
 
 backstory:
   "Traits – Sheltered": >-
@@ -225,12 +490,12 @@ backstory:
     experience dealing with people in the outside world.
   "Traits – Isolated": >-
     I grew up in a church-as-a-family, with many who loved me,
-    but none who were particular close and nuturing.
+    but none who were particular close and nurturing.
   "Ideals – Charity": >-
     I always try to help those in need, no matter what the personal cost.
   "Flaws – Piety": >-
     My piety sometimes leads me to blindly trust those that profess faith in my god.
-  "Flaws – Pascifism": >-
+  "Flaws – Pacifism": >-
     I will not harm a being, unless it is causing harm to me or those around me.
     Even then, I will try to disable rather than kill or destroy
   "Dogma – Eldath": >-
@@ -256,7 +521,7 @@ backstory:
   "Bonds – [todo]": >-
     [i need to invent the monetary master and abbess]
 
-  "Location – The Abbey": >-
+  "Location – Al Nophica Abbey": >-
     Although called an Abbey, this cluster of low profile stone buildings sits
     a short walk from a sacred grove and holy sit of Eldath.
     To the South and East, the buildings overlook the confluence of the Triboar
@@ -368,7 +633,7 @@ backstory:
     It was still and calm but did not have the same feeling of peace and
     tranquillity as the old abbey.
 
-    At the Monestry, they learnt how to actually use the weapons and the concept
+    At the Monastery, they learnt how to actually use the weapons and the concept
     and potential of Ki. As part of their novice/initiate training,
     they were sent on a raid against a goblin/kobold encampment,
     in which the leader ordered the camp to be set ablaze during the attack.
@@ -381,7 +646,7 @@ backstory:
     They decide not to return to the abbey, seeing as that would be an obvious place to look for them.
     In Conyberry, they meet Glint and Bram and are recruited to join the adventure.
 
-  "Session Log – Session 1": |-
+  "Session Log – Session 1 (The Fading, 8th)": |-
     Bram has a holy symbol that looks like a dragon claw -- Bahamut.
     Learnt about the Cat Lord from new best friend Glint.
     Kolbold with white scales on the shield?
@@ -391,11 +656,11 @@ backstory:
     Changling Tiefling pushed the kobold out of the cart!
     There's a lot of plotting going on :/
 
-  "Session Log – Session 2": |
+  "Session Log – Session 2 (The Fading, 8th/9th)": |
     Innkeeper of Phandalin is human, Toblin Stonehill, from Triboar.
     There's an ex-Sheriff 40mi east "Big Al" (Alfonse Kalazorn)
 
-    Townmaster Harbin Western, leading Phandalin
+    Town-Master Harbin Western, leading Phandalin
       Wouldn't come out.
       Had quests
       Scared as all fuck.
@@ -407,7 +672,8 @@ backstory:
     Lionshield Coster
       Fantasy Costo, where all your dreams come true
       Run by Linene Graywind
-      Whelp. there's noone here who can fight, it seems
+      Offering a 25% discount of weapon silvering, to counter were creatures.
+      Whelp. there's no-one here who can fight, it seems
 
     Barthen's Provisioners
       Run by Elmar Barthen (might be a wizard, does shape shifting)
@@ -416,13 +682,13 @@ backstory:
     That dragon scale inlaid shield we found? That's magical! Reduces cold damage
     Our cleric doesn't like being encouraged to go to wizard school
 
-  "Session Log – Session 3": |
+  "Session Log – Session 3 (The Fading, 9th)": |
     Smithy
       Dwarven smith (Alger) and Human apprentice.
       Made some magical moonblades (inverse scythes)
       Alger seems to be willing to actually work towards defeating the dragon, but makes blades (ewwwww).
 
-    The local midwife — an acolyte of Chauntea named Adabra Gwynn — lives by herself in a stone windmill on the side of a hill a few miles south of Phandalin. With dragon sightings becoming more common, it’s not safe for her to be alone. Urge Adabra to return to Phandalin. Once she’s safe, visit Townmaster Harbin Wester to claim a reward of 25 gp.
+    The local midwife — an acolyte of Chauntea named Adabra Gwynn — lives by herself in a stone windmill on the side of a hill a few miles south of Phandalin. With dragon sightings becoming more common, it’s not safe for her to be alone. Urge Adabra to return to Phandalin. Once she’s safe, visit Town-Master Harbin Wester to claim a reward of 25 gp.
 
     At The Windmill
       30% grade hill is a fun climb!
@@ -439,7 +705,7 @@ backstory:
 
       Found us a Glint who found an elder half-elf, sounds like they had a great time in the orchard.
 
-  "Session Log – Session 4": |
+  "Session Log – Session 4 (The Fading, 9th/10th)": |
     Sleepy times. Very important. Glint seems rather upset with just how Fine we were on our trip.
 
     "All Druids Welcomes At Alderleaf Farm." -- seen on the side of the well by the shrine in town.
@@ -448,28 +714,28 @@ backstory:
 
     We're going to the...[drum roll please] the Gnomes.
     We have found them be following a stream (Light got to lead the pad-pad) and found their magical mushrooms.
-    And their waterfall. Their very very loud waterfall. WHICH WE CAN'T HEAR EACHOTHER OVER!!
+    And their waterfall. Their very very loud waterfall. WHICH WE CAN'T HEAR EACH OTHER OVER!!
     Found a way in, and we eventually find the kitchen of the gnomes! Legendary bread and mushroom facilities.
-    Fibblestib and Dabbledob are the artificers. We should go visit them, but maybe not going via the Crazy Gnome who is testing their fully automatic onmi-directional crossbow machine. Are we going to BE FINE(tm) again?
+    Fibblestib and Dabbledob are the artificers. We should go visit them, but maybe not going via the Crazy Gnome who is testing their fully automatic omni-directional crossbow machine. Are we going to BE FINE(tm) again?
     During the battle, people disappeared and reappeared elsewhere, Glint grew wings and lights, Bezlik turned blue, and Sleep eventually took this thing down. Good old Sleep. We love sleep.
     Landan raised the idea of building a bigger, more dragon killing version to the now captured gnome friend.
 
-    The teleported friends found some guards who are on the lookout for shapeshifters, very aggressively. Crossbow aggressive :3
-    We have some tense neigotiations as we shuffle through trying to prove that we are friends, not shapeshifters, as neither is true.
-    They do not belive Light. Even after I loafed!
+    The teleported friends found some guards who are on the lookout for shape-shifters, very aggressively. Crossbow aggressive :3
+    We have some tense negotiations as we shuffle through trying to prove that we are friends, not shape-shifters, as neither is true.
+    They do not believe Light. Even after I loafed!
 
-  "Session Log – Session 5": |
-    Bezlik declared as "I am Bezlikoye, Changling, and servant of Ma'eyt".
-    That scared the bigjebsus out of the gnomish guards who went running.
+  "Session Log – Session 5 (The Fading, 10th)": |
+    Bezlik declared as "I am Bezlikoye, Changeling, and servant of Ma'eyt".
+    That scared the big-jebsus out of the gnomish guards who went running.
     Light let the mad engineering gnome go free (and reclaim my rope) ready to work out how to get a Centaur across a narrow rope bridge.
 
-    The rope bridge does not like our mass. Glint is flying aorund, leaving the spinning blades round. Bezlik is climbing down into a river, Landan is not, Bram has gone the long way around, and Light is stuck in the middle splitting the party even more. Who knows where Glint is, who knows what Landan is going to do.
+    The rope bridge does not like our mass. Glint is flying around, leaving the spinning blades round. Bezlik is climbing down into a river, Landan is not, Bram has gone the long way around, and Light is stuck in the middle splitting the party even more. Who knows where Glint is, who knows what Landan is going to do.
     All Light knows is that they are wet, their head hurts from the noise of the waterfall, and so far this is possibly worse that the whole manticore incident.
 
     [OOC] Glint found Fibblestib(m) and Dabbledob(f) have been found by a Glint.
     Light make it up a slope, but there's nowhere to tie up the rope to help the others up.
 
-    The Benny Hill Theme plays. Glint does one full loop of the tunnels and makes some new friends in the time in the time it takes up to wade the river and climb into the dormatory.
+    The Benny Hill Theme plays. Glint does one full loop of the tunnels and makes some new friends in the time in the time it takes up to wade the river and climb into the dormitory.
     Bram isn't good with steep slopes, damaged the manticore-nommed leg again :( But we have found the foreman/chief inventor gnomes.
 
     Glint "I turned off the Spinning Death Blades"
@@ -477,10 +743,10 @@ backstory:
     Glint "Don't even worry about it, I turned them off"
 
     Gods, we made it in to a laboratory with useful people. This room is full of *things* and *stuff* which is exciting.
-    Hey, these people know the difference between shapeshifters and shapechangers. Light still doesn't, but hopefully they're learning.
+    Hey, these people know the difference between shape-shifters and shape-changers. Light still doesn't, but hopefully they're learning.
 
-    Right, the kings are a couple who are...out of it. They're locked up in their room worrying about shapechangers. The fore-gnomes seem to think that one has gone insane and is holding the other.
-    Someone finally explains the difference (in character) between changelings and dopplegangers and shapechangers. Let's hope that Light was paying attention and not essentially hissing at everything.
+    Right, the kings are a couple who are...out of it. They're locked up in their room worrying about shape-changers. The fore-gnomes seem to think that one has gone insane and is holding the other.
+    Someone finally explains the difference (in character) between changelings and doppelgangers and shape-changers. Let's hope that Light was paying attention and not essentially hissing at everything.
 
     There might also be a green dragon in the area (v.OOC).
 
@@ -495,12 +761,12 @@ backstory:
     Pog is also missing. (eyyyyy, aren't we all missing a Pog >.<). There's a keg gone from the wine cellar too, signs of struggle and their is a stray plate! Such chaos. Also, the mug Pog went to fill isn't there.
     [OOC] Back over by the king's bedchambers, the talking is going...poorly. There's keyhole spying, spell transcribing, and all sorts of drama. Oh, and Dobby is guarding the door.
 
-  "Session Log – Session 6": |
+  "Session Log – Session 6 (The Fading, 10th)": |
     [OOC] Landan has a fancy book.
 
-    Oh good, the quad firing crossbow machine has been remanned (regnomed) by...the left half of Pog. Who has been...melted by acid (probably from the nom nom, but maybe Dale has entered the scene). Light has no brain in this moment.
+    Oh good, the quad firing crossbow machine has been re-manned (re-gnomed) by...the left half of Pog. Who has been...melted by acid (probably from the nom nom, but maybe Dale has entered the scene). Light has no brain in this moment.
 
-    Bram feel down a cliff, Glint is panicing, and Bezlik we found the cooks looking very beat up and they reckon they trapped it up North...but it came from the wrong direction than one would expect given where Pog's body is. This is all going swimmingly (with far too much swimming).
+    Bram feel down a cliff, Glint is panicking, and Bezlik we found the cooks looking very beat up and they reckon they trapped it up North...but it came from the wrong direction than one would expect given where Pog's body is. This is all going swimmingly (with far too much swimming).
     Light is still very much having a headache and not thinking well, to the point that they still haven't realised that there is probably more than one mimic. Or that sending off Glint by themself is a terrible idea as she'll panic and cause more problems.
     [OOC] Landan also seems to be doing a bit of a panic, and has jumped into the water.
 
@@ -520,23 +786,23 @@ backstory:
 
     [OOC] Bezlik tried to shift in front of the Kings, and things went sideways. The form shift didn't actually take place, and there was a scary booming voice...and Light saw none of this.
 
-    Things Light _may_ have learned from this expidition:
+    Things Light _may_ have learned from this expedition:
      - Glint might be an bumbling idiot
      - Rushing in is a good way to get ganked
      - People and situations are complicated and evolve quicker than they are used to thinking
 
-    Things Light _has_ learnt from this expidition:
+    Things Light _has_ learnt from this expedition:
      - Healing boops! (well technically returning and handing in the quest does that)
 
-  "Session Log – Session 7": |
+  "Session Log – Session 7 (The Fading, 10th/11th)": |
     Back to town, sold off the Wizzard Hat for 55gp
 
     Party split up to run errands. Bezlik got us the rooms
 
     Landan and I head to Barthen's Provisions, where a Bugbear and an ex-bodybuilder-looking human were having an argument with Elmar.
-    The inside doesn't feel right...something about redbands? Still seems happy to see Landan.
+    The inside doesn't feel right...something about Red Bands? Still seems happy to see Landan.
     Seemed unaware of where his stock was when finding the herbalism kit, and really wanted us out.
-    [OOC] Shakedown! We have some "vigilanties" in town >.<
+    [OOC] Shakedown! We have some "vigilantes" (Red Bands) in town >.<
 
     Glint and Bram off to meet Daran, the half-elf in Orchard
     [OOC] ex-fighter, has a great sword behind the door
@@ -552,12 +818,12 @@ backstory:
     Elmar, from the supplies store, has a dwarf supplier Gundren Rockseeker has not turned up, and he's worried. We might be all off on another advantage
 
     We went up the path, found the dead horses...and got jumped by 4 goblins. Light did some fancy running to engage one pair, and took them out...including collapsing one's chest in on itself.
-    The rest got cleaned up very quick (combat lastest less than a round).
+    The rest got cleaned up very quick (combat lasted less than a round).
 
     Bram got Light to snap out of the "oh no I hurt something" stance by pointing out the one who still is up. Glint speaks Goblin!
     Captured Goblin tells us there are at least 15 goblins at the lair, led by a non-goblin who is uglier and hairier than Landan.
     Black Spider hired King Grol wanted the Dwarf who was running the supply cart.
-    On being released, they attempted to sneak back pass us, and got firebolted.
+    On being released, they attempted to sneak back pass us, and got fire-bolted.
 
     Tracks heading to the North imply the cart was _carried_ off by the goblins (not dragged)
 
@@ -566,17 +832,17 @@ backstory:
      - 2 gp
 
     Back at the beginning of the right, Light spotted a book that was a Dwarven journal.
-    [OOC] seems to be about a recoverd magical dwarven forge
+    [OOC] seems to be about a recovered magical dwarven forge
 
     https://cdn.discordapp.com/attachments/969593357825376276/1010638513672310865/unknown.png
 
     Manor in town is named for the Lord mentioned in the passage
-    [OOC] The runined house in the east of town is where the entrance probably is entrance?
+    [OOC] The ruined house in the east of town is where the entrance probably is entrance?
 
     We set off after the tracks, and we now have traps! There was one rope snare trap, and a giant covered hole (which was probably dug after the cart was carried across)
     And we arrive at A LOCATION. As we get closer, we see a stream/brook flowing out of our destination.
 
-  "Session Log – Session 8": |
+  "Session Log – Session 8 (The Fading, 11th)": |
     Time to investigate this here cave!
     We find no traps, three sentries already stabbed to death.
     Bezlik returns, with the ability to Summon Greater Crossbow.
@@ -596,9 +862,9 @@ backstory:
 
     These notes are very incomplete because brain. I did get chocolates IRL.
 
-  "Session Log – Session 9": |
+  "Session Log – Session 9 (The Fading, 11th)": |
     Kobold encounter! The healer went down first, quickly traded for a kobold.
-    Three kobolda come out of the shadows, Landan is brought up, Light gets a
+    Three kobolds come out of the shadows, Landan is brought up, Light gets a
     bruise and a stab and then magiced into a frag.
     Light managed to go down twice in this combat! The second time for their
     own silly reasons.
@@ -611,34 +877,608 @@ backstory:
       - including potions, money, and maybe some other things?
       - no sign of the driver friend
 
-    Light heard a human-ish voice being harrassed by some Goblins (hey, there's still some of those around).
+    Light heard a human-ish voice being harassed by some Goblins (hey, there's still some of those around).
     Before taking our rest (which we really, really needed), we manage to prevent the defence water from flooding away and potentially trapping us out.
 
-    A rest occurred. 3 hit dice wasn't enough for me to fully heal up, but the group overall is looking a lot better. We head back inside, and cross the bridge and find...the goblins! One might be called Klarg. They spot the light coming from our party, and...we somehow get into a hostage neigotation! Bram is summoned into the room to try and secure release of the captive.
+    A rest occurred. 3 hit dice wasn't enough for me to fully heal up, but the group overall is looking a lot better. We head back inside, and cross the bridge and find...the goblins! One might be called Klarg. They spot the light coming from our party, and...we somehow get into a hostage negotiation! Bram is summoned into the room to try and secure release of the captive.
 
-    Bram successfully neigotiated the release of the human, after the goblin found out they were now in charge. Turns out that power corrupts, or some such. The human we rescues it appearantly called Sildar Hallwinter, and doesn't seem to know much apart from their being a 'the castle' -- possibly 'Cragmore Castle'.
+    Bram successfully negotiated the release of the human, after the goblin found out they were now in charge. Turns out that power corrupts, or some such. The human we rescues it apparently called Sildar Hallwinter, and doesn't seem to know much apart from their being a 'the castle' -- possibly 'Cragmaw Castle'.
 
     Our captured kobold has been...burnt to a crisp! Along with Rope-Chan the First!
     The rope is dead...long live the rope!
 
-    We return to town!
+    We head back towards town!
 
+  "Session Log – Session 10 (The Fading, 11th)": |
+    Sildar info dump: Sildar is a member of The Lords Alliance. Joined the Rocksseeker's caravan to get to Phandalin un-harassed. Heading there to find a fellow alliance member, looking for wizard Iarno Albrek (disappeared a few months ago). Iarno was meant to preserve order, but instead we have the Red Band instead, and a mayor who won't come outside.
+    Upon learning of the plan to re-poen the mines, he pledged to that caused. The Rockseeker brother he was travelling with had a map to the magic mines in Wave-echo Cave.
+
+    We return to the town, and return to the provisioner who sent us after Gundred Rockseeker; we filled them in on what we know (no dwarf, no map, lots of goblins and kobolds chasing them).
+    We got the pearl and another 100G!
+    And a hint that the Red Bands aren't the only problem around here...
+
+    [OOC] Bezlik things: Tower of Storms is something they are looking for? My mind slipped off this section of conversation. "That which you seek fell to the lure of the Tower of Storms, Search the property of the fallen to find that which you seek."
+    [Very OOC] oh, the Tower of Storms is a lighthouse on the coast!
+
+    Sildar, the Lord Alliance friend, is going to stay with Daran, the half-elf over at the orchard. Glint, Bram, and Bezlik take him over there.
+
+    Walking into the inn, there are three Dragonborn at one table, and an eldery human by the fireplace. One of the Dragonborn is younger and a black dragonborn, and is familiar to Light for some reason. At quick glance, the human is in travelling gear.
+
+    The dragonborn...frankly look like an adventuring party:
+     - Dreamer (he/him), crystal == scholarly
+     - Basher (she/her), bronze == oldest, heavy leathers + magic hammer
+     - Faithful (they/them), black == robes, necklace, youngest.
+
+    We get food and I definitely don't have a weird interaction with the innkeeper finding out where the Alderleaf Farm.
+
+    Bronze dragonborn is Basher, Bezlik knows he had an apprenticeship with a blacksmith in Bezlik's home town. Also, Bram rescued them? Anyway, they, are on the way to start a new magic shop down the high road in Leilon (going to be called the Dragon's Emporium) -- and they're carrying a bunch of magic items. They deliver the centaur armour they made for Bram, but they are also carrying some cool things including plushies of resist fear.
+    Bezlik buys a wand of magic missile darts.
+
+    Bram backstory unlock: became a paladin when Bahamut called upon on them to save a town? (Help my brain pulled out when doing this)
+
+    Light's Nightmare:
+     - Goblin crunching sound
+     - Field of dead goblins and kobolds
+     - Blood on their fur
+     - Oh look its the monastery master, the angry human
+     - Order to burn everything down
+     - Whip made of wire around goblin throat
+     - Run through with rapier
+
+    Landan's Nightmare:
+     - Crystal dragon born was at wizard college with Landan, ~3 years younger
+     - weren't interacting, was in the artificer labs
+     - seeing all the members of the group
+     - all the group encircled around a book like the one Landan carries, chanting
+     - they're doing a thing...and the book eats the group? with implosions~
+     [ a school building was destroyed ]
+
+    [OOC] The warlocks have warlock chats! They determine patrons, and a bit of what is up with Bezlik's time stopping mentor.
+    [OOC] Bezlik has unlocked the ability to mix forms.
+
+    At the farm, an older halfling is running the farm Qelline Alderleaf.
+
+    Light trauma dumps, and gets a referral to Reidoth, who is inspected the ruins of Thundertree, some tea, and adorable flowers behind the ears.
+    
+    Qelline has a child called Carp (potat!!).
+
+    Light goes the long way back, and notices the tavern (the Sleeping Giant) is full of Red Band folk -- 5 in total, 2 heading towards the east, also hear two voices nearer the inn who also seem to be Red Band affiliated.
+
+  "Session Log – Session 11 (The Fading, 12th)": |
+    On returning to the inn, Light meets Faithful coming down the stairs...who knows Light from the Abbey! They left the Abbey about a year ago aged 10ish as the youngest cleric (and aspiring tailor), looking for friendly folks to send back to the abbey.
+    The pair get breakfast (porridge with berries); Faithful confirms the existence of one lage green dragon, and one small green dragon, as well as the white dragon we already know about.
+    They also confirm that Eldath is good with the whole self-defence thing.
+    After catching up, the dragonborn and the missing PCs head off to Leilon (and Light promises to visit).
+
+    [OOC Knowledge] Bezlik (she/her) comes down in a female Elf 'mirth' form. She sits next to the mysterious older man by the fireplace, and finds out that he recently came into possession of a nearby mine (and might be a escort quest). He had a shop near Neverwinter that Bezlik (and Landan?), so must be new in the area. Real big bragger, but seems to believe what he is saying.
+
+    Bezlik checks in on Landan, who is busy.
+
+    Bezlik and Light compare notes -- the green dragons are probably looking to (re)claim the region for the younger dragon -- there was a ancient dragon (Old Gnawbone) in the Neverwinter Wood, and there was a non-ancient one killed on the Dragon Barrow. (Hey, maybe we can turn the greens against the white??)
+
+    Landan appears! They've been having a "great time" working on the holy symbol. "Still needs a bit of work, but shouldn't be an issue".
+
+    Planning commences. Known problems and priorities, in order of fearfulness:
+     - A White Dragon with a fanatic kobold army.
+     - An elder green dragon and it's offspring.
+     - "Black Spider" who hired King Ghrol to capture a dwarf to help find a magical forge.
+     - The Red Band plaguing the town.
+     - Insufficient nyaps.
+     - Visting the Dwaven excavation
+     - Seeing the old man to his mine
+
+    Bezlik Miqo'te reveal! No-one is impressed, because no-one understands what is going on.
+
+    We step outside to go visit the QUEST BOARD, and are greeted by NEW MAP.
+    This map contains people shouting "it's him" and firing arrows. What people? Who can say. But there's one on the roof! And that sure is an arrow sticking out of Landan...looking like we're gearing up for Everything To Be Fine.
+
+    Flying is cheating. How is Light meant to punch something that is flying?
+    Making Light purple is cheating. Light has a clear, well-defined colour scheme. If you cast faerie fire on Light, it should be yellow.
+
+    "Welcome to taking damage! I know this is a new experience for you!" -- Randus to Eldre.
+
+    A critical bonk occurred, followed by a critical bolt (which took out our flying friend).
+
+    Things Light has been told not to worry about:
+     - The fangs on the male 'elf'
+     - The fangs biting Light
+     - The long sword the elf has
+     - That elf in general
+     - The damage roll from the long sword
+     - The 10 psychic damage that downed Light
+     - This entire raider group seeming Not Right
+
+    The blade-singer elf is called Ella! I wonder if she also has fangs...
+
+    "Not actually a vampire...just be very clear" -- Randus
+
+    Bezlik, known to our attackers to be pest, goes down.
+    Light goes down to psychic damage (such a surprise).
+
+    When we are all out (Landan via sleep), the Elves took Landan's book and ran away.
+    Sildar turned up just too late to save Bezlik from a critical death save failure.
+    Upon coming around, Light finds Landan and a dead Bezlik...and performs a 40 second cross-town sprint carrying Bezlik to Alderleaf Farm in the hopes of a revivify -- and is about 30 seconds too slow. Bezlik's soul doesn't want to be reincarnated in some random body, and so we start saying our goodbyes.
+
+    "We have only marginally traumatised the boy. That's something" -- Kitteh
+
+    Light's bite wound: there's no blood...and a magical residue! I'm sure that is fine. Leading theory is something similar to a Dhampir.
+
+    We begin the prepatory work to bury Bezlik's body and wait for Bram and Glint to return.
+
+  "Interlude – Landan's Backstory": >-
+    Backstory for Landan - short version, About 5 years back, Landan was training to be a Wizard, and got stuck in a pseudo-gig economy thing that was researching the difference between arcane and divine magic at a structural level.  On a day that Landan was making up some study time, that research group, "The Weave Research Collective," was destroyed by an explosion of some kind of white energy.
+    In the rubble he found no survivors, but a box with the book Ella took and what is now his holy symbol, Landan found himself unable to cast spells as a Wizard, as though his brain had been rewired, but can now cast as a Cleric.
+    Currently doesn't know who his deity is, or if he isn't just a REALLY weird wizard who is effectively just a Cleric.
+    In the past 5 years he's been learning the office-side works of a Cleric, as well as trying to pick up any information on what might've happened on the divine side of stuff.
+    While he has a really bad reputation in the city that he was training to be a Wizard in, it hasn't been an issue so far.
+
+  "Session Log – Session 12 (The Fading, 12th/13th)": |
+    We start digging a grave.
+
+    Light takes a visit to the inn to tell Toblin about the attack to their property, and is dispatched to visit the woodworker (Thel Dendrar) to get some repairs. He's entertaining when we arrive, and the door is answered by Mirna (possibly wife?). Thel comes out with a very pretty Tiefling (Eldre's new character Narthian) who seems to be visiting.
+
+    Meanwhile, Landan discusses gods with Daran at the Orchard. Daran learns of Landan's god problem.
+
+    Narthian new character finds the evidence of Aarakocra stalking on the windowsill; this gets reported to Sildar in a _very communicative manner_. She is sent off to report these findings to us.
+
+    Visited the Smithy to commission a small grave marker for Bezlik, and found out that there are Chakram are for sale.
+
+    Narthian's obvious gear:
+      - longbow
+      - buckler
+      - short sword
+      - scimitar
+      - woodland smell
+
+    LANDAN IS A SMOL!! (5'4") (I didn't previously realise this)
+
+    More digging. Grave complete.
+
+    Return to the smithy (late) (but Light learnt about clocks!). The grave marker is complete, and Light spends 20gp on a Chakram.
+
+    We have been offered a discount on the room rates!
+    Landan identified the dagger! It's the Dagger of Misdirection -- it acts as a hologram anchor creating a spectral copy of the wielder that spells can come from.
+    We head to bed.
+
+    Narthian learns about the Red Bands and how they should be put back in their place (during their own dinner). She then heads out into the outskirt woods to set up a small camp for themselves in a tree lean-to.
+
+    In the morning, Light revisits the shrine (which is dedicated to Tymora), and investigates the Sister Garaele's house. There's fancy lace curtains, something that I saw as a metal item on the table, and it is notably untouched by the Red Bands. Light draw a conclusion that this building is _weird_.
+
+    (Holy moly I am rolling poorly today)
+
+    Landan uses Locate Object but can not find the item. Booo. Menas its either a long way away, or has been shielded with lead. Landan grows even more concerned.
+
+    Narthian also likes to visit the shrine in the morning...and has decided to follow Light back to the inn to ask what the Red Bands are. Toblin the innkeeper seems upset about this line of conversation, so Narthian takes us outside to the town green (not quiet a water cooler chat around the well, sorry Randus).
+
+    "Congraulations Narthian, you have become leader and acquired a Monk and a Cleric. Uses them as you will"
+
+    Narthian has a range along the Triboar trail, fighting things as needed. They want to clear out the Red Bands; we will pick them up when the rest of the part is back.
+
+    Town trip, selling all the extra stuff from Bezlik.
+    Barthen's Provisions:
+      - Reassured him that we are still look for Rockseeker.
+
+    Lionshild Coster:
+      - Silvering weapons discount (only 75gp) continues -- end 18th day of the fading.
+
+    Quest Board Update:
+      - Orcs have attacked Butterskull Ranch, five miles east of Conyberry along the Triboar Trail! Travel there with haste, assess the damage, and help any way you can. Ranch owner Alfonse “Big Al” Kalazorn is a retired sheriff who can reward you for your efforts. If he’s dead, return to Town-Master Harbin Wester with proof of Kalazorn’s demise to receive a reward of 100 gp.
+      - Deep in Neverwinter Wood, along the river that flows west toward Neverwinter, is a logging camp. Every two months, Phandalin delivers fresh supplies to the camp, which is run by the half-brother of Phandalin’s town-master, Harbin Wester. Barthen, the local provisioner, has prepared a new delivery. He needs someone to bear the supplies safely to the camp. Return to Harbin Wester with a notice of delivery signed by his half-brother, Tibor Wester, to claim your reward of 100 gp.
+      - The Mountain’s Toe Gold Mine lies fifteen miles northeast of Phandalin. The new overseer, Don-Jon Raskin, just made the trip from Neverwinter to Phandalin and needs to be escorted to the mine. There’s no telling what dangers lie between here and there. Once you deliver Raskin safe and sound, return to Town-Master Harbin Wester to collect a reward of 100 gp.
+
+    We visit the town-master to ask about Sister Garaele -- the town-master is rather distraught that quest items have been arriving in fur (or horse hair). Apparently she is on the way to Neverwinter; her disappearing for weeks or months at a time. "She can take care of herself".
+    We find out that the Tower of Storms is probably the lighthouse at the Western end of the Triboar Trial.
+    Landan and Light head South picking herbs (not very successfully) and visit Adabra. We take up the offer of the half price potion, and also get an updated sale list (potions, poisons, and some helpful books that both Landan and Light would love to buy).
+
+    We share tea, and talk about the weather. We all notice that there have been multiple localised lightning storms...at the Tower of Storms. Landan barters for a book on local legends (which is going to be real useful). There's a lot of local legends in there -- including 'Fall of Thundertree' (recent); 'Fall of Conyberry'; and the story of Lady Alagondar who defeated a green dragon.
+    On the subject of the Tower of Storms, it was once a place of worship for Talos (a Chaotic Evil God of Storms).
+
+    Narthian heads off to scout the mansion, and headed North towards in Triboar Trail.
+
+    We return to the inn to find a returned Bram and Glint.
+
+  "Session Log – Session 13 (The Fading, 13th/early 14th)": |
+    Mint??? (What's a Mint?)
+    "It's OK, It's OK, they're friendly...we think" -- Bram, on Mint.
+
+    Sildar informs Bram and Glint of a death and, having been up for over 24 hours, is escorted back to the orchard to get some rest.
+    They then find a returning Light and Landan; there are hugs. Also, Glint has a gooish skull with a sapphire eye on her shoulder called Mint. They also recovered Landan's book (which is returned, slightly changed). The skull (who is calling Glint 'mama', though only Glint can hear the voice) is a sort of gelatinous cube with the skull inside it. It can also move of its own accord, it seems...and they change forms when they hear their name).
+
+    https://cdn.discordapp.com/attachments/1036777256812552244/1036797947494531072/unknown.png
+
+    The Aarakocra that killed Bezlik seems to have been offed by Cryovain (judging by the eating and frozen state the body was found in).
+
+    The book now has additional, higher level spells.
+
+    We proceed to the Bury Bezlik step, with various rituals (planting saplings, etc.).
+
+    Planing Step:
+     - Time to push these Red Bands
+     - The leader is called "The Glass Staff".
+    Prep Work:
+     - Acquire Narthian
+     - Have manacles made
+     - Wait until night
+    Phase 1:
+     - "Two Tabaxi walk into a bar..."
+     - Bar Fight
+    Phase 2:
+     - Smoke them out of the mansion
+
+    Narthian wasn't at home. So this is already going swimmingly. A note has been left.
+
+    15 manacles have been ordered (from the apprentice?) for 30gp. On returning to the inn, a very much lighter coin purse is given over to Bram. Dinner is consumed (including by Mint).
+
+    The Mint based moon alarm clock works.
+
+    "DM, I headpat the ooze."
+
+    We set off to the Inn -- Light spots 6 inside, and we set up for "Two Tabaxi Walk Into A Bar". Glint gets off the start of the fight...by getting stabbed twice and lighting someone on fire. The fight goes...ok. Light manages to successfully engage 3 sober double attackers. Light gets their second ever kill (booo) and [about an hour of combat got lost here. We only killed...four, no wait five of the seven.
+
+    Kitteh rolled about 10 natural ones in the session, 6 of them on a d20 (plus a bunch of d4 and d6).
+
+  "Session Log – Session 14 (The Fading, 14th early morning)": |
+    Narthian update: she's back! And scored -2 on her first intimidation check. The captive in question bites her boot, and gets killed by a scimitar.
+    The second captive gets just the butt of the sword, which Light is not fast enough to deflect.
+
+    Glint is taking the remaining captive back to the Orchard.
+
+    Landan is roped into fixing the inn, and Bram and Light go to recover the body of the one who tried to escape down the road. Light is approached by a squirrel bearing a note and a mask, both from Qelline Alderleaf.
+    https://cdn.discordapp.com/attachments/896383431120932915/1048658399346294784/image.png
+    https://www.dndbeyond.com/magic-items/5842527-elder-leaf-mask
+
+    We return to the bar to find that a group was there to keep an eye on the inn -- and presumably us. Bodies are moved around to the back of the bar, and a short rest is had before we head off towards the manor. Light does some _very basic_ scouting (determining we're safe to at least approach the front door -- what's left of it). Light is leading the non-dark-vision havers on a lead rope up to the building.
+
+    The main floor of the building is abandoned, apart from Thel the woodworker. His family has been taken by the Red Bands earlier in the day, and his bruised self thought he could do something about it. We enable our lights and start exploring the ruins for the secret entrances. Landan fails a wisdom saves and zooms off to recover...his holy book. Upon touching it, the holy book...glows green and crumbled to dust. Landan's book glows green. (Note: the glows are not known to Light). I'm sure all of this is 100% ok.
+    https://cdn.discordapp.com/attachments/969993077638971442/1048684811432235048/image.png
+
+    Narthian finds some traps and a probable entrance, and does not make the best stealth roll.
+
+    We descend into the sub levels, where we find...a big room with a big font/cistern (which has a bag floating in it, tied to be below the surface) and a bunch of pantry supplies. The bag turns out to be a bolt bag with various useful (and expensive) things. Oh, and it poisoned Light >.< (thank you Bram for the healing). We discovered a secret door to the west, and the sounds of Thel's wife to the north.
+
+  "Session Log – Session 15 (The Fading, 14th early morning)": |
+    Glint Update: The bandit was eventually taken to the orchard! And she catches up. And tells Light not to talk to strangers????
+
+    We head north into a corridor with a _lot_ of box text, including an angel double door at the end.
+    And traps! The floor falls away, and Narthian is caught by Light. The party has a conversation about where to go, and Glint...falls in the hole. gdi Glint. Light eventually convinces the part to turn around and look at the other doors.
+
+    The north of the western pair of doors goes to a small dorm/barracks (vacated), and the southern one opens...onto a underground crevice. We explore, and find...Thel's body. Oh now, we have a dark elf impostor! With magic and some kind of beast(s). It's also doing a lot of psychic attacks to  We leap into action (very slowly).
+    It's friends are Nothics! https://media-waterdeep.cursecdn.com/avatars/thumbnails/14/475/1000/1000/636364321398842272.png
+
+    We get covered in magical darkness. Glint immidately gets distracted by a treasure chest and falling off things again. Light makes a daring leap across the chasm in order to...ok, look, it made sense at the time. The rest of the party uses their turns much more sensibly, including Narthian actually dealing damage. The darkness dropes at the end of the round, leaving just the Nothic visible.
+
+    "Ah, where was I...right, I was looking at fun spells to screw with you" -- Randus
+
+    Narthian and Light take down the Nothic, but the image friend has disappeared out into the forest.
+
+    The treasure chest contains a long sword in silver scabbard (not scarab). It's got a bird of prey hilt and a inscribed. Also there is a bunch of money, some potions and some spell scrolls.
+
+    The chasm itself is...magical? Thel's body is decomposing slower than it should do. There are more skeletons around, (2 to 5 humans) that also seem pristine. We recover Thel's body and cover it.
+
+    Heading North again, we find...a storage area and another secret door. Glint opens the door and triggers...skeletons. Excellent. Combat #2, and we're still not actually heading in the correct direction to save the hostages (assuming they every actually existed...). Light also rolls above passive perception for once! The skeletons have skeletal short swords. Light crit fails the shove to move glint out of the line of fire/stab, Landan does a wonderful turn undead, and the entire fight is a bit messy because there are 5 characters and 3 tiles to stand on. As we're dealing with the skeletons, a one-horned tiefling pops open the side door on the passage and stabs Landan. Reactions go on the stack. So many reactions. Light runs in, rather foolishly, and comes face-to-face with a maul wielding barbarian. Nuts are kicked, mauls are flailed, sacred is breathed, and no party members goes down.
+
+    The bodies are looted. Glint acquires new armour and everyone gains infinite ammunition.
+
+  "Session Log – Session 16 (The Fading, 14th morning)": |
+    The session starts with the DM taking stock of our situation, our resources, and liabilities (i.e. the entire party). While rummaging we find some magic items we lost in our pockets, and work out who should have them. Oh, and Augury was used up on the sword, confirming it isn't too bad an idea to wield. And now, on with the show!
+
+    The tomb room has some more box text; the pillars have oak design on the bottoms, and the other sides of the double Angel doors. This is a family crypt, with generic angels for the family of many religions. Narthian checks the graves and lo and behold _doesn't loot them_.
+
+    Glint has gone for the remaining door, which appears to be where the wimpering was coming from. Showing an amazing amount of sense, she sends a silent image through the door, and Light *attempts* to react to the two swords swinging down by throwing a Chakram...and ends up last in initiative. Narthian gets off a clean shot, and they find out that stabbing Glint ends in a firey hellish rebuke death.
+
+    We have found prisoners! In actual cells! Hey, if we'd known there are cells here, we could have saved money on those manacles if we knew this was here. The second person surrenders _successfully_, and gets manacled.
+    Inside the (straw lined, toiletless) cells do contain Thel's family, and Light manages to use some basic leverage principles to open the cells. Also, the fiend appearantly doesn't attack people in cloaks (and some of the traps will also not be triggered). We all acquire cloaks, and Narthian escorts the family and the prisoner to orchard.
+
+    People:
+      - Guys out front
+      - The Glass Staff
+      - At least 12 people
+      - Hairy fuckers who think they run the place
+      - The goblin Droop, who might be fren?
+
+    Items are attuned, Landan's new glass dagger starts glowing yellow, and Narthian gets the drop on us on her return. We cross the chasm, and prepare to open the door. Two attempts were made to detect the ambush, both failed, and Light gets three, no four, weapons directly to them and promptly keels over. Combat ensues: crits do in fact hit, "Lay on Hoof" occurs, Light gets their first taste of mounted combat, Narthian gets spider climb mode engaged, and gets to do some fun trick shots, and Landan and Glint go off on their own adventure. Light gains another kill, Landan and Glint re-engage from the South.
+
+    Everyone is confused which one is Glint and which one is Light.
+
+    Randus offers to drop initiative. We politely decline. The Goblin Droop has been located to the South along with bug bears. Narthian gets to open this door, and crits do continue to hit (funny that), but so do maces, javelins, and Narthian's third crit of the evening. Light manages to overturn a table and punch a door to pieces. Crits continue to hit, this time in the form of a Glint firebolt. Mosk, the bug bear, goes down to a punch to the nuts.
+
+  "Session Log – Session 17 (The Fading, 14th)": |
+    Recovering after the fight with the bugbears, Narthian hears a sound from the chasm which I'm sure will be nothing and is definitely not the new player character Faelar the pale skinned blade-singer elf staking us. Faelar is not to be confused with Ella, the blade-singer elf who attacks people in the town square for books. He's also not to be confused by the Drow-like friend who was previous tricking us into things and could have easily looped back to kill us.
+
+    Droop, the friendly goblin who Nars had suggested would be around, is still cowering under the bed; Glint (who speaks goblin) goes to reassure them that they're not going to be attack by us...although not before Droop tried to pick up one of the Bugbear's maces to defend himself with. This...went as you would expect with a weak goblin picking up a mace built for someone twice their height, when they drop it on themselves. At the same time Landan and Bram, meanwhile, are planning to barricade the door to the North to ensure we don't get flanked, and talk about burning the place down. Facing a Goblin calling for mercy and the plan to burn the place down, Light breaks down and sends the rest of the session in some amount of trauma haze.
+
+    Glint is able to get *some* useful information out of Droop, namely that there are Slave pens (which are *cough* left, up, right, up, left -- I'm sure this is useful information and not just a confused gobbo). Light fails their con save against not hyperventilating. Everyone agrees that slave pens are bad (and any plans of burning the place down are abandoned). Faelar agrees that slave pens are bad, and enters into some form of stand off with Narthian with regards to "I want you to make yourself visible" and "I'm happy to do that when you're not pointing a nooked bow at me". This is eventually resolved by way of the invisibility spell running out, and Faelar being, very clearly, not the drow (unless they're in disguise again). Narthian calls Bram over to help work this out; Bram has picked up Light's physical form and at least 4 of their brain cells, and Light will remain on their back for the rest of the session.
+
+    Faelar is six foot tall high elf, with pale skin, blue eyes, and blonde hair. As Bram establishes Faelar as a non-hostile (or maybe even friend) due to their connection to Daran, Droop is being brought up by Glint. (At this point, we are reminded that Mint is present. Also it appears that Glint is going to adopt every smol we run into). Droop acquires Mosk's jeweled eyepatch (possibly magical, as Mosks eyes seem to be fine) as declares that "I in charge now". Narthian resumes communion with floor-chan (albeit temporarily).
+
+    Operations GTFO commences, and is interrupted as we cross the chasm by the sounds of someone in the storeroom to the North. A rat familiar scurries out (and Light is definitely at the point where they will believe that a rat can talk). As we pause to consider, a booming voice is heard in three directions, telling us to get out whilst we still can. Narthian moves towards the store room to investigate, and Bram cautions the rat to surrender (and, presumably by extension, the person whose familiar it is). We are told once again to leave...in the name of the Lords Alliance. The same group that Sildar belongs to and is meant to be maintaining order. Upon locating a wizard with red robes, dark red hair, a beard, and a glass staff, we conclude we have located Glass Staff, the leader (also because Randus kept mentioning we still had the boss fight to do and I guess didn't want us leaving without doing it). Diplomacy is somewhat attempted, but it is discovered that this member of the Lords Alliance has simply hired or taken over a bandit gang to 'enforce peace' and either encouraged or turned a blind eye to their other activities.
+
+    Landan makes the first move, attempting to stick the traitor-to-the-cause with their (literally) shiny new dagger, and combat begins. Light takes out the familiar from horseback, and Faelar commences blade-singing. The exact same tune as Ella, the Elf who attacked us and whose actions contributed to Bezlik's death. Bram and Faelar close the gap and rediscover that flanking is a mechanic. With some damage now marked on the wizard, he misty steps to get out of the encirclement (and avoid so many attacks of opportunity). Glint misses her one shot before Narthian crits and pins the wizard to the wall...non-lethally.
+
+    Landan is straight off to try and strip them and throw them in the chasm, but it talked down to instead handing him over to Sildar. Faelar recovers the glass staff, and finds that the Tiefling and Human from the supply closet fuckery are...no longer present. The blood is there, there are no undead around, but their bodies are gone. Our barricade is still in place so...and we set out back into town (picking up Faelar's owl familiar along the way). Arriving at the orchard we are greeted by Sildar, who confirms that The Glass Staff is indeed missing Lord Alliance member Iarno Albrek, who is stripped of his symbols of office (Also Narthian shows us her cool sorority pin).
+
+    The prisoners are arranged -- the cell guard is looking for any excuse to not be celled with Iarno, but we don't give him a choice in the end. Adopt-a-Goblin day continues as Mirna Dendrar takes Droop back to the woodcutter's place, along with the three kids and Narthian. Faelar is more formally introduced as Faelar Starym from Evermeet blade-singer who claims not to bite people (but we're watching you!!) [Editor's note: there is no evidence that Ella was a dhampir, but Light doesn't really know that]. As the party deforms for the night, Faelar enters Sister Graelae's house, Landan stops by the provisioner to pick up some divination tools, and Light is transfer from Centaur to Bed.
+
+    Glint gets a "night" time visitor in the form of Bailitheoir to hand over the 'Demon-Lovers Horn' (a gift given from tieflings/dragons as part of the nuptials dream sequence, having recently acquired a demon-lovers horn (from the tiefling/human pair in the manor). It is exchanged for a Staff of the Wild (magical quarterstaff) which is successfully caught and twirled. The next item on Glint's scavenger list is not yet known.
+
+    Later Narthian encounters one of Thel's daughters crying over a package from Thel. Emotional moments and a shiny new magic bow that allows bypassing of some forms of cover and shielding.
+
+  "Session Log – Session 18 (The Fading, 14th)": |
+    The miner's exchange has a postal service (anywhere along the Swordcoast), which Faelar utilises to send word to Sister Garaele. The sentry owl doesn't report the slack black flying creature, but Faelar does notice it -- it continues flying North (so probably wasn't following Faelar).
+
+    Over b̶r̶e̶a̶k̶f̶a̶s̶t̶ lunch the team reviews plans, discovered that the Black Spider put out a hit order on Inaro. (Question: was this with the drow? Where did we find this key?)
+
+    We return to the manor and do some searching. Light stares into the Abyss, Glint just walks straight into it. The room with the missing corpses is still missing the corpses, but the armour and clothing are. We're uncertain what happened; there are two distinct areas of blood stains indicating the bodies moved, but there are no drag marks or footprints -- so it doesn't seem that they were either moved by hand or walked away.
+
+    The sarcophagi were further checked, and only contained platinum signet rings. The prison room has a dozen sets of clothes, ranging from gnome or child, through to a 7 foot heavy set build. Amongst them is a set of travelling cloths that Light recognises from...somewhere.
+
+    Suddenly: 30 feral beaver pelts (in the storeroom)
+
+    We head to the room behind the secret doors. Glint rushes ahead, and Bram gets somewhat stuck in the corridor. We have
+
+      - A chest with gold, gems, and two spell scrolls
+      - A desk with papers including alchem stuff
+      - A comfy bed
+
+    The desk has a sealed/stamped/chopped note from the Black Spider "Lord Albrek, My spies in Neverwinter tell me that strangers are due to arrive in Phandalin. They could be working for the dwarves. Capture them if you can, kill them if you must, but don’t allow them to upset our plans. See that any dwarven maps in their possession are delivered to me with haste. I’m counting on you, Iarno. Don’t disappoint me."
+
+    Looking closer at the two notes/orders that we have acquired...one is signed, one is stamped. One is a fake? It is likely that the stamped common written one is real, the one written in goblin was signed, and seemed to be . Inaro's orders were also stamped (with the Lords Alliance seal).
+
+    The next room in is a alchemical lab with bookshelves -- all set up to mass produce invisibility potion. Amongst them is one book in dwarvish, and one log book of failed potion attempts with some interesting side effects (hair loss, blue bugbear fur, etc.). Landan takes the dwarvish book (Urmon's journal) to find information about the wave echo cave, including info on a magical mace 'Lightbringer' that would still be in the cave. Faelar gets some shiny ingredients.
+
+    > a magic mace named Lightbringer was commissioned by priests of Lathander, the god of dawn, from the mages working with the gnomes and dwarves of the Phandelver’s Pact. It is unknown if the mace was completed or not, but what is known; is that if it was finished, the odds are good that it was still within the Wave Echo Cave the mine's location vanished from history.
+
+    The alchemical room is sorted, labelled, and powered down. and we head out the forest exit and begin looking for tracks. Landan identifies some path markers, and we are able to track down where the half-drow acquired a horse (and cut the rest of the line loose). We do recover their carts, and now have cart transport!)
+
+    Much lore and plot dump:
+     - Inaro confirms that Black Spider is a Drow
+
+     - Daran might be part of ~~an organisation~~
+     - Old Owl Well area, lots of prospectors are prospecting but bring driven off by undead
+     - Old Owl Well associated as an output of the Netheril empire
+     - Netheril Empire might have left around lots of powerful magic
+
+     - Probably other things my brain didn't process.
+     - Droop is still in charge, and is settling in to be a woodcutter's assistant
+     - Droop does not where Cragmaw Castle is. But knows who to ask -- the group that got .
+     - Glint is going to be "super good"
+
+  "Session Log – Session 19 (The Fading, 15th)": |
+    "Light: The Void Blinked back"; "You see an infinite void expanding in all directions..."
+     - There's a human (it's going to turn out to be Norman)
+     - Light sort of works out movement, and tries to find an edge to the void.
+     - Suddenly he is held, and gets crit-bitten for 18 points of damage
+     - Beastial Light with two long bloody fangs
+     - Fade to black
+     - Wake; morning prayers!
+
+    Faelar see the black flying thing around the inn as they leave in the morning, but it is gone by the time he comes back -- but he did send his owl out to look into it, but it hides as the owl approaches. What we do know: it is pure black, about a foot long, similar wingspan, small body.
+
+    Faelar meets a praying Light at the shrine and notices how distracted Light, and gets invited to breakfast.
+    Bram and Glint arrive downstairs at about the same time.
+    Nilsa Dendrar is getting an impromptu job interview at the Inn, and then comes and delivers Landan's lore book to us. Landan was sleeping upstairs not half an hour ago. There's a sack of coins (100GP plus), and a crumbled note in. Looks like Landan has secrets and is being blackmailed (or bribes).
+    The bird is a flying snake -> Zhentarim.
+
+    Glint gets very angry at Landan for disappearing, ends up reading all of the notes all of the time. This includes a note for the woodcutter's daughter which got mixed in, and the note Light found upstairs.
+
+    > Lots (over 3000) of dead owl bears at a site with a watch tower at a outpost. Possible Lich's phylactery, buried 5 miles deep.
+
+    Light tries to solve every problem at the same time by splitting the party, getting the mining run sorted, looking for Landan, and updating Sildar and prepping the wagon.
+
+    Suddenly a halfing bard, Merric (new player character?) from up North. Landan is "infamous up there" for being "the walking bomb". [Roll Play Thing will need to be resolved]
+
+    At Adabra's windmill, we meet a Droop who is delivering some stuff from Mirna. We also buy all the potions, the two herbalism books, and find out the manticore spikes can be sold to Mirna
+
+    On the route to the mine, we find 6 orc corpses, defrosting after being attacked by Cryovain (presumably). Oh, and Cryovain is at the mine, biting at the were-rats.
+    Don Jon, the nuisance he is, wants them dead -- at 20GP per head
+
+  "Session Log – Session 20 (The Fading, 15th--17th)": |
+    - Talk to Don Jon. Expected staff: 7 dwarves, 2 teiflings, 2 goliaths, 4 humans, 2 half-elves.
+    - Stash the cart
+    - Approach the entrance
+    - Negotiated Parley with the were-rat mine overseer
+    - Light's bite has...no mark nor scar?
+    - Insight Check: ...safe?
+    - Guards (both female) seem to be on a short leash
+    - We head in! (Narthian appears)
+    - Cave system. many were-rats.
+    - There is a regal were-rat, flanked by two human males
+    - It's Glint Charisma Time!
+    - From the shrine of Silvanus, just south of Connyberry
+    - Thrown out by Orcs (possibly related to the other Orc issues)
+    - They, uh, sacked the mines.
+    - A shiny if offered to Glint; we were already leaning towards helping anyway
+    - We *think* they will leave if we reclaim their old home.
+    - They also claim they haven't turned anyway.
+    - Don Jon is lead to the guest quarters
+    - We were asked to leave by the back/shrine exit
+    - We camp for the night, with watches. Faelar gets distracted.
+    - Merric, on third watch, sees an extra set of non-humanoid prints that leads up to Light (oh no!)
+    - Light doesn't really see anything in the tracks nor anything wrong with them, so it was clearly just some friendly critter. The Druid thing is really paying off!
+    - We travel the Shrine of Savras, where Thena is rapidly shot down and Light experiments with deception.
+    - Deception is...successful in that we can only see two orc so far. And one is down before initiative it resolved.
+    - There are...so so many Orcs. Light attempts to escape by climbing the wall, and falls into the other side.
+    - FIREBALL!
+    - More combat
+
+  "Session Log – Session 21 (The Fading, 17th)": |
+    - Combat continues
+    - Narthian crits
+    - Merric goes down
+    - Bram has sparkly armour (as in throws sparks) and magic breath
+    - Glint catches 3 with sleep
+    - Merric gets straight back up
+    - And goes back down
+    - Faelar's first crit
+    - Light finally uses a reaction attack, and goes down to the next javelin
+    - stuff happens.
+    - Light nat 1s their final death save...and is transported back to the void-space
+    - Where they try and become light
+    - And instead pull in the darkness
+    - Glint nearly gets one hit to death
+
+  "Session Log – Session 22 (The Fading, 17th)": |
+    - Light: not undead. But still having black eyes.
+    - Rest time!
+    - Ball of emptiness behind the eyes, like in the dreams.
+    - The party rolls 3 different nat 20s on one perception check.
+    - Mint has declared themselves the protector of Glint, possibly by channelled power from Glint's patron.
+    - The party splits up and explores -- loot the bodies, check the perimeter, and Light decides to wonder in alone.
+    - The shrine's temple room is covered in dust, and has four dead humanoids. The altar is on rollers and is clearly movable
+    - Up top, Light's bolt is still around. And the ensaring strike vines are still there, decaying, in a worryingly natural way.
+    - Light helps dispose of the final orc body! By falling off a tower
+    - The rest of the team starts tidying up. Merric gives Faelar a potentially magically longbow
+    - The priests get bundled up in blankets...it goes great until Bram and Glint touch the altar and go stiff
+    - We try to move them away, and that goes great with Light also ending up touching it and paralysed.
+    - flying high in the sky on massive white wings
+    - below me are the ruins of a town being rebuilt (Leonin)
+    - flying east -- trees, and field, ands trees, passing to Phandalian
+    - flying further east come the base of a large mountain range, fly up to the peak, see a stone fortress
+    - Light now knows the location of the dragon's nest!
+    - Under the shrine was a box containing a magic key and some gold
+    - We also find the solid gold bell, which was mentioned in Landan's journal but we had forgotten about.
+    - We Tidy Up! (including dropping the bell down).
+
+  "Session Log – Session 23 (The Fading, 18th)": |
+    During our long rest a little way away from the Shrine, Bram gets a vision from Bahamut (presumed) showing Don Jon and the dwarves sealed off in a collapsed cave in a mine infested with were-rats, presumably the one that we had just come from. Bram, Glint, and Narthian leave to go off-screen scout back at the mine, leaving Light, Merric, and Faelar to continue on to Big Al's Butterskull Ranch (a most concerning name).
+
+    As the party approached the the ranch, a couple of kilometers out the party finds a stray cow branded with BAK (Big Al Kalazorn). We attach a rope to her and begin taking her back to the ranch, keeping an eye out for other strays on the way.
+
+    - Arriving at the ranch, we find...honestly a lovely map. I really like this.
+    - As we approach with some mount of stealth using the Corn fields and orchards as cover, we find large numbers of loose pigs.
+    - The barn, burnt, contains the remains of...some kind. Are they human, or are they dancer? But there's 7 of them.
+    - We proceed towards the main house, to find a party going on. On the ground floor there are two drunk orcs, who were scouted by a Light who went invisible. They didn't realise that casting a spell broke that, and used druidcraft to indicate the presence of hostiles
+    - We flank around the building, and find the cellar storm door. We descend down to fine Al being worked over by an orc. We resume him with some amount of effectiveness!
+    - The raid to clear the house begins. Light and Faelar catch on fire.
+    - We pick up some Mithril Chain Mail, which is not of use to the party, but might be convertible to a chain shirt which is of use.
+
+    - "The gnomes gave you a timeline. They will have finished the first step by next session"
+
+  "Session Log – Session 24 (The Fading, 20th)": |
+    The other half of the party went back to scout the were-rat-occupied mines. There are up to three entrances, only the front one is being actively patrolled. The plan is to, well, just go up to the front door again and tell them the shrine is clear of orcs. We have no concrete evidence that they are going to betray our trust, despite the warnings from Bahamut.
+
+    I am very suspicious of everything the DM is doing today.
+
+    We head inside and attempt to have the situation resolved with Diplomacy. A rat is sent to get our reward, a rat is sent to confirm our claims by verifying the bell, and neither of them are being sento gather up the rats to kill us at all. As far as Light can tell, everything is going great, but Glint and Mint notice something is up. As Glint tries to cast silent image to distract a flanking party, their spell-casting is noticed by the were-rat.
+    That were-rat attempts to stop the spell casting by biting Glint, triggering combat.
+
+    First round of combat sees Light discover that these things don't take damage from bludgeoning and slashing damage, and isn't that maneuverable because they are the light source and are in a corridor. Bram scares a lot of them with a godly roar, and the mages bring out thunder and fire. Despite this the combat goes...slowly, grindingly.
+
+    The leader, carrying a magic item Kitteh would really like to get their paws on, starts to both run away (tracked via Glint's mind spike) and summons a pack of rodents of unusual size. As the party shuffles around and more into the main room, Light ducks in and closes the door behind them...leading to the second destroyed door of the campaign.
+
+    The rats are eventually defeated, no-one in the party went down, but multiple people contracted lycanthropy. Fun.
+
+  "Session Log – Session 25 (The Fading, 20th)": |
+    We give chase to the rat queen Zelene...the connection drops after a few seconds after as she...runs into a dead end with traps and Duergar with a magic bow and a big illustrious beard. (Sorry Randus, you gave a longer description but I wasn't typing at the time.
+    Light's current chain of thought is "this is a closed room, but they're armed, and they weren't locked in, but they had a trap and killed Zelene???".
+    Ah, they knows misty step. That begins to explain some things. Also they disappear whenever they leave the light cone, even to night vision. Most curious.
+
+    Their armour is also spiked and damages people in melee range...and it has a giant tentacle-y friend.
+
+    The bow is meant to be something that I remember. Anyway, once he gets disrupted, the bow seems to have illuminated him. Oh, and it's made of glass.
+    The tentacle monster goes down quickly, Kitteh iterates through a number of dinner plans they don't actually feel like doing and gets mid-way through frying some veg before wheeling to a sandwich, and the dwarf attempts to make a fighting retreat. They are felled and...captured. Sadly the spikes on his armour make him very hard to stabilised, and he dies...and the body disappears. The armour and gear are still there, but like the Human and Tiefling in the Red Band base, the ones with the glass dagger.
+
+    We take a short rest wherein Glint shows us the gold ore she found (and doesn't mention the magic item she picked up off of Zelene). As we begin reexamining the rest of the mine, we find such exciting things as:
+      - A half decomposed corpse.
+      - 10 fresh mounds of dirt, which are likely graves.
+      - A pen full of just large rats
+      - A door with moaning behind it
+
+    Merric has thieves tools, that's exciting. Sadly he doesn't seem to be able to open this lock. We break out the full toolkit to see if we can open it without damaging the people behind, and...that doesn't go brilliantly. But we manage to get in, and find the remaining staff and Don Jon. We give them some water and food.
+
+    The party continues exploring whilst Bram, Glint, and Narthian get the ex-prisoners onto the cart. We find some wheelbarrows, a big store of food and water, the general supplies you would expect in a mine. The cot rooms are very low quality -- barracks without lockers or chests, just a row of cots.
+
+    From the outside we are able to find our way into their rec-room, which actually looks likes kind of nice. I mean, these people life here 24/7 so it's not good enough, but it's something.
+
+    The remaining tasks we have are to stop the bodies miasmaing up the mine, and sorting out the pen of not-were rats. As ever, the party has entirely sensible plans for how to do this, resulting in us discovering one of the rats is in fact another were-rat. The group on burial duty takes care of them whilst Light performs a majestic leap leading the rat-rats out of the cave.
+
+    Overall haul from the cave: 10 lumps of gold, so resellable weapons, a couple of potions, dwarven spiked mail, a glass bow, a ring of keys, 5 starving dwarves, a Don Jon, and some loose gold.
+
+  "Session Log – Session 26 (The Fading, 21th)": |
+    nya.
+
+
+questlines:
+  active:
+  open:
+    # Backstory
+    - Recover Landan (Landan's backstory)
+    - Tower of Storms (Bezlik's backstory)
+    - Visit the Dragonborn in Leilon
+    # Icespire Peak
+    - Cryovain, the White Dragon
+    - Defeat Frigidfang
+    - Young and Old Green Dragon
+    # Lost Mine
+    - Take down the people in Cragmaw Castle
+    - Track down the dwarf Durgen Rockseeker
+    - Find the magic forge in Wave Echo Cave
+    - Investigate the Old Owl Well area, drive off anyone trying to exhume a Lich
+    # Misc.
+    - Dwarven Excavation Quest Board Mission
+    - Resupply the logging camp Quest Board Mission
+    - Freeing slaves captured by the Red Bands
+    - Solve the question of Sister Garaele
+    - Offload the manticore spikes to Mirna
+  complete:
+    - Clean out the Red Bands
+    - Recover Landan's stolen book
+    - Escort owner to Mountain's Toe Gold Mine
+    - Support Big Al Quest Board Mission
+    - Rehome the were-rat colony
+
+worries:
+  - Being overseen on the town green.
+  - The local legends about the tower of storms
+  - The very recent fall of Thundertree
+  - "\"If you'd like to continue edging, you may continue edging.\" -Randus, 2022"
+  - The font in the cellar of the ruined mansion
+  - More mimics being thrown at us
+  - The fangs on the male 'elf'
+  - The fangs biting Light
+  - The long sword the elf has
+  - That elf in general
+  - The damage roll from the long sword
+  - The 10 psychic damage that downed Light
+  - This entire raider group seeming Not Right
+  - Landan's off camera rolls.
+  - Randus rolling 6d8+6 three times.
 
 inventory:
-  - 9gp, 3sp, 5cp
-  - Backpack
-  - Common Clothes, Hooded
-  - Bedroll
-  - Waterskin
-  - Cook's Utensils|https://tea-cats.co.uk/dnd/cooks-tools.txt
-  - Herbalism Kit|https://tea-cats.co.uk/dnd/herbalism-kit.txt
-  - Tinderbox
-  - Torches (10)
-  - Rations (10)
-  - Hempen rope (50 feet)
-  - Amulet of Eldath
-  - Prayer book of Eldath
-  - Leather Band of Light|https://www.dndbeyond.com/magic-items/4983300-leather-band-of-light
-  - Herbs and Ingredients, 5gp worth
-  - Grappling hook
-  - Healing Potion|https://www.dndbeyond.com/magic-items/4708-potion-of-healing
+  - "20sp, 9cp"
+  - "[3lb] Common Clothes, Hooded"
+  - "[7lb] Bedroll"
+  - "[5lb] Waterskin"
+
+  - "[5lb] Light Crossbow|https://roll20.net/compendium/dnd5e/Light%20Crossbow"
+  - "[2lb] Chakram|https://www.dndbeyond.com/magic-items/5768356-chakram"
+  - "[4lb] Quarterstaff|https://roll20.net/compendium/dnd5e/Quarterstaff"
+  - "Wand of Magic Missile Darts"
+  - "Fist Wraps|https://www.dndbeyond.com/magic-items/6568025-fist-wraps"
+
+  - "[2lb] Leather Band of Light|https://www.dndbeyond.com/magic-items/4983300-leather-band-of-light"
+  - "Elder Leaf Mask|https://www.dndbeyond.com/magic-items/5842527-elder-leaf-mask"
+  #- "[1lb] Healing Potion|https://www.dndbeyond.com/magic-items/4708-potion-of-healing"
+
+  - "[5lb] Backpack"
+  - "[18lb] Rations (9)"
+  - "4 pieces of jerky"
+  - "[4lb] Torches (4)"
+  - "[8lb] Cook's Utensils|https://tea-cats.co.uk/dnd/cooks-tools.txt"
+  - "[3lb] Herbalism Kit|https://tea-cats.co.uk/dnd/herbalism-kit.txt"
+  - "[1lb] Tinderbox"
+  - "[5lb] Crowbar"
+  - "[3lb] Hammer"
+  - "[2lb] Pitons (8)"
+  - "[3lb] Rope of Climbing|https://roll20.net/compendium/dnd5e/Rope%20of%20Climbing"
+  - "[1lb] Amulet of Eldath"
+  - "[5lb] Prayer book of Eldath"
+  - "[4lb] Grappling hook"
+  - "[2lb] Pole of Collapsing|http://dnd5e.wikidot.com/wondrous-items:pole-of-collapsing"
+
+  - "Herbs and Ingredients, 62gp worth"
+  - "Manticore Spikes (3)"
+
+  - "Journal of Forms"
+  - "Herbalism 101"
+  - "Herbalism 102"

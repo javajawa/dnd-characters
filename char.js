@@ -98,6 +98,8 @@ fetch("character.json")
           weapon.name,
           Object.keys(weapon.damage).join("/"),
           weapon.proficient,
+          weapon.range[0] !== 0 ? parseVal(weapon.range[0]) : null,
+          weapon.range[1] !== 0 ? parseVal(weapon.range[1]) : null,
           parseVal(weapon.enchantment),
           Object.entries(weapon.damage).map(([type, damage]) =>
             parseVal(damage + "(" + type + ")", levels, facts)

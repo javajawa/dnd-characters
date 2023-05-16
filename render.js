@@ -152,6 +152,7 @@ export function render() {
             tr(
               { class: "leather" },
               td(weapon.name),
+              td(weapon.effectiveRange ? [span(value(weapon.effectiveRange)), "/", span(value(weapon.maxRange))] : ""),
               td("+", value(weapon.mods)),
               td(value(weapon.damage), " [" + weapon.type + "]"),
               td(weapon.notes)

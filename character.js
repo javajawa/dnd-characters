@@ -42,9 +42,11 @@ export class Feature {
 }
 
 export class Weapon {
-  constructor(name, type, proficient, mods, damage, notes) {
+  constructor(name, type, proficient, effectiveRange, maxRange, mods, damage, notes) {
     this.name = name;
     this.type = type;
+    this.effectiveRange = effectiveRange;
+    this.maxRange = maxRange;
     this.proficient = proficient;
     this._mods = mods;
     this._damage = damage;
