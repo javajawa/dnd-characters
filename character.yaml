@@ -13,18 +13,49 @@ info:
   appearance: |-
     Light-Yellow fur
     No patterning
-    Yellow eyes
+    Y̶e̶l̶l̶o̶w̶ Black eyes
     Low ears
 
 stats:
   str: "12(base)"
-  dex: "16(base) + 2(tabaxi racial bonus) + 2(monk lvl 4 ASI)"
+  dex: "16(base) + 2(tabaxi racial bonus) + 2(monk lvl 4 ASI) + 2*{hybrid_rat_form}(hybrid rat form)"
   con: "15(base)"
   int: "11(base) + 1(tabaxi racial bonus (relocated))"
   wis: "14(base) + 1(shadow touched feat)"
   cha: "7(base)"
 
 feats:
+  - name: Character
+    description: Base facts and resources for a DnD character
+    link: "#"
+    facts:
+      perception: "10 + wis(passive perception) + prof(passive perception)"
+
+    resources:
+      - name: action
+        pool: 1 + {haste}
+        regain:
+          amount: 999
+          "on": round
+      - name: bonus action
+        pool: 1
+        regain:
+          amount: 999
+          "on": round
+      - name: Spell Vocal
+        description: "Using voice for spell casting"
+        pool: 1
+        regain:
+          amount: 1
+          on: round
+      - name: Spell Somatic
+        description: "Using hand motions for spell casting"
+        pool: 1
+        regain:
+          amount: 1
+          on: round
+    # TODO: Add in the basic abilities: https://crobi.github.io/dnd5e-quickref/preview/quickref.html
+
   - name: Tabaxi
     link: http://dnd5e.wikidot.com/tabaxi
     description: |-
@@ -41,24 +72,22 @@ feats:
         target: nature
 
     facts:
-      speed: 30 + {monk_bonus_speed}
+      speed: 30(tabaxi) + {monk_bonus_speed}(monk speed)
+      climbing: 20(tabaxi)
 
     abilities:
-      - kind: ability
-        name: Dark-Vision
+      - name: Dark-Vision
         description: >-
           You have a cat's keen senses, especially in the dark.
           You can see in dim light within 60 feet of you as if it were bright light,
           and in darkness as if it were dim light.
           You can't discern color in darkness, only shades of gray.
-      - kind: ability
-        name: Feline Agility
+      - name: Feline Agility
         description: >-
           Your reflexes and agility allow you to move with a burst of speed.
           When you move on your tum in combat, you can double your speed until the end of the turn.
           Once you use this trait, you can't use it again until you move 0 feet on one of your turns.
-      - kind: ability
-        name: Cat's Claws
+      - name: Cat's Claws
         description: >-
           Because of your claws, you have a climbing speed of 20 feet.
           In addition, your claws are natural weapons, which you can use to make unarmed strikes.
@@ -78,8 +107,7 @@ feats:
       - type: skill
         target: religion
     abilities:
-      - kind: ability
-        name: Shelter of the Faithful
+      - name: Shelter of the Faithful
         description: >-
           As an acolyte, you command the respect of those who share your faith,
           and you can perform the religious ceremonies of your deity.
@@ -109,10 +137,9 @@ feats:
         pool: 2
         regain:
           amount: 2
-          on: round
-    abilities:
-      - kind: attack
-        name: "Unarmed: Grapple"
+          "on": round
+    attacks:
+      - name: "Unarmed: Grapple"
         resources:
           hands: 1
           action: 1
@@ -138,13 +165,12 @@ feats:
           - The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect,
             such as when a creature is hurled away by the thunder-wave spell.
 
-      - kind: attack
-        name: "Unarmed: Knock Prone"
+      - name: "Unarmed: Knock Prone"
         proficiency: unarmed
         resources:
           hands: 1
           action: 1
-        reach: "5 + 10{eldritch_maul}"
+        reach: "5 + 10{eldritch_maul}(eldritch maul)"
         attack_bonuses: "dex|str"
         damage:
           bludgeoning: 0
@@ -158,56 +184,54 @@ feats:
               - An attack roll against the creature has advantage if the attacker is within 5 feet of the creature.
                 Otherwise, the attack roll has disadvantage.
 
-      - kind: attack
-        name: "Unarmed: Punch with Fist"
+      - name: "Unarmed: Punch with Fist"
         proficiency: unarmed
         resources:
           hands: 1
           action: 1
-        reach: "5 + 10{eldritch_maul}"
+        reach: "5 + 10{eldritch_maul}(eldritch maul)"
         attack_bonuses: "dex|str"
         damage:
-          bludgeoning: "{martial_arts_dice} + {hybrid_rat_form}d4"
-          force: "{eldritch_maul}d6"
+          bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+          force: "{eldritch_maul}d6(eldritch maul)"
         damage_bonuses: "dex|str + 1(fist wraps)"
 
-      - kind: attack
-        name: "Unarmed: Slash with Fist and Claws"
+      - name: "Unarmed: Slash with Fist and Claws"
         proficiency: unarmed
         resources:
           hands: 1
           action: 1
-        reach: "5 + 10{eldritch_maul}"
+        reach: "5 + 10{eldritch_maul}(eldritch maul)"
         attack_bonuses: "dex|str"
         damage:
-          slashing: "{martial_arts_dice} + {hybrid_rat_form}d4"
-          force: "{eldritch_maul}d6"
+          slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+          force: "{eldritch_maul}d6(eldritch maul)"
         damage_bonuses: "dex|str + 1(fist wraps)"
 
-      - kind: attack
-        name: "Unarmed: Kick with Foot"
+      - name: "Unarmed: Kick with Foot"
         proficiency: unarmed
         resources:
           action: 1
-        reach: "5 + 10{eldritch_maul}"
+        reach: "5 + 10{eldritch_maul}(eldritch maul)"
         attack_bonuses: "dex|str"
         damage:
-          bludgeoning: "{martial_arts_dice} + {hybrid_rat_form}d4"
-          force: "{eldritch_maul}d6"
+          bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+          force: "{eldritch_maul}d6(eldritch maul)"
         damage_bonuses: "dex|str"
 
-      - kind: attack
-        name: "Unarmed: Slash with Foot Claws"
+      - name: "Unarmed: Slash with Foot Claws"
         proficiency: unarmed
         resources:
           action: 1
-        reach: "5 + 10{eldritch_maul}"
+        reach: "5 + 10{eldritch_maul}(eldritch maul)"
         attack_bonuses: "dex|str"
         damage:
-          slashing: "{martial_arts_dice} + {hybrid_rat_form}d4"
-          force: "{eldritch_maul}d6"
+          slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+          force: "{eldritch_maul}d6(eldritch maul)"
         damage_bonuses: "dex|str"
 
+  # FIXME: Add Shadow Touched
+  # FIXME: Add the were rat block
 
 levels:
   - class: Monk
@@ -221,6 +245,7 @@ levels:
     hit_points: 8
     facts:
       martial_arts_dice: "d4"
+      armour_class: 10 + dex + wis + 2*{haste}
     proficiencies:
       - type: ability_save
         target: str
@@ -265,13 +290,11 @@ levels:
       - type: weapon
         target: unarmed
     abilities:
-      - kind: ability
-        name: Unarmored Defense
+      - name: Unarmored Defense
         description: >-
           Beginning at 1st level, while you are wearing no armor and not wielding a shield,
           your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
-      - kind: ability
-        name: Martial Arts
+      - name: Martial Arts
         description: >-
           At 1st level, your practice of martial arts gives you mastery of
           combat styles that use unarmed strikes and monk weapons,
@@ -337,40 +360,49 @@ levels:
         pool: "{monk}"
         regain:
           amount: "{monk}"
-          on: short rest
+          "on": short rest
     facts:
       monk_bonus_speed: 10
+      ki_save: "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
     abilities:
-      - kind: ability
-        name: "Ki Power: Flurry of Blows"
+      - name: "Ki Power: Flurry of Blows"
         description: >-
           Immediately after you take the Attack action on your turn,
           you can spend 1 ki point to make two unarmed strikes as a bonus action.
         resources:
           ki: 1
-      - kind: ability
-        name: "Ki Power: Patient Defense"
+          bonus action: 1
+      - name: "Ki Power: Patient Defense"
         description: >-
           You can spend 1 ki point to take the Dodge action as a
           bonus action on your turn.
         resources:
           ki: 1
-      - kind: ability
-        name: "Ki Power: Step of the Wind"
+          bonus action: 1
+      - name: "Ki Power: Step of the Wind"
         description: >-
           You can spend 1 ki point to take the Disengage or Dash action as a
           bonus action on your turn, and your jump distance is doubled for the turn.
         resources:
           ki: 1
+          bonus action: 1
 
   - class: monk
     level: 3
     hit_die: d8
     hit_points: 5
+    proficiencies:
+      - type: skill
+        target: medicine
+      - type: equipment
+        target: herbalist's tools
+
     abilities:
       - name: "Ki Power: Hands of Healing"
-        source: Way of Mercy, Monastic tradition
-        dice: "1{martial die} + wis"
+        resources:
+          ki: 1
+        dice_rolls:
+          healing: "1{martial die} + wis"
         description: >-
           At 3rd level, your mystical touch can mend wounds.
           As an action, you can spend 1 ki point to touch a creature and restore a
@@ -380,7 +412,6 @@ levels:
           When you use your Flurry of Blows, you can replace one of the
           unarmed strikes with a use of this feature without spending a ki point for the healing.
       - name: "Ki Power: Hands of Harm"
-        source: Way of Mercy, Monastic tradition
         dice: "1{martial die} + wis"
         description: >-
           At 3rd level, you use your ki to inflict wounds.
@@ -391,6 +422,9 @@ levels:
       - name: Deflect Missiles
         source: Monk lvl3
         dice: 1d10 + dex + {monk}
+        damage:
+          piercing: 1d10
+        damage_bonuses: dex + {monk}
         description: >-
           Starting at 3rd level, you can use your reaction to deflect or catch the
           missile when you are hit by a ranged weapon attack.
@@ -405,83 +439,269 @@ levels:
           You make this attack with proficiency, regardless of your weapon
           proficiencies, and the missile counts as a monk weapon for the attack.
 
+  - class: monk
+    level: 4
+    hit_die: d8
+    hit_points: 5
+    abilities: [] # TODO: Add lvl 4 class abilities
 
-facts:
-  "hit points": "8(lvl1 monk hit dice) + 5(lvl2 monk hit die) + 5(lvl3 monk hit die) + 5(lvl4 monk hit dice) + 5(lvl5 monk hit die) + {monk}*con(con modifier)"
-  "armour class": "10(monk unarmoured) + dex(monk unarmoured) + wis(monk unarmoured)"
-  "movement": 30(tabaxi) + 10(unarmored movement)
-  "climbing": 20(cat's claws)
-  "hit dice": "{monk}d8(monk hit dice)"
-  "ki points": "{monk}(one per monk lvl)"
-  "ki save": "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
-  "perception": "10 + wis(passive perception) + prof(passive perception)"
+    # TODO: Add lvl 5 monk abilities
 
-proficiencies:
-  skills:
-    medicine: Way of Mercy (monk sub-class)
-  tools:
-    Herbalists Tools: Way of Mercy (monk sub-class)
+items:
+  - name: Healing Potion
+    link: http://dnd5e.wikidot.com/wondrous-items:potion-of-healing
+    description: >-
+      You regain hit points when you drink this potion.
+      The number of hit points depends on the potion’s rarity,
+      as shown in the Potions of Healing table.
+      Whatever its potency, the potion’s red liquid glimmers when agitated.
+    count: 0
+    weight: 1
+    value: 50gp
+    resources:
+      - name: Healing Potion
+        description: Healing pots avaialable
+        pool: "{count}"
+        regain:
+          amount: 0
+          "on": dawn
 
-weapons:
-  - name: Quarterstaff (1h)
-    proficient: true
-    range: [0, 0]
-    enchantment: dex
-    damage:
-      bludgeoning: 1d6
-    notes: ""
-  - name: Quarterstaff (2h)
-    proficient: true
-    range: [0, 0]
-    enchantment: dex
-    damage:
-      bludgeoning: 1d8
-    notes: ""
-  - name: Light Crossbow (2h)
-    proficient: true
-    range: [80, 320]
-    enchantment: dex
-    damage:
-      piercing: 1d8
-    notes: Loading, Two-handed
+    abilities:
+      - name: Drink Healing Potion
+        resources:
+          bonus_action: 1
+          hands: 1
+          healing_potion: 1
+        description: "gulp gulp gulp"
+        dice_rolls:
+          healing: 2d4 + 2
+
+  - name: Leather Band of Light
+    link: https://www.dndbeyond.com/magic-items/4983300-leather-band-of-light
+    description: >-
+      An old leather band, it surprisingly conforms to any part of your body that you chose to wrap it around.
+      Given to you by an elderly half-elf monk that has long since retired from
+      adventuring and taking up residence as the head of security of the holy site
+      in which you were raised.
+      
+      She gave this to you on the day you set out to join the monastery,
+      saying "may this simple band of leather always reflect your Inner Light in
+      both the brightest and darkest of times",
+      at which point is started to glow as if by magic.
+    weight: 2
+    value: unknown
+    count: 1
+    abilities:
+      - name: Light (bright)
+        description: The leather band of light sheds bright light in a 30ft sphere centered on yourself.
+        status:
+          - name: light
+            description: bright light shed in a 30ft sphere centered on yourself.
+            length: indefinite
+      - name: Light (penumbral)
+        description: The leather band of light sheds dark but illuminating light in a 30ft sphere centered on yourself.
+        status:
+          - name: light
+            description: dark but illuminating light shed in a 30ft sphere centered on yourself.
+            length: indefinite
+
+  - name: Quarterstaff
+    description: Simple versatile Melee Weapon
+    link: http://dnd5e.wikidot.com/weapons
+    weight: 4
+    value: 2sp
+    count: 1
+    attacks:
+      - name: Quarterstaff, 1-handed
+        description: ""
+        proficiency: quarterstaff
+        resources:
+          action: 1
+          hands: 1
+        reach: "5 + 10{eldritch_maul}(eldritch maul)"
+        attack_bonuses: str|dex
+        damage:
+          bludgeoning: 1d6
+        damage_bonuses: str|dex
+      - name: Quarterstaff, 2-handed
+        description: ""
+        proficiency: quarterstaff
+        resources:
+          action: 1
+          hands: 1
+        reach: "5 + 10{eldritch_maul}(eldritch maul)"
+        attack_bonuses: str|dex
+        damage:
+          bludgeoning: 1d8
+        damage_bonuses: str|dex
+
   - name: Chakram
-    proficient: true
-    enchantment: dex
-    range: [ "20+5*dex(dex modifier)+5*str(str modifier)", 100 ]
-    damage:
-      slashing: 1d6
-    notes: "DC10 dex save on miss"
+    description: |
+      After striking, the Chakram ricochets off its target and returns to the user.
+    link: https://www.dndbeyond.com/magic-items/5768356-chakram
+    value: "0"
+    weight: 2
+    attacks:
+      - name: Chakram, Thrown
+        description: |
+          After striking, the Chakram ricochets off its target and returns to the user.
+          When thrown, the range of this weapon increases by 5 ft times your strength and/or your dexterity modifier(s) to a maximum of 60/100.  
+          On Hit, this weapon returns to the user as intended. On a miss, a DC 10 dex save is needed to catch this weapon.
+        proficiency: hand axe
+        resources:
+          action: 1
+        attack_bonuses: dex
+        range:
+            - "20+5*dex(dex modifier)+5*str(str modifier)"
+            - 100
+        damage:
+          slashing: 1d6
+        damage_bonuses: dex
+      - name: Chakram, Melee
+        proficiency: hand axe
+        resources:
+          action: 1
+        attack_bonuses: dex
+        reach: 5 + 10*{eldritch_maul}(Eldritch Maul)
+        damage:
+          slashing: 1d6
+        damage_bonuses: dex
 
+  - name: Light Crossbow
+    link: http://dnd5e.wikidot.com/weapons
+    description:
+      Simple ranged weapon, Ammunition, range (80/320), loading, two-handed
+    weight: 5
+    value: 25gp
+    count: 1
+    attacks:
+      - name: Crossbow Bolt
+        proficiency: light crossbow
+        range: [80, 320]
+        attack_bonuses: dex
+        resources:
+          action: 1
+          crossbow bolt: 1
+        damage:
+          piercing: 1d8
+        damage_bonuses: dex
 
-features:
-  - name: Druidcraft (action, cantrip, 30ft)
-    source: Elder Leaf Mask
-    description: |-
-      Whispering to the spirits of nature, you create one of the following effects within range:
+  - name: Elder Lead Mask
+    link: https://www.dndbeyond.com/magic-items/5842527-elder-leaf-mask
+    description: >
+      This item was crafted by Qelline Alderleaf for her husband before an unforeseen
+      hunting accident claimed his life. It is cut out of a single leaf of the
+      Elder tree in the grove she grew up in.
+    count: 1
+    value: "0"
+    weight: 1
+    abilities:
+      - name: Druidcraft
+        link: http://dnd5e.wikidot.com/spell:druidcraft
+        description: |-
+          Whispering to the spirits of nature, you create one of the following effects within range:
 
-       - You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.
-       - You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.
-       - You create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.
-       - You instantly light or snuff out a candle, a torch, or a small campfire.
-  - name: Ensaring Strike (1 ki point, bonus action, self)
-    source: Elder Leaf Mask
-    description: |-
-      Concentration, up to 1 minute
+           - You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.
+           - You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.
+           - You create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.
+           - You instantly light or snuff out a candle, a torch, or a small campfire.
+        resources:
+          action: 1
+          spell_vocal: 1
+          spell_somatic: 1
+        range: [30, 30]
 
-      The next time you hit a creature with a weapon attack before this spell ends, a writhing mass of thorny vines appears at the point of impact, and the target must succeed on a Strength saving throw or be restrained by the magical vines until the spell ends. A Large or larger creature has advantage on this saving throw. If the target succeeds on the save, the vines shrivel away.
+      - name: Ensaring Strike
+        link: http://dnd5e.wikidot.com/spell:ensnaring-strike
+        description: >-
+          Concentration, up to 1 minute
+    
+          The next time you hit a creature with a weapon attack before this spell ends,
+          a writhing mass of thorny vines appears at the point of impact,
+          and the target must succeed on a Strength saving throw or be restrained
+          by the magical vines until the spell ends.
+          A Large or larger creature has advantage on this saving throw.
+          If the target succeeds on the save, the vines shrivel away.
+    
+          While restrained by this spell, the target takes 1d6 piercing damage
+          at the start of each of its turns. A creature restrained by the vines
+          or one that can touch the creature can use its action to make a
+          Strength check against your spell save DC.
+          On a success, the target is freed.
+        resources:
+          bonus action: 1
+          ki point: 1
+          spell concentration: 1
+          spell_vocal: 1
+        duration: 1 minute
+        concentration: true
+        saves:
+          stat: str
+          dc: 8 + prod + wis
+        rolls:
+          damage: 1d6
 
-      While restrained by this spell, the target takes 1d6 piercing damage at the start of each of its turns. A creature restrained by the vines or one that can touch the creature can use its action to make a Strength check against your spell save DC. On a success, the target is freed.
-  - name: Spike Growth (2 ki points, action, 150ft)
-    source: Elder Leaf Mask
-    description: |-
-      The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.
+      - name: Spike Growth
+        link: http://dnd5e.wikidot.com/spell:spike-growth
+        description:
+          The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns.
+          The area becomes difficult terrain for the duration.
+          When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.
+          
+          The transformation of the ground is camouflaged to look natural.
+          Any creature that can't see the area at the time the spell is cast
+          must make a Wisdom (Perception) check against your spell save DC to
+          recognize the terrain as hazardous before entering it.
+        range: [ 150, 150 ]
+        saves:
+          skill: perception
+          dc: 8 + prod + wis
 
-      The transformation of the ground is camouflaged to look natural. Any creature that can't see the area at the time the spell is cast must make a Wisdom (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.
   - name: Wand of Magic Missile Darts
-    source: Wand of Magic Missile Darts
-    description: |-
-      This wand has 3 charges. While holding it, you can use an action to cast the magic missile dart spell from it. When you expend 1 of its charges you instead cast the magic missile spell from it.
-      The wand regains 1d4 - 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
+    description: >-
+      This wand has 3 charges.
+      While holding it, you can use an action to cast the magic missile dart spell from it.
+      When you expend 1 of its charges you instead cast the magic missile spell from it.
+      
+      The wand regains 1d4-1 expended charges daily at dawn.
+      If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
+    weight: 1
+    value: unknown
+    resources:
+      - name: Magic Missile Wand Charges
+        description: >-
+          This wand has 3 charges.
+          While holding it, you can use an action to cast the magic missile dart spell from it.
+          When you expend 1 of its charges you instead cast the magic missile spell from it.
+          
+          The wand regains 1d4-1 expended charges daily at dawn.
+          If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
+        pool: 3
+        regain:
+          "on": dawn
+          amount: 1d4-1
+    attacks:
+      - name: Magic Missile Dart
+        proficiency: none
+        range: [ 120, 120 ]
+        attack_bonuses: 1000
+        resources:
+          action: 1
+          hands: 1
+        damage:
+          force: 1d4
+        damage_bonuses: 1
+      - name: Magic Missile
+        proficiency: none
+        range: [ 120, 120 ]
+        attack_bonuses: 1000
+        resources:
+          action: 1
+          hands: 1
+          magic_missile_wand_charge: 1
+        damage:
+          force: 1d4
+        damage_bonuses: 1
 
 
 backstory:
@@ -1396,10 +1616,14 @@ backstory:
 
   "Session Log – Session 26 (The Fading, 21th)": |
     nya.
+    "what's that 
 
 
-questlines:
+quest-lines:
   active:
+    - Return the injured miners to Phandalin
+    - Seek a cure for were-rat lycanthropy
+    - Quietly melt down the giant gold bell
   open:
     # Backstory
     - Recover Landan (Landan's backstory)
@@ -1444,41 +1668,34 @@ worries:
   - Landan's off camera rolls.
   - Randus rolling 6d8+6 three times.
 
-inventory:
-  - "20sp, 9cp"
-  - "[3lb] Common Clothes, Hooded"
-  - "[7lb] Bedroll"
-  - "[5lb] Waterskin"
-
-  - "[5lb] Light Crossbow|https://roll20.net/compendium/dnd5e/Light%20Crossbow"
-  - "[2lb] Chakram|https://www.dndbeyond.com/magic-items/5768356-chakram"
-  - "[4lb] Quarterstaff|https://roll20.net/compendium/dnd5e/Quarterstaff"
-  - "Wand of Magic Missile Darts"
-  - "Fist Wraps|https://www.dndbeyond.com/magic-items/6568025-fist-wraps"
-
-  - "[2lb] Leather Band of Light|https://www.dndbeyond.com/magic-items/4983300-leather-band-of-light"
-  - "Elder Leaf Mask|https://www.dndbeyond.com/magic-items/5842527-elder-leaf-mask"
-  #- "[1lb] Healing Potion|https://www.dndbeyond.com/magic-items/4708-potion-of-healing"
-
-  - "[5lb] Backpack"
-  - "[18lb] Rations (9)"
-  - "4 pieces of jerky"
-  - "[4lb] Torches (4)"
-  - "[8lb] Cook's Utensils|https://tea-cats.co.uk/dnd/cooks-tools.txt"
-  - "[3lb] Herbalism Kit|https://tea-cats.co.uk/dnd/herbalism-kit.txt"
-  - "[1lb] Tinderbox"
-  - "[5lb] Crowbar"
-  - "[3lb] Hammer"
-  - "[2lb] Pitons (8)"
-  - "[3lb] Rope of Climbing|https://roll20.net/compendium/dnd5e/Rope%20of%20Climbing"
-  - "[1lb] Amulet of Eldath"
-  - "[5lb] Prayer book of Eldath"
-  - "[4lb] Grappling hook"
-  - "[2lb] Pole of Collapsing|http://dnd5e.wikidot.com/wondrous-items:pole-of-collapsing"
-
-  - "Herbs and Ingredients, 62gp worth"
-  - "Manticore Spikes (3)"
-
-  - "Journal of Forms"
-  - "Herbalism 101"
-  - "Herbalism 102"
+#inventory:
+#  - "20sp, 9cp"
+#  - "[3lb] Common Clothes, Hooded"
+#  - "[7lb] Bedroll"
+#  - "[5lb] Waterskin"
+#
+#  - "Fist Wraps|https://www.dndbeyond.com/magic-items/6568025-fist-wraps"
+#
+#
+#  - "[5lb] Backpack"
+#  - "[18lb] Rations (9)"
+#  - "4 pieces of jerky"
+#  - "[4lb] Torches (4)"
+#  - "[8lb] Cook's Utensils|https://tea-cats.co.uk/dnd/cooks-tools.txt"
+#  - "[3lb] Herbalism Kit|https://tea-cats.co.uk/dnd/herbalism-kit.txt"
+#  - "[1lb] Tinderbox"
+#  - "[5lb] Crowbar"
+#  - "[3lb] Hammer"
+#  - "[2lb] Pitons (8)"
+#  - "[3lb] Rope of Climbing|https://roll20.net/compendium/dnd5e/Rope%20of%20Climbing"
+#  - "[1lb] Amulet of Eldath"
+#  - "[5lb] Prayer book of Eldath"
+#  - "[4lb] Grappling hook"
+#  - "[2lb] Pole of Collapsing|http://dnd5e.wikidot.com/wondrous-items:pole-of-collapsing"
+#
+#  - "Herbs and Ingredients, 62gp worth"
+#  - "Manticore Spikes (3)"
+#
+#  - "Journal of Forms"
+#  - "Herbalism 101"
+#  - "Herbalism 102"

@@ -12,6 +12,6 @@ target = name.replace(".yaml", ".json").replace(".yml", ".json")
 print(name, "->", target)
 
 with open(name, "r") as infile:
-    data = yaml.load(infile, Loader=yaml.SafeLoader)
+    data = yaml.load(infile, Loader=yaml.CLoader)
     with open(target, "w") as outfile:
         json.dump(data, outfile)

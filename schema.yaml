@@ -1,7 +1,6 @@
 ---
-"$schema": http://json-schema.org/draft-07/schema#
-
-$id: "DnD Character"
+$schema: http://json-schema.org/draft-07/schema#
+#$id: "DnD Character"
 
 type: object
 additionalProperties: false
@@ -10,6 +9,7 @@ required:
   - info
   - feats
   - levels
+  - items
   - stats
   - backstory
 properties:
@@ -21,6 +21,8 @@ properties:
     $ref: "#/definitions/Feats"
   levels:
     $ref: "#/definitions/Levels"
+  items:
+    $ref: "#/definitions/Items"
   stats:
     $ref: "#/definitions/Stats"
   backstory:
@@ -28,6 +30,26 @@ properties:
     patternProperties:
       ".*":
         type: string
+  worries:
+    type: array
+    items:
+      type: string
+  quest-lines:
+    type: object
+    properties:
+      open:
+        type: array
+        items:
+          type: string
+      active:
+        type: array
+        items:
+          type: string
+      complete:
+        type: array
+        items:
+          type: string
+
 
 definitions:
   Info:
@@ -93,10 +115,153 @@ definitions:
     items:
       $ref: "#/definitions/Feat"
 
+  Items:
+    type: array
+    additionalProperties: false
+    items:
+      $ref: "#/definitions/Item"
+
   Value:
     type:
       - integer
       - string
+
+  AbstractThingSource:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      link:
+        type: string
+      proficiencies:
+        type: array
+        items:
+          $ref: "#/definitions/Proficiency"
+      resources:
+        type: array
+        items:
+          $ref: "#/definitions/Resource"
+      facts:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      attacks:
+        type: array
+        items:
+          - $ref: "#/definitions/Attack"
+      abilities:
+        type: array
+        items:
+          - $ref: "#/definitions/Ability"
+
+  Item:
+    type: object
+    unevaluatedProperties: false
+    allOf:
+      - $ref: "#/definitions/AbstractThingSource"
+    properties:
+      weight:
+        type: integer
+        minimum: 0
+      count:
+        type: integer
+        minimum: 0
+        default: 1
+      value:
+        type: string
+      link:
+        type: string
+
+    required:
+      - name
+      - description
+      - weight
+      - value
+
+  Level:
+    type: object
+    unevaluatedProperties: false
+    allOf:
+      - $ref: "#/definitions/AbstractThingSource"
+    required:
+      - class
+      - level
+      - hit_die
+      - hit_points
+    properties:
+      class:
+        type: string
+      level:
+        type: integer
+      hit_die:
+        type: string
+        pattern: "^d(6|8|10|12)$"
+      hit_points:
+        type: integer
+        minimum: 4
+        maximum: 12
+
+  Feat:
+    type: object
+    unevaluatedProperties: false
+    allOf:
+      - $ref: "#/definitions/AbstractThingSource"
+    required:
+      - name
+      - link
+      - description
+
+  Proficiency:
+    type: object
+    additionalProperties: false
+    required:
+      - type
+      - target
+    properties:
+      type:
+        type: string
+        enum:
+          - weapon
+          - armour
+          - equipment
+          - skill
+          - ability_save
+      target:
+        type: string
+
+  Resource:
+    type: object
+    additionalProperties: false
+    required:
+      - name
+      - pool
+      - regain
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      pool:
+        $ref: "#/definitions/Value"
+      regain:
+        type: object
+        additionalProperties: false
+        required:
+          - amount
+          - "on"
+        properties:
+          amount:
+            $ref: "#/definitions/Value"
+          "on":
+            type: string
+            enum:
+              - round
+              - short rest
+              - long rest
+              - dawn
 
   Damage:
     type: object
@@ -158,10 +323,6 @@ definitions:
       - $ref: "#/definitions/DamageOrStatus"
 
     properties:
-      kind:
-        type: string
-        enum:
-          - "attack"
       name:
         type: string
       description:
@@ -182,6 +343,11 @@ definitions:
       damage_bonuses:
         $ref: "#/definitions/Value"
       resources:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      consumes:
         type: object
         patternProperties:
           ".*":
@@ -216,163 +382,54 @@ definitions:
   Ability:
     type: object
     additionalProperties: false
-    properties:
-      kind:
-        type: string
-        enum:
-          - "ability"
-      name:
-        type: string
-      description:
-        type: string
-      resources:
-        type: object
-        patternProperties:
-          ".*":
-            $ref: "#/definitions/Value"
-
-  Item:
-    type: object
-    additionalProperties: false
-    properties:
-      name:
-        type: string
-      description:
-        type: string
-      link:
-        type: string
-      abilities:
-        type: array
-        items:
-          - $ref: "#/definitions/Attack"
-          - $ref: "#/definitions/Ability"
     required:
       - name
       - description
-
-  Level:
-    type: object
-    additionalProperties: false
-    required:
-      - class
-      - level
-      - hit_die
-      - hit_points
-    properties:
-      class:
-        type: string
-      level:
-        type: integer
-      description:
-        type: string
-      link:
-        type: string
-      hit_die:
-        type: string
-        pattern: "^d(6|8|10|12)$"
-      hit_points:
-        type: integer
-        minimum: 4
-        maximum: 12
-      proficiencies:
-        type: array
-        items:
-          $ref: "#/definitions/Proficiency"
-      resources:
-        type: array
-        items:
-          $ref: "#/definitions/Resource"
-      facts:
-        type: object
-        patternProperties:
-          ".*":
-            $ref: "#/definitions/Value"
-      abilities:
-        type: array
-        items:
-          oneOf:
-            - $ref: "#/definitions/Attack"
-            - $ref: "#/definitions/Ability"
-
-  Feat:
-    type: object
-    additionalProperties: false
-    required:
-      - name
-      - link
-      - description
-    properties:
-      name:
-        type: string
-      link:
-        type: string
-      description:
-        type: string
-      proficiencies:
-        type: array
-        items:
-          $ref: "#/definitions/Proficiency"
-      resources:
-        type: array
-        items:
-          $ref: "#/definitions/Resource"
-      facts:
-        type: object
-        patternProperties:
-          ".*":
-            $ref: "#/definitions/Value"
-      abilities:
-        type: array
-        items:
-          anyOf:
-            - $ref: "#/definitions/Attack"
-            - $ref: "#/definitions/Ability"
-
-  Proficiency:
-    type: object
-    additionalProperties: false
-    required:
-      - type
-      - target
-    properties:
-      type:
-        type: string
-        enum:
-          - weapon
-          - armour
-          - equipment
-          - skill
-          - ability_save
-      target:
-        type: string
-
-  Resource:
-    type: object
-    additionalProperties: false
-    required:
-      - name
-      - pool
-      - regain
     properties:
       name:
         type: string
       description:
         type: string
-      pool:
-        $ref: "#/definitions/Value"
-      regain:
+      link:
+        type: string
+      resources:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      dice_rolls:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      save:
         type: object
         additionalProperties: false
         required:
-          - amount
-          - on
+          - stat
+          - dc
         properties:
-          amount:
+          stat:
+            $ref: "#/definitions/Stat"
+          dc:
             $ref: "#/definitions/Value"
-          on:
-            type: string
-            enum:
-              - round
-              - short rest
-              - long rest
-              - dawn
+      status:
+        type: array
+        items:
+          type: object
+          additionalProperties: false
+          required:
+            - name
+            - length
+          properties:
+            name:
+              type: string
+            length:
+              type: string
+            description:
+              type: string
+      range:
+        type: array
+        items:
+          - $ref: "#/definitions/Value"
+          - $ref: "#/definitions/Value"

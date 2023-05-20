@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: character.json
+all: character.json schema.json
 	true
 
 %.json: %.yaml
