@@ -1,0 +1,116 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
+name: Character
+description: Base facts and resources for a DnD character
+link: "#"
+facts:
+  perception: "10 + wis(passive perception) + prof(passive perception)"
+
+stats:
+  str: "12(base)"
+  dex: "16(base)"
+  con: "15(base)"
+  int: "11(base)"
+  wis: "14(base)"
+  cha: "7(base)"
+
+resources:
+  - name: action
+    pool: 1 + {haste}
+    regain:
+      amount: 999
+      "on": round
+  - name: bonus action
+    pool: 1
+    regain:
+      amount: 999
+      "on": round
+  - name: Spell Vocal
+    description: "Using voice for spell casting"
+    pool: 1
+    regain:
+      amount: 1
+      on: round
+  - name: Spell Somatic
+    description: "Using hand motions for spell casting"
+    pool: 1
+    regain:
+      amount: 1
+      on: round
+
+# TODO: Add in the basic abilities: https://crobi.github.io/dnd5e-quickref/preview/quickref.html
+
+---
+
+name: Tabaxi
+link: http://dnd5e.wikidot.com/tabaxi
+description: |-
+  Hailing from a strange and distant land, wandering tabaxi are catlike
+  humanoids driven by curiosity to collect interesting artifacts,
+  gather tales and stories, and lay eyes on all the world's wonders.
+  
+  Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long.
+  Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
+
+stats:
+  dex: "2(tabaxi racial bonus)"
+  int: "1(tabaxi racial bonus (relocated))"
+
+proficiencies:
+  - type: skill
+    target: perception
+  - type: skill
+    target: nature
+
+facts:
+  speed: 30(tabaxi) + {monk_bonus_speed}(monk speed)
+  climbing: 20(tabaxi)
+
+abilities:
+  - name: Dark-Vision
+    description: >-
+      You have a cat's keen senses, especially in the dark.
+      You can see in dim light within 60 feet of you as if it were bright light,
+      and in darkness as if it were dim light.
+      You can't discern color in darkness, only shades of gray.
+  - name: Feline Agility
+    description: >-
+      Your reflexes and agility allow you to move with a burst of speed.
+      When you move on your tum in combat, you can double your speed until the end of the turn.
+      Once you use this trait, you can't use it again until you move 0 feet on one of your turns.
+  - name: Cat's Claws
+    description: >-
+      Because of your claws, you have a climbing speed of 20 feet.
+      In addition, your claws are natural weapons, which you can use to make unarmed strikes.
+      If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier,
+      instead of the bludgeoning damage normal for an unarmed strike.
+
+---
+
+name: Acolyte
+link: http://dnd5e.wikidot.com/background:acolyte
+description: >-
+  You have spent your life in the service of a temple to a specific god or pantheon of gods.
+  You act as an intermediary between the realm of the holy and the mortal world,
+  performing sacred rites and offering sacrifices in order to conduct worshipers
+  into the presence of the divine.
+proficiencies:
+  - type: skill
+    target: insight
+  - type: skill
+    target: religion
+abilities:
+  - name: Shelter of the Faithful
+    description: >-
+      As an acolyte, you command the respect of those who share your faith,
+      and you can perform the religious ceremonies of your deity.
+      You and your adventuring companions can expect to receive free healing
+      and care at a temple, shrine, or other established presence of your faith,
+      though you must provide any material components needed for spells.
+      Those who share your religion will support you (but only you) at a modest lifestyle.
+
+      You might also have ties to a specific temple dedicated to your chosen deity or pantheon,
+      and you have a residence there. This could be the temple where you used to serve,
+      if you remain on good terms with it, or a temple where you have found a new home.
+      While near your temple, you can call upon the priests for assistance,
+      provided the assistance you ask for is not hazardous and you remain in
+      good standing with your temple.

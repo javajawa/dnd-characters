@@ -1,6 +1,6 @@
 ---
 $schema: http://json-schema.org/draft-07/schema#
-#$id: "DnD Character"
+$id: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/character.yaml
 
 type: object
 additionalProperties: false
@@ -10,7 +10,6 @@ required:
   - feats
   - levels
   - items
-  - stats
   - backstory
 properties:
   name:
@@ -23,8 +22,6 @@ properties:
     $ref: "#/definitions/Levels"
   items:
     $ref: "#/definitions/Items"
-  stats:
-    $ref: "#/definitions/Stats"
   backstory:
     type: object
     patternProperties:
@@ -104,7 +101,6 @@ definitions:
   Levels:
     type: array
     additionalProperties: false
-    minItems: 1
     maxItems: 20
     items:
       $ref: "#/definitions/Level"
@@ -135,6 +131,8 @@ definitions:
         type: string
       link:
         type: string
+      stats:
+        $ref: "#/definitions/Stats"
       proficiencies:
         type: array
         items:

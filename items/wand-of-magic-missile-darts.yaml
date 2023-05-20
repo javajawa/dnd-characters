@@ -1,0 +1,47 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
+
+name: Wand of Magic Missile Darts
+description: >-
+  This wand has 3 charges.
+  While holding it, you can use an action to cast the magic missile dart spell from it.
+  When you expend 1 of its charges you instead cast the magic missile spell from it.
+  
+  The wand regains 1d4-1 expended charges daily at dawn.
+  If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
+weight: 1
+value: unknown
+resources:
+  - name: Magic Missile Wand Charges
+    description: >-
+      This wand has 3 charges.
+      While holding it, you can use an action to cast the magic missile dart spell from it.
+      When you expend 1 of its charges you instead cast the magic missile spell from it.
+      
+      The wand regains 1d4-1 expended charges daily at dawn.
+      If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
+    pool: 3
+    regain:
+      "on": dawn
+      amount: 1d4-1
+attacks:
+  - name: Magic Missile Dart
+    proficiency: none
+    range: [ 120, 120 ]
+    attack_bonuses: 1000
+    resources:
+      action: 1
+      hands: 1
+    damage:
+      force: 1d4
+    damage_bonuses: 1
+  - name: Magic Missile
+    proficiency: none
+    range: [ 120, 120 ]
+    attack_bonuses: 1000
+    resources:
+      action: 1
+      hands: 1
+      magic_missile_wand_charge: 1
+    damage:
+      force: 1d4
+    damage_bonuses: 1

@@ -1,0 +1,7 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
+name: Were-Rat
+description: ""
+link: "#"
+
+stats:
+  dex: "2*{hybrid_rat_form}(hybrid rat form)"

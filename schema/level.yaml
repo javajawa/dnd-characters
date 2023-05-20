@@ -1,0 +1,291 @@
+---
+$schema: http://json-schema.org/draft-07/schema#
+$id: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/level.yaml
+
+type: object
+unevaluatedProperties: false
+allOf:
+  - $ref: "https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/abstract-source.yaml"
+required:
+  - class
+  - level
+  - hit_die
+  - hit_points
+properties:
+  class:
+    type: string
+  level:
+    type: integer
+  hit_die:
+    type: string
+    pattern: "^d(6|8|10|12)$"
+  hit_points:
+    type: integer
+    minimum: 4
+    maximum: 12
+  # Inherited
+  name:
+    type: string
+  description:
+    type: string
+  link:
+    type: string
+  proficiencies:
+    type: array
+    items:
+      $ref: "#/definitions/Proficiency"
+  resources:
+    type: array
+    items:
+      $ref: "#/definitions/Resource"
+  facts:
+    type: object
+    patternProperties:
+      ".*":
+        $ref: "#/definitions/Value"
+  attacks:
+    type: array
+    items:
+      - $ref: "#/definitions/Attack"
+  abilities:
+    type: array
+    items:
+      - $ref: "#/definitions/Ability"
+
+definitions:
+  Value:
+    type:
+      - integer
+      - string
+
+  Proficiency:
+    type: object
+    additionalProperties: false
+    required:
+      - type
+      - target
+    properties:
+      type:
+        type: string
+        enum:
+          - weapon
+          - armour
+          - equipment
+          - skill
+          - ability_save
+      target:
+        type: string
+
+  Resource:
+    type: object
+    additionalProperties: false
+    required:
+      - name
+      - pool
+      - regain
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      pool:
+        $ref: "#/definitions/Value"
+      regain:
+        type: object
+        additionalProperties: false
+        required:
+          - amount
+          - "on"
+        properties:
+          amount:
+            $ref: "#/definitions/Value"
+          "on":
+            type: string
+            enum:
+              - round
+              - short rest
+              - long rest
+              - dawn
+
+  Attack:
+    type: object
+    additionalProperties: false
+    required:
+      - name
+      - proficiency
+      - attack_bonuses
+    allOf:
+      - $ref: "#/definitions/ReachOrRange"
+      - $ref: "#/definitions/DamageOrStatus"
+
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      proficiency:
+        type: string
+      reach:
+        $ref: "#/definitions/Value"
+      range:
+        type: array
+        items:
+          - $ref: "#/definitions/Value"
+          - $ref: "#/definitions/Value"
+      attack_bonuses:
+        $ref: "#/definitions/Value"
+      damage:
+        $ref: "#/definitions/Damage"
+      damage_bonuses:
+        $ref: "#/definitions/Value"
+      resources:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      consumes:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      save:
+        type: object
+        additionalProperties: false
+        required:
+          - stat
+          - dc
+        properties:
+          stat:
+            $ref: "#/definitions/Stat"
+          dc:
+            $ref: "#/definitions/Value"
+      status:
+        type: array
+        items:
+          type: object
+          additionalProperties: false
+          required:
+            - name
+            - length
+          properties:
+            name:
+              type: string
+            length:
+              type: string
+            description:
+              type: string
+
+  Ability:
+    type: object
+    additionalProperties: false
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      link:
+        type: string
+      resources:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      dice_rolls:
+        type: object
+        patternProperties:
+          ".*":
+            $ref: "#/definitions/Value"
+      save:
+        type: object
+        additionalProperties: false
+        required:
+          - stat
+          - dc
+        properties:
+          stat:
+            $ref: "#/definitions/Stat"
+          skill:
+            type: string
+          dc:
+            $ref: "#/definitions/Value"
+      status:
+        type: array
+        items:
+          type: object
+          additionalProperties: false
+          required:
+            - name
+            - length
+          properties:
+            name:
+              type: string
+            length:
+              type: string
+            description:
+              type: string
+      range:
+        type: array
+        items:
+          - $ref: "#/definitions/Value"
+          - $ref: "#/definitions/Value"
+
+  ReachOrRange:
+    oneOf:
+      - required:
+          - reach
+      - required:
+          - range
+
+  DamageOrStatus:
+    oneOf:
+      - required:
+          - status
+          - save
+      - required:
+          - damage
+          - damage_bonuses
+
+  Damage:
+    type: object
+    additionalProperties: false
+    properties:
+      bludgeoning:
+          $ref: "#/definitions/Value"
+      piercing:
+          $ref: "#/definitions/Value"
+      slashing:
+          $ref: "#/definitions/Value"
+
+      acid:
+          $ref: "#/definitions/Value"
+      cold:
+          $ref: "#/definitions/Value"
+      fire:
+          $ref: "#/definitions/Value"
+      force:
+          $ref: "#/definitions/Value"
+      lightning:
+          $ref: "#/definitions/Value"
+      necrotic:
+          $ref: "#/definitions/Value"
+      poison:
+          $ref: "#/definitions/Value"
+      psychic:
+          $ref: "#/definitions/Value"
+      radiant:
+          $ref: "#/definitions/Value"
+      thunder:
+          $ref: "#/definitions/Value"
+
+  Stat:
+    type: string
+    enum:
+      - str
+      - dex
+      - con
+      - wis
+      - int
+      - cha

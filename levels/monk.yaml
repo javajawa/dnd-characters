@@ -1,0 +1,236 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/level.yaml
+
+class: Monk
+level: 1
+link: http://dnd5e.wikidot.com/monk
+description: >-
+  Monks are united in their ability to magically harness the energy that flows in their bodies.
+  Whether channeled as a striking display of combat prowess or a subtler focus of
+  defensive ability and speed, this energy infuses all that a monk does.
+hit_die: d8
+hit_points: 8
+facts:
+  martial_arts_dice: "d4"
+  armour_class: 10 + dex + wis + 2*{haste}
+proficiencies:
+  - type: ability_save
+    target: str
+  - type: ability_save
+    target: dex
+  - type: skill
+    target: history
+  - type: skill
+    target: athletics
+  - type: equipment
+    target: cook's tools
+  - type: weapon
+    target: club
+  - type: weapon
+    target: dagger
+  - type: weapon
+    target: great club
+  - type: weapon
+    target: hand axe
+  - type: weapon
+    target: javelin
+  - type: weapon
+    target: light hammer
+  - type: weapon
+    target: mace
+  - type: weapon
+    target: quarterstaff
+  - type: weapon
+    target: sickle
+  - type: weapon
+    target: spear
+  - type: weapon
+    target: light crossbow
+  - type: weapon
+    target: dart
+  - type: weapon
+    target: short bow
+  - type: weapon
+    target: sling
+  - type: weapon
+    target: short sword
+  - type: weapon
+    target: unarmed
+abilities:
+  - name: Unarmored Defense
+    description: >-
+      Beginning at 1st level, while you are wearing no armor and not wielding a shield,
+      your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
+  - name: Martial Arts
+    description: >-
+      At 1st level, your practice of martial arts gives you mastery of
+      combat styles that use unarmed strikes and monk weapons,
+      which are short-swords and any simple melee weapons that don't have
+      the two-handed or heavy property.
+
+
+      You gain the following benefits while you are unarmed or wielding
+      only monk weapons and you aren't wearing armor or wielding a shield:
+
+       - You can use Dexterity instead of Strength for the attack and damage
+      rolls of your unarmed strikes and monk weapons.
+
+       - You can roll you martial arts die in place of the normal damage of
+      your unarmed strike or monk weapon.
+
+       - When you use the Attack action with an unarmed strike or a monk weapon
+      on your turn, you can make one unarmed strike as a bonus action.
+  - name: Dedicated Weapon
+    description: >-
+      Also at 2nd level, you train yourself to use a variety of weapons as monk weapons,
+      not just simple melee weapons and short-swords.
+      Whenever you finish a short or long rest, you can touch one weapon, focus your ki on it,
+      and then count that weapon as a monk weapon until you use this feature again.
+
+      The chosen weapon must meet these criteria:
+      
+        - The weapon must be a simple or martial weapon.
+      
+        - You must be proficient with it.
+      
+        - It must lack the heavy and special properties.  
+
+---
+
+class: Monk
+level: 2
+link: http://dnd5e.wikidot.com/monk
+description: >-
+  Monks are united in their ability to magically harness the energy that flows in their bodies.
+  Whether channeled as a striking display of combat prowess or a subtler focus of
+  defensive ability and speed, this energy infuses all that a monk does.
+hit_die: d8
+hit_points: 5
+resources:
+  - name: Ki
+    description: >-
+      Starting at 2nd level, your training allows you to harness the mystic energy of ki.
+      Your access to this energy is represented by a number of ki points.
+      Your monk level determines the number of points you have, as shown in the
+      Ki Points column of the Monk table.
+
+      You can spend these points to fuel various ki features.
+      You start knowing three such features: Flurry of Blows, Patient Defense,
+      and Step of the Wind.
+      You learn more ki features as you gain levels in this class.
+
+      When you spend a ki point, it is unavailable until you finish a short
+      or long rest, at the end of which you draw all of your expended ki back
+      into yourself.
+      You must spend at least 30 minutes of the rest meditating to regain your ki points.
+
+      Some of your ki features require your target to make a saving throw to
+      resist the feature's effects.
+    pool: "{monk}"
+    regain:
+      amount: "{monk}"
+      "on": short rest
+facts:
+  monk_bonus_speed: 10
+  ki_save: "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
+abilities:
+  - name: "Flurry of Blows"
+    description: >-
+      Immediately after you take the Attack action on your turn,
+      you can spend 1 ki point to make two unarmed strikes as a bonus action.
+    resources:
+      ki: 1
+      bonus action: 1
+  - name: "Patient Defense"
+    description: >-
+      You can spend 1 ki point to take the Dodge action as a
+      bonus action on your turn.
+    resources:
+      ki: 1
+      bonus action: 1
+  - name: "Step of the Wind"
+    description: >-
+      You can spend 1 ki point to take the Disengage or Dash action as a
+      bonus action on your turn, and your jump distance is doubled for the turn.
+    resources:
+      ki: 1
+      bonus action: 1
+
+---
+
+class: Monk
+level: 3
+hit_die: d8
+hit_points: 5
+proficiencies:
+  - type: skill
+    target: medicine
+  - type: equipment
+    target: herbalist's tools
+
+abilities:
+  - name: "Hands of Healing"
+    description: >-
+      At 3rd level, your mystical touch can mend wounds.
+      As an action, you can spend 1 ki point to touch a creature and restore a
+      number of hit points equal to a roll of your Martial Arts die + your
+      Wisdom modifier.
+
+      When you use your Flurry of Blows, you can replace one of the
+      unarmed strikes with a use of this feature without spending a ki point for the healing.
+    resources:
+      ki: 1
+    dice_rolls:
+      healing: "1{martial die} + wis"
+
+  - name: "Hands of Harm"
+    description: >-
+      At 3rd level, you use your ki to inflict wounds.
+      When you hit a creature with an unarmed strike,
+      you can spend 1 ki point to deal extra necrotic damage equal
+      to one roll of your Martial Arts die + your Wisdom modifier.
+      You can use this feature only once per turn.
+    resources:
+      ki: 1
+    dice_rolls:
+      Damage: "1{martial die} + wis"
+
+  - name: Deflect Missiles
+    source: Monk lvl3
+    dice: 1d10 + dex + {monk}
+    damage:
+      piercing: 1d10
+    damage_bonuses: dex + {monk}
+    description: >-
+      Starting at 3rd level, you can use your reaction to deflect or catch the
+      missile when you are hit by a ranged weapon attack.
+      When you do so, the damage you take from the attack is reduced by
+      1d10 + your Dexterity modifier + your monk level.
+
+      If you reduce the damage to 0, you can catch the missile if it is small
+      enough for you to hold in one hand and you have at least one hand free.
+      If you catch a missile in this way, you can spend 1 ki point to make a
+      ranged attack with a range of 20/60 using the weapon or piece of
+      ammunition you just caught, as part of the same reaction.
+      You make this attack with proficiency, regardless of your weapon
+      proficiencies, and the missile counts as a monk weapon for the attack.
+
+---
+
+class: Monk
+level: 4
+hit_die: d8
+hit_points: 5
+
+stats:
+  dex: "2(monk lvl4 ASI)"
+
+# TODO: Add lvl 4 monk abilities
+
+---
+
+class: Monk
+level: 4
+hit_die: d8
+hit_points: 5
+
+# TODO: Add lvl 5 monk abilities

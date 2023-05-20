@@ -1,0 +1,72 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
+
+name: Elder Lead Mask
+link: https://www.dndbeyond.com/magic-items/5842527-elder-leaf-mask
+description: >
+  This item was crafted by Qelline Alderleaf for her husband before an unforeseen
+  hunting accident claimed his life. It is cut out of a single leaf of the
+  Elder tree in the grove she grew up in.
+count: 1
+value: "0"
+weight: 1
+abilities:
+  - name: Druid Craft
+    link: http://dnd5e.wikidot.com/spell:druidcraft
+    description: |-
+      Whispering to the spirits of nature, you create one of the following effects within range:
+
+       - You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.
+       - You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.
+       - You create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.
+       - You instantly light or snuff out a candle, a torch, or a small campfire.
+    resources:
+      action: 1
+      spell_vocal: 1
+      spell_somatic: 1
+    range: [30, 30]
+
+  - name: Ensaring Strike
+    link: http://dnd5e.wikidot.com/spell:ensnaring-strike
+    description: >-
+      Concentration, up to 1 minute
+
+      The next time you hit a creature with a weapon attack before this spell ends,
+      a writhing mass of thorny vines appears at the point of impact,
+      and the target must succeed on a Strength saving throw or be restrained
+      by the magical vines until the spell ends.
+      A Large or larger creature has advantage on this saving throw.
+      If the target succeeds on the save, the vines shrivel away.
+
+      While restrained by this spell, the target takes 1d6 piercing damage
+      at the start of each of its turns. A creature restrained by the vines
+      or one that can touch the creature can use its action to make a
+      Strength check against your spell save DC.
+      On a success, the target is freed.
+    resources:
+      bonus action: 1
+      ki point: 1
+      spell concentration: 1
+      spell_vocal: 1
+    duration: 1 minute
+    concentration: true
+    saves:
+      stat: str
+      dc: 8 + prod + wis
+    rolls:
+      damage: 1d6
+
+  - name: Spike Growth
+    link: http://dnd5e.wikidot.com/spell:spike-growth
+    description:
+      The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns.
+      The area becomes difficult terrain for the duration.
+      When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.
+      
+      The transformation of the ground is camouflaged to look natural.
+      Any creature that can't see the area at the time the spell is cast
+      must make a Wisdom (Perception) check against your spell save DC to
+      recognize the terrain as hazardous before entering it.
+    range: [ 150, 150 ]
+    saves:
+      skill: perception
+      dc: 8 + prod + wis

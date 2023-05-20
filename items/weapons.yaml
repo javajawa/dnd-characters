@@ -1,0 +1,93 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
+
+# TODO: "Fist Wraps|https://www.dndbeyond.com/magic-items/6568025-fist-wraps"
+
+name: Quarterstaff
+description: Simple versatile Melee Weapon
+link: http://dnd5e.wikidot.com/weapons
+weight: 4
+value: 2sp
+count: 1
+attacks:
+  - name: Quarterstaff, 1-handed
+    description: ""
+    proficiency: quarterstaff
+    resources:
+      action: 1
+      hands: 1
+    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    attack_bonuses: str|dex
+    damage:
+      bludgeoning: 1d6
+      force: "{eldritch_maul}d6"
+    damage_bonuses: str|dex
+  - name: Quarterstaff, 2-handed
+    description: ""
+    proficiency: quarterstaff
+    resources:
+      action: 1
+      hands: 1
+    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    attack_bonuses: str|dex
+    damage:
+      bludgeoning: 1d8
+      force: "{eldritch_maul}d6"
+    damage_bonuses: str|dex
+
+---
+
+name: Light Crossbow
+link: http://dnd5e.wikidot.com/weapons
+description:
+  Simple ranged weapon, Ammunition, range (80/320), loading, two-handed
+weight: 5
+value: 25gp
+count: 1
+attacks:
+  - name: Crossbow Bolt
+    proficiency: light crossbow
+    range: [80, 320]
+    attack_bonuses: dex
+    resources:
+      action: 1
+      crossbow bolt: 1
+    damage:
+      piercing: 1d8
+    damage_bonuses: dex
+
+# TODO: - Silvered Dagger.
+
+---
+
+name: Chakram
+description: |
+  After striking, the Chakram ricochets off its target and returns to the user.
+link: https://www.dndbeyond.com/magic-items/5768356-chakram
+value: "0"
+weight: 2
+attacks:
+  - name: Chakram, Thrown
+    description: |
+      After striking, the Chakram ricochets off its target and returns to the user.
+      When thrown, the range of this weapon increases by 5 ft times your strength and/or your dexterity modifier(s) to a maximum of 60/100.  
+      On Hit, this weapon returns to the user as intended. On a miss, a DC 10 dex save is needed to catch this weapon.
+    proficiency: hand axe
+    resources:
+      action: 1
+    attack_bonuses: str|dex
+    range:
+        - "20+5*dex(dex modifier)+5*str(str modifier)"
+        - 100
+    damage:
+      slashing: 1d6
+    damage_bonuses: str|dex
+  - name: Chakram, Melee
+    proficiency: hand axe
+    resources:
+      action: 1
+    attack_bonuses: str|dex
+    reach: 5 + 10*{eldritch_maul}(Eldritch Maul)
+    damage:
+      slashing: 1d6
+      force: "{eldritch_maul}d6"
+    damage_bonuses: str|dex

@@ -1,0 +1,85 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
+name: Shadow-Touched
+description: |
+  Your exposure to the Shadowfell's magic has changed you, granting you the following benefits:
+  - Increase your Intelligence, Wisdom, or Charisma score by 1, to a maximum of 20.
+  - You learn the Invisibility spell and one 1st-level spell of your choice.
+    The 1st-level spell must be from the Illusion or Necromancy school of magic.
+    You can cast each of these spells without expending a spell slot.
+    Once you cast either of these spells in this way, you can't cast that spell
+    in this way again until you finish a long rest.
+    You can also cast these spells using spell slots you have of the appropriate level.
+    The spells' spell casting ability is the ability increased by this feat.
+
+link: http://dnd5e.wikidot.com/feat:shadow-touched
+
+stats:
+  wis: "1(shadow touched feat)"
+
+resources:
+  - name: Shadow Touched Spell Slot
+    pool: 1
+    regain:
+      amount: 1
+      on: long rest
+
+abilities:
+  - name: Invisibility
+    link: http://dnd5e.wikidot.com/spell:invisibility
+    description: |
+      A creature you touch becomes invisible until the spell ends.
+      Anything the target is wearing or carrying is invisible as long as
+      it is on the target’s person.
+      The spell ends for a target that attacks or casts a spell.
+
+    resources:
+      shadow touched spell slot: 1
+      spell vocal: 1
+      spell somatic: 1
+
+    status:
+      - name: invisible
+        length: 1 hour
+        description: |
+          A creature you touch becomes invisible until the spell ends.
+          Anything the target is wearing or carrying is invisible as long as
+          it is on the target’s person.
+          The spell ends for a target that attacks or casts a spell.
+      
+          An invisible creature is impossible to see without the aid of magic or a special sense.
+          For the purpose of hiding, the creature is heavily obscured.
+          The creature’s location can be detected by any noise it makes or any tracks it leaves.
+          Attack rolls against the creature have disadvantage,
+          and the creature’s attack rolls have advantage.
+
+  - name: Colour Spray
+    link: http://dnd5e.wikidot.com/spell:color-spray
+    description: |
+      A dazzling array of flashing, colored light springs from your hand.
+      Roll 6d10, the total is how many hit points of creatures this spell can effect.
+      Creatures in a 15-foot cone originating from you are affected in ascending order
+      of their current hit points (ignoring unconscious creatures and creatures that can’t see).
+
+      Starting with the creature that has the lowest current hit points,
+      each creature affected by this spell is blinded until the end of your next turn.
+      Subtract each creature’s hit points from the total before moving on to the
+      creature with the next lowest hit points.
+      A creature’s hit points must be equal to or less than the remaining total
+      for the creature to be affected.
+
+    resources:
+      shadow touched spell slot: 1
+      spell vocal: 1
+      spell somatic: 1
+
+    dice_rolls:
+      Target HP: 6d10
+
+    status:
+      - name: blinded
+        length: 1 round
+        description: |
+          A blinded creature can’t see and automatically fails any ability check that requires sight.
+          
+          Attack rolls against the creature have advantage,
+          and the creature’s attack rolls have disadvantage.

@@ -1,0 +1,108 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/feat.yaml
+
+name: Unarmed Combat
+link: http://dnd5e.wikidot.com/tabaxi
+description: |-
+  Hailing from a strange and distant land, wandering tabaxi are catlike
+  humanoids driven by curiosity to collect interesting artifacts,
+  gather tales and stories, and lay eyes on all the world's wonders.
+
+  Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long.
+  Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
+resources:
+  - name: Hands
+    pool: 2
+    regain:
+      amount: 2
+      "on": round
+attacks:
+  - name: "Unarmed: Grapple"
+    resources:
+      hands: 1
+      action: 1
+    proficiency: unarmed
+    reach: "5"
+    attack_bonuses: "dex|str"
+    save:
+      dc: 8 + str + prof
+      stat: dex
+    status:
+      - name: Grappled
+        length: Until Broken
+        description: |-
+          While grappled, the opponent can use an action to try escaping.
+          They make a Strength (Athletics) or Dexterity (Acrobatics) check,
+          against this attacks save.
+    description: |-
+      The target is Grappled, and the grapple’s escape DC equals 8 + your Strength modifier + your Proficiency Bonus.
+      This grapple is possible only if the target is no more than one Size larger than you and if you have a hand free to grab the target.
+
+      - A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.
+      - The condition ends if the grappler is incapacitated (see the condition).
+      - The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect,
+        such as when a creature is hurled away by the thunder-wave spell.
+
+  - name: "Unarmed: Knock Prone"
+    proficiency: unarmed
+    resources:
+      hands: 1
+      action: 1
+    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    attack_bonuses: "dex|str"
+    damage:
+      bludgeoning: 0
+    damage_bonuses: 0
+    status:
+      - name: Prone
+        length: Until they stand up
+        description: |-
+          - A prone creature’s only movement option is to crawl, unless it stands up and thereby ends the condition.
+          - The creature has disadvantage on attack rolls.
+          - An attack roll against the creature has advantage if the attacker is within 5 feet of the creature.
+            Otherwise, the attack roll has disadvantage.
+
+  - name: "Unarmed: Punch with Fist"
+    proficiency: unarmed
+    resources:
+      hands: 1
+      action: 1
+    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    attack_bonuses: "dex|str"
+    damage:
+      bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      force: "{eldritch_maul}d6(eldritch maul)"
+    damage_bonuses: "dex|str + 1(fist wraps)"
+
+  - name: "Unarmed: Slash with Fist and Claws"
+    proficiency: unarmed
+    resources:
+      hands: 1
+      action: 1
+    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    attack_bonuses: "dex|str"
+    damage:
+      slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      force: "{eldritch_maul}d6(eldritch maul)"
+    damage_bonuses: "dex|str + 1(fist wraps)"
+
+  - name: "Unarmed: Kick with Foot"
+    proficiency: unarmed
+    resources:
+      action: 1
+    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    attack_bonuses: "dex|str"
+    damage:
+      bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      force: "{eldritch_maul}d6(eldritch maul)"
+    damage_bonuses: "dex|str"
+
+  - name: "Unarmed: Slash with Foot Claws"
+    proficiency: unarmed
+    resources:
+      action: 1
+    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    attack_bonuses: "dex|str"
+    damage:
+      slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      force: "{eldritch_maul}d6(eldritch maul)"
+    damage_bonuses: "dex|str"

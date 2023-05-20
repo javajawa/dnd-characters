@@ -1,0 +1,30 @@
+$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
+
+name: Leather Band of Light
+link: https://www.dndbeyond.com/magic-items/4983300-leather-band-of-light
+description: >-
+  An old leather band, it surprisingly conforms to any part of your body that you chose to wrap it around.
+  Given to you by an elderly half-elf monk that has long since retired from
+  adventuring and taking up residence as the head of security of the holy site
+  in which you were raised.
+  
+  She gave this to you on the day you set out to join the monastery,
+  saying "may this simple band of leather always reflect your Inner Light in
+  both the brightest and darkest of times",
+  at which point is started to glow as if by magic.
+weight: 2
+value: unknown
+count: 1
+abilities:
+  - name: Light (bright)
+    description: The leather band of light sheds bright light in a 30ft sphere centered on yourself.
+    status:
+      - name: light
+        description: bright light shed in a 30ft sphere centered on yourself.
+        length: indefinite
+  - name: Light (penumbral)
+    description: The leather band of light sheds dark but illuminating light in a 30ft sphere centered on yourself.
+    status:
+      - name: light
+        description: dark but illuminating light shed in a 30ft sphere centered on yourself.
+        length: indefinite

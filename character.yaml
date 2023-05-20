@@ -16,436 +16,13 @@ info:
     Y̶e̶l̶l̶o̶w̶ Black eyes
     Low ears
 
-stats:
-  str: "12(base)"
-  dex: "16(base) + 2(tabaxi racial bonus) + 2(monk lvl 4 ASI) + 2*{hybrid_rat_form}(hybrid rat form)"
-  con: "15(base)"
-  int: "11(base) + 1(tabaxi racial bonus (relocated))"
-  wis: "14(base) + 1(shadow touched feat)"
-  cha: "7(base)"
 
-feats:
-  - name: Character
-    description: Base facts and resources for a DnD character
-    link: "#"
-    facts:
-      perception: "10 + wis(passive perception) + prof(passive perception)"
-
-    resources:
-      - name: action
-        pool: 1 + {haste}
-        regain:
-          amount: 999
-          "on": round
-      - name: bonus action
-        pool: 1
-        regain:
-          amount: 999
-          "on": round
-      - name: Spell Vocal
-        description: "Using voice for spell casting"
-        pool: 1
-        regain:
-          amount: 1
-          on: round
-      - name: Spell Somatic
-        description: "Using hand motions for spell casting"
-        pool: 1
-        regain:
-          amount: 1
-          on: round
-    # TODO: Add in the basic abilities: https://crobi.github.io/dnd5e-quickref/preview/quickref.html
-
-  - name: Tabaxi
-    link: http://dnd5e.wikidot.com/tabaxi
-    description: |-
-      Hailing from a strange and distant land, wandering tabaxi are catlike
-      humanoids driven by curiosity to collect interesting artifacts,
-      gather tales and stories, and lay eyes on all the world's wonders.
-      
-      Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long.
-      Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
-    proficiencies:
-      - type: skill
-        target: perception
-      - type: skill
-        target: nature
-
-    facts:
-      speed: 30(tabaxi) + {monk_bonus_speed}(monk speed)
-      climbing: 20(tabaxi)
-
-    abilities:
-      - name: Dark-Vision
-        description: >-
-          You have a cat's keen senses, especially in the dark.
-          You can see in dim light within 60 feet of you as if it were bright light,
-          and in darkness as if it were dim light.
-          You can't discern color in darkness, only shades of gray.
-      - name: Feline Agility
-        description: >-
-          Your reflexes and agility allow you to move with a burst of speed.
-          When you move on your tum in combat, you can double your speed until the end of the turn.
-          Once you use this trait, you can't use it again until you move 0 feet on one of your turns.
-      - name: Cat's Claws
-        description: >-
-          Because of your claws, you have a climbing speed of 20 feet.
-          In addition, your claws are natural weapons, which you can use to make unarmed strikes.
-          If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier,
-          instead of the bludgeoning damage normal for an unarmed strike.
-
-  - name: Acolyte
-    link: http://dnd5e.wikidot.com/background:acolyte
-    description: >-
-      You have spent your life in the service of a temple to a specific god or pantheon of gods.
-      You act as an intermediary between the realm of the holy and the mortal world,
-      performing sacred rites and offering sacrifices in order to conduct worshipers
-      into the presence of the divine.
-    proficiencies:
-      - type: skill
-        target: insight
-      - type: skill
-        target: religion
-    abilities:
-      - name: Shelter of the Faithful
-        description: >-
-          As an acolyte, you command the respect of those who share your faith,
-          and you can perform the religious ceremonies of your deity.
-          You and your adventuring companions can expect to receive free healing
-          and care at a temple, shrine, or other established presence of your faith,
-          though you must provide any material components needed for spells.
-          Those who share your religion will support you (but only you) at a modest lifestyle.
-
-          You might also have ties to a specific temple dedicated to your chosen deity or pantheon,
-          and you have a residence there. This could be the temple where you used to serve,
-          if you remain on good terms with it, or a temple where you have found a new home.
-          While near your temple, you can call upon the priests for assistance,
-          provided the assistance you ask for is not hazardous and you remain in
-          good standing with your temple.
-
-  - name: Unarmed Combat
-    link: http://dnd5e.wikidot.com/tabaxi
-    description: |-
-      Hailing from a strange and distant land, wandering tabaxi are catlike
-      humanoids driven by curiosity to collect interesting artifacts,
-      gather tales and stories, and lay eyes on all the world's wonders.
-
-      Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long.
-      Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
-    resources:
-      - name: Hands
-        pool: 2
-        regain:
-          amount: 2
-          "on": round
-    attacks:
-      - name: "Unarmed: Grapple"
-        resources:
-          hands: 1
-          action: 1
-        proficiency: unarmed
-        reach: "5"
-        attack_bonuses: "dex|str"
-        save:
-          dc: 8 + str + prof
-          stat: dex
-        status:
-          - name: Grappled
-            length: Until Broken
-            description: |-
-              While grappled, the opponent can use an action to try escaping.
-              They make a Strength (Athletics) or Dexterity (Acrobatics) check,
-              against this attacks save.
-        description: |-
-          The target is Grappled, and the grapple’s escape DC equals 8 + your Strength modifier + your Proficiency Bonus.
-          This grapple is possible only if the target is no more than one Size larger than you and if you have a hand free to grab the target.
-
-          - A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.
-          - The condition ends if the grappler is incapacitated (see the condition).
-          - The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect,
-            such as when a creature is hurled away by the thunder-wave spell.
-
-      - name: "Unarmed: Knock Prone"
-        proficiency: unarmed
-        resources:
-          hands: 1
-          action: 1
-        reach: "5 + 10{eldritch_maul}(eldritch maul)"
-        attack_bonuses: "dex|str"
-        damage:
-          bludgeoning: 0
-        damage_bonuses: 0
-        status:
-          - name: Prone
-            length: Until they stand up
-            description: |-
-              - A prone creature’s only movement option is to crawl, unless it stands up and thereby ends the condition.
-              - The creature has disadvantage on attack rolls.
-              - An attack roll against the creature has advantage if the attacker is within 5 feet of the creature.
-                Otherwise, the attack roll has disadvantage.
-
-      - name: "Unarmed: Punch with Fist"
-        proficiency: unarmed
-        resources:
-          hands: 1
-          action: 1
-        reach: "5 + 10{eldritch_maul}(eldritch maul)"
-        attack_bonuses: "dex|str"
-        damage:
-          bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-          force: "{eldritch_maul}d6(eldritch maul)"
-        damage_bonuses: "dex|str + 1(fist wraps)"
-
-      - name: "Unarmed: Slash with Fist and Claws"
-        proficiency: unarmed
-        resources:
-          hands: 1
-          action: 1
-        reach: "5 + 10{eldritch_maul}(eldritch maul)"
-        attack_bonuses: "dex|str"
-        damage:
-          slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-          force: "{eldritch_maul}d6(eldritch maul)"
-        damage_bonuses: "dex|str + 1(fist wraps)"
-
-      - name: "Unarmed: Kick with Foot"
-        proficiency: unarmed
-        resources:
-          action: 1
-        reach: "5 + 10{eldritch_maul}(eldritch maul)"
-        attack_bonuses: "dex|str"
-        damage:
-          bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-          force: "{eldritch_maul}d6(eldritch maul)"
-        damage_bonuses: "dex|str"
-
-      - name: "Unarmed: Slash with Foot Claws"
-        proficiency: unarmed
-        resources:
-          action: 1
-        reach: "5 + 10{eldritch_maul}(eldritch maul)"
-        attack_bonuses: "dex|str"
-        damage:
-          slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-          force: "{eldritch_maul}d6(eldritch maul)"
-        damage_bonuses: "dex|str"
+feats: []
 
   # FIXME: Add Shadow Touched
   # FIXME: Add the were rat block
 
-levels:
-  - class: Monk
-    level: 1
-    link: http://dnd5e.wikidot.com/monk
-    description: >-
-      Monks are united in their ability to magically harness the energy that flows in their bodies.
-      Whether channeled as a striking display of combat prowess or a subtler focus of
-      defensive ability and speed, this energy infuses all that a monk does.
-    hit_die: d8
-    hit_points: 8
-    facts:
-      martial_arts_dice: "d4"
-      armour_class: 10 + dex + wis + 2*{haste}
-    proficiencies:
-      - type: ability_save
-        target: str
-      - type: ability_save
-        target: dex
-      - type: skill
-        target: history
-      - type: skill
-        target: athletics
-      - type: equipment
-        target: cook's tools
-      - type: weapon
-        target: club
-      - type: weapon
-        target: dagger
-      - type: weapon
-        target: great club
-      - type: weapon
-        target: hand axe
-      - type: weapon
-        target: javelin
-      - type: weapon
-        target: light hammer
-      - type: weapon
-        target: mace
-      - type: weapon
-        target: quarterstaff
-      - type: weapon
-        target: sickle
-      - type: weapon
-        target: spear
-      - type: weapon
-        target: light crossbow
-      - type: weapon
-        target: dart
-      - type: weapon
-        target: short bow
-      - type: weapon
-        target: sling
-      - type: weapon
-        target: short sword
-      - type: weapon
-        target: unarmed
-    abilities:
-      - name: Unarmored Defense
-        description: >-
-          Beginning at 1st level, while you are wearing no armor and not wielding a shield,
-          your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
-      - name: Martial Arts
-        description: >-
-          At 1st level, your practice of martial arts gives you mastery of
-          combat styles that use unarmed strikes and monk weapons,
-          which are short-swords and any simple melee weapons that don't have
-          the two-handed or heavy property.
-    
-    
-          You gain the following benefits while you are unarmed or wielding
-          only monk weapons and you aren't wearing armor or wielding a shield:
-    
-           - You can use Dexterity instead of Strength for the attack and damage
-          rolls of your unarmed strikes and monk weapons.
-    
-           - You can roll you martial arts die in place of the normal damage of
-          your unarmed strike or monk weapon.
-    
-           - When you use the Attack action with an unarmed strike or a monk weapon
-          on your turn, you can make one unarmed strike as a bonus action.
-      - name: Dedicated Weapon
-        description: >-
-          Also at 2nd level, you train yourself to use a variety of weapons as monk weapons,
-          not just simple melee weapons and short-swords.
-          Whenever you finish a short or long rest, you can touch one weapon, focus your ki on it,
-          and then count that weapon as a monk weapon until you use this feature again.
-    
-          The chosen weapon must meet these criteria:
-          
-            - The weapon must be a simple or martial weapon.
-          
-            - You must be proficient with it.
-          
-            - It must lack the heavy and special properties.  
-
-  - class: Monk
-    level: 2
-    link: http://dnd5e.wikidot.com/monk
-    description: >-
-      Monks are united in their ability to magically harness the energy that flows in their bodies.
-      Whether channeled as a striking display of combat prowess or a subtler focus of
-      defensive ability and speed, this energy infuses all that a monk does.
-    hit_die: d8
-    hit_points: 5
-    resources:
-      - name: Ki
-        description: >-
-          Starting at 2nd level, your training allows you to harness the mystic energy of ki.
-          Your access to this energy is represented by a number of ki points.
-          Your monk level determines the number of points you have, as shown in the
-          Ki Points column of the Monk table.
-
-          You can spend these points to fuel various ki features.
-          You start knowing three such features: Flurry of Blows, Patient Defense,
-          and Step of the Wind.
-          You learn more ki features as you gain levels in this class.
-
-          When you spend a ki point, it is unavailable until you finish a short
-          or long rest, at the end of which you draw all of your expended ki back
-          into yourself.
-          You must spend at least 30 minutes of the rest meditating to regain your ki points.
-
-          Some of your ki features require your target to make a saving throw to
-          resist the feature's effects.
-        pool: "{monk}"
-        regain:
-          amount: "{monk}"
-          "on": short rest
-    facts:
-      monk_bonus_speed: 10
-      ki_save: "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
-    abilities:
-      - name: "Ki Power: Flurry of Blows"
-        description: >-
-          Immediately after you take the Attack action on your turn,
-          you can spend 1 ki point to make two unarmed strikes as a bonus action.
-        resources:
-          ki: 1
-          bonus action: 1
-      - name: "Ki Power: Patient Defense"
-        description: >-
-          You can spend 1 ki point to take the Dodge action as a
-          bonus action on your turn.
-        resources:
-          ki: 1
-          bonus action: 1
-      - name: "Ki Power: Step of the Wind"
-        description: >-
-          You can spend 1 ki point to take the Disengage or Dash action as a
-          bonus action on your turn, and your jump distance is doubled for the turn.
-        resources:
-          ki: 1
-          bonus action: 1
-
-  - class: monk
-    level: 3
-    hit_die: d8
-    hit_points: 5
-    proficiencies:
-      - type: skill
-        target: medicine
-      - type: equipment
-        target: herbalist's tools
-
-    abilities:
-      - name: "Ki Power: Hands of Healing"
-        resources:
-          ki: 1
-        dice_rolls:
-          healing: "1{martial die} + wis"
-        description: >-
-          At 3rd level, your mystical touch can mend wounds.
-          As an action, you can spend 1 ki point to touch a creature and restore a
-          number of hit points equal to a roll of your Martial Arts die + your
-          Wisdom modifier.
-
-          When you use your Flurry of Blows, you can replace one of the
-          unarmed strikes with a use of this feature without spending a ki point for the healing.
-      - name: "Ki Power: Hands of Harm"
-        dice: "1{martial die} + wis"
-        description: >-
-          At 3rd level, you use your ki to inflict wounds.
-          When you hit a creature with an unarmed strike,
-          you can spend 1 ki point to deal extra necrotic damage equal
-          to one roll of your Martial Arts die + your Wisdom modifier.
-          You can use this feature only once per turn.
-      - name: Deflect Missiles
-        source: Monk lvl3
-        dice: 1d10 + dex + {monk}
-        damage:
-          piercing: 1d10
-        damage_bonuses: dex + {monk}
-        description: >-
-          Starting at 3rd level, you can use your reaction to deflect or catch the
-          missile when you are hit by a ranged weapon attack.
-          When you do so, the damage you take from the attack is reduced by
-          1d10 + your Dexterity modifier + your monk level.
-
-          If you reduce the damage to 0, you can catch the missile if it is small
-          enough for you to hold in one hand and you have at least one hand free.
-          If you catch a missile in this way, you can spend 1 ki point to make a
-          ranged attack with a range of 20/60 using the weapon or piece of
-          ammunition you just caught, as part of the same reaction.
-          You make this attack with proficiency, regardless of your weapon
-          proficiencies, and the missile counts as a monk weapon for the attack.
-
-  - class: monk
-    level: 4
-    hit_die: d8
-    hit_points: 5
-    abilities: [] # TODO: Add lvl 4 class abilities
-
-    # TODO: Add lvl 5 monk abilities
+levels: []
 
 items:
   - name: Healing Potion
@@ -455,7 +32,7 @@ items:
       The number of hit points depends on the potion’s rarity,
       as shown in the Potions of Healing table.
       Whatever its potency, the potion’s red liquid glimmers when agitated.
-    count: 0
+    count: 1
     weight: 1
     value: 50gp
     resources:
@@ -476,232 +53,8 @@ items:
         dice_rolls:
           healing: 2d4 + 2
 
-  - name: Leather Band of Light
-    link: https://www.dndbeyond.com/magic-items/4983300-leather-band-of-light
-    description: >-
-      An old leather band, it surprisingly conforms to any part of your body that you chose to wrap it around.
-      Given to you by an elderly half-elf monk that has long since retired from
-      adventuring and taking up residence as the head of security of the holy site
-      in which you were raised.
-      
-      She gave this to you on the day you set out to join the monastery,
-      saying "may this simple band of leather always reflect your Inner Light in
-      both the brightest and darkest of times",
-      at which point is started to glow as if by magic.
-    weight: 2
-    value: unknown
-    count: 1
-    abilities:
-      - name: Light (bright)
-        description: The leather band of light sheds bright light in a 30ft sphere centered on yourself.
-        status:
-          - name: light
-            description: bright light shed in a 30ft sphere centered on yourself.
-            length: indefinite
-      - name: Light (penumbral)
-        description: The leather band of light sheds dark but illuminating light in a 30ft sphere centered on yourself.
-        status:
-          - name: light
-            description: dark but illuminating light shed in a 30ft sphere centered on yourself.
-            length: indefinite
-
-  - name: Quarterstaff
-    description: Simple versatile Melee Weapon
-    link: http://dnd5e.wikidot.com/weapons
-    weight: 4
-    value: 2sp
-    count: 1
-    attacks:
-      - name: Quarterstaff, 1-handed
-        description: ""
-        proficiency: quarterstaff
-        resources:
-          action: 1
-          hands: 1
-        reach: "5 + 10{eldritch_maul}(eldritch maul)"
-        attack_bonuses: str|dex
-        damage:
-          bludgeoning: 1d6
-        damage_bonuses: str|dex
-      - name: Quarterstaff, 2-handed
-        description: ""
-        proficiency: quarterstaff
-        resources:
-          action: 1
-          hands: 1
-        reach: "5 + 10{eldritch_maul}(eldritch maul)"
-        attack_bonuses: str|dex
-        damage:
-          bludgeoning: 1d8
-        damage_bonuses: str|dex
-
-  - name: Chakram
-    description: |
-      After striking, the Chakram ricochets off its target and returns to the user.
-    link: https://www.dndbeyond.com/magic-items/5768356-chakram
-    value: "0"
-    weight: 2
-    attacks:
-      - name: Chakram, Thrown
-        description: |
-          After striking, the Chakram ricochets off its target and returns to the user.
-          When thrown, the range of this weapon increases by 5 ft times your strength and/or your dexterity modifier(s) to a maximum of 60/100.  
-          On Hit, this weapon returns to the user as intended. On a miss, a DC 10 dex save is needed to catch this weapon.
-        proficiency: hand axe
-        resources:
-          action: 1
-        attack_bonuses: dex
-        range:
-            - "20+5*dex(dex modifier)+5*str(str modifier)"
-            - 100
-        damage:
-          slashing: 1d6
-        damage_bonuses: dex
-      - name: Chakram, Melee
-        proficiency: hand axe
-        resources:
-          action: 1
-        attack_bonuses: dex
-        reach: 5 + 10*{eldritch_maul}(Eldritch Maul)
-        damage:
-          slashing: 1d6
-        damage_bonuses: dex
-
-  - name: Light Crossbow
-    link: http://dnd5e.wikidot.com/weapons
-    description:
-      Simple ranged weapon, Ammunition, range (80/320), loading, two-handed
-    weight: 5
-    value: 25gp
-    count: 1
-    attacks:
-      - name: Crossbow Bolt
-        proficiency: light crossbow
-        range: [80, 320]
-        attack_bonuses: dex
-        resources:
-          action: 1
-          crossbow bolt: 1
-        damage:
-          piercing: 1d8
-        damage_bonuses: dex
-
-  - name: Elder Lead Mask
-    link: https://www.dndbeyond.com/magic-items/5842527-elder-leaf-mask
-    description: >
-      This item was crafted by Qelline Alderleaf for her husband before an unforeseen
-      hunting accident claimed his life. It is cut out of a single leaf of the
-      Elder tree in the grove she grew up in.
-    count: 1
-    value: "0"
-    weight: 1
-    abilities:
-      - name: Druidcraft
-        link: http://dnd5e.wikidot.com/spell:druidcraft
-        description: |-
-          Whispering to the spirits of nature, you create one of the following effects within range:
-
-           - You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.
-           - You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.
-           - You create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.
-           - You instantly light or snuff out a candle, a torch, or a small campfire.
-        resources:
-          action: 1
-          spell_vocal: 1
-          spell_somatic: 1
-        range: [30, 30]
-
-      - name: Ensaring Strike
-        link: http://dnd5e.wikidot.com/spell:ensnaring-strike
-        description: >-
-          Concentration, up to 1 minute
-    
-          The next time you hit a creature with a weapon attack before this spell ends,
-          a writhing mass of thorny vines appears at the point of impact,
-          and the target must succeed on a Strength saving throw or be restrained
-          by the magical vines until the spell ends.
-          A Large or larger creature has advantage on this saving throw.
-          If the target succeeds on the save, the vines shrivel away.
-    
-          While restrained by this spell, the target takes 1d6 piercing damage
-          at the start of each of its turns. A creature restrained by the vines
-          or one that can touch the creature can use its action to make a
-          Strength check against your spell save DC.
-          On a success, the target is freed.
-        resources:
-          bonus action: 1
-          ki point: 1
-          spell concentration: 1
-          spell_vocal: 1
-        duration: 1 minute
-        concentration: true
-        saves:
-          stat: str
-          dc: 8 + prod + wis
-        rolls:
-          damage: 1d6
-
-      - name: Spike Growth
-        link: http://dnd5e.wikidot.com/spell:spike-growth
-        description:
-          The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns.
-          The area becomes difficult terrain for the duration.
-          When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.
-          
-          The transformation of the ground is camouflaged to look natural.
-          Any creature that can't see the area at the time the spell is cast
-          must make a Wisdom (Perception) check against your spell save DC to
-          recognize the terrain as hazardous before entering it.
-        range: [ 150, 150 ]
-        saves:
-          skill: perception
-          dc: 8 + prod + wis
-
-  - name: Wand of Magic Missile Darts
-    description: >-
-      This wand has 3 charges.
-      While holding it, you can use an action to cast the magic missile dart spell from it.
-      When you expend 1 of its charges you instead cast the magic missile spell from it.
-      
-      The wand regains 1d4-1 expended charges daily at dawn.
-      If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
-    weight: 1
-    value: unknown
-    resources:
-      - name: Magic Missile Wand Charges
-        description: >-
-          This wand has 3 charges.
-          While holding it, you can use an action to cast the magic missile dart spell from it.
-          When you expend 1 of its charges you instead cast the magic missile spell from it.
-          
-          The wand regains 1d4-1 expended charges daily at dawn.
-          If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
-        pool: 3
-        regain:
-          "on": dawn
-          amount: 1d4-1
-    attacks:
-      - name: Magic Missile Dart
-        proficiency: none
-        range: [ 120, 120 ]
-        attack_bonuses: 1000
-        resources:
-          action: 1
-          hands: 1
-        damage:
-          force: 1d4
-        damage_bonuses: 1
-      - name: Magic Missile
-        proficiency: none
-        range: [ 120, 120 ]
-        attack_bonuses: 1000
-        resources:
-          action: 1
-          hands: 1
-          magic_missile_wand_charge: 1
-        damage:
-          force: 1d4
-        damage_bonuses: 1
+# TODO: "20sp, 9cp"
+# TODO: "Herbs and Ingredients, 72gp worth"
 
 
 backstory:
@@ -1158,7 +511,7 @@ backstory:
 
     At the farm, an older halfling is running the farm Qelline Alderleaf.
 
-    Light trauma dumps, and gets a referral to Reidoth, who is inspected the ruins of Thundertree, some tea, and adorable flowers behind the ears.
+    Light trauma dumps, and gets a referral to Reidoth, who inspected the ruins of Thundertree, some tea, and adorable flowers behind the ears.
     
     Qelline has a child called Carp (potat!!).
 
@@ -1195,7 +548,7 @@ backstory:
     Flying is cheating. How is Light meant to punch something that is flying?
     Making Light purple is cheating. Light has a clear, well-defined colour scheme. If you cast faerie fire on Light, it should be yellow.
 
-    "Welcome to taking damage! I know this is a new experience for you!" -- Randus to Eldre.
+    "Welcome to taking damage! I know this is a new experience for you!" -- Randus to Zvothur.
 
     A critical bonk occurred, followed by a critical bolt (which took out our flying friend).
 
@@ -1235,7 +588,7 @@ backstory:
   "Session Log – Session 12 (The Fading, 12th/13th)": |
     We start digging a grave.
 
-    Light takes a visit to the inn to tell Toblin about the attack to their property, and is dispatched to visit the woodworker (Thel Dendrar) to get some repairs. He's entertaining when we arrive, and the door is answered by Mirna (possibly wife?). Thel comes out with a very pretty Tiefling (Eldre's new character Narthian) who seems to be visiting.
+    Light takes a visit to the inn to tell Toblin about the attack to their property, and is dispatched to visit the woodworker (Thel Dendrar) to get some repairs. He's entertaining when we arrive, and the door is answered by Mirna (possibly wife?). Thel comes out with a very pretty Tiefling (Zvothur's new character Narthian) who seems to be visiting.
 
     Meanwhile, Landan discusses gods with Daran at the Orchard. Daran learns of Landan's god problem.
 
@@ -1365,7 +718,7 @@ backstory:
     The north of the western pair of doors goes to a small dorm/barracks (vacated), and the southern one opens...onto a underground crevice. We explore, and find...Thel's body. Oh now, we have a dark elf impostor! With magic and some kind of beast(s). It's also doing a lot of psychic attacks to  We leap into action (very slowly).
     It's friends are Nothics! https://media-waterdeep.cursecdn.com/avatars/thumbnails/14/475/1000/1000/636364321398842272.png
 
-    We get covered in magical darkness. Glint immidately gets distracted by a treasure chest and falling off things again. Light makes a daring leap across the chasm in order to...ok, look, it made sense at the time. The rest of the party uses their turns much more sensibly, including Narthian actually dealing damage. The darkness dropes at the end of the round, leaving just the Nothic visible.
+    We get covered in magical darkness. Glint immediately gets distracted by a treasure chest and falling off things again. Light makes a daring leap across the chasm in order to...ok, look, it made sense at the time. The rest of the party uses their turns much more sensibly, including Narthian actually dealing damage. The darkness dropes at the end of the round, leaving just the Nothic visible.
 
     "Ah, where was I...right, I was looking at fun spells to screw with you" -- Randus
 
@@ -1384,10 +737,10 @@ backstory:
 
     The tomb room has some more box text; the pillars have oak design on the bottoms, and the other sides of the double Angel doors. This is a family crypt, with generic angels for the family of many religions. Narthian checks the graves and lo and behold _doesn't loot them_.
 
-    Glint has gone for the remaining door, which appears to be where the wimpering was coming from. Showing an amazing amount of sense, she sends a silent image through the door, and Light *attempts* to react to the two swords swinging down by throwing a Chakram...and ends up last in initiative. Narthian gets off a clean shot, and they find out that stabbing Glint ends in a firey hellish rebuke death.
+    Glint has gone for the remaining door, which appears to be where the whimpering was coming from. Showing an amazing amount of sense, she sends a silent image through the door, and Light *attempts* to react to the two swords swinging down by throwing a Chakram...and ends up last in initiative. Narthian gets off a clean shot, and they find out that stabbing Glint ends in a firey hellish rebuke death.
 
     We have found prisoners! In actual cells! Hey, if we'd known there are cells here, we could have saved money on those manacles if we knew this was here. The second person surrenders _successfully_, and gets manacled.
-    Inside the (straw lined, toiletless) cells do contain Thel's family, and Light manages to use some basic leverage principles to open the cells. Also, the fiend appearantly doesn't attack people in cloaks (and some of the traps will also not be triggered). We all acquire cloaks, and Narthian escorts the family and the prisoner to orchard.
+    Inside the (straw lined, toilet-less) cells do contain Thel's family, and Light manages to use some basic leverage principles to open the cells. Also, the fiend appearantly doesn't attack people in cloaks (and some of the traps will also not be triggered). We all acquire cloaks, and Narthian escorts the family and the prisoner to orchard.
 
     People:
       - Guys out front
@@ -1567,7 +920,7 @@ backstory:
     - Arriving at the ranch, we find...honestly a lovely map. I really like this.
     - As we approach with some mount of stealth using the Corn fields and orchards as cover, we find large numbers of loose pigs.
     - The barn, burnt, contains the remains of...some kind. Are they human, or are they dancer? But there's 7 of them.
-    - We proceed towards the main house, to find a party going on. On the ground floor there are two drunk orcs, who were scouted by a Light who went invisible. They didn't realise that casting a spell broke that, and used druidcraft to indicate the presence of hostiles
+    - We proceed towards the main house, to find a party going on. On the ground floor there are two drunk orcs, who were scouted by a Light who went invisible. They didn't realise that casting a spell broke that, and used druid craft to indicate the presence of hostiles
     - We flank around the building, and find the cellar storm door. We descend down to fine Al being worked over by an orc. We resume him with some amount of effectiveness!
     - The raid to clear the house begins. Light and Faelar catch on fire.
     - We pick up some Mithril Chain Mail, which is not of use to the party, but might be convertible to a chain shirt which is of use.
@@ -1614,16 +967,148 @@ backstory:
 
     Overall haul from the cave: 10 lumps of gold, so resellable weapons, a couple of potions, dwarven spiked mail, a glass bow, a ring of keys, 5 starving dwarves, a Don Jon, and some loose gold.
 
-  "Session Log – Session 26 (The Fading, 21th)": |
-    nya.
-    "what's that 
+  "Session Log – Session 26 (The Fading, 21st/22nd/23rd)": >
+    The were-rat-ening commences:
+      - Faelar: brand-new fangs
+      - Merric: bigger fluffier ears
+      - Light: rat nose with extra whiskers 
+    
+    Glint is the one to notice, and encourages us to all look at our reflections (and also plucks one of Light's new whiskers).
+    
+    We work out pretty quickly that we're probably were-rats. An attempt is made to identify the potions, but it fails.
+    
+    We return to town; Narthian leaves us at the woodworkers, now relabelled as the "Herbalism Shop", as we proceed to Alderleaf Farm.
+    And this time we don't even traumatise any kids (Nars from down the road is actually over playing with Carp!).
+    
+    Asides: Glint appears to staring at random things. I wonder what that is about.
+    
+    The overall status of is: in need of much sleep and food. Bram and Glint take them off to the inn whilst the rest of
+    us get checked over ourselves by Qelline. She examines the bite marks, especially Merric's with the extra tattooing.
+    She recommended not letting people know lest they become hostile, and also notes that Mirna is the best person in
+    town to ask -- her parents are rumoured to have worked on a similar condition, but depending on
+    the version of the story either succeeded 
+    
+    As Bram and Glint return, Glint returns with magic items --
+    [a key that can open any lock](http://dnd5e.wikidot.com/wondrous-items:mystery-key),
+    [a pair of goggles that allow night vision](http://dnd5e.wikidot.com/wondrous-items:goggles-of-night),
+    and a [silver needle that allows someone to project their melee attacks](http://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo).
+    Bram has also stopped by the smithy to ask about the spiked
+    horse shoes, and was trying to be up-sold a battle scythe.
+    
+    The options for the gold bell are discussed -- the consensus is that trying to sell it outright
+    in town is a _bad_ idea, but smelting it down here would likely be an advantage.
+    Otherwise we need to transport it to somewhere like Neverwinter.
+    
+    We proceed to the town master's hall in order to hand in the transportation of Don Jon,
+    the quest board has been updated. We hand in the butter skull and the writ from Don Jon.
+    200gp get, added to party funds. The town master is also seeming a lot more confident,
+    and much more...in charge?
+    
+    We head north in the town, with Faelar heading to the provisioners, where he learns that
+    none of the spell components he wants are available, and Barthen isn't an actual full
+    on Wizard. The bow is identified at the standard price of 10gp, and it's a nice magic
+    glass short bow.
+    
+    At the smithy we find that he doesn't deal with armour that much, especially mithril;
+    instead it is recommended that we go the Lionshield Coster for that.
+    The matter of the gold bell is raised -- we consider having it melted down into ingots,
+    but it turns out in the end that we can just get it melted down for cash right now
+    to keep things simple.
 
+    The providence of the bell gets slightly raised, but it turns out the smith has heard
+    the story town that melted down their gold to hide it from the orcs.
+    "if it was me, I would have given the orcs the gold and try to run" he says;
+    "the orcs we have encountered haven't been the most reasonable", Merric replies.
+    
+    We settle on a deal for 2500gp for the bell to be melted down by the smithy,
+    which works out to about a 10% handling fee, which isn't too bad.
+    
+    As we re-cross town, we see a small white dragonborn girl (child) heading into the inn.
+    A new visitor to the town, who is very young -- she's still smaller than Merric.
+    
+    As the Coster, we see Linene and the end of the silvering deal (we kind of missed
+    the boat on that). She is very excited (and suddenly not "just closing up the shop")
+    when she hears we are looking to sell some mithril chain mail.
+    Problems occur when we are asked for price -- Light has no idea, nor does anyone
+    else in the party.
+    Faelar has an interesting moment of failed negotiations -- I'm not actually sure
+    if she thinks we're low balling or high balling her. We settle in the end to sell
+    if for 375gp.
+
+    A smaller sub-party goes into the miner's exchange -- fewer were rats to be seen.
+    Inside Merric is introduced to the wonderful of selling ores. We get 100gp
+    (in the form of 10 platinum). Merric takes a moment to look around and see if
+    there's anyone or anything shady going on.
+
+    As we return the the freshly minted herbalist Mirna, we spot Narthian heading
+    out of town. We knock on the door, and get invited in as Mirna notices that
+    something is wrong. Nars is sent up to bed as we fill in Mirna. Glint realises
+    for the first time that we might be infectious, and gets slightly agitated.
+    Bram takes her to catch up with Droop.
+    
+    Mirna reports that she just about remembers her parents attempting to cure
+    lycanthropy, it appearing to work, but the patient croaking the next morning.
+    Also something about "drinking being better than sleeping" -- hopefully not blood.
+    
+    Droop is still in charge.
+    
+    As we head back toward the inn, Faelar peels off to return to Sister Garaele's
+    home, wherein he finds a brown paper package tied up with string, and a note
+    that...was not read out. But Faelar opens it up and finds inside the box
+    a jewelled comb, a map from the ruins of Conyberry to a location a short
+    distance into the Neverwinter Wood, and a smaller box with five sheets
+    of paper with margin notes, which are some kind of magical item.
+
+    In the inn, Milsa is running taking orders, but immediately aims us to a
+    table without neighbours. The little dragonborn girl and an older white
+    dragon-born who is packing up a lead box in a closet.
+    We move to the designated table.
+    
+    Little dragon born is called Merry -- were at Falcon's Hunting Lodge.
+    Left because of a dragon attack, eating one of the guards. Information
+    is from the little girl, so may not be the most accurate.
+    The parent is called "The Lady of Frost" by Milsa, and is known by
+    Merric to be a travelling merchant of sorts. She's going to be running
+    a shop out of inn. Her daughter is adorable
+    
+    There was an old drunk tiefling, talking about goblin raids on the
+    Triboar trail -- probably out of Cragmaw Castle.
+    
+    We have food, we relax, and we turn in for the night.
+
+    Morning routines are pretty standard -- Light is praying for guidance,
+    understanding, and health; Merric writes a letter home; breakfast is
+    consumed. The dragonborn shop opens up and Faelar discovers is she
+    sells scrolls, finally...still not allowing him to acquire identify
+    as she doesn't have it stock.
+    
+    As we head down to Mirna's, we see Droop heading off toward Adabra's
+    (probably where Narthian is as well). She invites us in, where we find
+    a number of services and very convenient piles like "everything you need
+    to cast find familiar". A lot of the services seem to be anything that
+    might be able to bring in a few coins.
+    
+    The notes were located, and written up for us. We are asked to write
+    down any information on how it goes.
+
+    - Blood, our own, that's easy
+    - Nightshade -- if we can collect 10gp, we can have the rest all grown in 3--4 days. Faelar has 25gp of powered night shade.
+    - Rare Oils and Unguents -- we can get 25% off from Mirna.
+    - 100gp of wolfsbane...we need somewhere dark and bloody...
+    - Divine Blessing -- Bram was blessed by being touching the shrine, but only for 12 hours after the first touch. That's 2 definitely sorted. 
+
+    We finally trade off the manticore spikes and find out that the vials, which
+    are identified as being carrion crawler mucus, a very dangerous poison.
+    Sold the spikes for 60gp, acquired 3 health potions for 150gp.
+
+# TODO: Write a sending message to Landan
+
+# TODO: Add new dragonborn friends to the NPC spreadsheet
+# TODO: Write up the cure in the notes
+# TODO: Add Vajra Safahr as the Blackstaff to the NPC spreadsheet
 
 quest-lines:
-  active:
-    - Return the injured miners to Phandalin
-    - Seek a cure for were-rat lycanthropy
-    - Quietly melt down the giant gold bell
+  active: []
   open:
     # Backstory
     - Recover Landan (Landan's backstory)
@@ -1637,19 +1122,39 @@ quest-lines:
     - Take down the people in Cragmaw Castle
     - Track down the dwarf Durgen Rockseeker
     - Find the magic forge in Wave Echo Cave
+    # Cure for lycanthropy
+    - Gather 10gp of nightshade
+    - Grow the other 300gp of nightshade (with help of Mirna)
+    - Acquire 100gp of wolfsbane
+    - Look for supplies in Thundertree's ruins
+    - Work out divine blessings.
+    # Misc.
+    - Freeing slaves captured by the Red Bands
+    - Solve the question of Sister Garaele
     - Investigate the Old Owl Well area, drive off anyone trying to exhume a Lich
+  available:
+    # Commerce
+    - Identify and sell (perhaps) the spiked armour
     # Misc.
     - Dwarven Excavation Quest Board Mission
     - Resupply the logging camp Quest Board Mission
-    - Freeing slaves captured by the Red Bands
-    - Solve the question of Sister Garaele
-    - Offload the manticore spikes to Mirna
+    # TODO: Add the new quest board quests
   complete:
     - Clean out the Red Bands
     - Recover Landan's stolen book
-    - Escort owner to Mountain's Toe Gold Mine
+    # Support Big Al Quest Board Mission
     - Support Big Al Quest Board Mission
+    - Turn in the butter skull
+    # Escort owner to Mountain's Toe Gold Mine
+    - Escort owner to Mountain's Toe Gold Mine
     - Rehome the were-rat colony
+    - Return the injured miners to Phandalin
+    - Confirm Don Jon via writ.
+    # Cure for lycanthropy
+    - Seek a cure for were-rat lycanthropy
+    - Offload the manticore spikes to Mirna
+    # Misc
+    - Quietly melt down the giant gold bell
 
 worries:
   - Being overseen on the town green.
@@ -1667,35 +1172,3 @@ worries:
   - This entire raider group seeming Not Right
   - Landan's off camera rolls.
   - Randus rolling 6d8+6 three times.
-
-#inventory:
-#  - "20sp, 9cp"
-#  - "[3lb] Common Clothes, Hooded"
-#  - "[7lb] Bedroll"
-#  - "[5lb] Waterskin"
-#
-#  - "Fist Wraps|https://www.dndbeyond.com/magic-items/6568025-fist-wraps"
-#
-#
-#  - "[5lb] Backpack"
-#  - "[18lb] Rations (9)"
-#  - "4 pieces of jerky"
-#  - "[4lb] Torches (4)"
-#  - "[8lb] Cook's Utensils|https://tea-cats.co.uk/dnd/cooks-tools.txt"
-#  - "[3lb] Herbalism Kit|https://tea-cats.co.uk/dnd/herbalism-kit.txt"
-#  - "[1lb] Tinderbox"
-#  - "[5lb] Crowbar"
-#  - "[3lb] Hammer"
-#  - "[2lb] Pitons (8)"
-#  - "[3lb] Rope of Climbing|https://roll20.net/compendium/dnd5e/Rope%20of%20Climbing"
-#  - "[1lb] Amulet of Eldath"
-#  - "[5lb] Prayer book of Eldath"
-#  - "[4lb] Grappling hook"
-#  - "[2lb] Pole of Collapsing|http://dnd5e.wikidot.com/wondrous-items:pole-of-collapsing"
-#
-#  - "Herbs and Ingredients, 62gp worth"
-#  - "Manticore Spikes (3)"
-#
-#  - "Journal of Forms"
-#  - "Herbalism 101"
-#  - "Herbalism 102"
