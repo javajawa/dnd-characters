@@ -21,7 +21,7 @@ resources:
     pool: 1
     regain:
       amount: 1
-      on: long rest
+      every: long rest
 
 abilities:
   - name: Invisibility
@@ -36,6 +36,7 @@ abilities:
       shadow touched spell slot: 1
       spell vocal: 1
       spell somatic: 1
+      spell concentration: 1
 
     status:
       - name: invisible

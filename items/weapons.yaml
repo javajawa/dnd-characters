@@ -1,6 +1,17 @@
 $schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
 
-# TODO: "Fist Wraps|https://www.dndbeyond.com/magic-items/6568025-fist-wraps"
+name: Fist Wraps
+link: https://www.dndbeyond.com/magic-items/6568025-fist-wraps
+description: |
+  A set of leather bands with rivets inserted into them, designed to be wrapped around the user's fists.
+  Unarmed strikes made with a free hand, deal an additional +1 damage.
+  This is not treated as a magical item or effect.
+weight: 1
+value: unknown
+facts:
+  fist wraps: 1
+
+---
 
 name: Quarterstaff
 description: Simple versatile Melee Weapon
@@ -55,7 +66,36 @@ attacks:
       piercing: 1d8
     damage_bonuses: dex
 
-# TODO: - Silvered Dagger.
+---
+
+name: Silvered Dagger
+link: http://dnd5e.wikidot.com/weapons
+description: A simple dagger, with silver edging. Finesse, light, thrown (20/60)
+weight: 1
+value: 20gp (guess)
+
+attacks:
+  - name: Dagger, Thrown
+    proficiency: dagger
+    resources:
+      action: 1
+    attack_bonuses: str|dex
+    range:
+        - 20
+        - 60
+    damage:
+      piercing: 1d4
+    damage_bonuses: str|dex
+  - name: Dagger, Melee
+    proficiency: dagger
+    resources:
+      action: 1
+    attack_bonuses: str|dex
+    reach: 5 + 10*{eldritch_maul}(Eldritch Maul)
+    damage:
+      piercing: 1d4
+      force: "{eldritch_maul}d6"
+    damage_bonuses: str|dex
 
 ---
 

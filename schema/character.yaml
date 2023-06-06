@@ -149,11 +149,11 @@ definitions:
       attacks:
         type: array
         items:
-          - $ref: "#/definitions/Attack"
+          $ref: "#/definitions/Attack"
       abilities:
         type: array
         items:
-          - $ref: "#/definitions/Ability"
+          $ref: "#/definitions/Ability"
 
   Item:
     type: object
@@ -249,11 +249,11 @@ definitions:
         additionalProperties: false
         required:
           - amount
-          - "on"
+          - every
         properties:
           amount:
             $ref: "#/definitions/Value"
-          "on":
+          every:
             type: string
             enum:
               - round
@@ -331,6 +331,8 @@ definitions:
         $ref: "#/definitions/Value"
       range:
         type: array
+        minItems: 2
+        maxItems: 2
         items:
           - $ref: "#/definitions/Value"
           - $ref: "#/definitions/Value"
@@ -359,6 +361,8 @@ definitions:
         properties:
           stat:
             $ref: "#/definitions/Stat"
+          skill:
+            type: string
           dc:
             $ref: "#/definitions/Value"
       status:
@@ -409,6 +413,8 @@ definitions:
         properties:
           stat:
             $ref: "#/definitions/Stat"
+          skill:
+            type: string
           dc:
             $ref: "#/definitions/Value"
       status:

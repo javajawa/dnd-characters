@@ -1,7 +1,7 @@
 .PHONY: all
 
-all: character.json schema.json
+all: site/character.json
 	true
 
-%.json: %.yaml
+site/character.json: character.yaml $(wildcard items/*.yaml) $(wildcard feats/*.yaml) $(wildcard levels/*.yaml)
 	python3 ./convert.py $<

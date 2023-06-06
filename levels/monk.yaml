@@ -128,7 +128,7 @@ resources:
     pool: "{monk}"
     regain:
       amount: "{monk}"
-      "on": short rest
+      every: short rest
 facts:
   monk_bonus_speed: 10
   ki_save: "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
@@ -180,7 +180,7 @@ abilities:
     resources:
       ki: 1
     dice_rolls:
-      healing: "1{martial die} + wis"
+      healing: "1{martial_arts_die} + wis"
 
   - name: "Hands of Harm"
     description: >-
@@ -192,14 +192,9 @@ abilities:
     resources:
       ki: 1
     dice_rolls:
-      Damage: "1{martial die} + wis"
+      Damage: "1{martial_arts_die} + wis"
 
   - name: Deflect Missiles
-    source: Monk lvl3
-    dice: 1d10 + dex + {monk}
-    damage:
-      piercing: 1d10
-    damage_bonuses: dex + {monk}
     description: >-
       Starting at 3rd level, you can use your reaction to deflect or catch the
       missile when you are hit by a ranged weapon attack.
@@ -213,6 +208,14 @@ abilities:
       ammunition you just caught, as part of the same reaction.
       You make this attack with proficiency, regardless of your weapon
       proficiencies, and the missile counts as a monk weapon for the attack.
+    dice_rolls:
+      damage_reduction: 1d10 + dex + {monk}
+
+  - name: Ki-Fueled Attack
+    description: >-
+      Also at 3rd level, if you spend 1 ki point or more as part of your action on your turn,
+      you can make one attack with an unarmed strike or a monk weapon as a bonus
+      action before the end of the turn.
 
 ---
 
@@ -224,13 +227,59 @@ hit_points: 5
 stats:
   dex: "2(monk lvl4 ASI)"
 
-# TODO: Add lvl 4 monk abilities
+abilities:
+  - name: Slow Fall
+    link: http://dnd5e.wikidot.com/monk#toc13
+    description: >-
+      Beginning at 4th level, you can use your reaction when you fall to reduce
+      any falling damage you take by an amount equal to five times your monk level.
+  - name: Quickened Healing
+    link: http://dnd5e.wikidot.com/monk#toc14
+    description: >-
+      Also at 4th level, as an action, you can spend 2 ki points and roll a Martial Arts die.
+      You regain a number of hit points equal to the number rolled plus your proficiency bonus.
+    resources:
+      action: 1
+      ki: 2
+    dice_rolls:
+      healing: 1{martial_arts_die} + prof
 
 ---
 
 class: Monk
-level: 4
+level: 5
 hit_die: d8
 hit_points: 5
 
-# TODO: Add lvl 5 monk abilities
+abilities:
+  - name: Extra Attack
+    description: >-
+      Beginning at 5th level, you can attack twice, instead of once,
+      whenever you take the Attack action on your turn.
+
+  - name: Stunning Strike
+    description: >-
+      Starting at 5th level, you can interfere with the flow of ki in an opponent's body.
+      When you hit another creature with a melee weapon attack, you can spend 1 ki point
+      to attempt a stunning strike.
+      The target must succeed on a Constitution saving throw or be stunned until the
+      end of your next turn.
+    save:
+      stat: con
+      dc: 8 + prof + wis
+    status:
+      - name: Stunned
+        description: >-
+          A stunned creature is incapacitated (can't take actions or reactions),
+          can’t move, and can speak only falteringly.
+          The creature automatically fails Strength and Dexterity saving throws.
+          Attack rolls against the creature have advantage.
+        length: end of next turn
+
+  - name: Focused Aim
+    description: >-
+      Also at 5th level, when you miss with an attack roll,
+      you can spend 1 to 3 ki points to increase your attack roll by 2 for
+      each of these ki points you spend, potentially turning the miss into a hit.
+    resources:
+      ki: 1

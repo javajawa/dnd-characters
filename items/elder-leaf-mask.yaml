@@ -47,12 +47,19 @@ abilities:
       ki point: 1
       spell concentration: 1
       spell_vocal: 1
-    duration: 1 minute
-    concentration: true
-    saves:
+    save:
       stat: str
-      dc: 8 + prod + wis
-    rolls:
+      dc: 8 + prof + wis
+    status:
+      - name: ensaring strike
+        description: >-
+          The next time you hit a creature with a weapon attack before this spell ends,
+          a writhing mass of thorny vines appears at the point of impact,
+          and the target must succeed on a Strength saving throw or be restrained
+          by the magical vines until the spell ends.
+        length: 1 minutes
+
+    dice_rolls:
       damage: 1d6
 
   - name: Spike Growth
@@ -67,6 +74,7 @@ abilities:
       must make a Wisdom (Perception) check against your spell save DC to
       recognize the terrain as hazardous before entering it.
     range: [ 150, 150 ]
-    saves:
+    save:
+      stat: wis
       skill: perception
-      dc: 8 + prod + wis
+      dc: 8 + prof + wis

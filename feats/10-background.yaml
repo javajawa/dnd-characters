@@ -18,26 +18,59 @@ resources:
     pool: 1 + {haste}
     regain:
       amount: 999
-      "on": round
+      every: round
   - name: bonus action
     pool: 1
     regain:
       amount: 999
-      "on": round
+      every: round
   - name: Spell Vocal
     description: "Using voice for spell casting"
     pool: 1
     regain:
       amount: 1
-      on: round
+      every: round
   - name: Spell Somatic
     description: "Using hand motions for spell casting"
     pool: 1
     regain:
       amount: 1
-      on: round
+      every: round
 
-# TODO: Add in the basic abilities: https://crobi.github.io/dnd5e-quickref/preview/quickref.html
+abilities:
+  - name: Movement Abilities
+    link: https://crobi.github.io/dnd5e-quickref/preview/quickref.html
+    description: |-
+      You can move at any time during your turn (before, after, or during actions).
+
+      Move        Cost: 5ft per 5ft
+      Climb       Cost: 10ft per 5ft
+      Swim        Cost: 10ft per 5ft
+      Drop prone  Cost: 0ft
+      Crawl       Cost: 10ft per 5ft
+      Stand up    Cost: half movement speed
+      High jump   Cost: 5ft per 5ft
+      Long jump   Cost: 5ft per 5ft
+      Improvise   Any stunt not on this list
+  - name: Basic Actions
+    link: https://crobi.github.io/dnd5e-quickref/preview/quickref.html
+    description: |-
+      You can also interact with one object or feature of the environment for free.
+
+      Attack      Melee or ranged attack
+      Grapple     Special melee attack
+      Shove       Special melee attack
+      Cast Spell  Cast time of 1 action
+      Dash        Double movement speed
+      Disengage   Prevent opportunity attacks
+      Dodge       Increase defenses
+      Escape      Escape a grapple
+      Help        Grant an ally advantage
+      Use Object  Interact, use special abilities
+      Use shield  Equip or unequip a shield
+      Ready       Choose trigger and action
+      Hide
+      Search
 
 ---
 

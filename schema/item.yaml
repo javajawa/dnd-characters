@@ -44,11 +44,11 @@ properties:
   attacks:
     type: array
     items:
-      - $ref: "#/definitions/Attack"
+      $ref: "#/definitions/Attack"
   abilities:
     type: array
     items:
-      - $ref: "#/definitions/Ability"
+      $ref: "#/definitions/Ability"
 
 
 definitions:
@@ -94,11 +94,11 @@ definitions:
         additionalProperties: false
         required:
           - amount
-          - "on"
+          - every
         properties:
           amount:
             $ref: "#/definitions/Value"
-          "on":
+          every:
             type: string
             enum:
               - round

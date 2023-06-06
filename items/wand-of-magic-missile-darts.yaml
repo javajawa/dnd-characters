@@ -21,7 +21,7 @@ resources:
       If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
     pool: 3
     regain:
-      "on": dawn
+      every: dawn
       amount: 1d4-1
 attacks:
   - name: Magic Missile Dart

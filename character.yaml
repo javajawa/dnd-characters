@@ -16,12 +16,7 @@ info:
     Y̶e̶l̶l̶o̶w̶ Black eyes
     Low ears
 
-
 feats: []
-
-  # FIXME: Add Shadow Touched
-  # FIXME: Add the were rat block
-
 levels: []
 
 items:
@@ -37,11 +32,11 @@ items:
     value: 50gp
     resources:
       - name: Healing Potion
-        description: Healing pots avaialable
+        description: Healing pots available
         pool: "{count}"
         regain:
           amount: 0
-          "on": dawn
+          every: dawn
 
     abilities:
       - name: Drink Healing Potion
@@ -53,8 +48,15 @@ items:
         dice_rolls:
           healing: 2d4 + 2
 
-# TODO: "20sp, 9cp"
-# TODO: "Herbs and Ingredients, 72gp worth"
+  - name: Money
+    description: Cash cash cash
+    weight: 1
+    value: 20sp, 9cp
+
+  - name: Herbs and Ingredients
+    description: Things wot light found
+    weight: 1
+    value: 72gp
 
 
 backstory:
@@ -992,8 +994,10 @@ backstory:
     [a key that can open any lock](http://dnd5e.wikidot.com/wondrous-items:mystery-key),
     [a pair of goggles that allow night vision](http://dnd5e.wikidot.com/wondrous-items:goggles-of-night),
     and a [silver needle that allows someone to project their melee attacks](http://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo).
+    
     Bram has also stopped by the smithy to ask about the spiked
     horse shoes, and was trying to be up-sold a battle scythe.
+    The shoes will be ready in about a ten-day (so top of the next month). 
     
     The options for the gold bell are discussed -- the consensus is that trying to sell it outright
     in town is a _bad_ idea, but smelting it down here would likely be an advantage.
@@ -1064,12 +1068,12 @@ backstory:
     dragon-born who is packing up a lead box in a closet.
     We move to the designated table.
     
-    Little dragon born is called Merry -- were at Falcon's Hunting Lodge.
+    Little dragon born is called Mary -- were at Falcon's Hunting Lodge.
     Left because of a dragon attack, eating one of the guards. Information
     is from the little girl, so may not be the most accurate.
     The parent is called "The Lady of Frost" by Milsa, and is known by
     Merric to be a travelling merchant of sorts. She's going to be running
-    a shop out of inn. Her daughter is adorable
+    a shop out of inn. Her daughter is adorable.
     
     There was an old drunk tiefling, talking about goblin raids on the
     Triboar trail -- probably out of Cragmaw Castle.
@@ -1088,30 +1092,153 @@ backstory:
     to cast find familiar". A lot of the services seem to be anything that
     might be able to bring in a few coins.
     
-    The notes were located, and written up for us. We are asked to write
-    down any information on how it goes.
+    The notes were located, and written up for us. We are asked to record
+    how it goes and bring all the information back to Mirna, which we
+    agree to do.
+    
+    > A rich merchant from the ten towns up north came to us claiming to have
+    > been bitten by a werewolf and wishing for us to fix him.
+    > After some studying of his wound and condition we've decide to take the case.
+    > As a precaution on nights of the full moon, we chain him to his bed with
+    > silver Manacles...after some testing, it appears that the "remove curse spell"
+    > will suppress the effects and traits of the curse for 24 hours,
+    > however it leaves the recipient feeling tired.
+    > After some time I sought some advice from a Wizard friend of mine of he
+    > mentioned that the "Wish" spell could probably do the trick as it's limited
+    > only by the imagination...
+    
+    > Potion attempt 34 (the formula is the same as attempt 13, but I'm running out
+    > of ideas so this time we are trying it without 1st casting "remove curse"
+    >
+    > IT WORKED, it really worked, the patient appears to be extremely exhausted
+    > from the process so I recommended he go straight to bed and rest,
+    > but he insisted on celebrating. Come to find out he died this next morning.
+    > After listening to my pleas the town master let me examine the body before
+    > he was sent home for interment.
+    >
+    > I've copied what I believe to be the successful formula below with some notes
+    > on my observations, but given the death I've been banned from continuing my
+    > research oversight. I've received a letter from the Blackstaff today offering
+    > to sponsor my research...
+    >
+    > Blood of the Lycanthrope potions:
+    >  - Fresh blood from the lycanthrope being cures.
+    >    As far as I can tell, the blood muse be drawn from the subject and added just before consumption.
+    >  - 100gp worth of Nightshade
+    >  - Rare oils unguents worth at least 1,000gp
+    >  - 100gp worth of Wolfsbane variant.
+    >    We found this growing in locations of pure darkness, typically in patches of earth where the
+    >    ground had been soaked in blood.
+    >
+    > The potion must be administered under the the effects of a divine blessing.
+    > We believe the potion consumes the divine energy of the blessing to trigger
+    > the reaction that expunges the curse.
 
     - Blood, our own, that's easy
-    - Nightshade -- if we can collect 10gp, we can have the rest all grown in 3--4 days. Faelar has 25gp of powered night shade.
+    - Nightshade -- if we can collect 10gp, we can have the rest all grown in 3--4 days.
+      Faelar has 25gp of powered night shade.
     - Rare Oils and Unguents -- we can get 25% off from Mirna.
     - 100gp of wolfsbane...we need somewhere dark and bloody...
-    - Divine Blessing -- Bram was blessed by being touching the shrine, but only for 12 hours after the first touch. That's 2 definitely sorted. 
+    - Divine Blessing -- Bram was blessed by being touching the shrine,
+      but only for 12 hours after the first touch. That's 2 definitely sorted. 
 
     We finally trade off the manticore spikes and find out that the vials, which
     are identified as being carrion crawler mucus, a very dangerous poison.
     Sold the spikes for 60gp, acquired 3 health potions for 150gp.
 
-# TODO: Write a sending message to Landan
+  "Session Log – Session 27 (The Fading, 23rd/24th)": >
+    Everything was Fine. Kitteh was not present for the session, so these notes are second hand.
+    
+    Merric now has access to the sending spell, and is intending to use it to
+    find and recover Landan. We can get "his magical essence" from his book.
+    The message is composed by Light (but why? why would you pick Light?)
+    and is successfully sent on the second attempt -- and a response is received
+    
+    > Light, I was ambushed. Restrained somewhere damp, dark.
+    > Goblins or kobolds run by Giz, an orc.
+    > They seem more interested in people than that weapon.
 
-# TODO: Add new dragonborn friends to the NPC spreadsheet
-# TODO: Write up the cure in the notes
-# TODO: Add Vajra Safahr as the Blackstaff to the NPC spreadsheet
+    Neither Silidar nor Daran know of Giz, so we're not 100% on where to go
+    next for getting Landan back. Light also asked if anyone had been back into
+    the Red Bands hideout, and then headed down there to go look for ingredients
+    for the cure.
+
+    Back on the main plan, the party sets out to...get ambushed? (ok, this is
+    Kitteh's plan, I shouldn't sound shocked). We are on the hunt for a number
+    of unknown locations -- Landan's and Cragmaw Castle specifically.
+    Glint uses Silent Image to give the impression that Bram is actually just
+    a horse pulling the cart. The rest of the party looks a lot less deadly,
+    with limited armour. Faelar, with the noble background is set up as the mark,
+    and Merric is placed on the flank, with Thena flying as an AWAC OWL.
+    
+    The carriage party heads off; the first day of travel and the overnight stay
+    at the junction of the Triboar Trial with the Phandalin spur is uneventful.
+    The second day heading west events start with another party heading east
+    along the trail towards us -- three horses and riders, of unknown disposition
+    are seen by Thena. At short distance from us, the horse falls under one of
+    the riders who screams as they tumble to the ground. They get ambushed very
+    shortly before the parties meet -- which either indicates a brave set of
+    ambushers taking two groups at once, a group of attackers who are unaware
+    we are coming, or Randus just really wanting to make sure we get to talk to one
+    of these people alive.
+    The location of the ambush is exactly where Silidar was ambushed.
+    
+    The attackers are a group of goblins! The two on the road are within Fire Bolt
+    range, but seem to be a bit tougher than the average goblin commoner you'll
+    see on the street. They take cover behind the downed horses.
+    There's also two or more hanging around the outside of the path -- two sets
+    of arrows come out for Glint from the south, and at least one person relocates
+    to the north side of the road.
+
+    Faelar hastes Bram, who charges in. Glint uses Create Bonfire to mark one
+    goblin for the rest of the party to target (and to, you know, start fires).
+    Merric casts Hypnotic pattern on on that area, catching the two central goblins
+    (by the power of glow sticks).
+    
+    An lean (and mean?) looking Orc attempts to hit and run Bram, and discovered
+    that Bram has an Orc-slaying sword.
+    Glint goes down, but is quickly picked up by Cure Wounds.
+    Bram discovers that one of the travellers is still alive under her horse.
+    Glint gets to play around with Blink, which is a really cool spell that
+    hides you off in the Ethereal Plane between rounds, essentially.
+
+    The bonfire Goblin is booming bladed -- meaning bonus damage if it leaves
+    the bonfire, or for remaining in the fire. It goes down within the next
+    couple of rounds in the end to a bow shot from Merric.
+    Meanwhile, back in the road, the Orc reappears to cast darkness over the
+    areas with Bram, the traveller, and themselves.
+    
+    The North-side Goblins include a stealthy friend who manages to keep re-hiding
+    right up until the moment that Merric stumbles into it. The goblins are taken
+    out by the rest of the party outside of the darkness.
+
+    Back inside the darkness, Bram is in a problematic situation -- the civilian
+    is down on the ground, and the orc is still in there somewhere (presumably).
+    Bram gently finds the civilian with a hoof, lays on hoof, and invites them
+    up onto his back. The fight in the darkness goes slowly in when measured
+    in attacks, but between everyone in there attacks were coming one a second,
+    with a lot of missing.
+    Glint, in a bit of a panic, attempts to cast sleep into the darkness;
+    the only person who goes down is the civilian on Bram's back, who starts
+    falling off. Both sides land heavy blows, leaving the Bram at 1, and the
+    Orc still reasonably up. As things draw to a head Faelar rushes in (as
+    all known goblins are down) but the final blow is successfully struck by
+    Bram.
+
+    Battle Summary: Stressful but Satisfying.
+
+    Two goblins are available for questioning, held by the cousins of rope-chan.
+    One rescued fair maiden, who has lost two travelling companions.
+    Glint noticed a rustling up to the North which could totally be Light. Totally.
+    Definitely not more Goblins. Or Orcs. Or anything of that nature.
 
 quest-lines:
-  active: []
+  active:
+    - Recover Landan (Landan's backstory)
+    - Take down the people in Cragmaw Castle
+    - Track down the dwarf Durgen Rockseeker
   open:
     # Backstory
-    - Recover Landan (Landan's backstory)
     - Tower of Storms (Bezlik's backstory)
     - Visit the Dragonborn in Leilon
     # Icespire Peak
@@ -1119,8 +1246,6 @@ quest-lines:
     - Defeat Frigidfang
     - Young and Old Green Dragon
     # Lost Mine
-    - Take down the people in Cragmaw Castle
-    - Track down the dwarf Durgen Rockseeker
     - Find the magic forge in Wave Echo Cave
     # Cure for lycanthropy
     - Gather 10gp of nightshade
@@ -1133,12 +1258,17 @@ quest-lines:
     - Solve the question of Sister Garaele
     - Investigate the Old Owl Well area, drive off anyone trying to exhume a Lich
   available:
+    # Backstory
+    - '"Faelar picked up a new side quest"'
     # Commerce
     - Identify and sell (perhaps) the spiked armour
-    # Misc.
+    # Misc. (but from Icespire Peak)
     - Dwarven Excavation Quest Board Mission
     - Resupply the logging camp Quest Board Mission
-    # TODO: Add the new quest board quests
+    - Prepare the Axeholm fortress as a sanctuary for the the people of Phandalin
+    - Recover the sword of a previous dragon slayer from his burial barrow
+    - Destroy the spell casters lair that is causing orcs to threaten Falcon's Hunting Lodge.
+    - Find & Clear bandits east on the Triboar Trail near Wyvern Tor
   complete:
     - Clean out the Red Bands
     - Recover Landan's stolen book

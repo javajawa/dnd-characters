@@ -9,12 +9,14 @@ description: |-
 
   Ultimate travelers, the inquisitive tabaxi rarely stay in one place for long.
   Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
+
 resources:
   - name: Hands
     pool: 2
     regain:
       amount: 2
-      "on": round
+      every: round
+
 attacks:
   - name: "Unarmed: Grapple"
     resources:
@@ -24,7 +26,7 @@ attacks:
     reach: "5"
     attack_bonuses: "dex|str"
     save:
-      dc: 8 + str + prof
+      dc: 8 + prof + str
       stat: dex
     status:
       - name: Grappled
@@ -71,7 +73,7 @@ attacks:
     damage:
       bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
       force: "{eldritch_maul}d6(eldritch maul)"
-    damage_bonuses: "dex|str + 1(fist wraps)"
+    damage_bonuses: "dex|str + {fist wraps}(fist wraps)"
 
   - name: "Unarmed: Slash with Fist and Claws"
     proficiency: unarmed
@@ -83,7 +85,7 @@ attacks:
     damage:
       slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
       force: "{eldritch_maul}d6(eldritch maul)"
-    damage_bonuses: "dex|str + 1(fist wraps)"
+    damage_bonuses: "dex|str + {fist wraps}(fist wraps)"
 
   - name: "Unarmed: Kick with Foot"
     proficiency: unarmed
