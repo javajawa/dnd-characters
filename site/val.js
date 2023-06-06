@@ -24,7 +24,7 @@ export class MulVal extends Val {
   constructor(mul, val, reason) {
     super(0, reason);
 
-    this._val = val;
+    this.value = val;
     this.mul = mul;
   }
 
