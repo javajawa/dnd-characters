@@ -1,6 +1,8 @@
 {
+  "scripts": {
+    "build": "esbuild src/script.ts --bundle --sourcemap --outdir=./site --tsconfig=tsconfig.json"
+  },
   "devDependencies": {
-    "tslib": "^2.5.3",
-    "typescript": "^5.1.3"
+    "esbuild": "^0.17.19"
   }
 }

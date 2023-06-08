@@ -76,17 +76,17 @@ definitions:
     additionalProperties: false
     properties:
       str:
-        $ref: "#/definitions/Value"
+        type: number
       dex:
-        $ref: "#/definitions/Value"
+        type: number
       con:
-        $ref: "#/definitions/Value"
+        type: number
       int:
-        $ref: "#/definitions/Value"
+        type: number
       wis:
-        $ref: "#/definitions/Value"
+        type: number
       cha:
-        $ref: "#/definitions/Value"
+        type: number
 
   Stat:
     type: string
@@ -211,6 +211,10 @@ definitions:
       - name
       - link
       - description
+      - equippable
+    properties:
+      equippable:
+        type: boolean
 
   Proficiency:
     type: object

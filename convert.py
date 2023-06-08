@@ -23,7 +23,8 @@ for key in character:
         for file in (path / key).iterdir():
             with file.open("r", encoding="utf-8") as infile:
                 if objects := list(yaml.load_all(infile, Loader=yaml.CLoader)):
-                    del objects[0]["$schema"]
+                    if "$schema" in objects[0]:
+                        del objects[0]["$schema"]
                     character[key].extend(objects)
 
 backstory: dict[str, str] = character["backstory"]

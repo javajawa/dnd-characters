@@ -1,5 +1,4 @@
-$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/level.yaml
-
+name: Monk 1
 class: Monk
 level: 1
 link: http://dnd5e.wikidot.com/monk
@@ -10,8 +9,8 @@ description: >-
 hit_die: d8
 hit_points: 8
 facts:
-  martial_arts_dice: "d4"
-  armour_class: 10 + dex + wis + 2*{haste}
+  martial_arts: "d4"
+  armour_class: 10 + dex + wis
 proficiencies:
   - type: ability_save
     target: str
@@ -95,7 +94,7 @@ abilities:
         - It must lack the heavy and special properties.  
 
 ---
-
+name: Monk 2
 class: Monk
 level: 2
 link: http://dnd5e.wikidot.com/monk
@@ -130,8 +129,8 @@ resources:
       amount: "{monk}"
       every: short rest
 facts:
-  monk_bonus_speed: 10
-  ki_save: "8(monk ki saves) + wis(monk ki saves) + prof(monk ki saves)"
+  walk speed: "+10"
+  ki_save: "8 + wis + prof"
 abilities:
   - name: "Flurry of Blows"
     description: >-
@@ -157,8 +156,13 @@ abilities:
 
 ---
 
+name: Monk 3
 class: Monk
 level: 3
+description: >-
+  Monks are united in their ability to magically harness the energy that flows in their bodies.
+  Whether channeled as a striking display of combat prowess or a subtler focus of
+  defensive ability and speed, this energy infuses all that a monk does.
 hit_die: d8
 hit_points: 5
 proficiencies:
@@ -180,7 +184,7 @@ abilities:
     resources:
       ki: 1
     dice_rolls:
-      healing: "1{martial_arts_die} + wis"
+      healing: "1{martial_arts} + wis"
 
   - name: "Hands of Harm"
     description: >-
@@ -192,7 +196,7 @@ abilities:
     resources:
       ki: 1
     dice_rolls:
-      Damage: "1{martial_arts_die} + wis"
+      Damage: "1{martial_arts} + wis"
 
   - name: Deflect Missiles
     description: >-
@@ -219,13 +223,18 @@ abilities:
 
 ---
 
+name: Monk 4
 class: Monk
 level: 4
+description: >-
+  Monks are united in their ability to magically harness the energy that flows in their bodies.
+  Whether channeled as a striking display of combat prowess or a subtler focus of
+  defensive ability and speed, this energy infuses all that a monk does.
 hit_die: d8
 hit_points: 5
 
 stats:
-  dex: "2(monk lvl4 ASI)"
+  dex: 2
 
 abilities:
   - name: Slow Fall
@@ -242,14 +251,22 @@ abilities:
       action: 1
       ki: 2
     dice_rolls:
-      healing: 1{martial_arts_die} + prof
+      healing: 1{martial_arts} + prof
 
 ---
 
+name: Monk 5
 class: Monk
 level: 5
+description: >-
+  Monks are united in their ability to magically harness the energy that flows in their bodies.
+  Whether channeled as a striking display of combat prowess or a subtler focus of
+  defensive ability and speed, this energy infuses all that a monk does.
 hit_die: d8
 hit_points: 5
+
+facts:
+  martial_arts: d6
 
 abilities:
   - name: Extra Attack

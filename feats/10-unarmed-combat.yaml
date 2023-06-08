@@ -1,7 +1,6 @@
-$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/feat.yaml
-
 name: Unarmed Combat
 link: http://dnd5e.wikidot.com/tabaxi
+equippable: false
 description: |-
   Hailing from a strange and distant land, wandering tabaxi are catlike
   humanoids driven by curiosity to collect interesting artifacts,
@@ -71,7 +70,7 @@ attacks:
     reach: "5 + 10{eldritch_maul}(eldritch maul)"
     attack_bonuses: "dex|str"
     damage:
-      bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      bludgeoning: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
       force: "{eldritch_maul}d6(eldritch maul)"
     damage_bonuses: "dex|str + {fist wraps}(fist wraps)"
 
@@ -83,7 +82,7 @@ attacks:
     reach: "5 + 10{eldritch_maul}(eldritch maul)"
     attack_bonuses: "dex|str"
     damage:
-      slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      slashing: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
       force: "{eldritch_maul}d6(eldritch maul)"
     damage_bonuses: "dex|str + {fist wraps}(fist wraps)"
 
@@ -94,7 +93,7 @@ attacks:
     reach: "5 + 10{eldritch_maul}(eldritch maul)"
     attack_bonuses: "dex|str"
     damage:
-      bludgeoning: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      bludgeoning: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
       force: "{eldritch_maul}d6(eldritch maul)"
     damage_bonuses: "dex|str"
 
@@ -105,6 +104,6 @@ attacks:
     reach: "5 + 10{eldritch_maul}(eldritch maul)"
     attack_bonuses: "dex|str"
     damage:
-      slashing: "{martial_arts_dice}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
+      slashing: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
       force: "{eldritch_maul}d6(eldritch maul)"
     damage_bonuses: "dex|str"

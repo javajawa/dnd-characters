@@ -3,10 +3,11 @@ $schema: http://json-schema.org/draft-07/schema#
 $id: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/level.yaml
 
 type: object
-unevaluatedProperties: false
-allOf:
-  - $ref: "https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/abstract-source.yaml"
+additionalProperties: false
+
 required:
+  - name
+  - description
   - class
   - level
   - hit_die
@@ -34,6 +35,8 @@ properties:
     type: array
     items:
       $ref: "#/definitions/Proficiency"
+  stats:
+    $ref: "#/definitions/Stats"
   resources:
     type: array
     items:
@@ -57,6 +60,23 @@ definitions:
     type:
       - integer
       - string
+
+  Stats:
+    type: object
+    additionalProperties: false
+    properties:
+      str:
+        type: number
+      dex:
+        type: number
+      con:
+        type: number
+      int:
+        type: number
+      wis:
+        type: number
+      cha:
+        type: number
 
   Proficiency:
     type: object

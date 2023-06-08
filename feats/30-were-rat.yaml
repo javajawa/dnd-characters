@@ -1,6 +1,6 @@
-$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
 name: Were-Rat
 link: ""
+equippable: false
 description: >-
   While you have contracted the were-rat lycanthropy trait, you are still able
   to resist the curse in it's purest form.
@@ -19,22 +19,35 @@ description: >-
   You gain resistance to bludgeoning, slashing and piercing damage from non-magical and non-silvered weapons.
   This becomes immunity when you use the ‘embrace change’ ability, until dawn. 
 
-stats:
-  dex: "2*{hybrid_rat_form}(hybrid rat form) + 2*{full_rat_form}(full rat form)"
-
-facts:
-  darkvision: +60*{full_rat_form}(full rat form)
-  speed: +5*{full_rat_form}(full rat form)
-
-proficiencies:
-  - type: weapon
-    target: bite
-
 abilities:
   - name: Keen Smell
     description: You have advantage on perception checks that rely on smell.
 
-  - name: Shape Change (human/hybrid)
+  - name: Embrace Change
+    description: >-
+      You fully embrace your inner rat; the curse takes ahold of you,
+      and you forfeiting control of your PC to the DM until the next sunrise.
+      
+      If this triggers while you are awake you attack the nearest creature at random.
+      On nights of a Full Moon, you most succeed on a DC 15 wisdom save to resist the
+      curse taking forcing you to use this ability
+      (full moon triggers will be addressed via impact only in game,
+      example when you awake your inner rat may have hidden some of your items).
+    save:
+      stat: wis
+      dc: 15
+
+---
+
+name: Were-Rat (Humanoid Form)
+link: ""
+description: >-
+  The default, Humanoid form
+
+equippable: true
+
+abilities:
+  - name: Shape Change to Hybrid From
     description: >-
       As an action you can shift your form to normal, rat or hybrid.
       
@@ -48,7 +61,7 @@ abilities:
       stat: wis
       dc: 15
 
-  - name: Shape Change (rat)
+  - name: Shape Change to Rat Form
     description: >-
       As an action you can shift your form to normal, rat or hybrid.
       
@@ -69,16 +82,107 @@ abilities:
       stat: wis
       dc: 15
 
-  - name: Embrace Change
+---
+
+name: Were-Rat (Humanoid Form)
+link: ""
+description: >-
+  The default, Humanoid form
+
+equippable: true
+
+facts:
+  hybrid_rat_form: 1
+
+stats:
+  dex: 2
+
+proficiencies:
+  - type: weapon
+    target: bite
+
+abilities:
+  - name: Shape Change to Hybrid From
     description: >-
-      You fully embrace your inner rat; the curse takes ahold of you,
-      and you forfeiting control of your PC to the DM until the next sunrise.
+      As an action you can shift your form to normal, rat or hybrid.
       
-      If this triggers while you are awake you attack the nearest creature at random.
-      On nights of a Full Moon, you most succeed on a DC 15 wisdom save to resist the
-      curse taking forcing you to use this ability
-      (full moon triggers will be addressed via impact only in game,
-      example when you awake your inner rat may have hidden some of your items).
+      When you use this ability, you most succeed on a DC15 wisdom save or your
+      inner rat takes hold. In this case, you do not transform and instead
+      your action is used to move as far away from any creature you can see.
+      
+      If you fail this check 3 times in 1 day you must use the 'embrace change' ability.
+      Upon using the 'embrace change' ability, you auto save on this DC check until dawn.
+    save:
+      stat: wis
+      dc: 15
+
+  - name: Shape Change to Rat Form
+    description: >-
+      As an action you can shift your form to normal, rat or hybrid.
+      
+      When you use this ability, you most succeed on a DC15 wisdom save or your
+      inner rat takes hold. In this case, you do not transform and instead
+      your action is used to move as far away from any creature you can see.
+      
+      If you fail this check 3 times in 1 day you must use the 'embrace change' ability.
+      Upon using the 'embrace change' ability, you auto save on this DC check until dawn.
+
+      While In your Rat form your size becomes small, you gain an extra 5ft of movement,
+      you lose the ability to speak, and you lose the ability to use weapons, items,
+      and equipment.
+      
+      You my chose to have your equipment pulled in to your form or is dropped on the ground.
+      If you're wearing armor or using a shield you lose those AC bonuses.
+    save:
+      stat: wis
+      dc: 15
+
+---
+
+name: Were-Rat (Rat Form)
+link: ""
+description: >-
+  The default, Humanoid form
+
+equippable: true
+
+facts:
+  full_rat_form: 1
+  darkvision: +60
+  walk speed: +5
+
+stats:
+  dex: +2
+
+proficiencies:
+  - type: weapon
+    target: bite
+
+abilities:
+  - name: Shape Change to Human From
+    description: >-
+      As an action you can shift your form to normal, rat or hybrid.
+      
+      When you use this ability, you most succeed on a DC15 wisdom save or your
+      inner rat takes hold. In this case, you do not transform and instead
+      your action is used to move as far away from any creature you can see.
+      
+      If you fail this check 3 times in 1 day you must use the 'embrace change' ability.
+      Upon using the 'embrace change' ability, you auto save on this DC check until dawn.
+    save:
+      stat: wis
+      dc: 15
+
+  - name: Shape Change to Hybrid From
+    description: >-
+      As an action you can shift your form to normal, rat or hybrid.
+      
+      When you use this ability, you most succeed on a DC15 wisdom save or your
+      inner rat takes hold. In this case, you do not transform and instead
+      your action is used to move as far away from any creature you can see.
+      
+      If you fail this check 3 times in 1 day you must use the 'embrace change' ability.
+      Upon using the 'embrace change' ability, you auto save on this DC check until dawn.
     save:
       stat: wis
       dc: 15

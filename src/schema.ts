@@ -1,29 +1,10 @@
-import { Value } from "./values";
+import {Value} from "./values";
+import {Proficiency, Skill, Stat, Stats} from "./stats";
 
-// FIXME: Update this
-export type Feat = AbstractThingSource
+export type FactBlock = { [k:string]: string }
+export type DamageType = "bludgeoning" | "piercing" | "slashing"
+    | "acid" | "cold" | "fire" | "force" | "lightning" | "necrotic" | "poison" | "psychic" | "radiant" | "thunder"
 
-// FIXME: Update this
-export type Level = AbstractThingSource
-
-export interface Item extends AbstractThingSource {
-  weight: number
-  count: number
-  value: number
-}
-
-type FactBlock = { [k:string]: Value }
-type Stat = "str" | "dex" | "con" | "wis" | "int" | "cha"
-type DamageType = "bludgeoning" | "piercing" | "slashing" | "acid" | "cold" | "fire" | "force" | "lightning" | "necrotic" | "poison" | "psychic" | "radiant" | "thunder"
-
-export interface Stats {
-  str: Value
-  dex: Value
-  con: Value
-  int: Value
-  wis: Value
-  cha: Value
-}
 
 export interface Character {
   name: string
@@ -50,7 +31,7 @@ export interface Info {
   appearance?: string
 }
 
-interface AbstractThingSource {
+export interface AbstractThingSource {
   name: string
   description: string
   link: string
@@ -64,9 +45,21 @@ interface AbstractThingSource {
   abilities?: Ability[]
 }
 
-interface Proficiency {
-  type: "weapon" | "armour" | "equipment" | "skill" | "ability_save"
-  target: string
+export interface Level extends AbstractThingSource {
+  class: string
+  level: number
+  hit_die: string
+  hit_points: number
+}
+
+export interface Feat extends AbstractThingSource {
+  equippable: boolean
+}
+
+export interface Item extends AbstractThingSource {
+  weight: number
+  count: number
+  value: number | string
 }
 
 interface Resource {
@@ -84,18 +77,18 @@ export interface Attack {
   description: string
   proficiency: string
 
-  resources?: { [k: string]: Value }
-  reach?: Value
-  range?: [Value, Value]
+  resources?: { [k: string]: string }
+  reach?: string
+  range?: [string, string]
 
-  attack_bonuses: Value
-  damage: { [k in DamageType]?: Value }
-  damage_bonuses: Value
+  attack_bonuses: string
+  damage: { [k in DamageType]?: string }
+  damage_bonuses: string
 
   save?: {
     stat: Stat
-    skill?: string
-    dc: Value
+    skill?: Skill
+    dc: string
   }
 
   status?: {
@@ -109,17 +102,20 @@ export interface Ability {
   name: string
   description: string
   link?: string
-  resources?: { [k: string]: Value }
-  dice_rolls?: { [k: string]: Value }
+
+  range?: [string, string]
+  resources?: { [k: string]: string }
+  dice_rolls?: { [k: string]: string }
+
   save?: {
     stat: Stat
-    skill?: string
-    dc: Value
+    skill?: Skill
+    dc: string
   }
+
   status?: {
     name: string
     length: string
     description?: string
   }[]
-  range?: [Value, Value]
 }

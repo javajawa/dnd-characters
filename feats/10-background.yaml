@@ -1,21 +1,22 @@
-$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
 name: Character
 description: Base facts and resources for a DnD character
 link: "#"
+equippable: false
 facts:
+  armour_class: "10"
   perception: "10 + wis(passive perception) + prof(passive perception)"
 
 stats:
-  str: "12(base)"
-  dex: "16(base)"
-  con: "15(base)"
-  int: "11(base)"
-  wis: "14(base)"
-  cha: "7(base)"
+  str: 12
+  dex: 16
+  con: 15
+  int: 11
+  wis: 14
+  cha: 7
 
 resources:
   - name: action
-    pool: 1 + {haste}
+    pool: 1
     regain:
       amount: 999
       every: round
@@ -76,6 +77,7 @@ abilities:
 
 name: Tabaxi
 link: http://dnd5e.wikidot.com/tabaxi
+equippable: false
 description: |-
   Hailing from a strange and distant land, wandering tabaxi are catlike
   humanoids driven by curiosity to collect interesting artifacts,
@@ -85,18 +87,18 @@ description: |-
   Their innate nature pushes them to leave no secrets uncovered, no treasures or legends lost.
 
 stats:
-  dex: "2(tabaxi racial bonus)"
-  int: "1(tabaxi racial bonus (relocated))"
+  dex: 2
+  int: 1
 
-proficiencies:
+proficie`ncies:
   - type: skill
     target: perception
   - type: skill
     target: nature
 
 facts:
-  speed: 30(tabaxi) + {monk_bonus_speed}(monk speed)
-  climbing: 20(tabaxi)
+  walk speed: 30
+  climb speed: 20
 
 abilities:
   - name: Dark-Vision
@@ -121,6 +123,7 @@ abilities:
 
 name: Acolyte
 link: http://dnd5e.wikidot.com/background:acolyte
+equippable: false
 description: >-
   You have spent your life in the service of a temple to a specific god or pantheon of gods.
   You act as an intermediary between the realm of the holy and the mortal world,

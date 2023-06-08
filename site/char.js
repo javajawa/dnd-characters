@@ -38,7 +38,7 @@ function parseVal(string, levels, facts) {
     return new StatVal(string, comment);
   }
 
-  if (string == "prof") {
+  if (string === "prof") {
     return new ProfVal(comment);
   }
 

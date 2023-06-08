@@ -1,7 +1,6 @@
 "use strict";
 
 import { elemGenerator } from "https://javajawa.github.io/elems.js/elems.js";
-import { Val, StatVal, ComboVal } from "./val.js";
 import { stats, skills } from "./character.js";
 
 const [

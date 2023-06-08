@@ -1,5 +1,5 @@
-$schema: https://raw.githubusercontent.com/javajawa/dnd-characters/mainline/schema/item.yaml
 name: Shadow-Touched
+equippable: false
 description: |
   Your exposure to the Shadowfell's magic has changed you, granting you the following benefits:
   - Increase your Intelligence, Wisdom, or Charisma score by 1, to a maximum of 20.
@@ -14,7 +14,7 @@ description: |
 link: http://dnd5e.wikidot.com/feat:shadow-touched
 
 stats:
-  wis: "1(shadow touched feat)"
+  wis: +1
 
 resources:
   - name: Shadow Touched Spell Slot
