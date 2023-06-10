@@ -116,6 +116,7 @@ export function elemGenerator(tag: string, ns?: string): (...args: NestedArgs[])
 					{
 						elem.setAttribute( key, '' );
 					}
+					// @ts-ignore
 					else if ( val === false )
 					{
 						elem.removeAttribute( key );
@@ -130,58 +131,16 @@ export function elemGenerator(tag: string, ns?: string): (...args: NestedArgs[])
 					}
 					else
 					{
-						throw `Invalid type for attribute ${key} in element ${tag}`;
+						throw new Error(`Invalid type for attribute ${key} in element ${tag}`);
 					}
 				} );
 			}
 			else
 			{
-				throw `Invalid type in arguments for element ${tag}, arg was ${typeof arg}: ${arg}`;
+				throw new Error(`Invalid type in arguments for element ${tag}, arg was ${typeof arg}: ${arg}`);
 			}
 		} );
 
 		return elem;
 	};
-}
-
-
-/**
- * documentFragment is a helper function to generate Document Fragments in the
- * elems.js style.
- *
- * Example: A Custom Element template
- *
- *   const _h1 = elemGenerator( 'h1' );
- *   const _slot = elemGenerator( 'slot' );
- *
- *   const template = documentFragment(
- *     _h1( 'the title' )
- *     _slot(),
- *   );
- *
- *   class MyParagraph extends HTMLElement {
- *     constructor() {
- *       super();
- *       this.attachShadow( { mode: 'open' } );
- *       this.shadowRoot.appendChild( template.cloneNode( true ) );
- *     }
- *   };
- *
- * Example: Appending multiple nodes as a single DOM action
- *
- *   const _li = elemGenerator( 'li' );
- *   const items = documentFragment(
- *     [ 1, 2, 3 ].map( d => _li( d ) ),
- *   );
- *
- *   let list = document.querySelector( '#list' );
- *   list.appendChild( items );
- */
-export function documentFragment( ...args: Node[] ): DocumentFragment
-{
-	const fragment = new DocumentFragment();
-
-	args.forEach( arg => fragment.appendChild( arg ) );
-
-	return fragment;
 }

@@ -1,4 +1,4 @@
-name: Elder Lead Mask
+name: Elder Leaf Mask
 link: https://www.dndbeyond.com/magic-items/5842527-elder-leaf-mask
 description: >
   This item was crafted by Qelline Alderleaf for her husband before an unforeseen
@@ -25,7 +25,7 @@ abilities:
 
   - name: Ensaring Strike
     link: http://dnd5e.wikidot.com/spell:ensnaring-strike
-    description: >-
+    description: |-
       Concentration, up to 1 minute
 
       The next time you hit a creature with a weapon attack before this spell ends,
@@ -50,7 +50,7 @@ abilities:
       dc: 8 + prof + wis
     status:
       - name: ensaring strike
-        description: >-
+        description: |-
           The next time you hit a creature with a weapon attack before this spell ends,
           a writhing mass of thorny vines appears at the point of impact,
           and the target must succeed on a Strength saving throw or be restrained

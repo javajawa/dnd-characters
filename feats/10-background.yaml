@@ -44,15 +44,18 @@ abilities:
     description: |-
       You can move at any time during your turn (before, after, or during actions).
 
-      Move        Cost: 5ft per 5ft
-      Climb       Cost: 10ft per 5ft
-      Swim        Cost: 10ft per 5ft
-      Drop prone  Cost: 0ft
-      Crawl       Cost: 10ft per 5ft
-      Stand up    Cost: half movement speed
-      High jump   Cost: 5ft per 5ft
-      Long jump   Cost: 5ft per 5ft
-      Improvise   Any stunt not on this list
+      | Name        | Movement Cost |
+      |-------------|---------------|
+      | Move        | 5ft per 5ft   |
+      | Climb       | 10ft per 5ft  |
+      | Swim        | 10ft per 5ft  |
+      | Drop prone  | 0ft           |
+      | Crawl       | 10ft per 5ft  |
+      | Stand up    | half movement |
+      | High jump   | 5ft per 5ft   |
+      | Long jump   | 5ft per 5ft   |
+      | Improvise   | Any stunt not on this list |
+
   - name: Basic Actions
     link: https://crobi.github.io/dnd5e-quickref/preview/quickref.html
     description: |-
@@ -90,7 +93,7 @@ stats:
   dex: 2
   int: 1
 
-proficie`ncies:
+proficiencies:
   - type: skill
     target: perception
   - type: skill
@@ -99,21 +102,22 @@ proficie`ncies:
 facts:
   walk speed: 30
   climb speed: 20
+  darkvision: 60
 
 abilities:
   - name: Dark-Vision
-    description: >-
+    description: |-
       You have a cat's keen senses, especially in the dark.
       You can see in dim light within 60 feet of you as if it were bright light,
       and in darkness as if it were dim light.
       You can't discern color in darkness, only shades of gray.
   - name: Feline Agility
-    description: >-
+    description: |-
       Your reflexes and agility allow you to move with a burst of speed.
       When you move on your tum in combat, you can double your speed until the end of the turn.
       Once you use this trait, you can't use it again until you move 0 feet on one of your turns.
   - name: Cat's Claws
-    description: >-
+    description: |-
       Because of your claws, you have a climbing speed of 20 feet.
       In addition, your claws are natural weapons, which you can use to make unarmed strikes.
       If you hit with them, you deal slashing damage equal to 1d4 + your Strength modifier,
@@ -124,7 +128,7 @@ abilities:
 name: Acolyte
 link: http://dnd5e.wikidot.com/background:acolyte
 equippable: false
-description: >-
+description: |-
   You have spent your life in the service of a temple to a specific god or pantheon of gods.
   You act as an intermediary between the realm of the holy and the mortal world,
   performing sacred rites and offering sacrifices in order to conduct worshipers
@@ -136,7 +140,7 @@ proficiencies:
     target: religion
 abilities:
   - name: Shelter of the Faithful
-    description: >-
+    description: |-
       As an acolyte, you command the respect of those who share your faith,
       and you can perform the religious ceremonies of your deity.
       You and your adventuring companions can expect to receive free healing

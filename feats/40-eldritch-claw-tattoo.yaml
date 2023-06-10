@@ -1,0 +1,17 @@
+name: Eldritch Maul
+link: http://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo
+description: |-
+  As a bonus action, you can empower the tattoo for 1 minute.
+  
+  For the duration, each of your melee attacks with a weapon or an unarmed
+  strike can reach a target up to 15 feet away from you,
+  as inky tendrils launch toward the target.
+  
+  In addition, your melee attacks deal an extra 1d6 force damage on a hit.
+  Once used, this bonus action can't be used again until the next dawn.
+
+equippable: true
+
+facts:
+  _eldritch_maul_reach: 10
+  _eldritch_maul: 1d6

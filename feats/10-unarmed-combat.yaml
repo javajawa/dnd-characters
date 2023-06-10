@@ -23,7 +23,7 @@ attacks:
       action: 1
     proficiency: unarmed
     reach: "5"
-    attack_bonuses: "dex|str"
+    attack_bonuses: "dex|str + {_eldritch_claw}"
     save:
       dc: 8 + prof + str
       stat: dex
@@ -48,8 +48,8 @@ attacks:
     resources:
       hands: 1
       action: 1
-    reach: "5 + 10{eldritch_maul}(eldritch maul)"
-    attack_bonuses: "dex|str"
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
+    attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
       bludgeoning: 0
     damage_bonuses: 0
@@ -67,43 +67,43 @@ attacks:
     resources:
       hands: 1
       action: 1
-    reach: "5 + 10{eldritch_maul}(eldritch maul)"
-    attack_bonuses: "dex|str"
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
+    attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      bludgeoning: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-      force: "{eldritch_maul}d6(eldritch maul)"
-    damage_bonuses: "dex|str + {fist wraps}(fist wraps)"
+      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      force: "{_eldritch_maul}(eldritch maul)"
+    damage_bonuses: "dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
 
   - name: "Unarmed: Slash with Fist and Claws"
     proficiency: unarmed
     resources:
       hands: 1
       action: 1
-    reach: "5 + 10{eldritch_maul}(eldritch maul)"
-    attack_bonuses: "dex|str"
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
+    attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      slashing: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-      force: "{eldritch_maul}d6(eldritch maul)"
-    damage_bonuses: "dex|str + {fist wraps}(fist wraps)"
+      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      force: "{_eldritch_maul}(eldritch maul)"
+    damage_bonuses: "dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
 
   - name: "Unarmed: Kick with Foot"
     proficiency: unarmed
     resources:
       action: 1
-    reach: "5 + 10{eldritch_maul}(eldritch maul)"
-    attack_bonuses: "dex|str"
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
+    attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      bludgeoning: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-      force: "{eldritch_maul}d6(eldritch maul)"
+      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      force: "{_eldritch_maul}(eldritch maul) + {_eldritch_claw}"
     damage_bonuses: "dex|str"
 
   - name: "Unarmed: Slash with Foot Claws"
     proficiency: unarmed
     resources:
       action: 1
-    reach: "5 + 10{eldritch_maul}(eldritch maul)"
-    attack_bonuses: "dex|str"
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
+    attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      slashing: "{martial_arts}(martial arts) + {hybrid_rat_form}d4(hybrid-rat form)"
-      force: "{eldritch_maul}d6(eldritch maul)"
+      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      force: "{_eldritch_maul}(eldritch maul) + {_eldritch_claw}"
     damage_bonuses: "dex|str"

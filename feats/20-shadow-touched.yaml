@@ -14,7 +14,7 @@ description: |
 link: http://dnd5e.wikidot.com/feat:shadow-touched
 
 stats:
-  wis: +1
+  wis: 1
 
 resources:
   - name: Shadow Touched Spell Slot

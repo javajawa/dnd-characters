@@ -1,0 +1,37 @@
+{
+  "name": "Beyond Kitteh",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Integrates the D&D Beyond Character Sheets with Roll20 and Foundry VTT.",
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://app.roll20.net/editor/*",
+    "*://tea-cats.co.uk/dnd/*"
+  ],
+
+  "background":
+  {
+      "scripts": ["extension.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://app.roll20.net/editor/"
+      ],
+      "js": [
+        "roll20.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://tea-cats.co.uk/dnd/"
+      ],
+      "js": [
+        "tea-cats.js"
+      ]
+    }
+  ]
+}

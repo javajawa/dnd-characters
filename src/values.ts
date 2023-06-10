@@ -6,13 +6,14 @@ export abstract class Value {
   abstract representation(facts: Facts): string
   abstract roll(facts: Facts): number
   abstract can_resolve_without_facts(): boolean
-  abstract can_resolve_with_facts(): boolean
+  abstract can_resolve_with_facts(facts: Facts): boolean
   abstract resolve_without_facts(): number
   abstract resolve_with_facts(facts: Facts): number
+  abstract expected(facts: Facts): number
 }
 
 export abstract class NumericValue extends Value {
-  override can_resolve_with_facts(): boolean {
+  override can_resolve_with_facts(_: Facts): boolean {
     return true;
   }
 }
@@ -40,11 +41,11 @@ export class FixedValue extends NumericValue {
     return this._value;
   }
 
-  override can_resolve_without_facts(): boolean {
-    return true;
+  override expected(_: Facts) {
+    return this._value;
   }
 
-  override can_resolve_with_facts(): boolean {
+  override can_resolve_without_facts(): boolean {
     return true;
   }
 
@@ -86,12 +87,16 @@ export class MultiplierValue extends Value {
     return this.multiplier.resolve_with_facts(facts) * this.target.roll(facts);
   }
 
+  override expected(facts: Facts) {
+    return this.multiplier.expected(facts) * this.target.expected(facts);
+  }
+
   override can_resolve_without_facts(): boolean {
     return this.multiplier.can_resolve_without_facts() && this.target.can_resolve_without_facts();
   }
 
-  override can_resolve_with_facts(): boolean {
-    return this.multiplier.can_resolve_without_facts() && this.target.can_resolve_without_facts();
+  override can_resolve_with_facts(facts: Facts): boolean {
+    return this.multiplier.can_resolve_with_facts(facts) && this.target.can_resolve_with_facts(facts);
   }
 
   override resolve_without_facts(): number {
@@ -126,6 +131,10 @@ export class DiceValue extends Value {
     return total;
   }
 
+  override expected(_: Facts) {
+    return this.count * (this.sides + 1) / 2;
+  }
+
   override reason(_: Facts): string {
     return this._reason;
   }
@@ -138,7 +147,7 @@ export class DiceValue extends Value {
     return false;
   }
 
-  override can_resolve_with_facts(): boolean {
+  override can_resolve_with_facts(_: Facts): boolean {
     return false;
   }
 
@@ -152,6 +161,25 @@ export class DiceValue extends Value {
 }
 
 type DiceGrouping = { [sides: number]: number };
+
+function to_dice(value: Value, facts: Facts): DiceValue | null {
+  if (value instanceof DiceValue) {
+    return value;
+  }
+  if (value instanceof FactValue) {
+    return to_dice(facts.get(value.fact), facts);
+  }
+  if (value instanceof AdditionalValue) {
+    return to_dice(value.inner, facts);
+  }
+  if (value instanceof MultiOptionedValue) {
+    const inner = value.simplify(facts);
+    if (inner instanceof DiceValue) {
+      return inner;
+    }
+  }
+  return null;
+}
 
 export class ComboValue extends Value {
   readonly values: Value[]
@@ -167,10 +195,18 @@ export class ComboValue extends Value {
     this.values = values.map((x) => (x instanceof ComboValue ? x.values : x)).flat();
   }
 
+  override roll(facts: Facts) {
+    return this.values.reduce((total, val) => total + val.roll(facts), 0);
+  }
+
+  override expected(facts: Facts) {
+    return this.values.reduce((total, val) => total + val.expected(facts), 0);
+  }
+
   override representation(facts: Facts) {
-    const dice: DiceValue[] = this.values.filter(x => x instanceof DiceValue) as DiceValue[];
-    const statics: Value[] = this.values.filter(x => x.can_resolve_with_facts());
-    const other: Value[] = this.values.filter(x => !((x instanceof DiceValue) || (x.can_resolve_with_facts())));
+    const dice: DiceValue[] = this.values.map(x => to_dice(x, facts)).filter(x => x !== null) as DiceValue[];
+    const statics: Value[] = this.values.filter(x => x.can_resolve_with_facts(facts));
+    const other: Value[] = this.values.filter(x => !(to_dice(x, facts) || (x.can_resolve_with_facts(facts))));
 
     const static_part = statics.length ? statics.reduce((total, value) => total + value.resolve_with_facts(facts), 0).toString(10) : [];
     const grouped_dice: DiceValue[] = Object.entries(
@@ -179,6 +215,8 @@ export class ComboValue extends Value {
           totals[sides] = die.count + (totals[sides] || 0);
           return totals;
         }, {})
+    ).sort(
+        ([l_sides , _], [r_sides , _a]) => parseInt(r_sides, 10) - parseInt(l_sides, 10)
     ).map(
         ([sides, count]) =>
         new DiceValue(count, parseInt(sides), "")
@@ -188,23 +226,47 @@ export class ComboValue extends Value {
   }
 
   override reason(facts: Facts) {
-    return this.values.map(r => r.representation(facts) + " [" + r.reason(facts).replace(/\n/gm, " | ") + "]").join("\n");
+    const dice: Value[] = this.values.filter(x => to_dice(x, facts));
+    const statics: Value[] = this.values.filter(x => x.can_resolve_with_facts(facts))
+        .sort((a, b) => b.resolve_with_facts(facts) - a.resolve_with_facts(facts));
+    const other: Value[] = this.values.filter(x => !(to_dice(x, facts) || (x.can_resolve_with_facts(facts))));
+
+    return [...dice, ...statics, ...other].map(r => r.can_resolve_with_facts(facts) && r.resolve_with_facts(facts) === 0 ? "" : r.representation(facts) + " [" + r.reason(facts).replace(/\n/gm, " | ") + "]").filter(x => x).join("\n");
   }
 
-  override roll(facts: Facts) {
-    return this.values.reduce((total, val) => total + val.roll(facts), 0);
-  }
   can_resolve_without_facts(): boolean {
       return this.values.every(v => v.can_resolve_without_facts());
   }
-  can_resolve_with_facts(): boolean {
-      return this.values.every(v => v.can_resolve_with_facts());
+  can_resolve_with_facts(facts: Facts): boolean {
+      return this.values.every(v => v.can_resolve_with_facts(facts));
   }
   resolve_without_facts(): number {
       return this.values.reduce((total, v) => total + v.resolve_without_facts(), 0);
   }
   resolve_with_facts(facts: Facts): number {
       return this.values.reduce((total, v) => total + v.resolve_with_facts(facts), 0);
+  }
+
+  to_roll20(facts: Facts): string {
+    return this.values.map(v => {
+        if (v instanceof ComboValue) {
+            return v.to_roll20(facts);
+        }
+        if (v instanceof DiceValue) {
+            return v.representation(facts);
+        }
+        if (v instanceof StatValue) {
+            return v.resolve_with_facts(facts) + "[" + v.stat + "]";
+        }
+        if (v instanceof FactValue) {
+            return v.resolve_with_facts(facts) + "[" + v.fact + "]";
+        }
+        if (v instanceof ProficiencyValue) {
+            return v.resolve_with_facts(facts) + "[prof]";
+        }
+
+        return v.can_resolve_with_facts(facts) ? v.resolve_with_facts(facts) : v.representation(facts);
+    }).join(" + ")
   }
 }
 
@@ -218,6 +280,12 @@ export class MultiOptionedValue extends Value {
   }
 
   override representation(facts: Facts): string {
+    const target = this.simplify(facts);
+
+    if (target !== this) {
+      return target.representation(facts);
+    }
+
     return this.options.map(x => x.representation(facts)).join(" or ");
   }
 
@@ -229,12 +297,16 @@ export class MultiOptionedValue extends Value {
     return 0;
   }
 
+  override expected(facts: Facts) {
+    return Math.max(...this.options.map(x => x.expected(facts)));
+  }
+
   override can_resolve_without_facts(): boolean {
     return this.options.every(v => v.can_resolve_without_facts());
   }
 
-  override can_resolve_with_facts(): boolean {
-    return this.options.every(v => v.can_resolve_with_facts());
+  override can_resolve_with_facts(facts: Facts): boolean {
+    return this.options.every(v => v.can_resolve_with_facts(facts));
   }
 
   resolve_with_facts(facts: Facts): number {
@@ -243,6 +315,24 @@ export class MultiOptionedValue extends Value {
 
   resolve_without_facts(): number {
     return Math.max(...this.options.map(x => x.resolve_without_facts()));
+  }
+
+  simplify(facts: Facts): Value {
+    if (this.options.length === 0) {
+      return this;
+    }
+
+    if (this.can_resolve_with_facts(facts)) {
+      return [...this.options].sort((a, b) => a.resolve_with_facts(facts) - b.resolve_with_facts(facts)).pop() || this;
+    }
+
+    const dice = this.options.map(s => to_dice(s, facts));
+
+    if (dice.every(s => s instanceof DiceValue)) {
+      return (dice as DiceValue[]).sort((a, b) => a.expected(facts) - b.expected(facts)).pop() || this;
+    }
+
+    return this;
   }
 }
 
@@ -257,7 +347,7 @@ class StatValue extends Value {
     this._reason = reason;
   }
 
-  can_resolve_with_facts(): boolean {
+  can_resolve_with_facts(_: Facts): boolean {
     return true;
   }
 
@@ -282,13 +372,17 @@ class StatValue extends Value {
   }
 
   roll(facts: Facts): number {
-    return facts.modifier(this.stat);
+    return this.resolve_with_facts(facts);
+  }
+
+  expected(facts: Facts): number {
+    return this.resolve_with_facts(facts);
   }
 }
 
 export class SkillValue extends ComboValue {
   constructor(skill: Skill, facts: Facts) {
-    let components: Value[] = [new StatValue(skills[skill], "Stat for " + skill)];
+    const components: Value[] = [new StatValue(skills[skill], "Stat for " + skill)];
 
     if (skill in facts.proficiencies.skill) {
       components.push(new ProficiencyValue(facts.proficiencies.skill[skill] || ""))
@@ -308,7 +402,7 @@ export class ProficiencyValue extends Value {
     this._reason = reason;
   }
 
-  can_resolve_with_facts(): boolean {
+  can_resolve_with_facts(_: Facts): boolean {
     return true;
   }
 
@@ -335,14 +429,103 @@ export class ProficiencyValue extends Value {
   roll(facts: Facts): number {
     return facts.proficiency_bonus;
   }
+
+  expected(facts: Facts): number {
+    return this.roll(facts);
+  }
 }
 
-const regexp_dice = /([0-9]*)d([0-9]+)/;
-const regexp_fact = /\{([a-z_]+)}/;
-const regexp_comment = /(.+)\((.+)\)/;
+export class FactValue extends Value {
+  readonly fact: string;
+  readonly _reason: string;
+
+  constructor(fact: string, reason: string) {
+    super();
+
+    this.fact = fact;
+    this._reason = reason;
+  }
+
+  can_resolve_with_facts(facts: Facts): boolean {
+    return facts.get(this.fact).can_resolve_with_facts(facts);
+  }
+
+  can_resolve_without_facts(): boolean {
+    return false;
+  }
+
+  representation(facts: Facts): string {
+    return facts.get(this.fact).representation(facts);
+  }
+
+  reason(_: Facts): string {
+    return "[" + this.fact.replace("_", " ").trim() + "] " + this._reason;
+  }
+
+  resolve_with_facts(facts: Facts): number {
+    return facts.get(this.fact).resolve_with_facts(facts);
+  }
+
+  resolve_without_facts(): number {
+    return 0;
+  }
+
+  roll(facts: Facts): number {
+    return facts.get(this.fact).roll(facts);
+  }
+
+  expected(facts: Facts): number {
+    return facts.get(this.fact).expected(facts);
+  }
+}
+
+class AdditionalValue implements Value {
+  readonly inner: Value
+
+  constructor(value: Value) {
+    this.inner = value;
+  }
+
+  can_resolve_with_facts(facts: Facts): boolean {
+    return this.inner.can_resolve_with_facts(facts);
+  }
+
+  can_resolve_without_facts(): boolean {
+    return this.inner.can_resolve_without_facts();
+  }
+
+  expected(facts: Facts): number {
+    return this.inner.expected(facts);
+  }
+
+  reason(facts: Facts): string {
+    return this.inner.reason(facts);
+  }
+
+  representation(facts: Facts): string {
+    return this.inner.representation(facts);
+  }
+
+  resolve_with_facts(facts: Facts): number {
+    return this.inner.resolve_with_facts(facts);
+  }
+
+  resolve_without_facts(): number {
+    return this.inner.resolve_without_facts();
+  }
+
+  roll(facts: Facts): number {
+    return this.inner.roll(facts);
+  }
+}
+
+const regexp_dice = /^([0-9]*)d([0-9]+)$/;
+const regexp_mul = /^([0-9]+)\*(\[?[^\]]+]?)$/;
+const regexp_fact = /^\{([a-zA-Z_ ]+)}$/;
+const regexp_comment = /^(.+)\((.+)\)$/;
 
 function parseValueString(input: string, reason: string): Value {
-  if (input.includes("+")) {
+  if (input.includes(" + ")) {
     return new ComboValue(
         ...input.split("+").map(v => processValueFromString(v, reason))
     );
@@ -371,18 +554,36 @@ function parseValueString(input: string, reason: string): Value {
   }
 
   if (regexp_dice.test(input)) {
-    let [, count, sides] = regexp_dice.exec(input) as string[];
+    const [, count, sides] = regexp_dice.exec(input) as string[];
 
     return new DiceValue(parseInt(count || "1", 10), parseInt(sides || "0", 10), reason);
   }
 
   if (regexp_fact.test(input)) {
-    let [, fact] = regexp_fact.exec(input) as string[];
+    const [, fact] = regexp_fact.exec(input) as string[];
 
-    return new FixedValue(7, fact || "");
+    return new FactValue(fact || "", reason);
   }
 
-  // FIXME: Write all the handling code here.
+  if (regexp_mul.test(input)) {
+    let [, mul, inner_value] = regexp_mul.exec(input) as string[];
+
+    inner_value = (inner_value || "")
+        .replace("[", "")
+        .replace("]", "")
+        .replace("+", " + ");
+
+    return new MultiplierValue(
+        new FixedValue(parseInt(mul || "1", 10), reason),
+        processValueFromString(inner_value, reason),
+        reason
+    );
+  }
+
+  if (!/^[0-9]+$/.test(input)) {
+    console.log(input, reason);
+  }
+
   return new FixedValue(parseInt(input), reason);
 }
 
@@ -390,18 +591,23 @@ export function processValueFromString(input: string, reason: string, existing?:
   input = input.toString().trim();
 
   if (input.startsWith("+")) {
-    return combine(processValueFromString(input.substring(1), reason), existing);
-  }
+    const value = parseValueString(input.substring(1), reason);
 
-  if (input.startsWith("*")) {
-    console.error("Multipliers not implemented", input, reason);
-
-    return existing || new FixedValue(0, reason);
+    return existing ? combine(value, existing) : new AdditionalValue(value);
   }
 
   const value = parseValueString(input, reason);
 
-  return existing ? new MultiOptionedValue(existing, value) : value;
+  if (existing instanceof AdditionalValue) {
+    return combine(value, existing);
+  }
+  let exist_additions: AdditionalValue[] = []
+
+  if (existing instanceof ComboValue) {
+    exist_additions = existing.values.filter(s => s instanceof AdditionalValue) as AdditionalValue[];
+  }
+
+  return existing ? new MultiOptionedValue(existing, exist_additions.length ? new ComboValue(value, ...exist_additions) : value) : value;
 }
 
 function combine(value: Value, existing?: Value): Value {
@@ -409,12 +615,20 @@ function combine(value: Value, existing?: Value): Value {
     return value;
   }
 
+  if (existing instanceof AdditionalValue) {
+    console.log(existing, value);
+    if (value instanceof AdditionalValue) {
+      return new AdditionalValue(new ComboValue(existing.inner, value.inner));
+    }
+    return combine(existing, value);
+  }
+
   if (existing instanceof MultiOptionedValue) {
     if (value instanceof MultiOptionedValue) {
       return new MultiOptionedValue(...existing.options, ...value.options);
     }
 
-    return new MultiOptionedValue(...existing.options.map(v => combine(value, v)))
+    return new MultiOptionedValue(...existing.options.map(v => combine(value, v)));
   }
 
   if (value instanceof MultiOptionedValue) {

@@ -114,7 +114,7 @@ export function render() {
   );
   document.getElementById("right").appendChild(
     section(
-      { id: "statblock" },
+      { id: "stat_block" },
       p(
       Object.entries(stats)
         .map(([stat, name]) => [

@@ -1,7 +1,7 @@
 name: Were-Rat
 link: ""
 equippable: false
-description: >-
+description: |-
   While you have contracted the were-rat lycanthropy trait, you are still able
   to resist the curse in it's purest form.
   
@@ -24,7 +24,7 @@ abilities:
     description: You have advantage on perception checks that rely on smell.
 
   - name: Embrace Change
-    description: >-
+    description: |-
       You fully embrace your inner rat; the curse takes ahold of you,
       and you forfeiting control of your PC to the DM until the next sunrise.
       
@@ -39,16 +39,16 @@ abilities:
 
 ---
 
-name: Were-Rat (Humanoid Form)
+name: Humanoid Form (Were-Rat)
 link: ""
-description: >-
+description: |-
   The default, Humanoid form
 
 equippable: true
 
 abilities:
   - name: Shape Change to Hybrid From
-    description: >-
+    description: |-
       As an action you can shift your form to normal, rat or hybrid.
       
       When you use this ability, you most succeed on a DC15 wisdom save or your
@@ -62,7 +62,7 @@ abilities:
       dc: 15
 
   - name: Shape Change to Rat Form
-    description: >-
+    description: |-
       As an action you can shift your form to normal, rat or hybrid.
       
       When you use this ability, you most succeed on a DC15 wisdom save or your
@@ -84,15 +84,15 @@ abilities:
 
 ---
 
-name: Were-Rat (Humanoid Form)
+name: Hybrid Form (Were-Rat)
 link: ""
-description: >-
-  The default, Humanoid form
+description: |-
+  The default, Hybrid form
 
 equippable: true
 
 facts:
-  hybrid_rat_form: 1
+  _hybrid_rat_unarmed: 1d4
 
 stats:
   dex: 2
@@ -103,7 +103,7 @@ proficiencies:
 
 abilities:
   - name: Shape Change to Hybrid From
-    description: >-
+    description: |-
       As an action you can shift your form to normal, rat or hybrid.
       
       When you use this ability, you most succeed on a DC15 wisdom save or your
@@ -117,7 +117,7 @@ abilities:
       dc: 15
 
   - name: Shape Change to Rat Form
-    description: >-
+    description: |-
       As an action you can shift your form to normal, rat or hybrid.
       
       When you use this ability, you most succeed on a DC15 wisdom save or your
@@ -139,20 +139,17 @@ abilities:
 
 ---
 
-name: Were-Rat (Rat Form)
+name: Rat Form (Were-Rat)
 link: ""
-description: >-
-  The default, Humanoid form
-
+description: "" # FIXME: Write this
 equippable: true
 
 facts:
-  full_rat_form: 1
-  darkvision: +60
-  walk speed: +5
+  darkvision: "+60"
+  walk speed: "+5"
 
 stats:
-  dex: +2
+  dex: 2
 
 proficiencies:
   - type: weapon
@@ -160,7 +157,7 @@ proficiencies:
 
 abilities:
   - name: Shape Change to Human From
-    description: >-
+    description: |-
       As an action you can shift your form to normal, rat or hybrid.
       
       When you use this ability, you most succeed on a DC15 wisdom save or your
@@ -174,7 +171,7 @@ abilities:
       dc: 15
 
   - name: Shape Change to Hybrid From
-    description: >-
+    description: |-
       As an action you can shift your form to normal, rat or hybrid.
       
       When you use this ability, you most succeed on a DC15 wisdom save or your
@@ -189,7 +186,7 @@ abilities:
 
 attacks:
   - name: Were-Rat Bite
-    description: >-
+    description: |-
       When in rat form, you gain ‘bite’ attack – on hit dealing 1d4 damage.
       This is treated as a finesse weapon for attack rolls and damage calculation
       and you have proficiency with it.

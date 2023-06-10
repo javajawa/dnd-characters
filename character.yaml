@@ -22,7 +22,7 @@ levels: []
 items:
   - name: Healing Potion
     link: http://dnd5e.wikidot.com/wondrous-items:potion-of-healing
-    description: >-
+    description: |-
       You regain hit points when you drink this potion.
       The number of hit points depends on the potion’s rarity,
       as shown in the Potions of Healing table.
@@ -1237,6 +1237,64 @@ backstory:
     Glint noticed a rustling up to the North which could totally be Light. Totally.
     Definitely not more Goblins. Or Orcs. Or anything of that nature.
 
+  "Light's Little Adventure (The Fading, 23rd/24th)": |
+    - head down into the old mine
+    - find a wolfsbane variant of some kind
+    - attempt to make it bloom
+    - breath in...something
+    - carried by...daddy (Snarltooth) or mommy (Dusk)
+    - hear a voice from behind the individual holding Light 
+    - "that was a terrible fall"
+    - "they're a tough kid, they'll be fine"
+    - [smash cut]
+    - Light is laying in a basket/cradle
+    - dry wind across my fur, looking up see canvas, light tan-beige
+    - there's some sand in tent
+    - baby light! such a baby! does a cry!
+    - oh no, daddy is dead. mommy is arguing with a human(oid), well wrapped in gear.
+    - And Light is being kidnapped
+    - a very pale elf, very old, bald, and in the distance. Pale Elf from Shadowfell
+    - the elf gives chase until mommy calls out to someone/something
+    - black shimmer passing through some kind of membrane
+    - aaannnnd come to _in_ the void.
+    - in the distance, a desk with books on it.
+    - the desk is incorporeal, and has a religious symbol on it
+    - the void has no nat
+    - Books are on Shadowfell, and Origins of the The Raven Queen.
+    - One of these is a journal that Light recognises from the Abbey. 
+    - The desk is from the desert tent that Light was a babbo in.
+    - Attempt to Zoom And Enhance
+      - Snarltooth -- Cheetah Yellow, two black streaks from eyes down. Bit more muscular than Light.
+      - Dusk -- Slender, pale fur (nearing snow leopard). Trying to remember causes brain to
+        sometimes think it's actually a vibrant yellow.
+        Black markings: spots on the forehead, streaks from top of eye to ear, also wearing goggles. 
+    - Light breaks down and cries
+    - Mommy gives back pats
+    - "there there. we made it, kind of [...] we will meet again." (???)
+    - Just see Dusk in a heavy black robe, face shrouded in shadow, wearing the emblem of The Raven Queen, as she fades
+
+    - The plant is now slightly damp, but has bloomed. Each one has a bright red stripe.
+    - It looks like it's the right shape! Huzzah!
+    - collect three out of the four available wolfsbane plants (roots and all).
+    - the plants themselves are large, but only one flower each.
+    - wrap them up -- don't want them to expose them to sunlight 
+    - Light steps out into the..dusk...which is too dark. Light's ability to see brightness
+
+    - Visit Mirna. Report the findings of the Wolfsbane, work with it in the dark.
+      We keep the flowers and the roots, which go into a special darkness box.
+      Already inside the box is a vial of unknown liquid.
+    - Amount was roughly 150gp (i.e. 1.5 potions worth).
+
+    - Mirna has finally noticed Light's eyes. And does a concern.     
+    - "abnormal knowledge" is a term used to describe the dragon born at the inn
+
+    - sleep a night
+
+    - on the road:
+      - find a camp, probably they party's
+
+    - the only side of the party combat is the party. Light can't hear the adversaries or their weapons at all.
+
 quest-lines:
   active:
     - Recover Landan (Landan's backstory)
@@ -1255,7 +1313,7 @@ quest-lines:
     # Cure for lycanthropy
     - Gather 10gp of nightshade
     - Grow the other 300gp of nightshade (with help of Mirna)
-    - Acquire 100gp of wolfsbane
+    - Acquire 300gp of wolfsbane
     - Look for supplies in Thundertree's ruins
     - Work out divine blessings.
     # Misc.

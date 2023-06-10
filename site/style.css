@@ -80,9 +80,12 @@ section::before, #inventory a::before {
   bottom: 0;
   z-index: -1;
   box-shadow: 2px 3px 20px black, 0 0 125px #8f5922 inset;
-  background: #fffef0;
-  background-image: var(--pepper);
+  background: #fffef0 var(--pepper);
   filter: url(#wavy2);
+}
+
+section section::before {
+  box-shadow: none;
 }
 
 dl {
@@ -127,9 +130,8 @@ details img {
     max-height: 300px;
 }
 
-#statblock {
+#stat_block {
   text-align: center;
-  transform: rotate(0.8deg);
 }
 
 #identity {
@@ -145,18 +147,14 @@ details img {
   transform: skew(-1deg, 2deg);
 }
 
-#notes {
-  transform: rotate(-0.2deg);
-}
-
-#statblock div {
+#stat_block div.roundel {
   display: inline-block;
   width: 4rem;
   text-align: center;
   padding-bottom: 1rem;
 }
 
-#statblock span {
+.roundel span {
   font-size: 60%;
   text-transform: capitalize;
 }
@@ -177,7 +175,6 @@ details img {
 }
 
 #inventory::before {
-  background-image: none;
   background: none;
   filter: none;
 }
@@ -198,21 +195,24 @@ blockquote {
 }
 
 .leather, blockquote {
-  background: #906b52;
+  background: #906b52 url(leather.webp);
   box-shadow: 0 0 0 2px #906b52, 2px 1px 3px 2px rgba(10, 10, 0, 0.5);
   border: 1px dashed #624a2e;
   border-radius: 5px;
-  background-image: url(leather.png);
 }
 
 .leather > td {
-  border: 1px dashed #624a2e;
-  border-width: 2px 0;
+  border: dashed #624a2e;
+  border-width: 1px 0;
 }
 
 td > details {
   margin: 0;
 }
+details[open] {
+  padding: 0.1rem 0.5rem;
+}
+
 
 .stat {
   position: relative;
@@ -241,22 +241,60 @@ td > details {
   right: -0.85em;
 }
 
-attr,
 [title] {
   cursor: pointer;
   text-decoration: 1px blue wavy;
 }
 
 table {
-  width: calc(100% - 8rem);
+  width: 100%;
   margin: 0 auto;
-  transform: rotate(-0.4deg);
 }
 
 table,
 td,
 th {
-  padding: 0.1rem;
-  border-spacing: 0 0.8rem;
+  padding: 0 0.1rem;
+  border-spacing: 0 0.5rem;
   text-align: left;
+}
+
+td>label {
+  display: block;
+}
+
+.tabs {
+  position: relative;
+  padding-top: 31px;
+}
+
+.tab {
+  margin: 0;
+  clear: both;
+}
+
+.tab>label {
+  position: absolute;
+  top: 0;
+  padding: 4px 6px;
+  background: #906b52;
+  border-radius: 5px 5px 0 0;
+}
+
+.tab [type=radio] {
+  display: none;
+}
+
+.tabs .content {
+  display: none;
+  padding: 0.5rem 1rem;
+}
+
+.tab:has([type=radio]:checked)>label, .tab:has([type=radio]:checked) {
+  background: rgba(143, 89, 44, 0.2);
+}
+
+[type=radio]:checked ~ .content {
+  display: block;
+  width: auto;
 }

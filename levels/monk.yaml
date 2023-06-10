@@ -2,7 +2,7 @@ name: Monk 1
 class: Monk
 level: 1
 link: http://dnd5e.wikidot.com/monk
-description: >-
+description: |-
   Monks are united in their ability to magically harness the energy that flows in their bodies.
   Whether channeled as a striking display of combat prowess or a subtler focus of
   defensive ability and speed, this energy infuses all that a monk does.
@@ -56,11 +56,11 @@ proficiencies:
     target: unarmed
 abilities:
   - name: Unarmored Defense
-    description: >-
+    description: |-
       Beginning at 1st level, while you are wearing no armor and not wielding a shield,
       your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
   - name: Martial Arts
-    description: >-
+    description: |-
       At 1st level, your practice of martial arts gives you mastery of
       combat styles that use unarmed strikes and monk weapons,
       which are short-swords and any simple melee weapons that don't have
@@ -79,7 +79,7 @@ abilities:
        - When you use the Attack action with an unarmed strike or a monk weapon
       on your turn, you can make one unarmed strike as a bonus action.
   - name: Dedicated Weapon
-    description: >-
+    description: |-
       Also at 2nd level, you train yourself to use a variety of weapons as monk weapons,
       not just simple melee weapons and short-swords.
       Whenever you finish a short or long rest, you can touch one weapon, focus your ki on it,
@@ -98,7 +98,7 @@ name: Monk 2
 class: Monk
 level: 2
 link: http://dnd5e.wikidot.com/monk
-description: >-
+description: |-
   Monks are united in their ability to magically harness the energy that flows in their bodies.
   Whether channeled as a striking display of combat prowess or a subtler focus of
   defensive ability and speed, this energy infuses all that a monk does.
@@ -106,7 +106,7 @@ hit_die: d8
 hit_points: 5
 resources:
   - name: Ki
-    description: >-
+    description: |-
       Starting at 2nd level, your training allows you to harness the mystic energy of ki.
       Your access to this energy is represented by a number of ki points.
       Your monk level determines the number of points you have, as shown in the
@@ -124,30 +124,30 @@ resources:
 
       Some of your ki features require your target to make a saving throw to
       resist the feature's effects.
-    pool: "{monk}"
+    pool: "{Monk}"
     regain:
-      amount: "{monk}"
+      amount: "{Monk}"
       every: short rest
 facts:
   walk speed: "+10"
   ki_save: "8 + wis + prof"
 abilities:
   - name: "Flurry of Blows"
-    description: >-
+    description: |-
       Immediately after you take the Attack action on your turn,
       you can spend 1 ki point to make two unarmed strikes as a bonus action.
     resources:
       ki: 1
       bonus action: 1
   - name: "Patient Defense"
-    description: >-
+    description: |-
       You can spend 1 ki point to take the Dodge action as a
       bonus action on your turn.
     resources:
       ki: 1
       bonus action: 1
   - name: "Step of the Wind"
-    description: >-
+    description: |-
       You can spend 1 ki point to take the Disengage or Dash action as a
       bonus action on your turn, and your jump distance is doubled for the turn.
     resources:
@@ -159,7 +159,7 @@ abilities:
 name: Monk 3
 class: Monk
 level: 3
-description: >-
+description: |-
   Monks are united in their ability to magically harness the energy that flows in their bodies.
   Whether channeled as a striking display of combat prowess or a subtler focus of
   defensive ability and speed, this energy infuses all that a monk does.
@@ -173,7 +173,7 @@ proficiencies:
 
 abilities:
   - name: "Hands of Healing"
-    description: >-
+    description: |-
       At 3rd level, your mystical touch can mend wounds.
       As an action, you can spend 1 ki point to touch a creature and restore a
       number of hit points equal to a roll of your Martial Arts die + your
@@ -184,10 +184,10 @@ abilities:
     resources:
       ki: 1
     dice_rolls:
-      healing: "1{martial_arts} + wis"
+      healing: "{martial_arts} + wis"
 
   - name: "Hands of Harm"
-    description: >-
+    description: |-
       At 3rd level, you use your ki to inflict wounds.
       When you hit a creature with an unarmed strike,
       you can spend 1 ki point to deal extra necrotic damage equal
@@ -196,10 +196,10 @@ abilities:
     resources:
       ki: 1
     dice_rolls:
-      Damage: "1{martial_arts} + wis"
+      Damage: "{martial_arts} + wis"
 
   - name: Deflect Missiles
-    description: >-
+    description: |-
       Starting at 3rd level, you can use your reaction to deflect or catch the
       missile when you are hit by a ranged weapon attack.
       When you do so, the damage you take from the attack is reduced by
@@ -213,10 +213,10 @@ abilities:
       You make this attack with proficiency, regardless of your weapon
       proficiencies, and the missile counts as a monk weapon for the attack.
     dice_rolls:
-      damage_reduction: 1d10 + dex + {monk}
+      damage_reduction: "1d10 + dex + {Monk}"
 
   - name: Ki-Fueled Attack
-    description: >-
+    description: |-
       Also at 3rd level, if you spend 1 ki point or more as part of your action on your turn,
       you can make one attack with an unarmed strike or a monk weapon as a bonus
       action before the end of the turn.
@@ -226,7 +226,7 @@ abilities:
 name: Monk 4
 class: Monk
 level: 4
-description: >-
+description: |-
   Monks are united in their ability to magically harness the energy that flows in their bodies.
   Whether channeled as a striking display of combat prowess or a subtler focus of
   defensive ability and speed, this energy infuses all that a monk does.
@@ -239,26 +239,26 @@ stats:
 abilities:
   - name: Slow Fall
     link: http://dnd5e.wikidot.com/monk#toc13
-    description: >-
+    description: |-
       Beginning at 4th level, you can use your reaction when you fall to reduce
       any falling damage you take by an amount equal to five times your monk level.
   - name: Quickened Healing
     link: http://dnd5e.wikidot.com/monk#toc14
-    description: >-
+    description: |-
       Also at 4th level, as an action, you can spend 2 ki points and roll a Martial Arts die.
       You regain a number of hit points equal to the number rolled plus your proficiency bonus.
     resources:
       action: 1
       ki: 2
     dice_rolls:
-      healing: 1{martial_arts} + prof
+      healing: "{martial_arts} + prof"
 
 ---
 
 name: Monk 5
 class: Monk
 level: 5
-description: >-
+description: |-
   Monks are united in their ability to magically harness the energy that flows in their bodies.
   Whether channeled as a striking display of combat prowess or a subtler focus of
   defensive ability and speed, this energy infuses all that a monk does.
@@ -270,12 +270,12 @@ facts:
 
 abilities:
   - name: Extra Attack
-    description: >-
+    description: |-
       Beginning at 5th level, you can attack twice, instead of once,
       whenever you take the Attack action on your turn.
 
   - name: Stunning Strike
-    description: >-
+    description: |-
       Starting at 5th level, you can interfere with the flow of ki in an opponent's body.
       When you hit another creature with a melee weapon attack, you can spend 1 ki point
       to attempt a stunning strike.
@@ -286,7 +286,7 @@ abilities:
       dc: 8 + prof + wis
     status:
       - name: Stunned
-        description: >-
+        description: |-
           A stunned creature is incapacitated (can't take actions or reactions),
           can’t move, and can speak only falteringly.
           The creature automatically fails Strength and Dexterity saving throws.
@@ -294,7 +294,7 @@ abilities:
         length: end of next turn
 
   - name: Focused Aim
-    description: >-
+    description: |-
       Also at 5th level, when you miss with an attack roll,
       you can spend 1 to 3 ki points to increase your attack roll by 2 for
       each of these ki points you spend, potentially turning the miss into a hit.

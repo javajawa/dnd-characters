@@ -1,4 +1,4 @@
-name: Fist Wraps
+name: _fist_wraps
 link: https://www.dndbeyond.com/magic-items/6568025-fist-wraps
 description: |
   A set of leather bands with rivets inserted into them, designed to be wrapped around the user's fists.
@@ -7,7 +7,7 @@ description: |
 weight: 1
 value: unknown
 facts:
-  fist wraps: 1
+  _fist_wraps: 1
 
 ---
 
@@ -24,11 +24,11 @@ attacks:
     resources:
       action: 1
       hands: 1
-    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: str|dex
     damage:
       bludgeoning: 1d6
-      force: "{eldritch_maul}d6"
+      force: "{_eldritch_maul}(eldritch maul)"
     damage_bonuses: str|dex
   - name: Quarterstaff, 2-handed
     description: ""
@@ -36,11 +36,11 @@ attacks:
     resources:
       action: 1
       hands: 1
-    reach: "5 + 10{eldritch_maul}(eldritch maul)"
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: str|dex
     damage:
       bludgeoning: 1d8
-      force: "{eldritch_maul}d6"
+      force: "{_eldritch_maul}(eldritch maul)"
     damage_bonuses: str|dex
 
 ---
@@ -89,10 +89,10 @@ attacks:
     resources:
       action: 1
     attack_bonuses: str|dex
-    reach: 5 + 10*{eldritch_maul}(Eldritch Maul)
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     damage:
       piercing: 1d4
-      force: "{eldritch_maul}d6"
+      force: "{_eldritch_maul}(eldritch maul)"
     damage_bonuses: str|dex
 
 ---
@@ -114,7 +114,7 @@ attacks:
       action: 1
     attack_bonuses: str|dex
     range:
-        - "20+5*dex(dex modifier)+5*str(str modifier)"
+        - "20 + 5*dex(dex modifier) + 5*str(str modifier)"
         - 100
     damage:
       slashing: 1d6
@@ -124,8 +124,8 @@ attacks:
     resources:
       action: 1
     attack_bonuses: str|dex
-    reach: 5 + 10*{eldritch_maul}(Eldritch Maul)
+    reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     damage:
       slashing: 1d6
-      force: "{eldritch_maul}d6"
+      force: "{_eldritch_maul}(eldritch maul)"
     damage_bonuses: str|dex

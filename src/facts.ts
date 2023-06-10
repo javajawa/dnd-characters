@@ -1,79 +1,9 @@
-import {
-    ComboValue, DiceValue,
-    FixedValue,
-    MultiplierValue,
-    processValueFromString,
-    ProficiencyValue,
-    Value
-} from "./values";
+import {ComboValue, FixedValue, MultiplierValue, processValueFromString, Value} from "./values";
 import {Skill, skills, Stat} from "./stats";
 import {Level} from "./schema";
-import {Stats} from "./objects";
+import {Ability, Feat, Item, MeleeAttack, RangedAttack, Stats} from "./objects";
 
 type ProficiencyGroups = "ability_save" | "skill" | "weapon" | "armour" | "equipment"
-
-export class MeleeAttack {
-    name: string
-    from: string
-    description: string
-    proficiency: string
-
-    reach: Value
-    attack: Value
-    damage: Value
-
-    save?: {
-        stat: Stat
-        skill?: Skill
-        dc: Value
-    }
-
-    status?: {
-        name: string
-        length: string
-        description?: string
-    }[]
-
-    constructor(name: string, from: string, description: string, proficiency: string, reach: Value, attack: Value, damage: Value) {
-        this.name = name;
-        this.from = from;
-        this.description = description;
-        this.proficiency = proficiency;
-        this.reach = reach;
-        this.attack = attack;
-        this.damage = damage;
-    }
-
-    attack_roll(facts: Facts): Value {
-        if (!(this.proficiency in facts.proficiencies.weapon)) {
-            return this.attack;
-        }
-
-        return new ComboValue(new DiceValue(1, 20, "Attack Die"), this.attack, new ProficiencyValue("Proficient with " + this.proficiency));
-    }
-}
-
-// export interface Ability {
-//   name: string
-//   description: string
-//   link?: string
-//
-//   range?: [Value, Value]
-//   resources?: { [k: string]: Value }
-//   dice_rolls?: { [k: string]: Value }
-//
-//   save?: {
-//     stat: Stat
-//     skill?: Skill
-//     dc: Value
-//   }
-//
-//   status?: {
-//     name: string
-//     length: string
-//     description?: string
-//   }[]
-// }
 
 export class Facts {
     private readonly data: { [key: string]: Value }
@@ -89,13 +19,19 @@ export class Facts {
     }
 
     private hp: ComboValue = new ComboValue()
-    private readonly hit_dice: ComboValue = new ComboValue()
+    private readonly hitDice: ComboValue = new ComboValue()
 
     readonly notes: { [k: string]: string }
 
-    attacks: (MeleeAttack)[]
+    toggles: Feat[]
+    inventory: Item[]
+    attacks: (MeleeAttack|RangedAttack)[]
+    abilities: Ability[]
 
     constructor(notes: { [k: string]: string }) {
+        this.inventory = [];
+        this.toggles = [];
+        this.abilities = [];
         this.data = {};
         this.levels = {};
         this.notes = notes;
@@ -133,7 +69,7 @@ export class Facts {
 
         this.levels[level.class] = Math.max(level.level, this.levels[level.class] || 0);
         this.hp.values.push(new FixedValue(level.hit_points, reason));
-        this.hit_dice.values.push(processValueFromString(level.hit_die, reason));
+        this.hitDice.values.push(processValueFromString(level.hit_die, reason));
     }
 
     add_proficiency(type: ProficiencyGroups, target: string, reason: string): void {
@@ -167,7 +103,7 @@ export class Facts {
 
     get character_level(): number {
         return Object.values(this.levels)
-            .reduce((total, class_levels) => total + class_levels, 0);
+            .reduce((total, classLevels) => total + classLevels, 0);
     }
 
     get proficiency_bonus(): number {

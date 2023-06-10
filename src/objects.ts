@@ -1,24 +1,29 @@
 import {Feat as IFeat, Item as IItem} from "./schema";
-import {ComboValue} from "./values";
+import {ComboValue, DiceValue, ProficiencyValue, Value} from "./values";
+import {Skill, Stat} from "./stats";
+import {Facts} from "./facts";
 
 export class Item implements IItem {
     readonly name: string;
     readonly description: string;
     readonly link: string;
 
-    readonly equipped: boolean;
     readonly count: number;
     readonly value: number | string;
     readonly weight: number;
 
-    constructor(name: string, description: string, link: string, equipped: boolean, count: number, value: string, weight: number) {
+    readonly equippable: boolean;
+    equipped: boolean;
+
+    constructor(name: string, description: string, link: string, count: number, value: string, weight: number, equippable: boolean, equipped?: boolean) {
         this.name = name;
         this.description = description;
         this.link = link;
-        this.equipped = equipped;
         this.count = count;
         this.value = value;
         this.weight = weight;
+        this.equippable = equippable;
+        this.equipped = equipped || false;
     }
 }
 
@@ -28,14 +33,14 @@ export class Feat implements IFeat {
     readonly link: string;
 
     readonly equippable: boolean;
-    readonly equipped: boolean;
+    equipped: boolean;
 
     constructor(name: string, description: string, link: string, equippable: boolean, equipped?: boolean) {
         this.name = name;
         this.description = description;
         this.link = link;
         this.equippable = equippable;
-        this.equipped = equipped ? equipped || false : true;
+        this.equipped = equipped || false;
     }
 }
 
@@ -54,5 +59,131 @@ export class Stats {
         this.int = new ComboValue();
         this.wis = new ComboValue();
         this.cha = new ComboValue();
+    }
+}
+
+export class MeleeAttack {
+    name: string
+    from: string
+    description: string
+    proficiency: string
+
+    reach: Value
+    attack: Value
+    damage: Value
+
+    dice_rolls: { [k: string]: Value } = {}
+
+    save?: {
+        stat: Stat
+        skill?: Skill
+        dc: Value
+    }
+
+    status?: {
+        name: string
+        length: string
+        description?: string
+    }[]
+
+    constructor(name: string, from: string, description: string, proficiency: string, reach: Value, attack: Value, damage: Value) {
+        this.name = name;
+        this.from = from;
+        this.description = description;
+        this.proficiency = proficiency;
+        this.reach = reach;
+        this.attack = attack;
+        this.damage = damage;
+    }
+
+    attack_roll(facts: Facts): Value {
+        if (!(this.proficiency in facts.proficiencies.weapon)) {
+            return this.attack;
+        }
+
+        return new ComboValue(new DiceValue(1, 20, "Attack Die"), this.attack, new ProficiencyValue("Proficient with " + this.proficiency));
+    }
+}
+
+export class RangedAttack {
+    name: string
+    from: string
+    description: string
+    proficiency: string
+
+    standard_range: Value
+    max_range: Value
+    attack: Value
+    damage: Value
+
+    dice_rolls: { [k: string]: Value } = {}
+
+    save?: {
+        stat: Stat
+        skill?: Skill
+        dc: Value
+    }
+
+    status?: {
+        name: string
+        length: string
+        description?: string
+    }[]
+
+    constructor(name: string, from: string, description: string, proficiency: string, standard_range: Value, max_range: Value, attack: Value, damage: Value) {
+        this.name = name;
+        this.from = from;
+        this.description = description;
+        this.proficiency = proficiency;
+        this.standard_range = standard_range;
+        this.max_range = max_range;
+        this.attack = attack;
+        this.damage = damage;
+    }
+
+    attack_roll(facts: Facts): Value {
+        if (!(this.proficiency in facts.proficiencies.weapon)) {
+            return this.attack;
+        }
+
+        return new ComboValue(new DiceValue(1, 20, "Attack Die"), this.attack, new ProficiencyValue("Proficient with " + this.proficiency));
+    }
+}
+
+export class Ability {
+    name: string
+    from: string
+    description: string
+    link: string
+
+    range: [Value, Value] | null
+
+    dice_rolls: { [k: string]: Value }
+
+    save: {
+        stat: Stat
+        skill?: Skill
+        dc: Value
+    } | null
+
+    status?: {
+        name: string
+        length: string
+        description?: string
+    }[]
+
+    constructor(
+        name: string, from: string, description: string, link: string,
+        range: [Value, Value] | null,
+        save: { stat: Stat, skill?: Skill, dc: Value } | null,
+        rolls: { [k: string]: Value } | null
+    ) {
+        this.name = name;
+        this.from = from;
+        this.description = description;
+        this.link = link;
+        this.range = range;
+        this.save = save;
+        this.dice_rolls = rolls || {};
     }
 }

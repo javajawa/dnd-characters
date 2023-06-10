@@ -36,5 +36,5 @@
     "noPropertyAccessFromIndexSignature": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false
-  }
+  },
 }

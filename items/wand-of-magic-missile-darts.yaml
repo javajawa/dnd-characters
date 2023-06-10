@@ -1,5 +1,5 @@
 name: Wand of Magic Missile Darts
-description: >-
+description: |-
   This wand has 3 charges.
   While holding it, you can use an action to cast the magic missile dart spell from it.
   When you expend 1 of its charges you instead cast the magic missile spell from it.
@@ -10,7 +10,7 @@ weight: 1
 value: unknown
 resources:
   - name: Magic Missile Wand Charges
-    description: >-
+    description: |-
       This wand has 3 charges.
       While holding it, you can use an action to cast the magic missile dart spell from it.
       When you expend 1 of its charges you instead cast the magic missile spell from it.
@@ -41,5 +41,5 @@ attacks:
       hands: 1
       magic_missile_wand_charge: 1
     damage:
-      force: 1d4
-    damage_bonuses: 1
+      force: 3*[1d4+1]
+    damage_bonuses: 0

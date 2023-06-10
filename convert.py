@@ -31,13 +31,10 @@ backstory: dict[str, str] = character["backstory"]
 for key, value in backstory.items():
     backstory[key] = markdown.markdown(value)
 
-abilities = []
-attacks = []
-for thing in character["items"] + character["levels"] + character["feats"]:
-    abilities.extend(x["name"] for x in thing.get("abilities", []))
-    attacks.extend(x["name"] for x in thing.get("attacks", []))
-
-print(abilities, attacks)
+for category in ["items", "levels", "feats"]:
+    for thing in character.get(category, []):
+        for ability in thing.get("abilities", []):
+            ability["description"] = markdown.markdown(ability["description"])
 
 with (path / "site" / "character.json").open("w", encoding="utf-8") as outfile:
     json.dump(character, outfile, indent=2)
