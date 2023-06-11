@@ -311,7 +311,6 @@ definitions:
           - save
       - required:
           - damage
-          - damage_bonuses
 
   Attack:
     type: object
@@ -344,8 +343,6 @@ definitions:
         $ref: "#/definitions/Value"
       damage:
         $ref: "#/definitions/Damage"
-      damage_bonuses:
-        $ref: "#/definitions/Value"
       resources:
         type: object
         patternProperties:

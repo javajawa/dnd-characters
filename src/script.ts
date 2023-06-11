@@ -1,9 +1,9 @@
-import {AbstractThingSource, Character as CharacterSchema} from "./schema";
+import {AbstractThingSource, Character as CharacterSchema, DamageType} from "./schema";
 import {Ability, Feat, Item, MeleeAttack, RangedAttack} from "./objects";
 import {Facts} from "./facts";
 import {Stat} from "./stats";
 import {render} from "./render";
-import {ComboValue, processValueFromString} from "./values";
+import {processValueFromString, Value} from "./values";
 
 async function run(): Promise<void> {
     const response = await fetch("./character.json");
@@ -108,10 +108,12 @@ function loadFactsFromSource(facts: Facts, source: AbstractThingSource, reason: 
     }
 
     for (const attack of source.attacks || []) {
-        const damage = new ComboValue(
-            ...Object.entries(attack.damage || {}).map(([type, amount]) => processValueFromString(amount, type)),
-            processValueFromString(attack.damage_bonuses || "0", "bonuses")
-        );
+
+        const damage =
+            Object.fromEntries(
+                Object.entries(attack.damage || {})
+                    .map(([type, amount]) => [type, processValueFromString(amount, type)])
+            ) as { [k in DamageType]: Value };
 
         if (attack.reach) {
             facts.attacks.push(new MeleeAttack(

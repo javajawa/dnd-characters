@@ -1,4 +1,4 @@
-import {Feat as IFeat, Item as IItem} from "./schema";
+import {DamageType, Feat as IFeat, Item as IItem} from "./schema";
 import {ComboValue, DiceValue, ProficiencyValue, Value} from "./values";
 import {Skill, Stat} from "./stats";
 import {Facts} from "./facts";
@@ -70,7 +70,7 @@ export class MeleeAttack {
 
     reach: Value
     attack: Value
-    damage: Value
+    damage: { [k in DamageType]: Value }
 
     dice_rolls: { [k: string]: Value } = {}
 
@@ -86,7 +86,7 @@ export class MeleeAttack {
         description?: string
     }[]
 
-    constructor(name: string, from: string, description: string, proficiency: string, reach: Value, attack: Value, damage: Value) {
+    constructor(name: string, from: string, description: string, proficiency: string, reach: Value, attack: Value, damage: { [k in DamageType]: Value }) {
         this.name = name;
         this.from = from;
         this.description = description;
@@ -96,12 +96,18 @@ export class MeleeAttack {
         this.damage = damage;
     }
 
-    attack_roll(facts: Facts): Value {
-        if (!(this.proficiency in facts.proficiencies.weapon)) {
-            return this.attack;
+    attack_roll(facts: Facts): ComboValue {
+        const attack = new ComboValue(new DiceValue(1, 20, "Attack Die"), this.attack);
+
+        if (this.proficiency in facts.proficiencies.weapon) {
+            attack.values.push(new ProficiencyValue("Proficient with " + this.proficiency));
         }
 
-        return new ComboValue(new DiceValue(1, 20, "Attack Die"), this.attack, new ProficiencyValue("Proficient with " + this.proficiency));
+        return attack;
+    }
+
+    get total_damage(): Value {
+        return new ComboValue(...Object.values(this.damage));
     }
 }
 
@@ -114,7 +120,7 @@ export class RangedAttack {
     standard_range: Value
     max_range: Value
     attack: Value
-    damage: Value
+    damage: { [k in DamageType]: Value }
 
     dice_rolls: { [k: string]: Value } = {}
 
@@ -130,7 +136,7 @@ export class RangedAttack {
         description?: string
     }[]
 
-    constructor(name: string, from: string, description: string, proficiency: string, standard_range: Value, max_range: Value, attack: Value, damage: Value) {
+    constructor(name: string, from: string, description: string, proficiency: string, standard_range: Value, max_range: Value, attack: Value, damage: { [k in DamageType]: Value }) {
         this.name = name;
         this.from = from;
         this.description = description;
@@ -141,12 +147,18 @@ export class RangedAttack {
         this.damage = damage;
     }
 
-    attack_roll(facts: Facts): Value {
-        if (!(this.proficiency in facts.proficiencies.weapon)) {
-            return this.attack;
+    attack_roll(facts: Facts): ComboValue {
+        const attack = new ComboValue(new DiceValue(1, 20, "Attack Die"), this.attack);
+
+        if (this.proficiency in facts.proficiencies.weapon) {
+            attack.values.push(new ProficiencyValue("Proficient with " + this.proficiency));
         }
 
-        return new ComboValue(new DiceValue(1, 20, "Attack Die"), this.attack, new ProficiencyValue("Proficient with " + this.proficiency));
+        return attack;
+    }
+
+    get total_damage(): Value {
+        return new ComboValue(...Object.values(this.damage));
     }
 }
 

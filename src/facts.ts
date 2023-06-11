@@ -1,9 +1,16 @@
-import {ComboValue, FixedValue, MultiplierValue, processValueFromString, Value} from "./values";
-import {Skill, skills, Stat} from "./stats";
+import {
+    ComboValue,
+    FixedValue,
+    MultiplierValue,
+    processValueFromString,
+    StatValue,
+    Value
+} from "./values";
+import {Stat} from "./stats";
 import {Level} from "./schema";
 import {Ability, Feat, Item, MeleeAttack, RangedAttack, Stats} from "./objects";
 
-type ProficiencyGroups = "ability_save" | "skill" | "weapon" | "armour" | "equipment"
+type ProficiencyGroups = "ability_save" | "skill" | "weapon" | "armour" | "equipment" | "expertise"
 
 export class Facts {
     private readonly data: { [key: string]: Value }
@@ -13,6 +20,7 @@ export class Facts {
     readonly proficiencies: {
         "ability_save": { [k: string]: string }
         "skill": { [k: string]: string }
+        "expertise": { [k: string]: string }
         "weapon": { [k: string]: string }
         "armour": { [k: string]: string }
         "equipment": { [k: string]: string }
@@ -43,6 +51,7 @@ export class Facts {
             "weapon": {},
             "armour": {},
             "equipment": {},
+            "expertise": {},
         };
     }
 
@@ -110,38 +119,7 @@ export class Facts {
         return 2 + Math.floor((this.character_level - 1) / 4);
     }
 
-    modifier(skill: Stat | Skill): number {
-        if (skill in Stat) {
-            const stat = this.stats[skill as Stat].roll(this);
-
-            return Math.floor((stat - 10) / 2);
-        }
-
-        if (skill in Skill) {
-            const stat = skills[skill as Skill];
-            const modifier = this.modifier(stat);
-
-            if (skill in this.proficiencies.skill) {
-                return modifier + this.proficiency_bonus;
-            }
-
-            return modifier;
-        }
-
-        return 0;
-    }
-
-    save(stat: Stat): number {
-        const modifier = this.modifier(stat);
-
-        if (stat in this.proficiencies.ability_save) {
-            return modifier + this.proficiency_bonus;
-        }
-
-        return modifier;
-    }
-
     get hit_points(): Value {
-        return new ComboValue(this.hp, new MultiplierValue(new FixedValue(this.character_level, "Character Levels"), new FixedValue(this.modifier(Stat.con), "Constitution Modifier"), "Con modifier HP"));
+        return new ComboValue(this.hp, new MultiplierValue(new FixedValue(this.character_level, "Character Levels"), new StatValue(Stat.con, "Constitution Modifier"), "Con modifier HP"));
     }
 }

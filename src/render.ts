@@ -2,9 +2,9 @@
 
 import {elemGenerator} from "./elems";
 import {Facts} from "./facts";
-import {Info} from "./schema";
+import {DamageType, Info} from "./schema";
 import {Skill, skills, Stat, stats} from "./stats";
-import {ComboValue, DiceValue, SkillValue, Value} from "./values";
+import {ComboValue, DiceValue, SkillValue, StatSaveValue, StatValue, Value} from "./values";
 import {CharacterState} from "./script";
 import {Ability, MeleeAttack, RangedAttack} from "./objects";
 
@@ -37,40 +37,94 @@ function request_roll(roll: string) {
     document.dispatchEvent(e);
 }
 
-function simple_roll(char_name: string, roll_name: string, value: ComboValue, facts: Facts): void {
+function roll_string(value: ComboValue, facts: Facts): [number, string] {
     const modifier = value.values
         .filter(v => v.can_resolve_with_facts(facts))
         .map(v => v.resolve_with_facts(facts))
         .reduce((total, value) => total + value, 0);
 
-    const roll_def = value.to_roll20(facts);
-
-    // @ts-ignore
-    request_roll(
-        `&{template:simple} {{charname=${char_name}}} {{rname=${roll_name}}} {{always=1}} {{mod=${modifier}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
-    );
-
-    // const attack = "&{template:atk} {{charname=Light}} {{always=1}} {{mod=+8}} {{rname=Quarterstaff (1h)}} {{rnamec=Quarterstaff (1h)}} {{r1=[[1d20cs>20 + 5[DEX] + 3[PROF]]]}} 1d20cs>20 + 5[DEX] + 3[PROF]]]}} {{r2=[[1d20cs>20 + 5[DEX] + 3[PROF]]]}} 1d20cs>20 + 5[DEX] + 3[PROF]]]}}"
-    // const damage = "&{template:dmg} {{charname=Light}} {{always=1}} {{damage=1}} {{dmg1=[[1d6 + 6]]}} {{dmg1flag=1}} {{dmg1type=Bludgeoning}} {{dmg2=[[1d6]]}} {{dmg2flag=1}} {{dmg2type=Force}}"
+    return [modifier, value.to_roll20(facts)];
 }
 
+function simple_roll(roll_name: string, _value: Value, facts: Facts): void {
+    const value = new ComboValue(new DiceValue(1, 20, ""), _value);
+    const [modifier, roll_def] = roll_string(value, facts);
+
+    request_roll(
+        `&{template:simple} {{rname=${roll_name}}} {{always=1}} {{mod=${modifier}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
+    );
+}
+
+function attack_roll(weapon: string, attack: ComboValue, facts: Facts): void {
+    const [modifier, roll_def] = roll_string(attack, facts);
+
+    request_roll(
+        `&{template:atk} {{rname=${weapon}}} {{always=1}} {{mod=${modifier}}} {{rname=${weapon}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
+    );
+}
+
+function damage_roll(weapon: string, damage: { [k in DamageType]: Value}, facts: Facts): void {
+    Object.entries(damage)
+        .map(([type, v]) => [type, v instanceof ComboValue ? v : new ComboValue(v)] as [string, ComboValue])
+        .filter(([_, damage]) => damage.expected(facts) > 0)
+        .reduce(
+        (acc, [type, value], idx) => {
+            const j = idx % 2;
+            const i = (idx - j) / 2;
+
+            if (j === 0) {
+                acc[i] = acc[i] || [[type, value], [null, null]];
+            } else {
+                // @ts-ignore
+                acc[i][j] = [type, value];
+            }
+
+            return acc;
+        },
+        [] as [[string, ComboValue], [string|null, ComboValue|null]][]
+    ).map(([[type_1, damage_1], [type_2, damage_2]]) => {
+        request_roll(
+            `&{template:dmg} {{rname=${weapon}}} {{damage=1}} ` +
+            `{{dmg1flag=1}} {{dmg1type=${type_1}}} {{dmg1=[[${damage_1.to_roll20(facts)}]]}} ` +
+            `${type_2 ? "{{dmg2flag= 1 : 0}}" : ""} {{dmg2type=${type_2 || "0"}}} {{dmg2=[[${damage_2?.to_roll20(facts) || "0"}]]}} `
+        );
+    })
+
+
+}
 function stat_block(facts: Facts, state: CharacterState) {
     return section(
         main(
             {id: "stat_block"},
             p(
-                Object.entries(stats).map(([stat, name]) =>
-                    div(
+                Object.entries(stats).map(([id, name]) => {
+                    const stat = facts.stats[id as Stat];
+                    const roll = new StatValue(id as Stat, "roll");
+                    const save = new StatSaveValue(id as Stat, "save");
+
+                    return div(
                         {"class": "roundel"},
                         span(name),
                         abbr(
-                            value(facts.stats[stat as Stat] as ComboValue, facts),
+                            value(stat, facts),
                             {class: "stat leather"},
-                            abbr(facts.modifier(stat as Stat).toString(10), {class: "stat left leather"}),
-                            abbr(facts.save(stat as Stat).toString(10), {class: "stat right leather"})
+                            abbr(
+                                roll.resolve_with_facts(facts).toString(10),
+                                {
+                                    "class": "stat left leather",
+                                    "click": _ => simple_roll(name + " check", roll, facts),
+                                }
+                            ),
+                            abbr(
+                                save.resolve_with_facts(facts).toString(10),
+                                {
+                                    "class": "stat right leather",
+                                    "click": _ => simple_roll(name + " save", save, facts),
+                                }
+                            ),
                         )
                     )
-                ),
+                }),
             ),
             p(
                 div(
@@ -146,7 +200,7 @@ function stat_block(facts: Facts, state: CharacterState) {
                                     }
                                 }
 
-                                return b.damage.expected(facts) - a.damage.expected(facts);
+                                return b.total_damage.expected(facts) - a.total_damage.expected(facts);
                             }
                         ).map((attack) =>
                             tr(
@@ -160,8 +214,15 @@ function stat_block(facts: Facts, state: CharacterState) {
                                     [span(value(attack.standard_range, facts)), "/", span(value(attack.max_range, facts))],
                                     "ft"
                                 ),
-                                td(value(attack.attack_roll(facts), facts)),
-                                td(value(attack.damage, facts), " (mean: ", attack.damage.expected(facts).toString(10), ")"),
+                                td(
+                                    value(attack.attack_roll(facts), facts),
+                                    {"click": _ => attack_roll(attack.name, attack.attack_roll(facts), facts)},
+                                ),
+                                td(
+                                    value(attack.total_damage, facts),
+                                    " (mean: ", attack.total_damage.expected(facts).toString(10), ")",
+                                    {"click": _ => damage_roll(attack.name, attack.damage, facts)},
+                                ),
                             )
                         )
                     )
@@ -189,11 +250,13 @@ function saves_and_rolls(thing: MeleeAttack|RangedAttack|Ability, facts: Facts) 
     )
 
     if (thing.save) {
+        const save = thing.save.skill ? new SkillValue(thing.save.skill, facts) : new StatValue(thing.save.stat, "save");
+
         foo.unshift(p(
             "Save: ",
             thing.save.skill ? thing.save.skill + " (" + thing.save.stat + ")" : thing.save.stat,
             " dc ", value(thing.save.dc, facts),
-            " modifier ", facts.modifier(thing.save.skill || thing.save.stat).toString(10)
+            " modifier ", span(value(save, facts))
         ));
     }
 
@@ -244,12 +307,7 @@ function skills_block(facts: Facts) {
                     dt(skill),
                     dd(
                         value(new SkillValue(skill as Skill, facts), facts),
-                        {"click": _ => simple_roll(
-                            "Light",
-                                skill,
-                                new ComboValue(new DiceValue(1, 20, ""), new SkillValue(skill as Skill, facts)),
-                                facts
-                        )}
+                        {"click": _ => simple_roll(skill, new SkillValue(skill as Skill, facts), facts)}
                     ),
                 ])
             ),

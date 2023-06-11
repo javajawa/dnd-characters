@@ -30,8 +30,7 @@ attacks:
       action: 1
       hands: 1
     damage:
-      force: 1d4
-    damage_bonuses: 1
+      force: 1d4 + 1
   - name: Magic Missile
     proficiency: none
     range: [ 120, 120 ]
@@ -42,4 +41,3 @@ attacks:
       magic_missile_wand_charge: 1
     damage:
       force: 3*[1d4+1]
-    damage_bonuses: 0

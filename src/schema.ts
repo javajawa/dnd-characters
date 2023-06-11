@@ -83,7 +83,6 @@ export interface Attack {
 
   attack_bonuses: string
   damage: { [k in DamageType]?: string }
-  damage_bonuses: string
 
   save?: {
     stat: Stat

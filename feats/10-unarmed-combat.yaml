@@ -52,7 +52,6 @@ attacks:
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
       bludgeoning: 0
-    damage_bonuses: 0
     status:
       - name: Prone
         length: Until they stand up
@@ -70,9 +69,9 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
       force: "{_eldritch_maul}(eldritch maul)"
-    damage_bonuses: "dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
+      necrotic: "{_hands_of_harm}(hands of harm)"
 
   - name: "Unarmed: Slash with Fist and Claws"
     proficiency: unarmed
@@ -82,9 +81,9 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
       force: "{_eldritch_maul}(eldritch maul)"
-    damage_bonuses: "dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
+      necrotic: "{_hands_of_harm}(hands of harm)"
 
   - name: "Unarmed: Kick with Foot"
     proficiency: unarmed
@@ -93,9 +92,9 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str"
       force: "{_eldritch_maul}(eldritch maul) + {_eldritch_claw}"
-    damage_bonuses: "dex|str"
+      necrotic: "{_hands_of_harm}(hands of harm)"
 
   - name: "Unarmed: Slash with Foot Claws"
     proficiency: unarmed
@@ -104,6 +103,22 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form)"
+      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str"
       force: "{_eldritch_maul}(eldritch maul) + {_eldritch_claw}"
-    damage_bonuses: "dex|str"
+      necrotic: "{_hands_of_harm}(hands of harm)"
+
+---
+
+name: Hands of Harm
+link: http://dnd5e.wikidot.com/monk:mercy#toc2
+description: |-
+  At 3rd level, you use your ki to inflict wounds.
+  When you hit a creature with an unarmed strike,
+  you can spend 1 ki point to deal extra necrotic damage
+  equal to one roll of your Martial Arts die + your Wisdom modifier.
+  
+  You can use this feature only once per turn.
+equippable: true
+
+facts:
+  _hands_of_harm: "{martial_arts} + wis"

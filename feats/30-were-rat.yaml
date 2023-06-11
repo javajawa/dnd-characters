@@ -195,6 +195,5 @@ attacks:
       action: 1
     reach: 5
     attack_bonuses: dex
-    damage_bonuses: dex
     damage:
-      piercing: 1d4
+      piercing: 1d4 + dex

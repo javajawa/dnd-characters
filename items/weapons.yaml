@@ -27,9 +27,8 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: str|dex
     damage:
-      bludgeoning: 1d6
+      bludgeoning: 1d6 + str|dex
       force: "{_eldritch_maul}(eldritch maul)"
-    damage_bonuses: str|dex
   - name: Quarterstaff, 2-handed
     description: ""
     proficiency: quarterstaff
@@ -39,9 +38,8 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: str|dex
     damage:
-      bludgeoning: 1d8
+      bludgeoning: 1d8 + str|dex
       force: "{_eldritch_maul}(eldritch maul)"
-    damage_bonuses: str|dex
 
 ---
 
@@ -61,8 +59,7 @@ attacks:
       action: 1
       crossbow bolt: 1
     damage:
-      piercing: 1d8
-    damage_bonuses: dex
+      piercing: 1d8 + str|dex
 
 ---
 
@@ -82,8 +79,7 @@ attacks:
         - 20
         - 60
     damage:
-      piercing: 1d4
-    damage_bonuses: str|dex
+      piercing: 1d4 + str|dex
   - name: Dagger, Melee
     proficiency: dagger
     resources:
@@ -91,9 +87,8 @@ attacks:
     attack_bonuses: str|dex
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     damage:
-      piercing: 1d4
+      piercing: 1d4 + str|dex
       force: "{_eldritch_maul}(eldritch maul)"
-    damage_bonuses: str|dex
 
 ---
 
@@ -117,8 +112,7 @@ attacks:
         - "20 + 5*dex(dex modifier) + 5*str(str modifier)"
         - 100
     damage:
-      slashing: 1d6
-    damage_bonuses: str|dex
+      slashing: 1d6 + str|dex
   - name: Chakram, Melee
     proficiency: hand axe
     resources:
@@ -126,6 +120,5 @@ attacks:
     attack_bonuses: str|dex
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     damage:
-      slashing: 1d6
+      slashing: 1d6 + str|dex
       force: "{_eldritch_maul}(eldritch maul)"
-    damage_bonuses: str|dex

@@ -248,25 +248,32 @@ export class ComboValue extends Value {
   }
 
   to_roll20(facts: Facts): string {
-    return this.values.map(v => {
-        if (v instanceof ComboValue) {
-            return v.to_roll20(facts);
-        }
-        if (v instanceof DiceValue) {
-            return v.representation(facts);
-        }
-        if (v instanceof StatValue) {
-            return v.resolve_with_facts(facts) + "[" + v.stat + "]";
-        }
-        if (v instanceof FactValue) {
-            return v.resolve_with_facts(facts) + "[" + v.fact + "]";
-        }
-        if (v instanceof ProficiencyValue) {
-            return v.resolve_with_facts(facts) + "[prof]";
-        }
+    return this.values.filter(v => v.expected(facts) > 0).map(v => this._value_to_roll20(v, facts)).join(" + ");
+  }
 
-        return v.can_resolve_with_facts(facts) ? v.resolve_with_facts(facts) : v.representation(facts);
-    }).join(" + ")
+  private _value_to_roll20(v: Value, facts: Facts): string {
+    if (v instanceof ComboValue) {
+        return v.to_roll20(facts);
+    }
+    if (v instanceof DiceValue) {
+        return v.representation(facts);
+    }
+    if (v instanceof StatValue) {
+        return v.resolve_with_facts(facts).toString(10) + "[" + v.stat + "]";
+    }
+    if (v instanceof FactValue) {
+        return (v.can_resolve_with_facts(facts) ? v.resolve_with_facts(facts).toString(10) : v.representation(facts)) + "[" + v.fact.replace(/_/g, " ").trim() + "]";
+    }
+    if (v instanceof ProficiencyValue) {
+        return v.resolve_with_facts(facts).toString(10) + "[prof]";
+    }
+    if (v instanceof MultiOptionedValue) {
+      if (!(v.simplify(facts) instanceof MultiOptionedValue)) {
+        return this._value_to_roll20(v.simplify(facts), facts);
+      }
+    }
+
+    return v.can_resolve_with_facts(facts) ? v.resolve_with_facts(facts).toString(10) : v.representation(facts);
   }
 }
 
@@ -336,7 +343,7 @@ export class MultiOptionedValue extends Value {
   }
 }
 
-class StatValue extends Value {
+export class StatValue extends Value {
   readonly stat: Stat;
   readonly _reason: string;
 
@@ -347,8 +354,8 @@ class StatValue extends Value {
     this._reason = reason;
   }
 
-  can_resolve_with_facts(_: Facts): boolean {
-    return true;
+  can_resolve_with_facts(facts: Facts): boolean {
+    return facts.stats[this.stat].can_resolve_with_facts(facts);
   }
 
   can_resolve_without_facts(): boolean {
@@ -364,7 +371,9 @@ class StatValue extends Value {
   }
 
   resolve_with_facts(facts: Facts): number {
-    return facts.modifier(this.stat);
+    const stat = facts.stats[this.stat].resolve_with_facts(facts);
+
+    return Math.floor((stat - 10) / 2);
   }
 
   resolve_without_facts(): number {
@@ -378,6 +387,19 @@ class StatValue extends Value {
   expected(facts: Facts): number {
     return this.resolve_with_facts(facts);
   }
+}
+
+export class StatSaveValue extends StatValue {
+  override resolve_with_facts(facts: Facts): number {
+    const modifier = super.resolve_with_facts(facts);
+
+    if (this.stat in facts.proficiencies.ability_save) {
+      return modifier + facts.proficiency_bonus;
+    }
+
+    return modifier;
+  }
+
 }
 
 export class SkillValue extends ComboValue {
