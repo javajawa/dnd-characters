@@ -10,11 +10,11 @@ info:
     - Elvish
     - Druidic
     - Sylvan (written)
-  appearance: |-
-    Light-Yellow fur
-    No patterning
-    Y̶e̶l̶l̶o̶w̶ Black eyes
-    Low ears
+  appearance:
+    - Light-Yellow fur
+    - No patterning
+    - Y̶e̶l̶l̶o̶w̶ Black eyes
+    - Low ears
 
 feats: []
 levels: []
@@ -514,7 +514,7 @@ backstory:
     At the farm, an older halfling is running the farm Qelline Alderleaf.
 
     Light trauma dumps, and gets a referral to Reidoth, who inspected the ruins of Thundertree, some tea, and adorable flowers behind the ears.
-    
+
     Qelline has a child called Carp (potat!!).
 
     Light goes the long way back, and notices the tavern (the Sleeping Giant) is full of Red Band folk -- 5 in total, 2 heading towards the east, also hear two voices nearer the inn who also seem to be Red Band affiliated.
@@ -972,49 +972,49 @@ backstory:
 
   "Session Log – Session 26 (The Fading, 21st/22nd/23rd)": |
     The were-rat-ening commences:
-    
+
       - Faelar: brand-new fangs
       - Merric: bigger fluffier ears
-      - Light: rat nose with extra whiskers 
-    
+      - Light: rat nose with extra whiskers
+
     Glint is the one to notice, and encourages us to all look at our reflections (and also plucks one of Light's new whiskers).
-    
+
     We work out pretty quickly that we're probably were-rats. An attempt is made to identify the potions, but it fails.
-    
+
     We return to town; Narthian leaves us at the woodworkers, now relabelled as the "Herbalism Shop", as we proceed to Alderleaf Farm.
     And this time we don't even traumatise any kids (Nars from down the road is actually over playing with Carp!).
-    
+
     Asides: Glint appears to staring at random things. I wonder what that is about.
-    
+
     The overall status of is: in need of much sleep and food. Bram and Glint take them off to the inn whilst the rest of
     us get checked over ourselves by Qelline. She examines the bite marks, especially Merric's with the extra tattooing.
     She recommended not letting people know lest they become hostile, and also notes that Mirna is the best person in
     town to ask -- her parents are rumoured to have worked on a similar condition, but depending on
-    the version of the story either succeeded 
-    
+    the version of the story either succeeded
+
     As Bram and Glint return, Glint returns with magic items --
     [a key that can open any lock](http://dnd5e.wikidot.com/wondrous-items:mystery-key),
     [a pair of goggles that allow night vision](http://dnd5e.wikidot.com/wondrous-items:goggles-of-night),
     and a [silver needle that allows someone to project their melee attacks](http://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo).
-    
+
     Bram has also stopped by the smithy to ask about the spiked
     horse shoes, and was trying to be up-sold a battle scythe.
-    The shoes will be ready in about a ten-day (so top of the next month). 
-    
+    The shoes will be ready in about a ten-day (so top of the next month).
+
     The options for the gold bell are discussed -- the consensus is that trying to sell it outright
     in town is a _bad_ idea, but smelting it down here would likely be an advantage.
     Otherwise we need to transport it to somewhere like Neverwinter.
-    
+
     We proceed to the town master's hall in order to hand in the transportation of Don Jon,
     the quest board has been updated. We hand in the butter skull and the writ from Don Jon.
     200gp get, added to party funds. The town master is also seeming a lot more confident,
     and much more...in charge?
-    
+
     We head north in the town, with Faelar heading to the provisioners, where he learns that
     none of the spell components he wants are available, and Barthen isn't an actual full
     on Wizard. The bow is identified at the standard price of 10gp, and it's a nice magic
     glass short bow.
-    
+
     At the smithy we find that he doesn't deal with armour that much, especially mithril;
     instead it is recommended that we go the Lionshield Coster for that.
     The matter of the gold bell is raised -- we consider having it melted down into ingots,
@@ -1025,13 +1025,13 @@ backstory:
     the story town that melted down their gold to hide it from the orcs.
     "if it was me, I would have given the orcs the gold and try to run" he says;
     "the orcs we have encountered haven't been the most reasonable", Merric replies.
-    
+
     We settle on a deal for 2500gp for the bell to be melted down by the smithy,
     which works out to about a 10% handling fee, which isn't too bad.
-    
+
     As we re-cross town, we see a small white dragonborn girl (child) heading into the inn.
     A new visitor to the town, who is very young -- she's still smaller than Merric.
-    
+
     As the Coster, we see Linene and the end of the silvering deal (we kind of missed
     the boat on that). She is very excited (and suddenly not "just closing up the shop")
     when she hears we are looking to sell some mithril chain mail.
@@ -1051,13 +1051,13 @@ backstory:
     something is wrong. Nars is sent up to bed as we fill in Mirna. Glint realises
     for the first time that we might be infectious, and gets slightly agitated.
     Bram takes her to catch up with Droop.
-    
+
     Mirna reports that she just about remembers her parents attempting to cure
     lycanthropy, it appearing to work, but the patient croaking the next morning.
     Also something about "drinking being better than sleeping" -- hopefully not blood.
-    
+
     Droop is still in charge.
-    
+
     As we head back toward the inn, Faelar peels off to return to Sister Garaele's
     home, wherein he finds a brown paper package tied up with string, and a note
     that...was not read out. But Faelar opens it up and finds inside the box
@@ -1069,17 +1069,17 @@ backstory:
     table without neighbours. The little dragonborn girl and an older white
     dragon-born who is packing up a lead box in a closet.
     We move to the designated table.
-    
+
     Little dragon born is called Mary -- were at Falcon's Hunting Lodge.
     Left because of a dragon attack, eating one of the guards. Information
     is from the little girl, so may not be the most accurate.
     The parent is called "The Lady of Frost" by Milsa, and is known by
     Merric to be a travelling merchant of sorts. She's going to be running
     a shop out of inn. Her daughter is adorable.
-    
+
     There was an old drunk tiefling, talking about goblin raids on the
     Triboar trail -- probably out of Cragmaw Castle.
-    
+
     We have food, we relax, and we turn in for the night.
 
     Morning routines are pretty standard -- Light is praying for guidance,
@@ -1087,17 +1087,17 @@ backstory:
     consumed. The dragonborn shop opens up and Faelar discovers is she
     sells scrolls, finally...still not allowing him to acquire identify
     as she doesn't have it stock.
-    
+
     As we head down to Mirna's, we see Droop heading off toward Adabra's
     (probably where Narthian is as well). She invites us in, where we find
     a number of services and very convenient piles like "everything you need
     to cast find familiar". A lot of the services seem to be anything that
     might be able to bring in a few coins.
-    
+
     The notes were located, and written up for us. We are asked to record
     how it goes and bring all the information back to Mirna, which we
     agree to do.
-    
+
     > A rich merchant from the ten towns up north came to us claiming to have
     > been bitten by a werewolf and wishing for us to fix him.
     > After some studying of his wound and condition we've decide to take the case.
@@ -1145,7 +1145,7 @@ backstory:
     - Rare Oils and Unguents -- we can get 25% off from Mirna.
     - 100gp of wolfsbane...we need somewhere dark and bloody...
     - Divine Blessing -- Bram was blessed by being touching the shrine,
-      but only for 12 hours after the first touch. That's 2 definitely sorted. 
+      but only for 12 hours after the first touch. That's 2 definitely sorted.
 
     We finally trade off the manticore spikes and find out that the vials, which
     are identified as being carrion crawler mucus, a very dangerous poison.
@@ -1153,12 +1153,12 @@ backstory:
 
   "Session Log – Session 27 (The Fading, 23rd/24th)": |
     Everything was Fine. Kitteh was not present for the session, so these notes are second hand.
-    
+
     Merric now has access to the sending spell, and is intending to use it to
     find and recover Landan. We can get "his magical essence" from his book.
     The message is composed by Light (but why? why would you pick Light?)
     and is successfully sent on the second attempt -- and a response is received
-    
+
     > Light, I was ambushed. Restrained somewhere damp, dark.
     > Goblins or kobolds run by Giz, an orc.
     > They seem more interested in people than that weapon.
@@ -1175,7 +1175,7 @@ backstory:
     a horse pulling the cart. The rest of the party looks a lot less deadly,
     with limited armour. Faelar, with the noble background is set up as the mark,
     and Merric is placed on the flank, with Thena flying as an AWAC OWL.
-    
+
     The carriage party heads off; the first day of travel and the overnight stay
     at the junction of the Triboar Trial with the Phandalin spur is uneventful.
     The second day heading west events start with another party heading east
@@ -1187,7 +1187,7 @@ backstory:
     we are coming, or Randus just really wanting to make sure we get to talk to one
     of these people alive.
     The location of the ambush is exactly where Silidar was ambushed.
-    
+
     The attackers are a group of goblins! The two on the road are within Fire Bolt
     range, but seem to be a bit tougher than the average goblin commoner you'll
     see on the street. They take cover behind the downed horses.
@@ -1199,7 +1199,7 @@ backstory:
     goblin for the rest of the party to target (and to, you know, start fires).
     Merric casts Hypnotic pattern on on that area, catching the two central goblins
     (by the power of glow sticks).
-    
+
     An lean (and mean?) looking Orc attempts to hit and run Bram, and discovered
     that Bram has an Orc-slaying sword.
     Glint goes down, but is quickly picked up by Cure Wounds.
@@ -1212,7 +1212,7 @@ backstory:
     couple of rounds in the end to a bow shot from Merric.
     Meanwhile, back in the road, the Orc reappears to cast darkness over the
     areas with Bram, the traveller, and themselves.
-    
+
     The North-side Goblins include a stealthy friend who manages to keep re-hiding
     right up until the moment that Merric stumbles into it. The goblins are taken
     out by the rest of the party outside of the darkness.
@@ -1243,7 +1243,7 @@ backstory:
     - attempt to make it bloom
     - breath in...something
     - carried by...daddy (Snarltooth) or mommy (Dusk)
-    - hear a voice from behind the individual holding Light 
+    - hear a voice from behind the individual holding Light
     - "that was a terrible fall"
     - "they're a tough kid, they'll be fine"
     - [smash cut]
@@ -1261,13 +1261,13 @@ backstory:
     - the desk is incorporeal, and has a religious symbol on it
     - the void has no nat
     - Books are on Shadowfell, and Origins of the The Raven Queen.
-    - One of these is a journal that Light recognises from the Abbey. 
+    - One of these is a journal that Light recognises from the Abbey.
     - The desk is from the desert tent that Light was a babbo in.
     - Attempt to Zoom And Enhance
       - Snarltooth -- Cheetah Yellow, two black streaks from eyes down. Bit more muscular than Light.
       - Dusk -- Slender, pale fur (nearing snow leopard). Trying to remember causes brain to
         sometimes think it's actually a vibrant yellow.
-        Black markings: spots on the forehead, streaks from top of eye to ear, also wearing goggles. 
+        Black markings: spots on the forehead, streaks from top of eye to ear, also wearing goggles.
     - Light breaks down and cries
     - Mommy gives back pats
     - "there there. we made it, kind of [...] we will meet again." (???)
@@ -1277,7 +1277,7 @@ backstory:
     - It looks like it's the right shape! Huzzah!
     - collect three out of the four available wolfsbane plants (roots and all).
     - the plants themselves are large, but only one flower each.
-    - wrap them up -- don't want them to expose them to sunlight 
+    - wrap them up -- don't want them to expose them to sunlight
     - Light steps out into the..dusk...which is too dark. Light's ability to see brightness
 
     - Visit Mirna. Report the findings of the Wolfsbane, work with it in the dark.
@@ -1285,7 +1285,7 @@ backstory:
       Already inside the box is a vial of unknown liquid.
     - Amount was roughly 150gp (i.e. 1.5 potions worth).
 
-    - Mirna has finally noticed Light's eyes. And does a concern.     
+    - Mirna has finally noticed Light's eyes. And does a concern.
     - "abnormal knowledge" is a term used to describe the dragon born at the inn
 
     - sleep a night
@@ -1294,6 +1294,86 @@ backstory:
       - find a camp, probably they party's
 
     - the only side of the party combat is the party. Light can't hear the adversaries or their weapons at all.
+
+  "Session Log – Session 28 (The Fading, 24th)": |
+    Time to search the bodies!
+    The young lady (Kella) and her party (Drezlin and Xolkin) were on a mission
+    from the Lord's Alliance to deliver a message to Silidar
+    (who we at least know where he is!).
+    One of the dead riders has a locket that contains a picture of Kella.
+    The letter is retrieved.
+
+    The rustling from the North resolves into a Goblin with no weapons drawn,
+    but armed with a pure silver rapier and a thin wire whip.
+    The Goblin wants help -- something about friends in trouble. But who's
+    friends and what kind of trouble is unclear, though is scary to hear
+    about were-rats.
+
+    It turns out this is the goblin who had Silidar held captive.
+    The Cragmaw outpost was attacked by 'bad humans', and then orcs were
+    brought in to help, and now there is a bad human who is performing
+    experiments and cutting out Goblin tongues. And he seems very concerned
+    that if he is not back before nightfall people are going to start dying.
+
+    It _might_ be Landan. (It's going to be Landan).
+
+    Light catches up during a short rest, and recognised the weapons on the
+    Goblin as being the same as Norman's. This is going to be a confusing
+    situation. They seem to recall Light being around when their encampment
+    (which is interesting timeline-wise).
+
+    Light has a magic check performed (to insure he is who he appears to be).
+    He offers the weapons up for help; Light is doubtful about this.
+    Based on his ramblings, we have three major non-goblin leaders:
+
+    - Uvgeng (unknown)
+    - Giz (who Landan has reported as capturing them)
+    - Klarg (who was killed when we were last at the Cragmaw Hideout)
+
+    We approach the hideout with the plan for Light to slip in invisibly
+    with our new goblin friend Yeemik to get Landan up.
+    The rest of the party is approaching quietly through the woods, with
+    Glint taking 15 points of trap bludgeoning damage from a falling log.
+
+    - burly female Orc in heavy robes
+    - landan chained to the wall
+
+    Landan has black veins, like seared into his skin, running throughout
+    his entire body. Landan reacts to Yeemik's presence telekinesis the chains,
+    (but black spectral hands and a glowing actual hand).
+    Two of the chains hitting Giz and the other two hitting the wall
+    (missing Yeemik and Light in turn).
+    Giz screams, and initiative begins to be rolled.
+
+    The goblins in the room also have black veins running through them,
+    but also have green pulsing. This is going to get interesting.
+    Light takes down Giz between their surprise round and first round --
+    they also take a chunk out of the Orc downstairs, hoping that the Goblins
+    in the room aren't going to be hostile.
+
+    The glowing goblins *are* hostile. And they spit glowing pus. This hurts the light.
+    The fight outside sounds like it is going badly...
+    Yeemik attacks the goblin-oids with a whip drawing glowing green, and manages
+    to explode one. Covering us all in poison, and settings off the beginnings of
+    a chain reaction. Light (now at 2 from large amounts of poison)
+    takes down the fourth one, and charges the remaining orc down the slope.
+    Sadly they are unable to put it down this round, and look like they may not
+    make it through the round.
+
+    The exploding goblins sadly exploded a door (total door casualties to 3).
+    This reveals _more_ enemies. Some of them are casters!
+    The outside combat appears to be going poorly in terms of Randus rolling
+    multiple crits -- but also some maneuvering and counter-critical!
+
+    Stuff happens.
+
+    The combat ends with both sides of the split party having no idea what
+    the other half is up to. Faelar may or may not have summoned the rest
+    the dungeon by calling out for Light.
+
+    Landan's gear is located, and reacquired. Soon we shall get to find out
+    what happened to our friend.
+
 
 quest-lines:
   active:

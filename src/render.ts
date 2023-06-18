@@ -289,8 +289,8 @@ function info_block(name: string, facts: Facts, info: Info) {
         ),
         dl(
             Object.entries(info).map(([key, value]) => [
-                dt(key),
-                value instanceof Array ? value.map(x => dd(x)) : dd(value),
+                dt(value instanceof Array ? {"class": "list"} : "", key),
+                value instanceof Array ? value.map(x => dd({"class": "list"}, x)) : dd(value),
             ])
         )
     );

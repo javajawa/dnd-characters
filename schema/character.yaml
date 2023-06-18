@@ -69,7 +69,9 @@ definitions:
         items:
           type: string
       appearance:
-        type: string
+        type: array
+        items:
+          type: string
 
   Stats:
     type: object

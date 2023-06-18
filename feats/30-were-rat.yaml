@@ -23,6 +23,11 @@ abilities:
   - name: Keen Smell
     description: You have advantage on perception checks that rely on smell.
 
+  - name: Damage Resistence
+    description: |-
+      You gain resistance to bludgeoning, slashing and piercing damage from non-magical and non-silvered weapons.
+      This becomes immunity when you use the ‘embrace change’ ability, until dawn.
+
   - name: Embrace Change
     description: |-
       You fully embrace your inner rat; the curse takes ahold of you,

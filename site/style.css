@@ -104,6 +104,10 @@ dd {
   font-weight: lighter;
 }
 
+dt.list, dd.list {
+  grid-column: 1 / span 2;
+}
+
 dt,
 dd {
   padding: 0 0.25rem;

@@ -130,6 +130,7 @@ resources:
       every: short rest
 facts:
   walk speed: "+10"
+  climb speed: "+10"
   ki_save: "8 + wis + prof"
 abilities:
   - name: "Flurry of Blows"
