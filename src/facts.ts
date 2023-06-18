@@ -13,9 +13,9 @@ import {Ability, Feat, Item, MeleeAttack, RangedAttack, Stats} from "./objects";
 type ProficiencyGroups = "ability_save" | "skill" | "weapon" | "armour" | "equipment" | "expertise"
 
 export class Facts {
-    private readonly data: { [key: string]: Value }
-    readonly levels: { [key: string]: number }
-    readonly stats: Stats
+    private readonly data: { [key: string]: Value };
+    readonly levels: { [key: string]: number };
+    readonly stats: Stats;
 
     readonly proficiencies: {
         "ability_save": { [k: string]: string }
@@ -24,17 +24,17 @@ export class Facts {
         "weapon": { [k: string]: string }
         "armour": { [k: string]: string }
         "equipment": { [k: string]: string }
-    }
+    };
 
-    private hp: ComboValue = new ComboValue()
-    private readonly hitDice: ComboValue = new ComboValue()
+    private hp: ComboValue = new ComboValue();
+    private readonly hitDice: ComboValue = new ComboValue();
 
-    readonly notes: { [k: string]: string }
+    readonly notes: { [k: string]: string };
 
-    toggles: Feat[]
-    inventory: Item[]
-    attacks: (MeleeAttack|RangedAttack)[]
-    abilities: Ability[]
+    toggles: Feat[];
+    inventory: Item[];
+    attacks: (MeleeAttack | RangedAttack)[];
+    abilities: Ability[];
 
     constructor(notes: { [k: string]: string }) {
         this.inventory = [];
@@ -70,6 +70,7 @@ export class Facts {
     }
 
     set(key: string, data: string, reason: string): void {
+        if (key === "armour_class") console.log(reason, data);
         this.data[key] = processValueFromString(data, reason, this.data[key]);
     }
 
@@ -89,24 +90,24 @@ export class Facts {
         const val = new FixedValue(value, reason);
 
         switch (stat) {
-            case "str":
-                this.stats.str.values.push(val);
-                break;
-            case "dex":
-                this.stats.dex.values.push(val);
-                break;
-            case "con":
-                this.stats.con.values.push(val);
-                break;
-            case "wis":
-                this.stats.wis.values.push(val);
-                break;
-            case "int":
-                this.stats.int.values.push(val);
-                break;
-            case "cha":
-                this.stats.cha.values.push(val);
-                break;
+        case "str":
+            this.stats.str.values.push(val);
+            break;
+        case "dex":
+            this.stats.dex.values.push(val);
+            break;
+        case "con":
+            this.stats.con.values.push(val);
+            break;
+        case "wis":
+            this.stats.wis.values.push(val);
+            break;
+        case "int":
+            this.stats.int.values.push(val);
+            break;
+        case "cha":
+            this.stats.cha.values.push(val);
+            break;
         }
     }
 

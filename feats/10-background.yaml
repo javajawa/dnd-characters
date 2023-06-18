@@ -3,7 +3,7 @@ description: Base facts and resources for a DnD character
 link: "#"
 equippable: false
 facts:
-  armour_class: "10"
+  armour_class: "10 + dex"
   perception: "10 + wis(passive perception) + prof(passive perception)"
 
 stats:

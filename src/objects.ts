@@ -45,12 +45,12 @@ export class Feat implements IFeat {
 }
 
 export class Stats {
-    readonly str: ComboValue
-    readonly dex: ComboValue
-    readonly con: ComboValue
-    readonly int: ComboValue
-    readonly wis: ComboValue
-    readonly cha: ComboValue
+    readonly str: ComboValue;
+    readonly dex: ComboValue;
+    readonly con: ComboValue;
+    readonly int: ComboValue;
+    readonly wis: ComboValue;
+    readonly cha: ComboValue;
 
     constructor() {
         this.str = new ComboValue();
@@ -63,28 +63,28 @@ export class Stats {
 }
 
 export class MeleeAttack {
-    name: string
-    from: string
-    description: string
-    proficiency: string
+    name: string;
+    from: string;
+    description: string;
+    proficiency: string;
 
-    reach: Value
-    attack: Value
-    damage: { [k in DamageType]: Value }
+    reach: Value;
+    attack: Value;
+    damage: { [k in DamageType]: Value };
 
-    dice_rolls: { [k: string]: Value } = {}
+    dice_rolls: { [k: string]: Value } = {};
 
     save?: {
         stat: Stat
         skill?: Skill
         dc: Value
-    }
+    };
 
     status?: {
         name: string
         length: string
         description?: string
-    }[]
+    }[];
 
     constructor(name: string, from: string, description: string, proficiency: string, reach: Value, attack: Value, damage: { [k in DamageType]: Value }) {
         this.name = name;
@@ -112,29 +112,29 @@ export class MeleeAttack {
 }
 
 export class RangedAttack {
-    name: string
-    from: string
-    description: string
-    proficiency: string
+    name: string;
+    from: string;
+    description: string;
+    proficiency: string;
 
-    standard_range: Value
-    max_range: Value
-    attack: Value
-    damage: { [k in DamageType]: Value }
+    standard_range: Value;
+    max_range: Value;
+    attack: Value;
+    damage: { [k in DamageType]: Value };
 
-    dice_rolls: { [k: string]: Value } = {}
+    dice_rolls: { [k: string]: Value } = {};
 
     save?: {
         stat: Stat
         skill?: Skill
         dc: Value
-    }
+    };
 
     status?: {
         name: string
         length: string
         description?: string
-    }[]
+    }[];
 
     constructor(name: string, from: string, description: string, proficiency: string, standard_range: Value, max_range: Value, attack: Value, damage: { [k in DamageType]: Value }) {
         this.name = name;
@@ -163,26 +163,26 @@ export class RangedAttack {
 }
 
 export class Ability {
-    name: string
-    from: string
-    description: string
-    link: string
+    name: string;
+    from: string;
+    description: string;
+    link: string;
 
-    range: [Value, Value] | null
+    range: [Value, Value] | null;
 
-    dice_rolls: { [k: string]: Value }
+    dice_rolls: { [k: string]: Value };
 
     save: {
         stat: Stat
         skill?: Skill
         dc: Value
-    } | null
+    } | null;
 
     status?: {
         name: string
         length: string
         description?: string
-    }[]
+    }[];
 
     constructor(
         name: string, from: string, description: string, link: string,

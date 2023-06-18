@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-'use strict';
+"use strict";
 
-type EventListener = (this: Element, ev: Event) => any;
+type EventListener = (this: Element, ev: Event) => boolean | void;
 type AttrArgs = { [k: string]: string | boolean | null | EventListener }
 type ValidArgs = null | string | Node | Attr | AttrArgs
 type NestedArgs = ValidArgs | NestedArgs[]
@@ -75,72 +75,45 @@ type NestedArgs = ValidArgs | NestedArgs[]
  *   ) )
  * ) );
  */
-export function elemGenerator(tag: string, ns?: string): (...args: NestedArgs[]) => Element
-{
-	return ( ...args: NestedArgs[] ): Element =>
-	{
-		const elem = ns ? document.createElementNS( ns, tag ) : document.createElement( tag );
+export function elemGenerator(tag: string, ns?: string): (...args: NestedArgs[]) => Element {
+    return (...args: NestedArgs[]): Element => {
+        const elem = ns ? document.createElementNS(ns, tag) : document.createElement(tag);
 
-		args = args.flat( 3 );
-		args.forEach( arg =>
-		{
-			if ( arg === null )
-			{
-				return;
-			}
-			else if ( arg instanceof Attr )
-			{
-				elem.setAttribute( arg.name, arg.value );
-			}
-			else if ( arg instanceof Node )
-			{
-				elem.appendChild( arg );
-			}
-			else if ( typeof arg === 'string' )
-			{
-				elem.appendChild( document.createTextNode( arg ) );
-			}
-			else if ( typeof arg === 'object' )
-			{
-				const attrs: AttrArgs = arg as AttrArgs;
+        args = args.flat(3);
+        args.forEach(arg => {
+            if (arg === null) {
+                return;
+            } else if (arg instanceof Attr) {
+                elem.setAttribute(arg.name, arg.value);
+            } else if (arg instanceof Node) {
+                elem.appendChild(arg);
+            } else if (typeof arg === "string") {
+                elem.appendChild(document.createTextNode(arg));
+            } else if (typeof arg === "object") {
+                const attrs: AttrArgs = arg as AttrArgs;
 
-				Object.keys( attrs ).forEach( key =>
-				{
-					const val: string | boolean | EventListener | Attr | null = attrs[key] || null;
+                Object.keys(attrs).forEach(key => {
+                    const val: string | boolean | undefined | EventListener | Attr | null = attrs[key];
 
-					if ( val instanceof Function )
-					{
-						elem.addEventListener( key, val );
-					}
-					else if ( val === true )
-					{
-						elem.setAttribute( key, '' );
-					}
-					// @ts-ignore
-					else if ( val === false )
-					{
-						elem.removeAttribute( key );
-					}
-					else if ( val === null )
-					{
-						return;
-					}
-					else if ( typeof val !== 'object' )
-					{
-						elem.setAttribute( key, val.toString() );
-					}
-					else
-					{
-						throw new Error(`Invalid type for attribute ${key} in element ${tag}`);
-					}
-				} );
-			}
-			else
-			{
-				throw new Error(`Invalid type in arguments for element ${tag}, arg was ${typeof arg}: ${arg}`);
-			}
-		} );
+                    if (val instanceof Function) {
+                        elem.addEventListener(key, val);
+                    } else if (val === true) {
+                        elem.setAttribute(key, "");
+                    } else if (val === false) {
+                        elem.removeAttribute(key);
+                    } else if (val === null) {
+                        return;
+                    } else if (typeof val !== "object" && typeof val !== "undefined") {
+                        elem.setAttribute(key, val.toString());
+                    } else {
+                        throw new Error(`Invalid type for attribute ${key} in element ${tag}`);
+                    }
+                });
+            } else {
+                throw new Error(`Invalid type in arguments for element ${tag}, arg was ${typeof arg}: ${arg}`);
+            }
+        });
 
-		return elem;
-	};
+        return elem;
+    };
 }

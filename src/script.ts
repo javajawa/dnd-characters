@@ -1,7 +1,7 @@
 import {AbstractThingSource, Character as CharacterSchema, DamageType} from "./schema";
 import {Ability, Feat, Item, MeleeAttack, RangedAttack} from "./objects";
 import {Facts} from "./facts";
-import {Stat} from "./stats";
+import {Skill, Stat} from "./stats";
 import {render} from "./render";
 import {processValueFromString, Value} from "./values";
 
@@ -17,8 +17,8 @@ async function run(): Promise<void> {
 
 export class CharacterState {
     private readonly character: string;
-    readonly items: { [item: string]: boolean }
-    readonly feats: { [feat: string]: boolean }
+    readonly items: { [item: string]: boolean };
+    readonly feats: { [feat: string]: boolean };
 
     constructor(character: string) {
         this.character = character;
@@ -80,27 +80,26 @@ export class CharacterState {
 
 function cyrb53(str: string, seed = 0) {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-    for(let i = 0, ch; i < str.length; i++) {
+    for (let i = 0, ch; i < str.length; i++) {
         ch = str.charCodeAt(i);
         h1 = Math.imul(h1 ^ ch, 2654435761);
         h2 = Math.imul(h2 ^ ch, 1597334677);
     }
-    h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
     h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-    h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
     h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
 
     return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(10);
 }
 
-function loadFactsFromSource(facts: Facts, source: AbstractThingSource, reason: string): void
-{
+function loadFactsFromSource(facts: Facts, source: AbstractThingSource, reason: string): void {
     for (const {type, target} of source.proficiencies || []) {
-        facts.add_proficiency(type, target, reason)
+        facts.add_proficiency(type, target, reason);
     }
 
     for (const [stat, value] of Object.entries(source.stats || {})) {
-        facts.add_stat(stat as Stat, value, reason)
+        facts.add_stat(stat as Stat, value, reason);
     }
 
     for (const [fact, fact_value] of Object.entries(source.facts || {})) {
@@ -124,7 +123,7 @@ function loadFactsFromSource(facts: Facts, source: AbstractThingSource, reason: 
                 processValueFromString(attack.reach, attack.name),
                 processValueFromString(attack.attack_bonuses, attack.name),
                 damage
-            ))
+            ));
         }
 
         if (attack.range) {
@@ -137,16 +136,25 @@ function loadFactsFromSource(facts: Facts, source: AbstractThingSource, reason: 
                 processValueFromString(attack.range[1], attack.name),
                 processValueFromString(attack.attack_bonuses, attack.name),
                 damage
-            ))
+            ));
         }
     }
 
     for (const ability of source.abilities || []) {
-        const save = ability.save;
-        if (save) {
-            // @ts-ignore
-            save.dc = processValueFromString(save.dc, ability.name);
+        let save: { stat: Stat, skill?: Skill, dc: Value } | null = null;
+
+        if (ability.save)
+        {
+            save = {
+                stat: ability.save.stat,
+                dc: processValueFromString(ability.save.dc, ability.name)
+            };
+
+            if (save && ability.save?.skill) {
+                save["skill"] = ability.save.skill;
+            }
         }
+
         const rolls = Object.fromEntries(
             Object.entries(ability.dice_rolls || {})
                 .map(([name, roll]) => [name, processValueFromString(roll, name)])
@@ -158,10 +166,9 @@ function loadFactsFromSource(facts: Facts, source: AbstractThingSource, reason: 
             ability.description || "",
             ability.link || "",
             ability.range ? [processValueFromString(ability.range[0], ability.name), processValueFromString(ability.range[1], ability.name)] : null,
-            // @ts-ignore
             save,
             rolls,
-        ))
+        ));
     }
 }
 

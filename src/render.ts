@@ -63,35 +63,38 @@ function attack_roll(weapon: string, attack: ComboValue, facts: Facts): void {
     );
 }
 
-function damage_roll(weapon: string, damage: { [k in DamageType]: Value}, facts: Facts): void {
+function damage_roll(weapon: string, damage: { [k in DamageType]: Value }, facts: Facts): void {
     Object.entries(damage)
         .map(([type, v]) => [type, v instanceof ComboValue ? v : new ComboValue(v)] as [string, ComboValue])
         .filter(([_, damage]) => damage.expected(facts) > 0)
         .reduce(
-        (acc, [type, value], idx) => {
-            const j = idx % 2;
-            const i = (idx - j) / 2;
+            (acc, [type, value], idx) => {
+                const j = idx % 2;
+                const i = (idx - j) / 2;
 
-            if (j === 0) {
-                acc[i] = acc[i] || [[type, value], [null, null]];
-            } else {
-                // @ts-ignore
-                acc[i][j] = [type, value];
-            }
+                if (j === 0) {
+                    acc[i] = acc[i] || [[type, value], [null, null]];
+                } else {
+                    let v = acc[i];
+                    if (v) {
+                        v[j] = [type, value];
+                    }
+                }
 
-            return acc;
-        },
-        [] as [[string, ComboValue], [string|null, ComboValue|null]][]
-    ).map(([[type_1, damage_1], [type_2, damage_2]]) => {
-        request_roll(
-            `&{template:dmg} {{rname=${weapon}}} {{damage=1}} ` +
+                return acc;
+            },
+            [] as [[string, ComboValue], [string | null, ComboValue | null]][]
+        ).map(([[type_1, damage_1], [type_2, damage_2]]) => {
+            request_roll(
+                `&{template:dmg} {{rname=${weapon}}} {{damage=1}} ` +
             `{{dmg1flag=1}} {{dmg1type=${type_1}}} {{dmg1=[[${damage_1.to_roll20(facts)}]]}} ` +
             `${type_2 ? "{{dmg2flag= 1 : 0}}" : ""} {{dmg2type=${type_2 || "0"}}} {{dmg2=[[${damage_2?.to_roll20(facts) || "0"}]]}} `
-        );
-    })
+            );
+        });
 
 
 }
+
 function stat_block(facts: Facts, state: CharacterState) {
     return section(
         main(
@@ -123,7 +126,7 @@ function stat_block(facts: Facts, state: CharacterState) {
                                 }
                             ),
                         )
-                    )
+                    );
                 }),
             ),
             p(
@@ -151,7 +154,9 @@ function stat_block(facts: Facts, state: CharacterState) {
                                     label(
                                         {"for": item.name, "title": item.description},
                                         input({
-                                            "type": "checkbox", "id": item.name, "checked": state.equipped(item),
+                                            "type": "checkbox",
+                                            "id": item.name,
+                                            "checked": state.equipped(item),
                                             "change": e => state.equip(item, (e.target as HTMLInputElement).checked)
                                         }),
                                         a({"href": item.link, "target": "_blank"}, item.name),
@@ -166,7 +171,9 @@ function stat_block(facts: Facts, state: CharacterState) {
                                     label(
                                         {"for": feature.name, "title": feature.description},
                                         input({
-                                            "type": "checkbox", "id": feature.name, "checked": state.enabled(feature),
+                                            "type": "checkbox",
+                                            "id": feature.name,
+                                            "checked": state.enabled(feature),
                                             "change": e => state.enable(feature, (e.target as HTMLInputElement).checked)
                                         }),
                                         a({"href": feature.link, "target": "_blank"}, feature.name),
@@ -212,7 +219,7 @@ function stat_block(facts: Facts, state: CharacterState) {
                                 td(attack instanceof MeleeAttack ?
                                     span(value(attack.reach, facts)) :
                                     [span(value(attack.standard_range, facts)), "/", span(value(attack.max_range, facts))],
-                                    "ft"
+                                "ft"
                                 ),
                                 td(
                                     value(attack.attack_roll(facts), facts),
@@ -244,10 +251,10 @@ function stat_block(facts: Facts, state: CharacterState) {
     );
 }
 
-function saves_and_rolls(thing: MeleeAttack|RangedAttack|Ability, facts: Facts) {
-    let foo = Object.entries(thing.dice_rolls || {}).map(([name, roll]) =>
+function saves_and_rolls(thing: MeleeAttack | RangedAttack | Ability, facts: Facts) {
+    const foo = Object.entries(thing.dice_rolls || {}).map(([name, roll]) =>
         p("Roll for ", name, ": ", value(roll, facts))
-    )
+    );
 
     if (thing.save) {
         const save = thing.save.skill ? new SkillValue(thing.save.skill, facts) : new StatValue(thing.save.stat, "save");
@@ -270,8 +277,8 @@ function tabSet(tabs: { [name: string]: Element | Element[] }): Element {
         {"class": "tabs"},
         Object.entries(tabs).map(([title, element], index) => div(
             {"class": "tab"},
-                input({"type": "radio", "name": name, "id": title, checked: index === 0}),
-                label({"for": title, "style": "left: " + ((index * 90)+30) + "px"}, title),
+            input({"type": "radio", "name": name, "id": title, checked: index === 0}),
+            label({"for": title, "style": "left: " + ((index * 90) + 30) + "px"}, title),
             div({"class": "content"}, element, span({"style": "clear: both"}))
         ))
     );
@@ -340,7 +347,7 @@ function story_block(facts: Facts) {
         Object.entries(facts.notes).map(([title, text]) =>
             details(summary(title), ...html_to_element(text))
         )
-    )
+    );
 }
 
 export function render(name: string, facts: Facts, info: Info, state: CharacterState) {
