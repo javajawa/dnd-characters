@@ -101,9 +101,9 @@ export function elemGenerator(tag: string, ns?: string): (...args: NestedArgs[])
                         elem.setAttribute(key, "");
                     } else if (val === false) {
                         elem.removeAttribute(key);
-                    } else if (val === null) {
+                    } else if (val === null || val === undefined) {
                         return;
-                    } else if (typeof val !== "object" && typeof val !== "undefined") {
+                    } else if (typeof val !== "object") {
                         elem.setAttribute(key, val.toString());
                     } else {
                         throw new Error(`Invalid type for attribute ${key} in element ${tag}`);

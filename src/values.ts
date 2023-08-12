@@ -66,11 +66,11 @@ export class FixedValue extends NumericValue {
 }
 
 export class MultiplierValue extends Value {
-    private readonly multiplier: Value;
-    private readonly target: Value;
-    private readonly _reason: string;
+    readonly multiplier: Value;
+    readonly target: Value;
+    readonly _reason: string;
 
-    constructor(mul: NumericValue, val: Value, reason: string) {
+    constructor(mul: Value, val: Value, reason: string) {
         super();
 
         this.target = val;
@@ -87,7 +87,11 @@ export class MultiplierValue extends Value {
     }
 
     override reason(facts: Facts) {
-        return this._reason || "[" + this.multiplier.reason(facts) + "]×[" + this.target.reason(facts) + "]";
+        return "{ " +
+            this.multiplier.representation(facts) + " (" + this.multiplier.reason(facts) + ")" +
+        " }×{ " +
+            this.target.representation(facts) + " (" + this.target.reason(facts) + ")" +
+        " } " + this._reason + "";
     }
 
     roll(facts: Facts) {
@@ -194,7 +198,7 @@ export class ComboValue extends Value {
     constructor(...values: Value[]) {
         super();
 
-        if (values.length == 0) {
+        if (values.length === 0) {
             this.values = [];
             return;
         }
@@ -258,7 +262,7 @@ export class ComboValue extends Value {
     }
 
     to_roll20(facts: Facts): string {
-        return this.values.filter(v => v.expected(facts) > 0).map(v => this._value_to_roll20(v, facts)).join(" + ");
+        return this.values.filter(v => v.expected(facts) !== 0).map(v => this._value_to_roll20(v, facts)).join(" + ");
     }
 
     private _value_to_roll20(v: Value, facts: Facts): string {
@@ -624,6 +628,18 @@ function parseValueString(input: string, reason: string): Value {
 export function processValueFromString(input: string, reason: string, existing?: Value): Value {
     input = input.toString().trim();
 
+    if (input.startsWith("x")) {
+        const value = parseValueString(input.substring(1), reason);
+
+        existing = existing || new ComboValue();
+
+        if (existing instanceof MultiplierValue) {
+            return new MultiplierValue(combine(value, existing.multiplier), existing.target, "combined multipliers");
+        }
+
+        return new MultiplierValue(value, existing, reason);
+    }
+
     if (input.startsWith("+")) {
         const value = parseValueString(input.substring(1), reason);
 
@@ -632,28 +648,41 @@ export function processValueFromString(input: string, reason: string, existing?:
 
     const value = parseValueString(input, reason);
 
-    if (existing instanceof AdditionalValue) {
+    if ((existing instanceof AdditionalValue) || (existing instanceof MultiplierValue)) {
         return combine(value, existing);
     }
     let exist_additions: AdditionalValue[] = [];
+    let multiple: MultiplierValue | null = null;
 
     if (existing instanceof ComboValue) {
         exist_additions = existing.values.filter(s => s instanceof AdditionalValue) as AdditionalValue[];
     }
     if (existing instanceof MultiOptionedValue) {
-        const option = existing.options[0];
+        let option = existing.options[0];
+        if (option instanceof MultiplierValue) {
+            multiple = option;
+            option = option.target;
+        }
         if (option instanceof ComboValue) {
             exist_additions = option.values.filter(s => s instanceof AdditionalValue) as AdditionalValue[];
         }
     }
 
+    let new_value = exist_additions.length ? new ComboValue(value, ...exist_additions) : value;
+    if (multiple) {
+        new_value = new MultiplierValue(multiple.multiplier, new_value, multiple._reason);
+    }
 
-    return existing ? new MultiOptionedValue(existing, exist_additions.length ? new ComboValue(value, ...exist_additions) : value) : value;
+    return existing ? new MultiOptionedValue(existing, new_value) : value;
 }
 
 function combine(value: Value, existing?: Value): Value {
     if (!existing) {
         return value;
+    }
+
+    if (existing instanceof MultiplierValue) {
+        return new MultiplierValue(existing.multiplier, combine(value, existing.target), existing._reason)
     }
 
     if (existing instanceof AdditionalValue) {

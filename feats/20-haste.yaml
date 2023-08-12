@@ -13,6 +13,8 @@ description: |-
 
 facts:
   armour_class: "+2"
+  walk speed: "x2"
+  climb speed: "x2"
 
 resources:
   - name: action

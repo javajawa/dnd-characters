@@ -70,8 +70,9 @@ attacks:
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
       bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
-      force: "{_eldritch_maul}(eldritch maul)"
+      force: "{_eldritch_maul}(eldritch maul) + {_penumbra_reaction}(band of light penumbra, reaction)"
       necrotic: "{_hands_of_harm}(hands of harm)"
+      radiant: "{_light_reaction}(band of light, reaction)"
 
   - name: "Unarmed: Slash with Fist and Claws"
     proficiency: unarmed
@@ -82,8 +83,9 @@ attacks:
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
       slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str + {_fist_wraps}(fist wraps) + {_eldritch_claw}"
-      force: "{_eldritch_maul}(eldritch maul)"
+      force: "{_eldritch_maul}(eldritch maul) + {_penumbra_reaction}(band of light penumbra, reaction)"
       necrotic: "{_hands_of_harm}(hands of harm)"
+      radiant: "{_light_reaction}(band of light, reaction)"
 
   - name: "Unarmed: Kick with Foot"
     proficiency: unarmed
@@ -92,9 +94,10 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str"
-      force: "{_eldritch_maul}(eldritch maul) + {_eldritch_claw}"
+      bludgeoning: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str + {_eldritch_claw}"
+      force: "{_eldritch_maul}(eldritch maul) + {_penumbra_reaction}(band of light penumbra, reaction)"
       necrotic: "{_hands_of_harm}(hands of harm)"
+      radiant: "{_light_reaction}(band of light, reaction)"
 
   - name: "Unarmed: Slash with Foot Claws"
     proficiency: unarmed
@@ -103,9 +106,10 @@ attacks:
     reach: "5 + {_eldritch_maul_reach}(eldritch maul)"
     attack_bonuses: "dex|str + {_eldritch_claw}"
     damage:
-      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str"
-      force: "{_eldritch_maul}(eldritch maul) + {_eldritch_claw}"
+      slashing: "{martial_arts}(martial arts) + {_hybrid_rat_unarmed}(hybrid-rat form) + dex|str + {_eldritch_claw}"
+      force: "{_eldritch_maul}(eldritch maul) + {_penumbra_reaction}(band of light penumbra, reaction)"
       necrotic: "{_hands_of_harm}(hands of harm)"
+      radiant: "{_light_reaction}(band of light, reaction)"
 
 ---
 

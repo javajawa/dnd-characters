@@ -70,8 +70,13 @@ export class Facts {
     }
 
     set(key: string, data: string, reason: string): void {
-        if (key === "armour_class") console.log(reason, data);
+        if (key === "walk speed") {
+            console.log(key, data, reason, this.data[key]);
+        }
         this.data[key] = processValueFromString(data, reason, this.data[key]);
+        if (key === "walk speed") {
+            console.log(key, this.data[key]);
+        }
     }
 
     add_level(level: Level): void {

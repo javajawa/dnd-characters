@@ -1,0 +1,23 @@
+name: Leather Band of Light - Light Reaction
+link: http://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo
+description: |-
+  While the light is active if you spend a ki point to use ‘Patient Defense’ bonus action,
+  you may do an extra 1d4 of radiant damage on any attack you make that uses your reaction.
+
+equippable: true
+
+facts:
+  _light_reaction: 1d4
+
+---
+
+name: Leather Band of Light - Penumbra Reaction
+link: http://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo
+description: |-
+  While the light is active in magical darkness, if you spend a ki point to use ‘Patient Defense’
+  bonus action, you may do an extra 1d6 of necrotic damage on any attack you make that uses your reaction.
+
+equippable: true
+
+facts:
+  _penumbra_reaction: 1d6
