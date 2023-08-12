@@ -11,3 +11,19 @@
 # TODO: "[2lb] Pitons (8)"
 # TODO: "[4lb] Grappling hook"
 # TODO: 3 unidentified wolfsbane variant plants
+
+name: Herbalism Books
+description: |-
+  Herbalism 101
+  - Give you advantage on perception checks to find useful plants.
+
+  Herbalism 102
+  - Will give you advantage on investigation checks to identify the properties of useful plants (healing, poison...).
+value: 200gp
+weight: 6
+abilities:
+  - name: Search for Herbs
+    description: Go out and search for herbs!
+    dice_rolls:
+      locate herbs: 1d20
+      identify herbs: 1d20

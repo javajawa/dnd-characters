@@ -1507,11 +1507,52 @@ backstory:
     
     The blue dragon knocks out Light and Landan out, and the party beats a hasty retreat.
 
+  "Session Log – Session 32 (The Fading, 27th/28th/29th)": |
+    We return to the highway inn which is still busy but people are trying to get some refunds
+    before heading out. We fail to realise we should have been kinder to cook who had to fire
+    up her stove again. The proprietor is very unhappy to hear about the dragon. We do not
+    tell them it's because Kitteh said a thing once.
+    
+    We settle in for the night, and in the morning Light is surprisingly chipper.
+      "Nothing has tried to kill me today"
+      "We haven't been outside yet..."
+      "Maybe we just shouldn't go outside then!"
+    
+    Light then proceeds to absolutely fail at doing the three cups tricks (trying to
+    demonstrate how they could just stay around and make some cash).
+    
+    Planning then happens:
+     - We will go collect intel from the goblins
+     - Landan will prepare sending to contact Lelion
+    
+    Scouting Report:
+     - Strange visitor who looks like an older version of the kind with a big yellow glowing hammer.
+     - Goblins and Hobglins everywhere
+     - All king spotting also featured a drow (not obviously
+     - Repeated hooting every 4-6 hours
+     - Three possible entrances -- main to the West, hidden to the north, and door to south
+     - Some hobgoblins on patrol / hunting.
+    
+    New task assigned to the Goblins: Scout Thundertree!
+
+    We proceed onwards to Cragmaw Castle, stopping over night out the outskirt the forest.
+    
+    The next day we arrive at the south side of Cragmaw Castle.
+    The castle consists of 7 crumbling towers of different dizes and heights, but the
+    upper floors are in various stages of collapse. The design is not defensible,
+    and seems like it might be wizard-designed 
+    The south entrance has a big iron door which is protected from the elements.
+    Thea's scouting reveals that the South East tower is hollow and contains a sleeping owl
+    bear.
+    
+    The big iron is too much for us to open quietly, so we skirt around to the North
+    to locate a "secret" entrance of a gap covered by a tarp. Behind it is a moulding storeroom.
+    We are faced with a most perilous choice: curtain or door! *chants* Curtain or Door!
+    Update: the door looks like a door. Curtain reveals...more curtain.
 
 quest-lines:
   active:
-    # Backstory
-    - Visit the Dragonborn in Leilon
+    - Full Moons are on the 30th (new moons on the 15th)
     # Lost Mine
     - Take down the people in Cragmaw Castle
     - Track down the dwarf Durgen Rockseeker
@@ -1533,6 +1574,8 @@ quest-lines:
     # Bezlik's Backstory / Tower of Storms
     - Defeat Sparkbringer
     # Misc.
+    - Visit the Dragonborn in Leilon
+    - Find Reidoth in the lands around Thundertree
     - Freeing slaves captured by the Red Bands
     - Solve the question of Sister Garaele
     - Investigate the Old Owl Well area, drive off anyone trying to exhume a Lich
