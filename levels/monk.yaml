@@ -9,7 +9,7 @@ description: |-
 hit_die: d8
 hit_points: 8
 facts:
-  martial_arts: "d4"
+  martial_arts: "d6"
   armour_class: 10 + dex + wis
 proficiencies:
   - type: ability_save
@@ -60,38 +60,30 @@ abilities:
       Beginning at 1st level, while you are wearing no armor and not wielding a shield,
       your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
   - name: Martial Arts
-    description: |-
-      At 1st level, your practice of martial arts gives you mastery of
-      combat styles that use unarmed strikes and monk weapons,
-      which are short-swords and any simple melee weapons that don't have
-      the two-handed or heavy property.
+    description: >-
+      Your practice of martial arts gives you mastery of combat styles that use your Unarmed Strike
+      and Simple Weapons.
+      
+      You gain the following benefits while you are unarmed or wielding only Simple Weapons and 
+      you aren’t wearing armor or wielding a shield:
 
-
-      You gain the following benefits while you are unarmed or wielding
-      only monk weapons and you aren't wearing armor or wielding a shield:
-
-       - You can use Dexterity instead of Strength for the attack and damage
-      rolls of your unarmed strikes and monk weapons.
+       - You can use Dexterity instead of Strength for the attack and damage 
+         rolls of your Unarmed Strikes and Simple Weapons, except those that
+         have the TwoHanded property.
 
        - You can roll you martial arts die in place of the normal damage of
-      your unarmed strike or monk weapon.
+         your unarmed strike.
 
-       - When you use the Attack action with an unarmed strike or a monk weapon
-      on your turn, you can make one unarmed strike as a bonus action.
-  - name: Dedicated Weapon
-    description: |-
-      Also at 2nd level, you train yourself to use a variety of weapons as monk weapons,
-      not just simple melee weapons and short-swords.
-      Whenever you finish a short or long rest, you can touch one weapon, focus your ki on it,
-      and then count that weapon as a monk weapon until you use this feature again.
-
-      The chosen weapon must meet these criteria:
+       - When you use the Attack action with an Unarmed Strike or a 
+         Simple Weapon on your turn, you can make one Unarmed Strike as a Bonus Action on the 
+         same turn.
+  - name: Weapon Mastery
+    description: >-
+      Your training with weapons allows you to use the Mastery property of two kinds of Simple 
+      weapons of your choice, such as Daggers and Spears.
       
-        - The weapon must be a simple or martial weapon.
-      
-        - You must be proficient with it.
-      
-        - It must lack the heavy and special properties.  
+      Whenever you finish a Long Rest, you can change the kinds of Simple weapons you chose.
+      For example, you could switch to using the Mastery properties of Maces and Slings.
 
 ---
 name: Monk 2
@@ -106,24 +98,19 @@ hit_die: d8
 hit_points: 5
 resources:
   - name: Ki
-    description: |-
-      Starting at 2nd level, your training allows you to harness the mystic energy of ki.
-      Your access to this energy is represented by a number of ki points.
-      Your monk level determines the number of points you have, as shown in the
-      Ki Points column of the Monk table.
+    description: >-
+      Your self-discipline and martial training allow you to harness a well of
+      extraordinary energy within yourself. Your access to this energy is 
+      represented by a number of Discipline Points. 
+      Your Monk level determines the number of points you have,
+      as shown in the Discipline Points column of the Monk table.
 
-      You can spend these points to fuel various ki features.
-      You start knowing three such features: Flurry of Blows, Patient Defense,
-      and Step of the Wind.
-      You learn more ki features as you gain levels in this class.
+      You can spend these points to fuel various Martial Discipline features.
 
-      When you spend a ki point, it is unavailable until you finish a short
-      or long rest, at the end of which you draw all of your expended ki back
-      into yourself.
-      You must spend at least 30 minutes of the rest meditating to regain your ki points.
-
-      Some of your ki features require your target to make a saving throw to
-      resist the feature's effects.
+      When you spend a Discipline Point, it is unavailable until you finish
+      a Short Rest or Long Rest, at the end of which you regain all your
+      expended points. Some of your Martial Discipline features 
+      require your target to make a saving throw to resist the feature’s effects
     pool: "{Monk}"
     regain:
       amount: "{Monk}"
@@ -136,21 +123,21 @@ abilities:
   - name: "Flurry of Blows"
     description: |-
       Immediately after you take the Attack action on your turn,
-      you can spend 1 ki point to make two unarmed strikes as a bonus action.
+      you can spend 1 Discipline point to make two unarmed strikes as a bonus action.
     resources:
       ki: 1
       bonus action: 1
   - name: "Patient Defense"
     description: |-
-      You can spend 1 ki point to take the Dodge action as a
-      bonus action on your turn.
+      You can spend 1 Discipline Point to take the Dodge action as a Bonus Action.
     resources:
       ki: 1
       bonus action: 1
   - name: "Step of the Wind"
     description: |-
-      You can spend 1 ki point to take the Disengage or Dash action as a
-      bonus action on your turn, and your jump distance is doubled for the turn.
+      You can spend 1 Discipline Point to take both the Disengage and Dash 
+      actions as a Bonus Action, and your jump 
+      distance is doubled for the turn.
     resources:
       ki: 1
       bonus action: 1
@@ -201,20 +188,18 @@ abilities:
 
   - name: Deflect Missiles
     description: |-
-      Starting at 3rd level, you can use your reaction to deflect or catch the
-      missile when you are hit by a ranged weapon attack.
-      When you do so, the damage you take from the attack is reduced by
-      1d10 + your Dexterity modifier + your monk level.
-
-      If you reduce the damage to 0, you can catch the missile if it is small
-      enough for you to hold in one hand and you have at least one hand free.
-      If you catch a missile in this way, you can spend 1 ki point to make a
-      ranged attack with a range of 20/60 using the weapon or piece of
-      ammunition you just caught, as part of the same reaction.
-      You make this attack with proficiency, regardless of your weapon
-      proficiencies, and the missile counts as a monk weapon for the attack.
+      You can use your Reaction to deflect ranged attacks against you that deal Bludgeoning, 
+      Piercing, or Slashing damage. When you do so, the damage you take from the attack is reduced 
+      by 1d10 plus your Dexterity modifier plus your Monk level.
+      
+      If you reduce the damage to 0, you can spend 1 Discipline Point to redirect the attack toward 
+      another creature. If you do so, choose a creature within 60 feet of yourself
+      that isn’t behind Total Cover.
+      That creature must succeed on a Dexterity saving throw or take damage equal to 
+      two rolls of your Martial Arts die. The damage is the same type dealt by the attack.
     dice_rolls:
       damage_reduction: "1d10 + dex + {Monk}"
+      return_fire_save: 2{martial_arts}
 
   - name: Ki-Fueled Attack
     description: |-
@@ -241,8 +226,11 @@ abilities:
   - name: Slow Fall
     link: http://dnd5e.wikidot.com/monk#toc13
     description: |-
-      Beginning at 4th level, you can use your reaction when you fall to reduce
-      any falling damage you take by an amount equal to five times your monk level.
+      You can use your Reaction when you fall to reduce any damage you take from
+      the fall by an amount equal to five times your Monk level.
+    dice_rolls:
+      damage_reduction: 5 * {Monk}
+
   - name: Quickened Healing
     link: http://dnd5e.wikidot.com/monk#toc14
     description: |-
@@ -267,7 +255,7 @@ hit_die: d8
 hit_points: 5
 
 facts:
-  martial_arts: d6
+  martial_arts: d8
 
 abilities:
   - name: Extra Attack
@@ -277,11 +265,10 @@ abilities:
 
   - name: Stunning Strike
     description: |-
-      Starting at 5th level, you can interfere with the flow of ki in an opponent's body.
-      When you hit another creature with a melee weapon attack, you can spend 1 ki point
-      to attempt a stunning strike.
-      The target must succeed on a Constitution saving throw or be stunned until the
-      end of your next turn.
+      Once per turn when you hit a creature with a Simple Weapon or an Unarmed Strike,
+      you can spend 1 Discipline Point to attempt a stunning strike.
+      The target must succeed on a Constitution saving throw or have the Stunned condition until 
+      the start of your next turn.
     save:
       stat: con
       dc: 8 + prof + wis
@@ -293,11 +280,3 @@ abilities:
           The creature automatically fails Strength and Dexterity saving throws.
           Attack rolls against the creature have advantage.
         length: end of next turn
-
-  - name: Focused Aim
-    description: |-
-      Also at 5th level, when you miss with an attack roll,
-      you can spend 1 to 3 ki points to increase your attack roll by 2 for
-      each of these ki points you spend, potentially turning the miss into a hit.
-    resources:
-      ki: 1
