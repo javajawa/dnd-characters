@@ -1,0 +1,9 @@
+name: Shield of Faith
+link: http://dnd5e.wikidot.com/spell:shield-of-faith
+equippable: true
+description: |-
+  A shimmering field appears and surrounds a creature of your choice within range,
+  granting it a +2 bonus to AC for the duration.
+
+facts:
+  armour_class: "+2"
