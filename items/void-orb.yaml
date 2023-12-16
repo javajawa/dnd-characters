@@ -1,0 +1,28 @@
+name: Void Orb
+description: |
+  As an Action, you can speak the command word "Into the Void"
+  to consume one of the orb charges and throw this orb up to 30ft,
+  where it's replaced with a 15th diameter sphere of magical darkness.
+  The darkness remains until the command word is spoken again, at which
+  point it returns to an orb.
+  
+  The orb has a maximum of 3 charges and all charges are restored at midnight.
+weight: 1
+value: "unknown"
+resources:
+  - name: Pearl Orb Charge
+    pool: 3
+    regain:
+      every: dawn
+      amount: 3
+abilities:
+  - name: Orb of Darkness
+    description: |
+      As an Action, you can speak the command word "Into the Void"
+      to consume one of the orb charges and throw this orb up to 30ft,
+      where it's replaced with a 15th diameter sphere of magical dakrness.
+      The darkness remains until the command word is spoken again, at which
+      point it returns to an orb.
+    resources:
+      Pearl Orb Charge: 1
+    range: [30, 30]

@@ -122,3 +122,31 @@ attacks:
     damage:
       slashing: 1d6 + str|dex
       force: "{_eldritch_maul}(eldritch maul)"
+
+---
+
+name: Hew
+description: |
+  This +1 battleaxe deals maximum damage when the wielder hits a plant creature or an object made of wood.
+  The axe’s creator was a dwarf smith who feuded with the dryads of a forest where he cut firewood.
+  
+  Whoever carries the axe feels uneasy whenever he or she travels through a forest.
+value: "unknown"
+weight: 4
+attacks:
+  - name: Hew, 1 handed
+    proficiency: battleaxe
+    resources:
+      action: 1
+    attack_bonuses: str + 1
+    reach: "5"
+    damage:
+      piercing: 1d8 + str + 1
+  - name: Hew, 2 handed
+    proficiency: battleaxe
+    resources:
+      action: 1
+    attack_bonuses: str + 1
+    reach: "5"
+    damage:
+      piercing: 1d10 + str + 1

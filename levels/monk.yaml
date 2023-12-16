@@ -1,11 +1,27 @@
 name: Monk 1
 class: Monk
 level: 1
-link: http://dnd5e.wikidot.com/monk
+link: https://media.dndbeyond.com/compendium-images/ua/ph-playtest8/gHvtmY50loGLgQUb/UA2023-PH-Playtest8.pdf
 description: |-
-  Monks are united in their ability to magically harness the energy that flows in their bodies.
-  Whether channeled as a striking display of combat prowess or a subtler focus of
-  defensive ability and speed, this energy infuses all that a monk does.
+  Monks use rigorous combat training and mental discipline to align themselves with the
+  multiverse and tap into internal reservoirs of power. Different Monks conceptualize this
+  power in various ways: as breath, energy, life force, essence, or self, for example. Whether
+  channeled as a striking display of martial prowess or as a subtler focus of defense and
+  speed, this power infuses all that a Monk does.
+  
+  Monks harness and focus their internal power to create extraordinary, even supernatural,
+  effects. They channel uncanny speed and strength into their attacks, with or without the
+  use of weapons. In a Monk’s hands, even the most basic weapons can become sophisticated
+  implements of combat mastery. A Monk’s mightiest attacks can stun their opponents.
+  
+  Many Monks find that a structured life of ascetic withdrawal from the mundane world
+  helps them cultivate the physical and mental discipline they need to harness their power.
+  Other Monks believe that immersing themselves in the vibrant confusion of life helps to fuel their
+  determination and discipline.
+  
+  Monks generally view their adventures as personal tests of their physical and mental
+  development. They are driven by a desire to accomplish a greater mission than merely
+  slaying monsters and plundering treasure; they strive to hone themselves into living weapons.
 hit_die: d8
 hit_points: 8
 facts:
@@ -51,45 +67,42 @@ proficiencies:
   - type: weapon
     target: sling
   - type: weapon
+    target: scimitar
+  - type: weapon
     target: short sword
+  - type: weapon
+    target: hand crossbow
   - type: weapon
     target: unarmed
 abilities:
   - name: Unarmored Defense
     description: |-
-      Beginning at 1st level, while you are wearing no armor and not wielding a shield,
-      your AC equals 10 + your Dexterity modifier + your Wisdom modifier.
+      While you aren’t wearing any armor or wielding a Shield, your base Armor Class equals 10 plus
+      your Dexterity and Wisdom modifiers.
   - name: Martial Arts
-    description: >-
+    description: |-
       Your practice of martial arts gives you mastery of combat styles that use your Unarmed Strike
-      and Simple Weapons.
+      and Monk Weapons, which are Simple Melee Weapons and Martial Weapons with the Light
+      property.
       
-      You gain the following benefits while you are unarmed or wielding only Simple Weapons and 
-      you aren’t wearing armor or wielding a shield:
+      You gain the following benefits while you are unarmed or wielding only Monk Weapons and
+      you aren’t wearing armor or wielding a Shield:
 
-       - You can use Dexterity instead of Strength for the attack and damage 
-         rolls of your Unarmed Strikes and Simple Weapons, except those that
-         have the TwoHanded property.
-
-       - You can roll you martial arts die in place of the normal damage of
-         your unarmed strike.
-
-       - When you use the Attack action with an Unarmed Strike or a 
-         Simple Weapon on your turn, you can make one Unarmed Strike as a Bonus Action on the 
-         same turn.
-  - name: Weapon Mastery
-    description: >-
-      Your training with weapons allows you to use the Mastery property of two kinds of Simple 
-      weapons of your choice, such as Daggers and Spears.
+      - Bonus Unarmed Strike: You can make one Unarmed Strike as a Bonus Action.
       
-      Whenever you finish a Long Rest, you can change the kinds of Simple weapons you chose.
-      For example, you could switch to using the Mastery properties of Maces and Slings.
+      - Dexterous Attacks: You can use Dexterity instead of Strength for the attack and damage
+        rolls of your Unarmed Strikes and Monk Weapons. In addition, when you choose the
+        Grapple or Shove option, you can use your Dexterity modifier instead of Strength to
+        determine the saving throw DC.
+
+      - Martial Arts Die. You can roll a d6 in place of the normal damage of your Unarmed Strike or
+        Monk Weapons.
 
 ---
 name: Monk 2
 class: Monk
 level: 2
-link: http://dnd5e.wikidot.com/monk
+link: https://media.dndbeyond.com/compendium-images/ua/ph-playtest8/gHvtmY50loGLgQUb/UA2023-PH-Playtest8.pdf
 description: |-
   Monks are united in their ability to magically harness the energy that flows in their bodies.
   Whether channeled as a striking display of combat prowess or a subtler focus of
@@ -98,19 +111,21 @@ hit_die: d8
 hit_points: 5
 resources:
   - name: Ki
-    description: >-
-      Your self-discipline and martial training allow you to harness a well of
-      extraordinary energy within yourself. Your access to this energy is 
-      represented by a number of Discipline Points. 
-      Your Monk level determines the number of points you have,
-      as shown in the Discipline Points column of the Monk table.
-
-      You can spend these points to fuel various Martial Discipline features.
-
-      When you spend a Discipline Point, it is unavailable until you finish
-      a Short Rest or Long Rest, at the end of which you regain all your
-      expended points. Some of your Martial Discipline features 
-      require your target to make a saving throw to resist the feature’s effects
+    description: |-
+      Your self-discipline and martial training allow you to harness a well of extraordinary energy
+      within yourself. Your access to this energy is represented by a number of Discipline Points.
+      Your Monk level determines the number of points you have, as shown in the Discipline
+      Points column of the Monk table.
+      
+      You can spend these points to fuel certain Monk features. You start knowing three such
+      features: Flurry of Blows, Patient Defense, and Step of the Wind, each of which is detailed
+      below.
+      
+      When you spend a Discipline Point, it is unavailable until you finish a Short Rest or Long
+      Rest, at the end of which you regain all your expended points.
+      
+      Some features that use Discipline Points require your target to make a saving throw. The
+      saving throw DC equals 8 plus your Proficiency Bonus plus your Wisdom modifier.
     pool: "{Monk}"
     regain:
       amount: "{Monk}"
@@ -122,35 +137,63 @@ facts:
 abilities:
   - name: "Flurry of Blows"
     description: |-
-      Immediately after you take the Attack action on your turn,
-      you can spend 1 Discipline point to make two unarmed strikes as a bonus action.
+      You can spend 1 Discipline Point to make two Unarmed Strikes as a Bonus Action.
     resources:
       ki: 1
       bonus action: 1
-  - name: "Patient Defense"
+  - name: "Patient Defense (Disengage)"
     description: |-
-      You can spend 1 Discipline Point to take the Dodge action as a Bonus Action.
+      You can take the Disengage action as a Bonus Action. 
     resources:
-      ki: 1
       bonus action: 1
-  - name: "Step of the Wind"
+  - name: "Patient Defense (Disengage + Dodge)"
     description: |-
-      You can spend 1 Discipline Point to take both the Disengage and Dash 
-      actions as a Bonus Action, and your jump 
-      distance is doubled for the turn.
+      You can spent 1 Discipline Point to take both the
+      Disengage and the Dodge actions as a Bonus Action.
     resources:
       ki: 1
       bonus action: 1
-
+  - name: "Step of the Wind (Dash)"
+    description: |-
+      You can take the Dash action as a Bonus Action.
+    resources:
+      bonus action: 1
+  - name: "Step of the Wind (Dash + Disengage + Jump)"
+    description: |-
+      You can spend 1 Discipline Point to take both the Disengage and
+      Dash actions as a Bonus Action, and your jump distance is doubled for the turn.
+    resources:
+      ki: 1
+      bonus action: 1
+  - name: Uncanny Metabolism
+    description: |-
+      When you roll Initiative, you can regain all expended Discipline Points.
+      When you do so, roll your Martial Arts die, and regain a number of Hit Points
+      equal to your Monk level plus the number rolled.
+      
+      Once you use this feature, you can’t use it again until you finish a Long Rest.
+  - name: Unarmoured Movement
+    description: |-
+      Your speed increases by 10 feet while you aren’t wearing armor or wielding a Shield.
+      This bonus increases when you reach certain Monk levels, as shown on the Monk table.
 ---
 
-name: Monk 3
+name: Monk 3 (Mercy)
 class: Monk
 level: 3
+link: https://media.dndbeyond.com/compendium-images/ua/ph-playtest8/gHvtmY50loGLgQUb/UA2023-PH-Playtest8.pdf
 description: |-
-  Monks are united in their ability to magically harness the energy that flows in their bodies.
-  Whether channeled as a striking display of combat prowess or a subtler focus of
-  defensive ability and speed, this energy infuses all that a monk does.
+  Monks of the Way of Mercy learn to manipulate the life force of others to bring
+  aid to those in need. They are wandering physicians to the poor and hurt.
+  However, to those beyond their help, they bring a swift end as an act of mercy.
+  
+  Those who follow the Way of Mercy might be members of a religious order,
+  administering to the needy and making grim choices rooted in reality rather than idealism.
+  Some might be gentle-voiced healers, beloved by their communities,
+  while others might be masked bringers of macabre mercies.
+  
+  The walkers of this way usually don robes with deep cowls, and they often conceal
+  their faces with masks, presenting themselves as the faceless bringers of life and death.
 hit_die: d8
 hit_points: 5
 proficiencies:
@@ -158,6 +201,8 @@ proficiencies:
     target: medicine
   - type: equipment
     target: herbalist's tools
+  - type: skill
+    target: herbalism
 
 abilities:
   - name: "Hands of Healing"
@@ -177,29 +222,37 @@ abilities:
   - name: "Hands of Harm"
     description: |-
       At 3rd level, you use your ki to inflict wounds.
+      
       When you hit a creature with an unarmed strike,
       you can spend 1 ki point to deal extra necrotic damage equal
       to one roll of your Martial Arts die + your Wisdom modifier.
+      
       You can use this feature only once per turn.
     resources:
       ki: 1
     dice_rolls:
       Damage: "{martial_arts} + wis"
 
-  - name: Deflect Missiles
+  - name: Deflect Attacks
     description: |-
-      You can use your Reaction to deflect ranged attacks against you that deal Bludgeoning, 
-      Piercing, or Slashing damage. When you do so, the damage you take from the attack is reduced 
-      by 1d10 plus your Dexterity modifier plus your Monk level.
+      You can use your Reaction to deflect melee and ranged attacks against you that deal
+      Bludgeoning, Piercing, or Slashing damage.
+      When you do so, the total damage you take from the attack is reduced by 1d10 plus your
+      Dexterity modifier plus your Monk level.
       
-      If you reduce the damage to 0, you can spend 1 Discipline Point to redirect the attack toward 
-      another creature. If you do so, choose a creature within 60 feet of yourself
-      that isn’t behind Total Cover.
-      That creature must succeed on a Dexterity saving throw or take damage equal to 
-      two rolls of your Martial Arts die. The damage is the same type dealt by the attack.
+      If you reduce the damage to 0, you can spend 1 Discipline Point to redirect
+      some of the attack’s force. If you do so, choose a creature within 5
+      feet of you if the attack was a melee attack or 60 feet of yourself that
+      isn’t behind Total Cover if the attack was a ranged attack. That creature
+      must succeed on a Dexterity saving throw or take damage equal to two rolls
+      of your Martial Arts die plus your Dexterity modifier. The damage is the same
+      type dealt by the attack.
     dice_rolls:
-      damage_reduction: "1d10 + dex + {Monk}"
-      return_fire_save: 2{martial_arts}
+      Damage Reduction: "1d10 + dex + {Monk}"
+      Return Fire: 2{martial_arts}
+    save:
+      stat: dex
+      dc: 8 + prof + wis
 
   - name: Ki-Fueled Attack
     description: |-
@@ -212,10 +265,9 @@ abilities:
 name: Monk 4
 class: Monk
 level: 4
+link: https://media.dndbeyond.com/compendium-images/ua/ph-playtest8/gHvtmY50loGLgQUb/UA2023-PH-Playtest8.pdf
 description: |-
-  Monks are united in their ability to magically harness the energy that flows in their bodies.
-  Whether channeled as a striking display of combat prowess or a subtler focus of
-  defensive ability and speed, this energy infuses all that a monk does.
+  Monks get stronger~
 hit_die: d8
 hit_points: 5
 
@@ -229,28 +281,16 @@ abilities:
       You can use your Reaction when you fall to reduce any damage you take from
       the fall by an amount equal to five times your Monk level.
     dice_rolls:
-      damage_reduction: 5 * {Monk}
-
-  - name: Quickened Healing
-    link: http://dnd5e.wikidot.com/monk#toc14
-    description: |-
-      Also at 4th level, as an action, you can spend 2 ki points and roll a Martial Arts die.
-      You regain a number of hit points equal to the number rolled plus your proficiency bonus.
-    resources:
-      action: 1
-      ki: 2
-    dice_rolls:
-      healing: "{martial_arts} + prof"
+      damage_reduction: 5*{Monk}
 
 ---
 
 name: Monk 5
 class: Monk
 level: 5
+link: https://media.dndbeyond.com/compendium-images/ua/ph-playtest8/gHvtmY50loGLgQUb/UA2023-PH-Playtest8.pdf
 description: |-
-  Monks are united in their ability to magically harness the energy that flows in their bodies.
-  Whether channeled as a striking display of combat prowess or a subtler focus of
-  defensive ability and speed, this energy infuses all that a monk does.
+  Double punch time!
 hit_die: d8
 hit_points: 5
 
@@ -265,13 +305,18 @@ abilities:
 
   - name: Stunning Strike
     description: |-
-      Once per turn when you hit a creature with a Simple Weapon or an Unarmed Strike,
-      you can spend 1 Discipline Point to attempt a stunning strike.
-      The target must succeed on a Constitution saving throw or have the Stunned condition until 
-      the start of your next turn.
+      Once per turn when you hit a creature with a Monk Weapon or an Unarmed Strike, you can
+      spend 1 Discipline Point to attempt a stunning strike. The target must make a Constitution
+      saving throw. On a failed save, the target has the Stunned condition until the
+      start of your next turn.
+      
+      On a successful save, the target takes Force damage equal to a roll of your Martial Arts die
+      plus your Wisdom modifier.
     save:
       stat: con
       dc: 8 + prof + wis
+    dice_rolls:
+      Force Damage: "{martial_arts} + wis"
     status:
       - name: Stunned
         description: |-

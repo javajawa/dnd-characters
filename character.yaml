@@ -19,45 +19,7 @@ info:
 feats: []
 levels: []
 
-items:
-  - name: Healing Potion
-    link: http://dnd5e.wikidot.com/wondrous-items:potion-of-healing
-    description: |-
-      You regain hit points when you drink this potion.
-      The number of hit points depends on the potion’s rarity,
-      as shown in the Potions of Healing table.
-      Whatever its potency, the potion’s red liquid glimmers when agitated.
-    count: 1
-    weight: 1
-    value: 50gp
-    resources:
-      - name: Healing Potion
-        description: Healing pots available
-        pool: "{count}"
-        regain:
-          amount: 0
-          every: dawn
-
-    abilities:
-      - name: Drink Healing Potion
-        resources:
-          bonus_action: 1
-          hands: 1
-          healing_potion: 1
-        description: "gulp gulp gulp"
-        dice_rolls:
-          healing: 2d4 + 2
-
-  - name: Money
-    description: Cash cash cash
-    weight: 1
-    value: 20sp, 9cp
-
-  - name: Herbs and Ingredients
-    description: Things wot light found
-    weight: 1
-    value: 72gp
-
+items: []
 
 backstory:
   "Traits – Sheltered": >-
@@ -1591,7 +1553,7 @@ backstory:
     - Things are, in generally, pretty awful.
     - Fake Glint and Real Glint 
 
-  "Session Log – Session 35 (The Fading, 29th/30th)": |
+  "Session Log – Session 35 (The Fading, 29th/30th; HHT)": |
     We depart Cragmaw and being to make camp when barking is heard in the distance.
     
     Bram's Dream: Tiamat is being angry at person A; person B takes damage. And teaches Bram this power (happy birthday SJ).
@@ -1599,33 +1561,228 @@ backstory:
     The next morning, shortly after we leave camp, we come across a bloody scene with one or more missing carcasses
     where there is a mess of blood of entrails. Signs of multiple canines and at least 8 humanoids set of footprints.  
     
+    - Travel! not a lot happens
+    - Camping time: people finally still filling Jalorda in on the whole were-rat situations
+    - The were-rats are wrapped up. Light fails some number of checks and gets a blanket thrown over their head.
+    - Can't Speak with Dead on Gundred because no mouth :(
+    - We return to Phandalin
+    - Silidar has moved back into the manor with Merric and the lady from the road
+    - Jalorda begins trying to work out where he is, what's going on, whether we're all crazy people.
+    - Daran has us deliver some apples. Milsa is coordinating apple peeling.
+    - Jalorda asks about old empire necromancy sites. [Everyone disliked that]. Daran gives non-answers.
+    - In the manor, there is new construction happening
+    - Gundren is mostly identified
+    - Sildar and Merric are caught up with
+    - Glint and Light make off with the apple peals to make scrumpy
+    - The druids are doing a ritual, the kids are bored
+    - We consider using Qelline's one reincarnation scroll on Rockseeker 
+    - People are happy to see Landan!
+    - Storms over the neverwinter woods?? Those damn Talos worshippers are back on the escalator again
+
+  "Session Log – Session 36 (HHT; 1st, 2nd, 3rd Leaffall)": |
+    It's big feast time! Who's not here? Town Master Harbin, Helena of the Miner's exchange,
+    and the dwarf who runs the Sleeping Giant. Otherwise all named NPCs are present.
+    Adabra has arrived with some tasty drinks. Bram (and Glint) put on a show for the kids.
+    
+    Glint gives an offering at the shrine of luck and gets a spontaneously coin -- possibly
+    a sign from Tymora.
+
+    Bram takes food to the town master, and probably gets the best look any of us have had of him.
+    It did not gain us any specific information.
+
+    The manor has been reclaimed by the Lord's Alliance, and we have a couple of rooms
+
+    Light's dreams are the vision from the service, played over and over but with tiny
+    variations.
+    
+    Reincarnation happens...and Gundren returns as a wonderful slime person!
+    At the same time, Qelline receives a sending message from Thundertree -- Reidoth
+    is pinned down in their hut (with Yeemik).
+    
+    Slime!Gundren wants to proceed to Wave-Echo Cave in order to get ahead of any danger
+    to his brothers. We leave a map (which?) with him to annotate with Wave Echo Cave.
+    
+    Everything is fine.
+    
+    Bram grabs his freshly made horse shoes. The first day of zoomy travel North is uneventual.
+    On the second we intercept a returning scout goblin (the one who was with Yeemik) heading
+    south. We gave her food and water and let her carry on. We send a sending _to_ Yeemik.
+
+    On the third day, we arrive. Thena scouting reveals one standing structure, with
+    cultists around so -- we sneak in (successfully) and engage in combat with some interesting
+    draconic cultists who explode upon death with various effects.
+    Despite the complete lack of planning, the combat goes surprisingly well!
+
+  "Session Log – Session 37 (3rd Leaffall, Afternoon)": |
+    Combat continues! We have now all learnt to not kill these things in melee if we can avoid
+    it, but we're not great at avoiding. We clear up ok, and get Reidoth to let us inside.
+    
+    Yeemik is missing an arm and is exhausted, curled up on some old clothes.
+    They've had food but limited water and rest.
+    
+    Reidoth tells us that the guardian we was negotiating with was killed.
+    "green divine lizard" + "guardian" => we've got an Emerald Dragon called Crystella.
+    Or, we did and she has now been killed.
+    
+    The "cultists" were ex-humanoids that became draconic by doing
+    something with the Emerald's dragon scales (and (presumably) it's power).
+    Some more investigation seems to indicate that Drippingfang lead the people to take
+    Crystella. We have been told that not only were they taking things from Crystella's
+    corpse, they were also leaving/adding something, which might be dangerous.
+    
+    Reidoth has a convenient local map with knowledge of the still standing buildings.
+    We're also made aware of there having been both zombies and twig blights.
+    The opposing leader is going to be coloured purple. Good to know! Also, they were
+    and probably still are casters!
+    
+    https://cdn.discordapp.com/attachments/969993077638971442/1165343092635877386/637707682427270029.png?ex=65468154&is=65340c54&hm=380f142aebd51fca0caa5c8ee7fe629adb138534a461893b6bd7e5daa38ef63b
+    
+    Draconians are made by humanoids grafting bits of dying dragon into themselves.
+    This information, combined with the symbol, we have identified this as being a
+    (splinter) cell of The Cult of the Dragon, who are dedicated to bringing Tiamat
+    back to the material plane.
+    
+    https://cdn.discordapp.com/attachments/969993077638971442/1165344436826423357/latest.png?ex=65468294&is=65340d94&hm=d333a5a5acacee52f85c6b5ae94b98e32589d29f8f825703f40f38f19c5a274e
+
+    So, to summarise, we have probably around 10 hostile Draconians, an unknown number of
+    zombies, and a potentially trapped dragon corpse, traps left by the creatures eeking out
+    a living here for the last 30 years, and the formation of a base of operations for
+    the cult of the dragon.
+    
+    The plan comes together during a short rest: the injured will remaining in this tested
+    house, whilst we clear out the remaining cultists. We consider trying to set different
+    groups in the area against each other, specifically trying to appear as liberators to
+    the twig blights.
+    
+    An aside on Twig Blights:
+    > Twig blights can root in soil, which they do when living prey are scarce.
+    > While rooted, they resemble woody shrubs.
+    > When it pulls its roots free of the ground to move, a twig blight’s branches
+    > twist together to form a humanoid-looking body with a head and limbs.
+    > Twig blights seek out campsites and watering holes, rooting there to set
+    > up ambushes for potential victims coming to drink or rest.
+    > Huddled together in groups, twig blights blend in with an area’s natural
+    > vegetation or with piles of debris or firewood.
+    > Given how dry they are, twig blights are particularly susceptible to fire.
+    
+    We (eventually, in player time) head out to scout and isolate and eliminate groups.
+    Light is taking the lead and looking out...mostly for creatures, but also trying
+    to avoid places where traps would obviously be. Disappointingly, on the second
+    building Light pokes their head over a broken wall, finds some hostiles...but the
+    stealth check of 18 doesn't beat the perception of 19 from inside. The two draconians
+    inside come out, plus a third that glides down from a nearby tree in stealth mode.
+    We immediately find ourselves grouped up due to the terrain and the sudden
+    pincer maneuver. A fourth one glides in on round 2, and we try to keep them not
+    close to too many of us. On the plus side, actual damage taken is pretty low.
+    The two yellows do the petrification thing, the second black self-explodes,
+    but we get out of the fight with some resources used but not that worse for wear.
+    
+    Also spotted inside the old general store is a humanoid corpse bound or wrapped,
+    potentially in the sense of a zombie. It has been dead for an short-to-indeterminate
+    amount of time.
+
+  "Session Log – Session 38 (3rd Leaffall, Afternoon)": |
+    We resume the exploratory scout, with Light and Landan inspecting the
+    body/corpse in the main room of the general store. The initial melee-based
+    investigation attack determines that the body doesn't react to being poked
+    with a quarterstaff. The thin thread like substance is sticky, not woven
+    (i.e. not rope) and...not a lot else.
+    
+    "If it was going to hatch, it hasn't yet." -- Light (except it totally could).
+
+    The body is ignored, the party regroups and attempts to stealth towards the
+    next building. As we approach...zombies stagger out! The fight is confused by
+    appearing dragonbois (the stealthy purple acid bois again). Overall, the combat
+    is pretty simple.
+    
+    [Kitteh departs due to random pains~~]
+    
+    - "we all tried to not breath in zombie"
+    - glint thinks the cacoon is magical, goes to stab it, fails
+    - sends mint in to eat the sticky thread
+
+  "Session Log – Session 39 (3rd Leaffall, Afternoon)": |
+    - Combat.
+    - The boss Dimension Doored
+    - He didn't attack Yeemik
+    - We still have more patrols to clear
+    - Glint learns how to make draconians, and then burns that knowledge
+    - Knowledge is thus destroyed. Hopefully nothing important about Rockseeker's work
+    - Short Rest
+    - Zombies in the barracks
+    - Statue of Neverwinter hero Palien
+    - Combat!
+    - Giant Dragon Ooze??
+    - More combat
+
+  "Session Log – Session 40 (3rd Leaffall, Afternoon)": |
+    - Light attempts to dislodge the Ooze (not great)
+    - Faelar attempts to attack the boss, but can't get LOS, so takes out the last mook
+    - Landan pulls the Ooze off the wall, and it somewhat crushes Glint
+    - Bram stabs to it death
+    - Jalorda gets Glint back up
+    - Light drop bears from the top of the tower onto the "boss", interrupting it again
+    - The boss attempts to reposition and runs into Faelar, who booming bonks
+    - Glint charges in, and mind spikes him into exploding into a chaining lightning!
+
+    - The dragon corpse is beginning to desiccate :(
+    - Two egg-like containers, which is used in the metamorphosis. Unable to burn.
+    - A chest! 
+      - coins
+      - 4 silver goblets with moonstones
+      - 2 scrolls (Misty Step and Lightning bolt)
+      - rusty battleaxe (this turns out to be "Hew", a named artifact)
+    - Landan gets an experience with the remaining spirit of Crystella:
+      - "kindred spirit, protect this land from me. take this"
+      - and gains an emerald leather band
+      - the body starts crumbling
+    - The egg chambers don't seem to damageable, but we can dis-spell them (hopefully).
+
+    - Jalorda reckons the reason that the dracolich ritual failed is because the dragon was 
+
+    - Kitteh goes off to secrets! (get to see the pale tabaxi with a pearl necklace with a large black pearl. Light is given a pearl)
+    - A short rest is had
+    
+    - We continue the sweep and identify a second zombie building.
+    - More twig blight corpses
+    - Some nice home. Well, ex-nice-homes. Now debris! But they have money.
+    - A second complete sweep in completed, including getting things from the old herbalist's shop
+      - This probably included a necklace (Kitteh was away for a few minutes).
+    
+    - But why are zombies?
+      - Volcanic eruption of Mount Hotenow 30 years ago, wipes out the town
+      - The ash cloud leads to ash zombies, and probably also the twig blights.
+      - We don't think the dragon is going to turn. Other things have died without turning...
+
+    - Glint wants to give Yeemik some kind of reward
+    - Light is granted the symbol of the Emerald Enclave ("when your ready").
+    - Landan is going to stay here to protect us whilst the party heads out to check in 
+    - Level Up!
+
 
 quest-lines:
   active:
     - Full Moons are on the 30th (new moons on the 15th)
-    # Lost Mine
-    - Take down the people in Cragmaw Castle
-    - Track down the dwarf Durgen Rockseeker
+    - Find Reidoth in the lands around Thundertree
+    - Destroy the eggs that transmute draconians
+    - Bury Crystella properly (and avoid dragolich or dragozomb)
   open:
     # Icespire Peak
     - Cryovain, the White Dragon
     - Defeat Frigidfang
     - Young and Old Green Dragon
     # Lost Mine
-    - Take down the people in Cragmaw Castle
-    - Track down the dwarf Durgen Rockseeker
+    - Pick up the trail Rockseeker was on
     - Find the magic forge in Wave Echo Cave
     # Cure for lycanthropy
     - Gather 10gp of nightshade
     - Grow the other 300gp of nightshade (with help of Mirna)
-    - Acquire 300gp of wolfsbane
-    - Look for supplies in Thundertree's ruins
+    - Acquire 150gp of wolfsbane
     - Work out divine blessings.
     # Bezlik's Backstory / Tower of Storms
     - Defeat Sparkbringer
     # Misc.
     - Visit the Dragonborn in Leilon
-    - Find Reidoth in the lands around Thundertree
     - Freeing slaves captured by the Red Bands
     - Solve the question of Sister Garaele
     - Investigate the Old Owl Well area, drive off anyone trying to exhume a Lich
@@ -1633,9 +1790,7 @@ quest-lines:
   available:
     # Backstory
     - '"Faelar picked up a new side quest"'
-    # Commerce
-    - Identify and sell (perhaps) the spiked armour
-    # Misc. (but from Icespire Peak)
+    # Misc. (but from Icespire Peak?)
     - Dwarven Excavation Quest Board Mission
     - Resupply the logging camp Quest Board Mission
     - Prepare the Axeholm fortress as a sanctuary for the the people of Phandalin
@@ -1648,6 +1803,9 @@ quest-lines:
     - Recover Landan (Landan's backstory)
     - Support Big Al Quest Board Mission
     - Turn in the butter skull
+    # Lost Mine
+    - Take down the people in Cragmaw Castle
+    - Track down the dwarf Durgen Rockseeker
     # Bezlik's Backstory / Tower of Storms
     - Retrieve the Magic Conch!
     - Tower of Storms (Bezlik's backstory)
@@ -1661,6 +1819,7 @@ quest-lines:
     - Offload the manticore spikes to Mirna
     # Misc
     - Quietly melt down the giant gold bell
+    - Look for supplies in Thundertree's ruins
 
 worries:
   - Being overseen on the town green.

@@ -42,7 +42,7 @@ abilities:
       On a success, the target is freed.
     resources:
       bonus action: 1
-      ki point: 1
+      discipline point: 1
       spell concentration: 1
       spell_vocal: 1
     save:
@@ -72,7 +72,14 @@ abilities:
       must make a Wisdom (Perception) check against your spell save DC to
       recognize the terrain as hazardous before entering it.
     range: [ 150, 150 ]
+    resources:
+      action: 1
+      discipline point: 2
+      spell concentration: 1
+      spell_vocal: 1
     save:
       stat: wis
       skill: perception
       dc: 8 + prof + wis
+    dice_rolls:
+      Spike Growth Damage: 2d4

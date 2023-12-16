@@ -55,15 +55,33 @@ function simple_roll(roll_name: string, _value: Value, facts: Facts): void {
     );
 }
 
-function attack_roll(weapon: string, attack: ComboValue, facts: Facts): void {
-    const [modifier, roll_def] = roll_string(attack, facts);
+function describe(name: string, source: string, description: string): void {
+    request_roll(`&{template:traits} {{name=${name}}} {{source=${source}}} {{description=${description.replace(/\n/g, "%NEWLINE%")}}}`);
+}
+
+function custom_roll(roll_name: string, from_name: string, value: Value, facts: Facts): void {
+    const [modifier, roll_def] = roll_string(new ComboValue(value), facts);
 
     request_roll(
-        `&{template:atk} {{rname=${weapon}}} {{always=1}} {{mod=${modifier}}} {{rname=${weapon}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
+        `&{template:dmg} {{normal=1}} {{rname=${from_name}}} {{mod=${modifier}}} {{dmg1flag=1}} {{dmg1=[[${roll_def}]]}} {{dmg1type=${roll_name}}}`
     );
 }
 
-function damage_roll(weapon: string, damage: { [k in DamageType]: Value }, facts: Facts): void {
+function save_info(name: string, stat: Stat, skill: Skill|null, dc: Value, facts: Facts): void {
+    request_roll(
+        `&{template:atkdmg} {{normal=1}} {{save=1}} {{saveattr=${skill ? `${skill} (${stat})`: stat}}} {{savedesc=${name}}} {{savedc=${dc.resolve_with_facts(facts)}}}`
+    );
+}
+
+function attack_roll(weapon: string, attack: ComboValue, facts: Facts, vantage: boolean = false): void {
+    const [modifier, roll_def] = roll_string(attack, facts);
+
+    request_roll(
+        `&{template:atk} {{rname=${weapon}}} ${vantage? "{{always=1}}" : "{{normal=1}}"} {{mod=${modifier}}} {{rname=${weapon}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
+    );
+}
+
+function damage_roll(weapon: string, damage: { [k in DamageType]: Value }, facts: Facts, crit: boolean = false): void {
     Object.entries(damage)
         .map(([type, v]) => [type, v instanceof ComboValue ? v : new ComboValue(v)] as [string, ComboValue])
         .filter(([_, damage]) => damage.expected(facts) > 0)
@@ -87,8 +105,8 @@ function damage_roll(weapon: string, damage: { [k in DamageType]: Value }, facts
         ).map(([[type_1, damage_1], [type_2, damage_2]]) => {
             request_roll(
                 `&{template:dmg} {{rname=${weapon}}} {{damage=1}} ` +
-            `{{dmg1flag=1}} {{dmg1type=${type_1}}} {{dmg1=[[${damage_1.to_roll20(facts)}]]}} ` +
-            `${type_2 ? "{{dmg2flag= 1 : 0}}" : ""} {{dmg2type=${type_2 || "0"}}} {{dmg2=[[${damage_2?.to_roll20(facts) || "0"}]]}} `
+            `{{dmg1flag=1}} {{dmg1type=${type_1}}} {{dmg1=[[${damage_1.to_roll20(facts, crit)}]]}} ` +
+            `${type_2 ? "{{dmg2flag= 1 : 0}}" : ""} {{dmg2type=${type_2 || "0"}}} {{dmg2=[[${damage_2?.to_roll20(facts, crit) || "0"}]]}} `
             );
         });
 
@@ -151,15 +169,20 @@ function stat_block(facts: Facts, state: CharacterState) {
                             tr(
                                 {class: "leather"},
                                 td(
-                                    label(
-                                        {"for": item.name, "title": item.description},
-                                        input({
-                                            "type": "checkbox",
-                                            "id": item.name,
-                                            "checked": state.equipped(item),
-                                            "change": e => state.equip(item, (e.target as HTMLInputElement).checked)
-                                        }),
-                                        a({"href": item.link, "target": "_blank"}, item.name),
+                                    details(
+                                        summary(
+                                            label(
+                                                {"for": item.name},
+                                                input({
+                                                    "type": "checkbox",
+                                                    "id": item.name,
+                                                    "checked": state.equipped(item),
+                                                    "change": e => state.equip(item, (e.target as HTMLInputElement).checked)
+                                                }),
+                                                a({"href": item.link, "target": "_blank"}, item.name),
+                                            ),
+                                        ),
+                                        item.description,
                                     ),
                                 ),
                             ),
@@ -168,15 +191,20 @@ function stat_block(facts: Facts, state: CharacterState) {
                             tr(
                                 {class: "leather", "title": feature.description},
                                 td(
-                                    label(
-                                        {"for": feature.name, "title": feature.description},
-                                        input({
-                                            "type": "checkbox",
-                                            "id": feature.name,
-                                            "checked": state.enabled(feature),
-                                            "change": e => state.enable(feature, (e.target as HTMLInputElement).checked)
-                                        }),
-                                        a({"href": feature.link, "target": "_blank"}, feature.name),
+                                    details(
+                                        summary(
+                                            label(
+                                                {"for": feature.name},
+                                                input({
+                                                    "type": "checkbox",
+                                                    "id": feature.name,
+                                                    "checked": state.enabled(feature),
+                                                    "change": e => state.enable(feature, (e.target as HTMLInputElement).checked)
+                                                }),
+                                                a({"href": feature.link, "target": "_blank"}, feature.name),
+                                            ),
+                                        ),
+                                        feature.description,
                                     ),
                                 ),
                             ),
@@ -223,12 +251,12 @@ function stat_block(facts: Facts, state: CharacterState) {
                                 ),
                                 td(
                                     value(attack.attack_roll(facts), facts),
-                                    {"click": _ => attack_roll(attack.name, attack.attack_roll(facts), facts)},
+                                    {"click": e => attack_roll(attack.name, attack.attack_roll(facts), facts, (e as MouseEvent).shiftKey)},
                                 ),
                                 td(
                                     value(attack.total_damage, facts),
                                     " (mean: ", attack.total_damage.expected(facts).toString(10), ")",
-                                    {"click": _ => damage_roll(attack.name, attack.damage, facts)},
+                                    {"click": e => damage_roll(attack.name, attack.damage, facts, (e as MouseEvent).shiftKey)},
                                 ),
                             )
                         )
@@ -238,7 +266,7 @@ function stat_block(facts: Facts, state: CharacterState) {
                 facts.abilities.sort((a, b) => {
                     return (a.from + a.name).localeCompare(b.from + b.name);
                 }).map(ability => details(
-                    {"class": "leather"},
+                    {"class": "leather", "click": e => (e as MouseEvent).ctrlKey && describe(ability.name, ability.from, ability.description)},
                     summary(
                         ability.from,
                         " – ",
@@ -253,19 +281,31 @@ function stat_block(facts: Facts, state: CharacterState) {
 
 function saves_and_rolls(thing: MeleeAttack | RangedAttack | Ability, facts: Facts) {
     const foo = Object.entries(thing.dice_rolls || {}).map(([name, roll]) =>
-        p("Roll for ", name, ": ", value(roll, facts))
+        p("Roll for ", name, ": ", value(roll, facts), {"click": e => {
+            (e as MouseEvent).ctrlKey && describe(name, thing.name + " <- " + thing.from, thing.description);
+            custom_roll(name, thing.name, roll, facts);
+            e.stopPropagation();
+        }})
     );
 
-    if (thing.save) {
-        const save = thing.save.skill ? new SkillValue(thing.save.skill, facts) : new StatValue(thing.save.stat, "save");
-
-        foo.unshift(p(
-            "Save: ",
-            thing.save.skill ? thing.save.skill + " (" + thing.save.stat + ")" : thing.save.stat,
-            " dc ", value(thing.save.dc, facts),
-            " modifier ", span(value(save, facts))
-        ));
+    if (!thing.save) {
+        return foo;
     }
+
+    const save = thing.save;
+    const save_value = save.skill ? new SkillValue(save.skill, facts) : new StatValue(save.stat, "save");
+
+    foo.unshift(p(
+        "Save: ",
+        thing.save.skill ? thing.save.skill + " (" + thing.save.stat + ")" : thing.save.stat,
+        " dc ", value(thing.save.dc, facts),
+        " modifier ", span(value(save_value, facts)),
+        {"click": e => {
+            (e as MouseEvent).ctrlKey && describe(thing.name, thing.from, thing.description);
+            save_info(thing.name, save.stat, save.skill || null, save.dc, facts);
+            e.stopPropagation();
+        }}
+    ));
 
     return foo;
 }

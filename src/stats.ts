@@ -18,6 +18,7 @@ export enum Skill {
     insight = "insight",
     intimidation = "intimidation",
     investigation = "investigation",
+    herbalism = "herbalism",
 
     medicine = "medicine",
     nature = "nature",
@@ -50,6 +51,7 @@ export const skills: { [skill in Skill]: Stat } = {
     [Skill.arcana]: Stat.int,
     [Skill.athletics]: Stat.str,
     [Skill.deception]: Stat.cha,
+    [Skill.herbalism]: Stat.int,
     [Skill.history]: Stat.int,
     [Skill.insight]: Stat.wis,
     [Skill.intimidation]: Stat.cha,
