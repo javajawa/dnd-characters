@@ -51,7 +51,7 @@ function simple_roll(roll_name: string, _value: Value, facts: Facts): void {
     const [modifier, roll_def] = roll_string(value, facts);
 
     request_roll(
-        `&{template:simple} {{rname=${roll_name}}} {{always=1}} {{mod=${modifier}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
+        `&{template:simple} {{rname=${roll_name}}} {{rname=${roll_name}}} {{always=1}} {{mod=${modifier}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
     );
 }
 
@@ -63,7 +63,7 @@ function custom_roll(roll_name: string, from_name: string, value: Value, facts: 
     const [modifier, roll_def] = roll_string(new ComboValue(value), facts);
 
     request_roll(
-        `&{template:dmg} {{normal=1}} {{rname=${from_name}}} {{mod=${modifier}}} {{dmg1flag=1}} {{dmg1=[[${roll_def}]]}} {{dmg1type=${roll_name}}}`
+        `&{template:dmg} {{normal=1}} {{rname=${from_name}}} {{rnamec=${from_name}}} {{mod=${modifier}}} {{dmg1flag=1}} {{dmg1=[[${roll_def}]]}} {{dmg1type=${roll_name}}}`
     );
 }
 
@@ -77,7 +77,7 @@ function attack_roll(weapon: string, attack: ComboValue, facts: Facts, vantage: 
     const [modifier, roll_def] = roll_string(attack, facts);
 
     request_roll(
-        `&{template:atk} {{rname=${weapon}}} ${vantage? "{{always=1}}" : "{{normal=1}}"} {{mod=${modifier}}} {{rname=${weapon}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
+        `&{template:atk} {{rname=${weapon}}} {{rnamec=${weapon}}} ${vantage? "{{always=1}}" : "{{normal=1}}"} {{mod=${modifier}}} {{rname=${weapon}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
     );
 }
 
@@ -179,6 +179,7 @@ function stat_block(facts: Facts, state: CharacterState) {
                                                     "checked": state.equipped(item),
                                                     "change": e => state.equip(item, (e.target as HTMLInputElement).checked)
                                                 }),
+                                                item.count !== 1 ? item.count.toString(10) + "×" : null,
                                                 a({"href": item.link, "target": "_blank"}, item.name),
                                             ),
                                         ),

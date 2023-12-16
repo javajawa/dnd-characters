@@ -249,10 +249,10 @@ abilities:
       type dealt by the attack.
     dice_rolls:
       Damage Reduction: "1d10 + dex + {Monk}"
-      Return Fire: 2{martial_arts}
+      Return Fire: "{martial_arts} + {martial_arts} + dex"
     save:
       stat: dex
-      dc: 8 + prof + wis
+      dc: "{ki_save}"
 
   - name: Ki-Fueled Attack
     description: |-
@@ -314,7 +314,7 @@ abilities:
       plus your Wisdom modifier.
     save:
       stat: con
-      dc: 8 + prof + wis
+      dc: "{ki_save}"
     dice_rolls:
       Force Damage: "{martial_arts} + wis"
     status:

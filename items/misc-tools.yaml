@@ -14,10 +14,19 @@
 
 ---
 
-name: Money
+name: "Silver Pieces"
+count: 20
 description: Cash cash cash
 weight: 1
-value: 20sp, 9cp
+value: 20sp
+
+---
+
+name: "Copper Pieces"
+count: 9
+description: Cash cash cash
+weight: 1
+value: 9cp
 
 ---
 
@@ -54,10 +63,10 @@ abilities:
 name: Herbalism Books
 description: |-
   Herbalism 101
-  - Give you advantage on perception checks to find useful plants.
+    - Give you advantage on perception checks to find useful plants.
 
   Herbalism 102
-  - Will give you advantage on investigation checks to identify the properties of useful plants (healing, poison...).
+    - Will give you advantage on investigation checks to identify the properties of useful plants (healing, poison...).
   
   Potion of Healing – 25gp, 1 day to craft, Player Level Minimum 3rd, Heals 2d4+2 HP
   Greater Potion of Healing – 100gp, 1 week to craft, Player Level Minimum 3rd, Heals 4d4+4 HP
@@ -92,6 +101,7 @@ name: Herbs and Ingredients
 description: Things wot light found
 weight: 1
 value: 22gp
+count: 22
 resources:
   - name: Herbs and Ingredients
     description: Things for brewing potions

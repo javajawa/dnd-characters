@@ -22,7 +22,7 @@ export class Item implements IItem {
         this.count = count;
         this.value = value;
         this.weight = weight;
-        this.equippable = equippable;
+        this.equippable = true; // equippable;
         this.equipped = equipped || false;
     }
 }

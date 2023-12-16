@@ -198,7 +198,7 @@ function buildFacts(character: CharacterSchema, state: CharacterState): Facts {
             item.name,
             item.description,
             item.link,
-            item.count || 1,
+            isFinite(item.count) ? item.count : 1,
             item.value.toString(),
             item.weight,
             !!(item.attacks || item.abilities),
