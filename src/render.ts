@@ -56,14 +56,15 @@ function simple_roll(roll_name: string, _value: Value, facts: Facts): void {
 }
 
 function describe(name: string, source: string, description: string): void {
-    request_roll(`&{template:traits} {{name=${name}}} {{source=${source}}} {{description=${description.replace(/\n/g, "%NEWLINE%")}}}`);
+    description = description.replace(/\n\n/g, "%NEWLINE%").replace(/\n/g, " ");
+    request_roll(`&{template:traits} {{name=${name}}} {{source=${source}}} {{description=${description}}}`);
 }
 
-function custom_roll(roll_name: string, from_name: string, value: Value, facts: Facts): void {
+function custom_roll(roll_name: string, from_name: string, value: Value, facts: Facts, vantage: boolean): void {
     const [modifier, roll_def] = roll_string(new ComboValue(value), facts);
 
     request_roll(
-        `&{template:dmg} {{normal=1}} {{rname=${from_name}}} {{rnamec=${from_name}}} {{mod=${modifier}}} {{dmg1flag=1}} {{dmg1=[[${roll_def}]]}} {{dmg1type=${roll_name}}}`
+        `&{template:simple} ${vantage ? "{{always=1}}" : "{{normal=1}}"} {{rname=${roll_name}}} {{mod=${modifier}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}} {{charname=${from_name}}}`
     );
 }
 
@@ -284,7 +285,7 @@ function saves_and_rolls(thing: MeleeAttack | RangedAttack | Ability, facts: Fac
     const foo = Object.entries(thing.dice_rolls || {}).map(([name, roll]) =>
         p("Roll for ", name, ": ", value(roll, facts), {"click": e => {
             (e as MouseEvent).ctrlKey && describe(name, thing.name + " <- " + thing.from, thing.description);
-            custom_roll(name, thing.name, roll, facts);
+            custom_roll(name, thing.name, roll, facts, (e as MouseEvent).shiftKey);
             e.stopPropagation();
         }})
     );

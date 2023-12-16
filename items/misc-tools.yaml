@@ -11,6 +11,7 @@
 # TODO: "[2lb] Pitons (8)"
 # TODO: "[4lb] Grappling hook"
 # TODO: 3 unidentified wolfsbane variant plants
+# TODO: one potted nightshade
 
 ---
 
@@ -79,6 +80,7 @@ abilities:
     description: Go out and search for herbs!
     dice_rolls:
       Search For Herbs: 1d20 + wis(perception) + prof(perception)
+      Search For Herbs (Grasslands): 1d20 + wis(perception) + prof(perception) + prof(perception)
       Identify Herbs: 1d20 + int(nature) + prof(nature)
   - name: Brew Health Potion
     description: |
@@ -100,8 +102,8 @@ abilities:
 name: Herbs and Ingredients
 description: Things wot light found
 weight: 1
-value: 22gp
-count: 22
+value: 40gp
+count: 40
 resources:
   - name: Herbs and Ingredients
     description: Things for brewing potions

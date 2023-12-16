@@ -15,6 +15,9 @@ proficiencies:
     target: medium armor
   - type: armour
     target: shield
+  - type: skill
+    target: stealth
+
 abilities:
   - name: Favoured Enemy (Dragons)
     description: |-

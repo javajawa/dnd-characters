@@ -20,7 +20,7 @@ abilities:
     description: |
       As an Action, you can speak the command word "Into the Void"
       to consume one of the orb charges and throw this orb up to 30ft,
-      where it's replaced with a 15th diameter sphere of magical dakrness.
+      where it's replaced with a 15th diameter sphere of magical darkness.
       The darkness remains until the command word is spoken again, at which
       point it returns to an orb.
     resources:
