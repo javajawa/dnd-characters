@@ -1,0 +1,51 @@
+name: Ranger 1
+class: Ranger
+level: 1
+link: http://dnd5e.wikidot.com/ranger
+description: |-
+  Far from the bustle of cities and towns, past the hedges that shelter the most
+  distant farms from the terrors of the wild, amid the dense-packed trees of
+  trackless forests and across wide and empty plains, rangers keep their unending watch.
+hit_die: d10
+hit_points: 6
+proficiencies:
+  - type: armour
+    target: light armor
+  - type: armour
+    target: medium armor
+  - type: armour
+    target: shield
+abilities:
+  - name: Favoured Enemy (Dragons)
+    description: |-
+      Beginning at 1st level, you have significant experience studying, tracking, hunting,
+      and even talking to a certain type of enemy (dragons).
+
+      You have advantage on Wisdom (Survival) checks to track your favored enemies,
+      as well as advantage on Intelligence checks to recall information about them.
+
+      When you gain this feature, you also learn one language of your choice that
+      is spoken by your favored enemies, if they speak one at all.
+
+      You choose one additional favored enemy, as well as an associated language,
+      at 6th and 14th level. As you gain levels, your choices should reflect the
+      types of monsters you have encountered on your adventures.
+  - name: Natural Explorer (Grassland)
+    description: |-
+      Also at 1st level, you are particularly familiar with one type of natural
+      environment and are adept at traveling and surviving in such regions.
+
+      When you make an Intelligence or Wisdom check related to your favored terrain,
+      your proficiency bonus is doubled if you are using a skill that you’re proficient in.
+
+      While traveling for an hour or more in your favored terrain, you gain the following benefits:
+        - Difficult terrain doesn’t slow your group’s travel.
+        - Your group can’t become lost except by magical means.
+        - Even when you are engaged in another activity while traveling
+          (such as foraging, navigating, or tracking), you remain alert to danger.
+        - If you are traveling alone, you can move stealthily at a normal pace.
+        - When you forage, you find twice as much food as you normally would.
+        - While tracking other creatures, you also learn their exact number,
+          their sizes, and how long ago they passed through the area.
+
+      You choose additional favored terrain types at 6th and 10th level.
