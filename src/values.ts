@@ -276,6 +276,15 @@ export class ComboValue extends Value {
         if (v instanceof StatValue) {
             return v.resolve_with_facts(facts).toString(10) + "[" + v.stat + "]";
         }
+        if (v instanceof MultiplierValue) {
+            let inner;
+            if (v.target instanceof ComboValue) {
+                inner = v.target.to_roll20(facts, crit);
+            } else {
+                inner = this._value_to_roll20(v.target, facts, crit);
+            }
+            return Array(v.multiplier.resolve_with_facts(facts)).fill(inner).join(" + ");
+        }
         if (v instanceof FactValue) {
             let value = v.can_resolve_with_facts(facts) ? v.resolve_with_facts(facts).toString(10) : v.representation(facts);
 
