@@ -7,6 +7,7 @@ description: |-
   The wand regains 1d4-1 expended charges daily at dawn.
   If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.
 weight: 1
+count: 0   # On loan whilst on travels
 value: unknown
 resources:
   - name: Magic Missile Wand Charges

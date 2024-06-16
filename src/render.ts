@@ -46,12 +46,12 @@ function roll_string(value: ComboValue, facts: Facts): [number, string] {
     return [modifier, value.to_roll20(facts)];
 }
 
-function simple_roll(roll_name: string, _value: Value, facts: Facts): void {
+function simple_roll(roll_name: string, _value: Value, facts: Facts, vantage: boolean): void {
     const value = new ComboValue(new DiceValue(1, 20, ""), _value);
     const [modifier, roll_def] = roll_string(value, facts);
 
     request_roll(
-        `&{template:simple} {{rname=${roll_name}}} {{rname=${roll_name}}} {{always=1}} {{mod=${modifier}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
+        `&{template:simple} ${vantage ? "{{always=1}}" : "{{normal=1}}"} {{rname=${roll_name}}} {{rname=${roll_name}}} {{mod=${modifier}}} {{r1=[[${roll_def}]]}} {{r2=[[${roll_def}]]}}`
     );
 }
 
@@ -134,14 +134,14 @@ function stat_block(facts: Facts, state: CharacterState) {
                                 roll.resolve_with_facts(facts).toString(10),
                                 {
                                     "class": "stat left leather",
-                                    "click": _ => simple_roll(name + " check", roll, facts),
+                                    "click": e => simple_roll(name + " check", roll, facts, (e as MouseEvent).shiftKey),
                                 }
                             ),
                             abbr(
                                 save.resolve_with_facts(facts).toString(10),
                                 {
                                     "class": "stat right leather",
-                                    "click": _ => simple_roll(name + " save", save, facts),
+                                    "click": e => simple_roll(name + " save", save, facts, (e as MouseEvent).shiftKey),
                                 }
                             ),
                         )
@@ -356,7 +356,7 @@ function skills_block(facts: Facts) {
                     dt(skill),
                     dd(
                         value(new SkillValue(skill as Skill, facts), facts),
-                        {"click": _ => simple_roll(skill, new SkillValue(skill as Skill, facts), facts)}
+                        {"click": e => simple_roll(skill, new SkillValue(skill as Skill, facts), facts, (e as MouseEvent).shiftKey)}
                     ),
                 ])
             ),

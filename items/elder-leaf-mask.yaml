@@ -19,8 +19,8 @@ abilities:
        - You instantly light or snuff out a candle, a torch, or a small campfire.
     resources:
       action: 1
-      spell_vocal: 1
-      spell_somatic: 1
+      spell vocal: 1
+      spell somatic: 1
     range: [30, 30]
 
   - name: Ensaring Strike
@@ -44,7 +44,7 @@ abilities:
       bonus action: 1
       discipline point: 1
       spell concentration: 1
-      spell_vocal: 1
+      spell vocal: 1
     save:
       stat: str
       dc: 8 + prof + wis
@@ -76,7 +76,7 @@ abilities:
       action: 1
       discipline point: 2
       spell concentration: 1
-      spell_vocal: 1
+      spell vocal: 1
     save:
       stat: wis
       skill: perception

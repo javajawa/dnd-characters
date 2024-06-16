@@ -132,6 +132,7 @@ description: |
   
   Whoever carries the axe feels uneasy whenever he or she travels through a forest.
 value: "unknown"
+count: 0
 weight: 4
 attacks:
   - name: Hew, 1 handed

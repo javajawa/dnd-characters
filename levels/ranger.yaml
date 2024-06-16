@@ -17,6 +17,52 @@ proficiencies:
     target: shield
   - type: skill
     target: stealth
+  - type: weapon
+    target: battleaxe
+  - type: weapon
+    target: flail
+  - type: weapon
+    target: glaive
+  - type: weapon
+    target: greataxe
+  - type: weapon
+    target: greatsword
+  - type: weapon
+    target: halberd
+  - type: weapon
+    target: lance
+  - type: weapon
+    target: longsword
+  - type: weapon
+    target: maul
+  - type: weapon
+    target: morningstar
+  - type: weapon
+    target: pike
+  - type: weapon
+    target: rapier
+  - type: weapon
+    target: scimitar
+  - type: weapon
+    target: shortsword
+  - type: weapon
+    target: trident
+  - type: weapon
+    target: war pick
+  - type: weapon
+    target: warhammer
+  - type: weapon
+    target: whip
+  - type: weapon
+    target: blowgun
+  - type: weapon
+    target: hand crossbow
+  - type: weapon
+    target: heavy crossbow
+  - type: weapon
+    target: longbow
+  - type: weapon
+    target: net
 
 abilities:
   - name: Favoured Enemy (Dragons)
@@ -52,3 +98,54 @@ abilities:
           their sizes, and how long ago they passed through the area.
 
       You choose additional favored terrain types at 6th and 10th level.
+
+---
+
+name: Ranger 2
+class: Ranger
+level: 2
+link: http://dnd5e.wikidot.com/ranger
+description: |-
+  Far from the bustle of cities and towns, past the hedges that shelter the most
+  distant farms from the terrors of the wild, amid the dense-packed trees of
+  trackless forests and across wide and empty plains, rangers keep their unending watch.
+hit_die: d10
+hit_points: 6
+
+abilities:
+  - name: Blind Fighting
+    description: |-
+      You have blind sight with a range of 10 feet.
+      
+      Within that range, you can effectively see anything that isn't behind total cover,
+      even if you're blinded or in darkness.
+      Moreover, you can see an invisible creature within that range,
+      unless the creature successfully hides from you.
+
+  - name: Speak With Animals (S,V)
+    resources:
+      spell_slot_1: 1
+      action: 1
+      spell somatic: 1
+      spell vocal: 1
+    description: |-
+      You gain the ability to comprehend and verbally communicate with beasts for the duration.
+      The knowledge and awareness of many beasts is limited by their intelligence,
+      but at minimum, beasts can give you information about nearby locations and monsters,
+      including whatever they can perceive or have perceived within the past day.
+      You might be able to persuade a beast to perform a small favor for you, at the DM’s discretion.
+
+  - name: Absorb Elements (S)
+    resources:
+      reaction: 1
+      spell_slot_1: 1
+      spell somatic: 1
+    description: |-
+      The spell captures some of the incoming energy, lessening its effect on you and
+      storing it for your next melee attack.
+      You have resistance to the triggering damage type until the start of your next turn.
+      Also, the first time you hit with a melee attack on your next turn,
+      the target takes an extra 1d6 damage of the triggering type, and the spell ends.
+
+      At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher,
+      the extra damage increases by 1d6 for each slot level above 1st.

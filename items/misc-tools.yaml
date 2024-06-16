@@ -3,15 +3,33 @@
 # TODO: "[5lb] Water-skin"
 # TODO: "[5lb] Backpack"
 # TODO: "[18lb] Rations (9)"
-# TODO: "4 pieces of jerky"
 # TODO: "[4lb] Torches (4)"
 # TODO: "[1lb] Tinderbox"
 # TODO: "[5lb] Crowbar"
 # TODO: "[3lb] Hammer"
-# TODO: "[2lb] Pitons (8)"
+# TODO: "[2lb] Pitons (7)"
 # TODO: "[4lb] Grappling hook"
-# TODO: 3 unidentified wolfsbane variant plants
+# TODO: 4 wolfsbane variant plants
 # TODO: one potted nightshade
+# TODO: 1gp of nightshade
+# TODO: 1 pinch of rust (not wisp dust)
+# TODO: 4 pinches of wisps dust
+
+---
+
+name: "Glint's Fanciest Button"
+count: 1
+description: Must return.
+weight: 1
+value: 10gp
+
+---
+
+name: "Gold Pieces"
+count: 10
+description: Cash cash cash
+weight: 1
+value: 10gp
 
 ---
 
@@ -29,6 +47,37 @@ description: Cash cash cash
 weight: 1
 value: 9cp
 
+
+---
+
+name: Minor Healing Potion
+link: http://dnd5e.wikidot.com/wondrous-items:potion-of-healing
+description: |-
+  You regain hit points when you drink this potion.
+  The number of hit points depends on the potion’s rarity,
+  as shown in the Potions of Healing table.
+  Whatever its potency, the potion’s red liquid glimmers when agitated.
+count: 1
+weight: 1
+value: 25gp
+resources:
+  - name: Healing Potion
+    description: Healing pots available
+    pool: "{count}"
+    regain:
+      amount: 0
+      every: dawn
+
+abilities:
+  - name: Drink Healing Potion
+    resources:
+      bonus_action: 1
+      hands: 1
+      healing_potion: 1
+    description: "gulp gulp gulp"
+    dice_rolls:
+      healing: 1d4 + 1
+
 ---
 
 name: Healing Potion
@@ -38,7 +87,7 @@ description: |-
   The number of hit points depends on the potion’s rarity,
   as shown in the Potions of Healing table.
   Whatever its potency, the potion’s red liquid glimmers when agitated.
-count: 0
+count: 1
 weight: 1
 value: 50gp
 resources:
@@ -102,8 +151,8 @@ abilities:
 name: Herbs and Ingredients
 description: Things wot light found
 weight: 1
-value: 40gp
-count: 40
+value: 25gp
+count: 12
 resources:
   - name: Herbs and Ingredients
     description: Things for brewing potions

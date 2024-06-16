@@ -24,7 +24,7 @@ export class CharacterState {
         this.character = character;
 
         const state = window.localStorage.getItem(cyrb53(character));
-        const data = JSON.parse(state || "{}");
+        const data = JSON.parse(state || '{"items":{"Healing Potion":true,"Elder Lead Mask":true,"Wand of Magic Missile Darts":true,"Leather Band of Light":true,"Quarterstaff":false,"Light Crossbow":false,"Silvered Dagger":false,"Chakram":true,"Cook\'s Utensils":false,"Elder Leaf Mask":true,"Eldritch Claw Tattoo":true,"Herbalism Books":false,"Void Orb":true,"Hew":false,"Money":false,"Herbs and Ingredients":false,"_fist_wraps":true,"Herbalism Kit":false,"Rope of Climbing":true,"Pole of Collapsing":false,"Money: Silver Pieces":false,"Money: Copper Pieces":false,"Fist Wraps":true,"Silver Pieces":false,"Copper Pieces":false,"Minor Healing Potion":true},"feats":{"Humanoid Form (Were-Rat)":true,"Hybrid Form (Were-Rat)":false,"Rat Form (Were-Rat)":false,"Haste":false,"Eldritch Maul":false,"Hands of Harm":false,"Mage Armour":false,"Leather Band of Light - Light Reaction":false,"Leather Band of Light - Penumbra Reaction":false,"Shield of Faith":false,"Boots of Elvenkind":true}}');
 
         this.items = data.items || {};
         this.feats = data.feats || {};

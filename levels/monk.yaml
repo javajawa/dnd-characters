@@ -172,6 +172,8 @@ abilities:
       equal to your Monk level plus the number rolled.
       
       Once you use this feature, you can’t use it again until you finish a Long Rest.
+    dice_rolls:
+      healing: "{martial_arts} + {Monk}"
   - name: Unarmoured Movement
     description: |-
       Your speed increases by 10 feet while you aren’t wearing armor or wielding a Shield.
@@ -253,12 +255,6 @@ abilities:
     save:
       stat: dex
       dc: "{ki_save}"
-
-  - name: Ki-Fueled Attack
-    description: |-
-      Also at 3rd level, if you spend 1 Discipline Point or more as part of your
-      action on your turn, you can make one attack with an unarmed strike or a
-      monk weapon as a bonus action before the end of the turn.
 
 ---
 
