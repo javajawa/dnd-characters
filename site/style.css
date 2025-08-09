@@ -1,3 +1,7 @@
+:root {
+  interpolate-size: allow-keywords;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -47,11 +51,12 @@ p,
 dl,
 div,
 h2,
+h3,
 details {
   margin: 0 0 0.5rem;
 }
 
-h2 {
+h2, h3 {
   font-size: 1.25rem;
   font-weight: normal;
   text-align: center;
@@ -114,15 +119,25 @@ dd {
   margin: 0;
 }
 
-#notes>details {
-    display: inline-block;
-    width: 50%;
-    min-width: 20rem;
+#notes details {
+  overflow: hidden;
+}
+#notes details::details-content {
+  block-size: 0;
+  padding: 0;
+  transition: all 1s, content-visibility 1s;
+  transition-behavior: allow-discrete;
+}
+#notes details[open]::details-content {
+  block-size: auto;
+  padding: 0.3rem 0;
+}
+#notes summary>h2 {
+  display: inline-block;
+  text-align: start;
 }
 
 #notes>details[open] {
-    display: block;
-    width: auto;
     margin-bottom: 1rem;
     border-bottom: 1px solid grey;
 }

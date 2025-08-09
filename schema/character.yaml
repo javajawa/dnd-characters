@@ -10,7 +10,7 @@ required:
   - feats
   - levels
   - items
-  - backstory
+  - chapters
 properties:
   name:
     type: string
@@ -22,11 +22,45 @@ properties:
     $ref: "#/definitions/Levels"
   items:
     $ref: "#/definitions/Items"
-  backstory:
-    type: object
-    patternProperties:
-      ".*":
-        type: string
+
+  chapters:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - title
+        - scenes
+      properties:
+        title:
+          type: string
+        scenes:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - summary
+            properties:
+              summary:
+                type: string
+              sessions:
+                type: array
+                items:
+                  type: number
+              start:
+                type: string
+              end:
+                type: string
+              location:
+                type: string
+              characters:
+                types: array
+                items:
+                  type: string
+              story:
+                type: string
+
   worries:
     type: array
     items:

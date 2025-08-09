@@ -7,7 +7,7 @@ import {
     Value
 } from "./values";
 import {Stat} from "./stats";
-import {Level} from "./schema";
+import {Chapter, Level} from "./schema";
 import {Ability, Feat, Item, MeleeAttack, RangedAttack, Stats} from "./objects";
 
 type ProficiencyGroups = "ability_save" | "skill" | "weapon" | "armour" | "equipment" | "expertise"
@@ -29,14 +29,14 @@ export class Facts {
     private hp: ComboValue = new ComboValue();
     private readonly hitDice: ComboValue = new ComboValue();
 
-    readonly notes: { [k: string]: string };
+    readonly notes: Chapter[];
 
     toggles: Feat[];
     inventory: Item[];
     attacks: (MeleeAttack | RangedAttack)[];
     abilities: Ability[];
 
-    constructor(notes: { [k: string]: string }) {
+    constructor(notes: Chapter[]) {
         this.inventory = [];
         this.toggles = [];
         this.abilities = [];

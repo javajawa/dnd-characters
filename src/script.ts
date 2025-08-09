@@ -173,7 +173,7 @@ function loadFactsFromSource(facts: Facts, source: AbstractThingSource, reason: 
 }
 
 function buildFacts(character: CharacterSchema, state: CharacterState): Facts {
-    const facts: Facts = new Facts(character.backstory);
+    const facts: Facts = new Facts(character.chapters);
 
     for (const feat of character.feats) {
         const feature = new Feat(feat.name, feat.description, feat.link, feat.equippable);
@@ -201,7 +201,7 @@ function buildFacts(character: CharacterSchema, state: CharacterState): Facts {
             isFinite(item.count) ? item.count : 1,
             item.value.toString(),
             item.weight,
-            !!(item.attacks || item.abilities),
+            true,
         );
 
         i.equipped = state.equipped(i);

@@ -9,6 +9,7 @@ import {CharacterState} from "./script";
 import {Ability, MeleeAttack, RangedAttack} from "./objects";
 
 const h2 = elemGenerator("h2");
+const h3 = elemGenerator("h3");
 const section = elemGenerator("section");
 const p = elemGenerator("p");
 const dl = elemGenerator("dl");
@@ -27,6 +28,7 @@ const a = elemGenerator("a");
 const label = elemGenerator("label");
 const input = elemGenerator("input");
 const main = elemGenerator("main");
+const article = elemGenerator("article");
 
 function value(val: Value, facts: Facts): [string, { title: string }] {
     return [val.can_resolve_with_facts(facts) ? val.resolve_with_facts(facts).toString(10) : val.representation(facts), {"title": val.reason(facts)}];
@@ -386,8 +388,13 @@ function html_to_element(html: string): NodeList {
 function story_block(facts: Facts) {
     return section(
         {id: "notes"},
-        Object.entries(facts.notes).map(([title, text]) =>
-            details(summary(title), ...html_to_element(text))
+        facts.notes.map(({title, scenes}, idx) =>
+            details(
+                summary(h2(idx.toString(), " - ", title)),
+                ...scenes.map(scene => {
+                    return article(h3(scene.summary), ...html_to_element(scene.story||""))
+                })
+            )
         )
     );
 }

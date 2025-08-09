@@ -27,9 +27,11 @@ for key in character:
                         del objects[0]["$schema"]
                     character[key].extend(objects)
 
-backstory: dict[str, str] = character["backstory"]
-for key, value in backstory.items():
-    backstory[key] = markdown.markdown(value)
+story: list[dict[str, list[dict[str, str]]]] = character["chapters"]
+for chapter in story:
+    for scene in chapter["scenes"]:
+        if "story" in scene:
+            scene["story"] = markdown.markdown(scene["story"])
 
 for category in ["items", "levels", "feats"]:
     for thing in character.get(category, []):

@@ -31,6 +31,22 @@ export interface Character {
     }
     worries?: string[]
     backstory: { [k: string]: string }
+    chapters: Chapter[]
+}
+
+export interface Chapter {
+    title: string
+    scenes: Scene[]
+}
+
+export interface Scene {
+    summary: string
+    sessions?: number[]
+    start?: string
+    end?: string
+    location?: string
+    characters?: string[]
+    story?: string
 }
 
 export interface Info {
