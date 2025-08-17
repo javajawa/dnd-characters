@@ -28,10 +28,24 @@ for key in character:
                     character[key].extend(objects)
 
 story: list[dict[str, list[dict[str, str]]]] = character["chapters"]
+story_out: list[dict[str, list[dict[str, str]]]] = []
+
 for chapter in story:
+    chapter_out: dict[str, list[dict[str, str]]] = dict(chapter)
+    chapter_out["scenes"] = []
+    story_out.append(chapter_out)
+    last_scene: dict[str, str] | None = None
+
     for scene in chapter["scenes"]:
+        if not scene["summary"].startswith("-") or not last_scene:
+            last_scene = {k: v for k, v in scene.items() if k not in "story"}
+            last_scene["story"] = ""
+            chapter_out["scenes"].append(last_scene)
+
         if "story" in scene:
-            scene["story"] = markdown.markdown(scene["story"])
+            last_scene["story"] += markdown.markdown(scene["story"])
+
+character["chapters"] = story_out
 
 for category in ["items", "levels", "feats"]:
     for thing in character.get(category, []):

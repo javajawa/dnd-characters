@@ -141,6 +141,9 @@ dd {
     margin-bottom: 1rem;
     border-bottom: 1px solid grey;
 }
+#notes article {
+  margin: 3rem 0 0 0;
+}
 
 details img {
     display: block;
