@@ -3780,14 +3780,14 @@ chapters:
     scenes:
       - summary: Preparations
         sessions: [ 74 ]
-        start: 1491-10-24 0800
-        end: 1491-10-24 0900
+        start: 1491-10-24 0830
+        end: 1491-10-24 0930
         location: Phandalin
 
       - summary: -Checking The Quest Board
         sessions: [ 74 ]
-        start: 1491-10-24 0800
-        end: 1491-10-24 0830
+        start: 1491-10-24 0830
+        end: 1491-10-24 0900
         location: Townmaster's House, Phandalin
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
         story: |
@@ -3800,8 +3800,8 @@ chapters:
 
       - summary: -Visiting the Smithy
         sessions: [ 74 ]
-        start: 1491-10-24 0830
-        end: 1491-10-24 0900
+        start: 1491-10-24 0900
+        end: 1491-10-24 0930
         location: Alger's Smithy, PhandalinVer
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil, Alger ]
         story: |
@@ -3810,23 +3810,23 @@ chapters:
           barrel. Basil's inquiry leads Alger to describe it as a "vial launcher".
           This device bridges the gap between a crossbow, since, and grenade launcher,
           allowing us to fling rocks and potions at distant targets.
-          
+
           The party sees this as a wonderful way to get some control over a
-          flying dragon, but we look into ammunition in the [Barthen's Provisioners|Provisioners].
-          
+          flying dragon, but we look into ammunition in the [Provisioners](place:Barthen's Provisioners).
+
           After confirming we have a source and some stock of useful ammunition,
           we purchase the device.
-          
+
       - summary: -Ammo for an RPG‽
         sessions: [ 74 ]
-        start: 1491-10-24 0840
-        end: 1491-10-24 0850
+        start: 1491-10-24 0910
+        end: 1491-10-24 0920
         location: Barthen's Provisioners, Phandalin
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil, Thandor, Thistle ]
         story: |
           We head over to the [Barthen's Provisioners], where the staff [Thandor] and [Thistle]
           are obviously nervous and are avoiding open spaces.
-          
+
           The space is a little disorganised, but we find a vials of oil, acid,
           and alchemist's fire. We already have some acid in our packs from the
           experimental gear found in the [Cragmaw Hideout] from when we rescued
@@ -3834,8 +3834,8 @@ chapters:
 
       - summary: Journey to Axeholm
         sessions: [ 74 ]
-        start: 1491-10-24 0900
-        end: 1491-10-24 1700
+        start: 1491-10-24 0930
+        end: 1491-10-24 1930
         location: Sword Coast
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
         story: |
@@ -3848,17 +3848,17 @@ chapters:
 
       - summary: Arrival at Axeholm
         sessions: [ 74 ]
-        start: 1491-10-24 1700
-        end: 1491-10-24 1730
+        start: 1491-10-24 1930
+        end: 1491-10-24 2000
         location: Axeholm
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
         story: |
           A full day of hiking later, we reach the foothills of the [Sword Mountains].
           Thrust out from the base the mountain is the entrance to the
-          [Axeholm|dwarven fortress]: a dark, 15ft-wide passageway flanked by 40ft
+          [dwarven fortress](place:Axeholm): a dark, 15ft-wide passageway flanked by 40ft
           bulwarks of seamless stone. An iron portcullis covered with rust blocks the entrance.
           Arrow slits carved into the bulwarks are dark, revealing no hint of occupation.
-          
+
           [Faelar] uses Magic Eye to scout inside, exploring the interior.
           There is quite a large internal area; the gatehouse area being heavily
           defended with a large number of crew-served ballistas, most facing outwards,
@@ -3866,19 +3866,19 @@ chapters:
           gateway being successfully breached and the defenders getting flanked.
           Above the gateway stand more defenses, including the pots and slots for
           pouring boiling oil and the like.
-          
+
           At the back of the gateway is a double storey room, forming the main hall
           of the complex. This great hall has a 40-foot-high ceiling supported by
           four thick stone pillars. A thick layer of dust covers the flagstone floor.
           There are arrow slots point in from both the north and south ends of this room.
-          
+
           Around the great hall and gatehouse areas, the main doors are all closed,
           giving less access to the magic eye. However, by going the upstairs
           arrow slits, Faelar is able to guide it around to the into the upstairs
           corridor. This corridor is haunted by the luminous, wispy form of a female elf.
           She floats in the dusty hallway, its face wreathed in a tangle of
           gossamer hair, clad in spectral rags.
-          
+
           In the south east corner of the corridor, a small staircase leads down
           into a partially collapsed shrine as evidenced by wall carvings that
           depict dwarves carrying censers and observing religious rites.
@@ -3886,10 +3886,10 @@ chapters:
           damage during an earthquake -- either the cause of the evacuation,
           or in the time since. This leaves the shrine room an interesting mix
           of rubble, gnawed dwarven bones and a pack of ghouls.
-          
+
           The eastern side of the fortress has little more of note, other than
           winding, rubble-strewn tunnel connecting the upper and lower levels.
-          
+
           Crossing back over, Faelar finds routes into a few more spaces,
           although we know his coverage is now comprehensive. Along with
           various other groups of ghouls, the eye locates the throne room.
@@ -3899,8 +3899,8 @@ chapters:
 
       - summary: Breaching the Gatehouse
         sessions: [ 74 ]
-        start: 1491-10-24 1700
-        end: 1491-10-24 1715
+        start: 1491-10-24 2000
+        end: 1491-10-24 2015
         location: Axeholm
         characters: [ Glint, Faelar, Adela ]
         story: |
@@ -3909,7 +3909,7 @@ chapters:
           A party with smaller members might be able to slip in, but out group
           are not known to be smol. The iron portcullis is too lage and strong
           to shatter, and so Faelar and Glint enter via misty step.
-          
+
           Locating the winches for the portcullis is easy enough; however the
           mechanisms have not been maintained since the fall of the fortress,
           and casters are not known to be the most buff. The first attempts to
@@ -3918,14 +3918,14 @@ chapters:
           to raise (and lock) the portcullis 10 feet up -- enough clearance
           for the party to enter the corridor down to a thick wooden door with
           iron reinforcements.
-          
+
           The batteries housing both the ballistas and winches are (naturally)
           not directly connected to the corridor, not immeidately to the door.
           Neither [Glint] nor [Faelar] wish to explore the ghoulish corridors
           alone, so teleport back into the main corridor, after it has been
           inspected for traps. [Basil] and [Marcella] prepare to open the door,
           only to find it thoroughly barred.
-          
+
           Before conversations on this matter are concluded, [Adela]
           initiates her standard hostile entrance playbook and hurls two
           shatters at the door, breaking it down into (additional) rubble.
@@ -3933,14 +3933,14 @@ chapters:
           no-one has fully explained the purpose of the mission to [Adela]
           who believes it is exploring for magic or knowledge rather than
           building a refuge.
-          
+
           The party (finally) enters the complex, to be greater by all the
           ghouls a-gathering.
 
       - summary: A Storm of Ghouls
         sessions: [ 74 ]
-        start: 1491-10-24 1700
-        end: 1491-10-24 1715
+        start: 1491-10-24 2015
+        end: 1491-10-24 2015
         location: Axeholm
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
         story: | 
@@ -3954,11 +3954,105 @@ chapters:
           less than 30 seconds to the door falling in to the great hall
           being secured.
 
-      - summary: Exploring Axeholm
+      - summary: Charging Down the Magistrate
         sessions: [ 75 ]
-        start: 1491-10-24 1715
+        start: 1491-10-24 2015
+        end: 1491-10-24 2020
         location: Axeholm
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
+        story: |
+          The entry way secured, but various abilities still active, [Faelar]
+          urges us South to deal with the unknown undead hiding behind the
+          throne. [Faelar] is the first one through the door, and is unable to
+          see the hostile; the stench of death hangs heavy in the air of the
+          throne room, with a dark soot stained fireplace off to one side.
+          Straight down the centre line is a raised dias, containing the throne
+          and flanked by statues of two dwarven heroes. 
+
+          [Faelar] demands the undead come out, slowly; it partially complies
+          coming out and launching hellfire into the party.
+
+          [Tik-Garn] is the first one to get a good look at it.
+          Withered by madness, infused with dark energies around likely linked
+          to the abandonment of the fortress, the creature slowly turning
+          into a Death Knight stands in the rotting remnants of a Castellan's
+          armour.
+
+          The battle is tough, with the Castellan using the throne as cover
+          and launching their AoE attacks. Glint teleports in to try and gain
+          some advantage, throws bane on it, and teleports out pretty rapidly.
+
+          [Tik-Garn] having previously moved in to chain-kunai range, 
+          jumped up onto the throne to close the gap, but sadly missed the
+          the attack. This did however trigger a specific battle rage wild
+          magic style effect, giving Bram advantage on attack rolls and
+          disadvantage on skill checks.
+
+          The third hellfire ball takes out Faelar and Glint, and leaves
+          Adela and [Tik-Garn] on their last legs ([Basil] has evasion, and Bram
+          has a pseudo-evasion from a reaction). This forces [Adela] to round
+          the corner and unleash the strongest shatter she is capable of on the
+          dias, destroying the two statues, cracking the throne, and knocking
+          [Tik-Garn] unconscious.
+
+          This still isn't enough to bring down the Death-Castellan,
+          but it leaves room for Bram to get the final blow with an explosive
+          smite crashing down. The proto-Death Knight disparates, dissolving
+          into veins of shadow and steadily into mist, leaving only a gold
+          signet ring that bears the [Axeholm] crest: a hand-axe clutched in a
+          dwarven gauntlet.
+
+          Combat is however not quite over -- three party members need to be
+          got back on their feet. [Basil] gets [Glint] up, and [Adela] gets
+          a potion into [Tik-Garn] on her way to pick up the ring.
+
+      - summary: Short Rest
+        sessions: [ 75 ]
+        start: 1491-10-24 2020
+        end: 1491-10-24 2030
+        location: Axeholm
+        characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
+        story: |
+          Now the party is stable, Glint sets up Prayer of Healing to get our
+          short rest time down to 10 minutes. This gives us time to regroup;
+          we know there are many doors on this lower level that Faelar was
+          [unable to scout](scene:Arrival at Axeholm), and we do not know if
+          we have cleared all of the Ghouls.
+
+          The plan we come down on is to work from the top down, with telepathy
+          set up to help us communicate. The incorporeal being is also the final
+          confirmed known hostile; it's ghostly nature is talked around by the
+          party.
+
+          With the remains of the day growing short, but the prayer leaving us
+          feeling much stronger on our feet, we proceed up the stairs in the
+          back of the throne room.
+
+      - summary: Banshee
+        sessions: [ 75, 76 ]
+        start: 1491-10-24 2030
+        end: 1491-10-24 2100
+        location: Axeholm
+        characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
+        story: |
+          Basil take point up the stairs, using Invisibility to sneak up the
+          stairs. A length of corridor away, just before he turns off to
+          pass through a door, he encounters the Banshee like creature.
+
+          > The luminous, wispy form of a female elf floats in the dusty hallway
+          > before you, its face wreathed in a tangle of gossamer hair,
+          > its body clad in spectral rags that flutter around it.
+          > The apparition’s face becomes a mask of rage as it screams, “Get out of my house!”
+
+          Basil immediately apologies and acquiesces to this request, retreating
+          back towards the party. The presence of an elf in this dwarven fort is
+          of some surprise to Faelar, who is aware of the long history of animosity
+          between the two lineages. 
+
+          He hopes that being of noble descent, and having some knowledge of
+          the history, may be able to treat with her and avoid additional
+          bloodshed (of our rather spilt blood). His attempts to do so fail
+          rapidly, and an exchange of spells lash out up the corridor.
 
 
 quest-lines:
