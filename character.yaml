@@ -3962,10 +3962,10 @@ chapters:
         characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
         story: |
           The entry way secured, but various abilities still active, [Faelar]
-          urges us South to deal with the unknown undead hiding behind the
-          throne. [Faelar] is the first one through the door, and is unable to
-          see the hostile; the stench of death hangs heavy in the air of the
-          throne room, with a dark soot stained fireplace off to one side.
+          urges us South to deal with the [Castellan|unknown undead] hiding
+          behind the throne. [Faelar] is the first one through the door, and is
+          unable to see the hostile; the stench of death hangs heavy in the air
+          of the throne room, with a dark soot stained fireplace off to one side.
           Straight down the centre line is a raised dias, containing the throne
           and flanked by statues of two dwarven heroes. 
 
@@ -3975,28 +3975,28 @@ chapters:
           [Tik-Garn] is the first one to get a good look at it.
           Withered by madness, infused with dark energies around likely linked
           to the abandonment of the fortress, the creature slowly turning
-          into a Death Knight stands in the rotting remnants of a Castellan's
+          into a Death Knight stands in the rotting remnants of a [Castellan]'s
           armour.
 
-          The battle is tough, with the Castellan using the throne as cover
-          and launching their AoE attacks. Glint teleports in to try and gain
+          The battle is tough, with the [Castellan] using the throne as cover
+          and launching their AoE attacks. [Glint] teleports in to try and gain
           some advantage, throws bane on it, and teleports out pretty rapidly.
 
           [Tik-Garn] having previously moved in to chain-kunai range, 
           jumped up onto the throne to close the gap, but sadly missed the
           the attack. This did however trigger a specific battle rage wild
-          magic style effect, giving Bram advantage on attack rolls and
+          magic style effect, giving [Bram] advantage on attack rolls and
           disadvantage on skill checks.
 
-          The third hellfire ball takes out Faelar and Glint, and leaves
-          Adela and [Tik-Garn] on their last legs ([Basil] has evasion, and Bram
+          The third hellfire ball takes out [Faelar] and [Glint], and leaves
+          [Adela] and [Tik-Garn] on their last legs ([Basil] has evasion, and Bram
           has a pseudo-evasion from a reaction). This forces [Adela] to round
           the corner and unleash the strongest shatter she is capable of on the
           dias, destroying the two statues, cracking the throne, and knocking
           [Tik-Garn] unconscious.
 
-          This still isn't enough to bring down the Death-Castellan,
-          but it leaves room for Bram to get the final blow with an explosive
+          This still isn't enough to bring down the Death-[Castellan],
+          but it leaves room for [Bram] to get the final blow with an explosive
           smite crashing down. The proto-Death Knight disparates, dissolving
           into veins of shadow and steadily into mist, leaving only a gold
           signet ring that bears the [Axeholm] crest: a hand-axe clutched in a
@@ -4052,7 +4052,75 @@ chapters:
           He hopes that being of noble descent, and having some knowledge of
           the history, may be able to treat with her and avoid additional
           bloodshed (of our rather spilt blood). His attempts to do so fail
-          rapidly, and an exchange of spells lash out up the corridor.
+          rapidly, and an exchange of spells lash out up the corridor;
+          Faelar's chromatic orb hits, but her webbing globs up both him and
+          Basil.
+          
+          As combat she begins, she draws energy up through tendrils in the
+          ground, the opening ritual of Negative Energy Flood. Promptly
+          counter spelled, she then disappears into the walls.
+          As it reenters line of sight it reaches for Glint and does...something
+          to her.
+          
+          The combat is mostly playing whack-a-ghost; fighting something which
+          can simply transit through the wall and resists a lot damage is tricky.
+          Her attempts to use darkness to give us an even greater disadvantage.
+          The image of a void of pure black just emerges from the wall"
+          
+          It is felled by large guiding bolt and a a divine smite.
+
+      - summary: Webs
+        sessions: [ 76, 77 ]
+        start: 1491-10-24 2100
+        end: 1491-10-24 2110
+        location: Axeholm
+        characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
+        story: |
+          Adela admonishes the party for a lack of planning and research
+          before diving into this mission -- an elven emissary dying here
+          explains a lot of what is going.
+          
+          Inside the room is a webbed dessicated ghoul corpse,
+          as glint burns it away it smells terrible from all the
+          corpses that has been consumed.
+          
+          Nothing inside is magical, sadly.
+          
+          We proceed north to find a collapsed corridor and a balcony over
+          the ball room / great hall.
+
+      - summary: Chambers
+        sessions: [ 76, 77 ]
+        start: 1491-10-24 2110
+        end: 1491-10-24 2130
+        location: Axeholm
+        characters: [ Bram, Glint, Faelar, Tik-Garn, Adela, Basil ]
+        story: |
+          - room for honoured guests
+          - skeletal remains of a medium creature, likely an Elf.
+          - the bones are clean, not covered in dust.
+          - chunk missing from the neck, potentially indicating that their
+            throat was cut.
+          - she was killed 
+          
+          - second room has a fancy bed
+          - whsip of silver disappears into the fireplace
+          - Bram calls out, hears a rumbling like angry bees
+          - combat starts.
+          - it's the bees
+          - it is not the bees knees
+          
+          - the fireplace is has a bee hive
+          - the bee hive has a lever
+          - pulling hte lever opens the back of the firewall
+          - covered chest
+          - silvery glow
+          - chest does not have a traditional keyway
+          - turn the signet ring three times, thank you ghost
+          - find a magical belt and a magical helm
+          - ghost maybe gone?
+          - bram fails to close to the door
+          - 
 
 
 quest-lines:
@@ -4060,6 +4128,7 @@ quest-lines:
     - Cure for lycanthropy:
       - Full Moons are on the 30th (new moons on the 15th)
       - The potions are being brewed!
+    - Axeholm:
       - Prepare the Axeholm fortress as a sanctuary for the the people of Phandalin
   Open (known to us but not on a quest board for others):
     - Icespire Peak:
